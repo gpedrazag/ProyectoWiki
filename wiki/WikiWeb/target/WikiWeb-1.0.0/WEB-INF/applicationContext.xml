@@ -12,6 +12,6 @@
 
        <context:component-scan base-package="com.unipiloto.wiki.web.controllers" />
        <mvc:annotation-driven />
-       <mvc:resources mapping="/front-end/**" location="/front-end/">
+       <mvc:resources mapping="/front-end/**" location="/front-end/" />
 
 </beans>
