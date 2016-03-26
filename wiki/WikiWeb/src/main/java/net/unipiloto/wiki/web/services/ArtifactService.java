@@ -1,4 +1,4 @@
-package net.unipiloto.wiki.ejb.services;
+package net.unipiloto.wiki.web.services;
 
 import javax.ejb.Remote;
 
