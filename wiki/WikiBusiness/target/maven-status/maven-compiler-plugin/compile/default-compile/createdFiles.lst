@@ -1,0 +1,6 @@
+net\unipiloto\wiki\ejb\services\impl\OntologyGeneralServiceImpl.class
+net\unipiloto\wiki\ejb\services\ArtifactService.class
+net\unipiloto\wiki\ejb\dao\ArtifactDao.class
+net\unipiloto\wiki\ejb\services\OntologyGeneralService.class
+net\unipiloto\wiki\ejb\services\impl\ArtifactServiceImpl.class
+net\unipiloto\wiki\ejb\dao\impl\ArtifactDaoImpl.class

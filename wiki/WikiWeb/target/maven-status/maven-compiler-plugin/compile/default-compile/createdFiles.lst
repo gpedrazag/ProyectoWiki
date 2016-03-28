@@ -1,1 +1,3 @@
-com\unipiloto\wiki\web\controllers\IndexController.class
+net\unipiloto\wiki\web\services\ArtifactService.class
+net\unipiloto\wiki\web\controllers\IndexController.class
+net\unipiloto\wiki\web\services\OntologyGeneralService.class

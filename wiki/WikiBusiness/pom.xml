@@ -11,9 +11,10 @@
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <lib.dir>${project.build.directory}/classes/lib</lib.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>com.wiki.architecture</groupId>
@@ -24,18 +25,17 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
-        <groupId>org.openrdf.sesame</groupId>
-        <artifactId>sesame-runtime</artifactId>
-        <version>4.1.1</version>
-    </dependency>
-    <dependency>
-        <groupId>org.openrdf.sesame</groupId>
-        <artifactId>sesame-sail-nativerdf</artifactId>
-        <version>4.1.1</version>
-    </dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-runtime</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-sail-nativerdf</artifactId>
+            <version>4.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>

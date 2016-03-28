@@ -9,8 +9,7 @@
   <modules>
     <module>WikiEAR-ear</module>
     <module>../WikiBusiness</module>
-    <module>../WikiWeb</module>
     <module>../WikiEntities</module>
+    <module>../WikiWeb</module>
   </modules>
-  
 </project>

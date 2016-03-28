@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>WikiEAR</artifactId>
-        <groupId>com.wiki.architecture</groupId>
-        <version>1.0.0</version>
-    </parent>
+    <artifactId>WikiEAR</artifactId>
+    <groupId>com.wiki.architecture</groupId>
+    <version>1.0.0</version>
+  </parent>
 
     <groupId>com.wiki.architecture</groupId>
     <artifactId>WikiEAR-ear</artifactId>
@@ -17,26 +17,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-  
-    <dependencies>
-        
-        <dependency>
-            <groupId>com.wiki.architecture</groupId>
-            <artifactId>WikiEntities</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wiki.architecture</groupId>
-            <artifactId>WikiBusiness</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wiki.architecture</groupId>
-            <artifactId>WikiWeb</artifactId>
-            <version>1.0.0</version>
-            <type>war</type>
-        </dependency>
-    </dependencies>
     
     <build>
         <plugins>
@@ -60,5 +40,22 @@
             </plugin>
         </plugins>
     </build>
-    
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WikiWeb</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WikiBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>WikiEntities</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
