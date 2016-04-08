@@ -1,3 +1,5 @@
-net\unipiloto\wiki\web\services\ArtifactService.class
+net\unipiloto\wiki\web\entities\Artifact.class
+net\unipiloto\wiki\web\entities\transactions\ArtifactTransaction.class
 net\unipiloto\wiki\web\controllers\IndexController.class
+net\unipiloto\wiki\web\services\ArtifactServiceImpl.class
 net\unipiloto\wiki\web\services\OntologyGeneralService.class

@@ -1,3 +1,5 @@
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\services\ArtifactService.java
+P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\transactions\ArtifactTransaction.java
+P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\services\ArtifactServiceImpl.java
 P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\controllers\IndexController.java
+P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Artifact.java
 P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\services\OntologyGeneralService.java
