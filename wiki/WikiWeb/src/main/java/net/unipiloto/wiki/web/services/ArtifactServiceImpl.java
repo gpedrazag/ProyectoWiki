@@ -13,7 +13,7 @@ public class ArtifactServiceImpl
         
         try
         {
-            ArtifactTransaction.insertArtifact(id, description);
+            ArtifactTransaction.insert(id, description);
         } 
         catch (IOException ex)
         {

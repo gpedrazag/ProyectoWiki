@@ -10,10 +10,8 @@ import java.util.logging.Logger;
 import org.openrdf.OpenRDFException;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
-import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.sail.SailRepository;
 import org.openrdf.rio.RDFFormat;
-import org.openrdf.rio.RDFParseException;
 import org.openrdf.sail.nativerdf.NativeStore;
 
 
@@ -50,7 +48,10 @@ public class OntologyGeneralService
                 repo = new SailRepository(new NativeStore(new File(outreach+sep+"native_store"+sep)));
                 repo.initialize();
                 conn = repo.getConnection();
-                conn.add(ont, "http://www.semanticweb.org/sa", RDFFormat.RDFXML);
+                if(conn.getNamespace("http://www.semanticweb.org/sa#") == null)
+                {
+                    conn.add(ont, "http://www.semanticweb.org/sa", RDFFormat.RDFXML);
+                }
                 
             } 
             catch (IOException | OpenRDFException ex)
@@ -59,10 +60,7 @@ public class OntologyGeneralService
             }
             finally
             {
-                if(conn!=null)
-                {
-                    conn.close();
-                }
+                conn.close();
                 repo.shutDown();
             }
         }

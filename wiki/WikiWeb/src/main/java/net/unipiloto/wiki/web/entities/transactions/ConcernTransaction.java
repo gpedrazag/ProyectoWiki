@@ -11,15 +11,15 @@ import org.openrdf.query.QueryLanguage;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
-public class ArtifactTransaction
+public class ConcernTransaction
 {
-    public static void insert(int id, String description) throws IOException, URISyntaxException
+    public static void insert(int id, String concern) throws IOException, URISyntaxException
     {
         Repository repo = OntologyGeneralService.getInstance();
         repo.initialize();
         ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#artifact_"+id);
-        IRI object = factory.createIRI("http://www.semanticweb.org/sa#Artifact");
+        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#concern_"+id);
+        IRI object = factory.createIRI("http://www.semanticweb.org/sa#Concern");
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -27,14 +27,14 @@ public class ArtifactTransaction
             conn.add(subject, RDF.TYPE, object);
             String sparql = 
                 "INSERT {\n"+
-                "   <http://www.semanticweb.org/sa#artifact_"+id+">\n"+
+                "   <http://www.semanticweb.org/sa#concern_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
                 "}\n"+
                 "INSERT {\n"+
-                "   <http://www.semanticweb.org/sa#artifact_"+id+">\n"+
-                "   <http://www.semanticweb.org/sa#description>\n"+
-                "'"+description+"'\n"+
+                "   <http://www.semanticweb.org/sa#concern_"+id+">\n"+
+                "   <http://www.semanticweb.org/sa#concern>\n"+
+                "'"+concern+"'\n"+
                 "}\n"+
                 "WHERE{}";
             System.out.println(sparql);
@@ -48,7 +48,7 @@ public class ArtifactTransaction
         
     }
     
-    public static void update(int id, String description) throws IOException, URISyntaxException
+    public static void update(int id, String concern) throws IOException, URISyntaxException
     {
         Repository repo = OntologyGeneralService.getInstance();
         repo.initialize();
@@ -57,13 +57,13 @@ public class ArtifactTransaction
         {
             String sparql = 
                 "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#artifact_"+id+"> "
+                + "<http://www.semanticweb.org/sa#concern_"+id+"> "
                 + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Artifact>}\n"
+                + "<http://www.semanticweb.org/sa#Concern>}\n"
                 + "WHERE{}"
             ;
             conn.prepareUpdate(sparql);
-            insert(id, description);
+            insert(id, concern);
         }
         finally
         {
@@ -81,9 +81,9 @@ public class ArtifactTransaction
         {
             String sparql = 
                 "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#artifact_"+id+"> "
+                + "<http://www.semanticweb.org/sa#concern_"+id+"> "
                 + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Artifact>}\n"
+                + "<http://www.semanticweb.org/sa#Concern>}\n"
                 + "WHERE{}"
             ;
             conn.prepareUpdate(sparql);
