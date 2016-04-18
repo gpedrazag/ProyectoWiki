@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping(value = "/")
 public class IndexController
 {
                 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String initPage() throws IOException, URISyntaxException
     {
 
@@ -20,6 +21,8 @@ public class IndexController
         ArtifactServiceImpl.createArtifact(455, "Artefacto de prueba");
         return "index";
     }
+    
+    
     
     
 }

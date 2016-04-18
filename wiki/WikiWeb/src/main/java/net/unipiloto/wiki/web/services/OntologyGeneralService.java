@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.nio.channels.FileChannel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openrdf.OpenRDFException;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
@@ -20,8 +21,18 @@ public class OntologyGeneralService
 {
     private static Repository repo;
     
+    public static Repository getInstance()
+    {
+        if (repo==null)
+        {
+            repo = initRepository();
+        }
+        return repo;
+    }
+    
     public static Repository initRepository()
     {
+        RepositoryConnection conn = null;
         //File[] files = configWorkStation(request);
         if(repo != null)
         {
@@ -34,40 +45,29 @@ public class OntologyGeneralService
             {
                 String ch = System.getProperty("catalina.home");
                 String sep = System.getProperty("file.separator");
-                File outreach = new File(ch+sep+"outreach"+sep);
-                File ont = new File(outreach.getAbsolutePath()+sep+"ontologies"+sep+"ontology.owl");
-                repo = new SailRepository(new NativeStore(new File(outreach.getAbsolutePath()+sep+"native_store"+sep)));
+                String outreach = ch+sep+"outreach";
+                File ont = new File(outreach+sep+"ontologies"+sep+"ontology.owl");
+                repo = new SailRepository(new NativeStore(new File(outreach+sep+"native_store"+sep)));
                 repo.initialize();
-                RepositoryConnection conn = repo.getConnection();
-                
+                conn = repo.getConnection();
                 conn.add(ont, "http://www.semanticweb.org/sa", RDFFormat.RDFXML);
+                
+            } 
+            catch (IOException | OpenRDFException ex)
+            {
+                Logger.getLogger(OntologyGeneralService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            finally
+            {
+                if(conn!=null)
+                {
+                    conn.close();
+                }
                 repo.shutDown();
-            } 
-            catch (IOException ex)
-            {
-                Logger.getLogger(OntologyGeneralService.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            catch (RDFParseException ex)
-            {
-                Logger.getLogger(OntologyGeneralService.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-            catch (RepositoryException ex)
-            {
-                Logger.getLogger(OntologyGeneralService.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
         return repo;
-    }
-    
-    public static RepositoryConnection getConnection(Repository repo)
-    {
-        RepositoryConnection conn = null;
-        if(repo.isInitialized())
-        {
-            conn = repo.getConnection();
-        }
-        return conn;
     }
     
     private static File[] configWorkStation() throws URISyntaxException

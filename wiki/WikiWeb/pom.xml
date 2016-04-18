@@ -16,11 +16,6 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.wiki.architecture</groupId>
-            <artifactId>WikiEntities</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
             <version>4.0.1.RELEASE</version>
@@ -136,6 +131,18 @@
             <version>1.2.2</version>
         </dependency>
         <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-repository-sail</artifactId>
+            <version>4.1.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-sail-nativerdf</artifactId>
+            <version>4.1.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -151,7 +158,16 @@
             <artifactId>sesame-repository-api</artifactId>
             <version>4.1.1</version>
         </dependency>
-            
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-rdfxml</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-rio-turtle</artifactId>
+            <version>4.1.1</version>
+        </dependency>    
     </dependencies>
 
     <build>
