@@ -2,7 +2,7 @@ package net.unipiloto.wiki.web.entities.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import net.unipiloto.wiki.web.services.OntologyGeneralService;
+import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
@@ -15,7 +15,7 @@ public class DecisionTransaction
 {
     public static void insert(int id, String name, String arguments, String state) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyGeneralService.getInstance();
+        Repository repo = OntologyTools.getInstance();
         repo.initialize();
         ValueFactory factory = repo.getValueFactory();
         IRI subject = factory.createIRI("http://www.semanticweb.org/sa#decision_"+id);
@@ -60,7 +60,7 @@ public class DecisionTransaction
     
     public static void update(int id, String name, String arguments, String state) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyGeneralService.getInstance();
+        Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
@@ -84,7 +84,7 @@ public class DecisionTransaction
     
     public static void delete(int id) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyGeneralService.getInstance();
+        Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try

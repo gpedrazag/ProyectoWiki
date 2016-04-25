@@ -1,4 +1,4 @@
-package net.unipiloto.wiki.web.services;
+package net.unipiloto.wiki.web.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +15,7 @@ import org.openrdf.rio.RDFFormat;
 import org.openrdf.sail.nativerdf.NativeStore;
 
 
-public class OntologyGeneralService
+public class OntologyTools
 {
     private static Repository repo;
     
@@ -56,7 +56,7 @@ public class OntologyGeneralService
             } 
             catch (IOException | OpenRDFException ex)
             {
-                Logger.getLogger(OntologyGeneralService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(OntologyTools.class.getName()).log(Level.SEVERE, null, ex);
             }
             finally
             {
@@ -101,7 +101,7 @@ public class OntologyGeneralService
                     FileChannel dt = null;
                     try
                     {
-                        sc = new FileInputStream(new File(OntologyGeneralService.class.getResource("/ontologies/ontology.owl").toURI())).getChannel();
+                        sc = new FileInputStream(new File(OntologyTools.class.getResource("/ontologies/ontology.owl").toURI())).getChannel();
                         newOnt = new File(ontDir+sep+"ontology.owl");
                         newOnt.createNewFile();
                         dt = new FileInputStream(newOnt).getChannel();
