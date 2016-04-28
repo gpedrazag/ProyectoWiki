@@ -25,7 +25,7 @@ public class ArtifactService
         }
     }
     
-    public static void modifyArfact(int id, String description) 
+    public static void modifyArtifact(int id, String description) 
     {
         try
         {
@@ -41,7 +41,7 @@ public class ArtifactService
         }
     }
     
-    public static void removeAmrfact(int id, String description) 
+    public static void removeArtifact(int id) 
     {
         try
         {
