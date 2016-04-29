@@ -30,7 +30,7 @@ public class ConcernTransaction
                 "   <http://www.semanticweb.org/sa#concern_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#concern_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#concern>\n"+
@@ -50,26 +50,8 @@ public class ConcernTransaction
     
     public static void update(int id, String concern) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#concern_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Concern>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, concern);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, concern);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

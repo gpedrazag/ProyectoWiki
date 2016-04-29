@@ -30,17 +30,17 @@ public class EvaluationTransaction
                 "   <http://www.semanticweb.org/sa#evaluation_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#evaluation_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#pros>\n"+
                 "'"+pros+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#evaluation_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#cons>\n"+
-                "'"+pros+"'\n"+
-                "}\n"+
+                "'"+cons+"'\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#evaluation_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#valoration>\n"+
@@ -60,26 +60,8 @@ public class EvaluationTransaction
     
     public static void update(int id, String pros, String cons, String valoration) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#evaluation_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Evaluation>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, pros, cons, valoration);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, pros, cons, valoration);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

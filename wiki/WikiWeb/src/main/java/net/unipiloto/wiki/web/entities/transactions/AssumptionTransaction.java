@@ -30,12 +30,12 @@ public class AssumptionTransaction
                 "   <http://www.semanticweb.org/sa#assumption_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#assumption_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#description>\n"+
                 "'"+description+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#assumption_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#source>\n"+
@@ -55,26 +55,8 @@ public class AssumptionTransaction
     
     public static void update(int id, String description, String source) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#assumption_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Assumption>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, description, source);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, description, source);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

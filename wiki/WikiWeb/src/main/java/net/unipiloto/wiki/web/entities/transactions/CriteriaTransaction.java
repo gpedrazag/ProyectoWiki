@@ -30,12 +30,12 @@ public class CriteriaTransaction
                 "   <http://www.semanticweb.org/sa#criteria_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#criteria_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#keyword>\n"+
                 "'"+keyword+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#criteria_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#description>\n"+
@@ -55,26 +55,8 @@ public class CriteriaTransaction
     
     public static void update(int id, String keyword, String description) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#criteria_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Criteria>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, keyword, description);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, keyword, description);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

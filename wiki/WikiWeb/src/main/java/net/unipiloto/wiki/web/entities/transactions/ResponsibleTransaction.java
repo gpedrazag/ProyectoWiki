@@ -30,7 +30,7 @@ public class ResponsibleTransaction
                 "   <http://www.semanticweb.org/sa#solution_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#solution_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#name>\n"+
@@ -50,26 +50,8 @@ public class ResponsibleTransaction
     
     public static void update(int id, String name) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#responsible_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Responsible>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, name);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, name);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

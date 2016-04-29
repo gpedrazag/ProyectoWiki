@@ -19,7 +19,7 @@ public class IndexController
 
         OntologyTools.initRepository();
         ArtifactService.createArtifact(455, "Artefacto de prueba");
-        return "index";
+        return "wiki-main";
     }
     
     

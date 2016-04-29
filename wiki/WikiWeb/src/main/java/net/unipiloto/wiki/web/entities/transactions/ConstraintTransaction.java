@@ -30,7 +30,7 @@ public class ConstraintTransaction
                 "   <http://www.semanticweb.org/sa#constraint_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#constraint_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#name>\n"+
@@ -40,12 +40,12 @@ public class ConstraintTransaction
                 "   <http://www.semanticweb.org/sa#constraint_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#description>\n"+
                 "'"+description+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#constraint_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#rationale>\n"+
                 "'"+rationale+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#constraint_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#keyword>\n"+
@@ -65,26 +65,10 @@ public class ConstraintTransaction
     
     public static void update(int id, String name, String description, String rationale, String keyword) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#constraint_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Constraint>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, name, description, rationale, keyword);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        
+        delete(id);
+        insert(id, name, description, rationale, keyword);
+        
     }
     
     public static void delete(int id) throws IOException, URISyntaxException

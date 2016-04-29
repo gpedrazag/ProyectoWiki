@@ -13,7 +13,7 @@
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/front-end/jsp/"
+          p:prefix="/front-end/views/"
           p:suffix=".jsp" />
     
 </beans>

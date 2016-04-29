@@ -30,17 +30,17 @@ public class DecisionTransaction
                 "   <http://www.semanticweb.org/sa#decision_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#id>\n"+
                 "'"+id+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#decision_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#name>\n"+
                 "'"+name+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#decision_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#arguments>\n"+
                 "'"+arguments+"'\n"+
-                "}\n"+
+                "} WHERE{};\n"+
                 "INSERT {\n"+
                 "   <http://www.semanticweb.org/sa#decision_"+id+">\n"+
                 "   <http://www.semanticweb.org/sa#state>\n"+
@@ -60,26 +60,8 @@ public class DecisionTransaction
     
     public static void update(int id, String name, String arguments, String state) throws IOException, URISyntaxException
     {
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#decision_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Decision>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
-            insert(id, name, arguments, state);
-        }
-        finally
-        {
-            conn.close();
-            repo.shutDown();
-        }
+        delete(id);
+        insert(id, name, arguments, state);
     }
     
     public static void delete(int id) throws IOException, URISyntaxException
