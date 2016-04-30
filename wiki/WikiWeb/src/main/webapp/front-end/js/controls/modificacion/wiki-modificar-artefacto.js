@@ -258,38 +258,52 @@
             var list7 = [];
 
 
-            $.each($("#tbody-5 tr"), function (index, data) {
-                list5.push($(data).attr("id"));
-
-            });
-
-            alert(list5);
-
-            $.each($("#tbody-2 tr"), function (index, data) {
-                list2.push($(data).attr("id"));
-
-            });
-
-            alert(list2);
-
-            $.each($("#tbody-7 tr"), function (index, data) {
-                list7.push($(data).attr("id"));
-
-            });
-
-            alert(list7);
-
-            alert(id + " " + description);
+//            $.each($("#tbody-5 tr"), function (index, data) {
+//                list5.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list5);
+//
+//            $.each($("#tbody-2 tr"), function (index, data) {
+//                list2.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list2);
+//
+//            $.each($("#tbody-7 tr"), function (index, data) {
+//                list7.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7);
+//
+//            alert(id + " " + description);
         }
 
 
         function eventLoad() {
-
             
+            //alert();
+            ajaxSetArtefacto();
 
         }
 
-        
+        function ajaxSetArtefacto()
+        {
+            $.ajax({
+                url: "artifact/getAll",
+                method: "POST",
+                dataType:"json"
+            }).done(function (data) {
+                alert(data);
+            }).fail(function (jrxml, errorThrow) {
+                
+            });
+        }
+
+
 
         return this;
     };

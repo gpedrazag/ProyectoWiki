@@ -235,8 +235,9 @@
         }
 
         //evento que guarda los datos de una alternativa
-        function eventsave3() {
+        function eventsave3(event) {
 
+            event.preventDefault();
             var id = $("#txt-3").val();
             var description = $("#txt-area-3").val();
             var list5 = [];
@@ -244,44 +245,46 @@
             var list7 = [];
 
 
-            $.each($("#tbody-5 tr"), function (index, data) {
-                list5.push($(data).attr("id"));
-
-            });
-
-            alert(list5);
-
-            $.each($("#tbody-2 tr"), function (index, data) {
-                list2.push($(data).attr("id"));
-
-            });
-
-            alert(list2);
-
-            $.each($("#tbody-7 tr"), function (index, data) {
-                list7.push($(data).attr("id"));
-
-            });
-
-            alert(list7);
-
-            alert(id + " " + description);
-
+//            $.each($("#tbody-5 tr"), function (index, data) {
+//                list5.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list5);
+//
+//            $.each($("#tbody-2 tr"), function (index, data) {
+//                list2.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list2);
+//
+//            $.each($("#tbody-7 tr"), function (index, data) {
+//                list7.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7);
+//
+//            alert(id + " " + description);
+            alert("Entro al evento");
             ajaxSetArtefacto(id, description);
         }
 
         function ajaxSetArtefacto(id, desc)
         {
+
             $.ajax({
-                url: "/artifact/set",
+                url: "artifact/set",
                 data: {
                     id: id,
                     description: desc
                 },
-                type: "POST"
+                method: "POST"
             }).done(function () {
+                alert("Entro al ajax");
             }).fail(function (jrxml, errorThrow) {
-                callback(null);
+                alert(jrxml + " " + errorThrow);
             });
         }
 

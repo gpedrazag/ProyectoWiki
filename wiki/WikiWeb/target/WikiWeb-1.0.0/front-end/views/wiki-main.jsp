@@ -242,7 +242,7 @@
                                 <a href="#"><i></i>Alternativa<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a id="c-1" href="#crearAlternativa"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
+                                        <a id="c-1" href="#modificarAlternativa"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
                                         <a id="m-1" href="#modificarAlternativa"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
@@ -270,7 +270,7 @@
                                 <a href="#"><i></i>Artefacto<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a id="c-3" href="#crearArtefacto"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
+                                        <a id="c-3" ><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
                                         <a id="m-3" href="#modificarArtefacto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
