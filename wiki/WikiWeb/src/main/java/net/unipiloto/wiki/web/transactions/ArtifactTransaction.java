@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class ArtifactTransaction
 {
-    public static void insert(String id, String description) throws IOException, URISyntaxException
+    public static void insert(String id, String description, List<String> decisions) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -35,6 +35,10 @@ public class ArtifactTransaction
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(description));
+            for(String decision : decisions)
+            {
+               conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#artifactHave"), factory.createIRI("http://www.semanticweb.org/sa#"+decision)); 
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -49,10 +53,10 @@ public class ArtifactTransaction
         
     }
     
-    public static void update(String id, String description) throws IOException, URISyntaxException
+    public static void update(String id, String description, List<String> decisions) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, description);
+        insert(id, description, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -86,7 +90,7 @@ public class ArtifactTransaction
     public static String selectById(String id) 
     {
         Artifact artifact = null;
-        Repository repo = OntologyTools.getInstance();;
+        Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
@@ -107,7 +111,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 );
                 
-                artifact.setHaveDecisions(DecisionTransaction.getAllDecisionsByArtifactId(artifact.getId()));
+                artifact.setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifact.getId()));
             }
         }
         finally
@@ -143,7 +147,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;
-                artifacts.get(i).setHaveDecisions(DecisionTransaction.getAllDecisionsByArtifactId(artifacts.get(i).getId()));
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId()));
             }
         }
         finally

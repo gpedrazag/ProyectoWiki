@@ -88,7 +88,7 @@ public class DecisionTransaction
         }
     }
     
-    public static List<Decision> getAllDecisionsByArtifactId(String artifactId)
+    public static List<Decision> selectAllDecisionsByArtifactId(String artifactId)
     {
         List<Decision> decisions = new ArrayList<Decision>();
         
@@ -99,7 +99,11 @@ public class DecisionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?d WHERE {"
-                + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d "
+                + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d . "
+                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                + "?d <http://www.semanticweb.org/sa#name> ?name . "
+                + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
+                + "?d <http://www.semanticweb.org/sa#state> ?state "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();
@@ -108,8 +112,13 @@ public class DecisionTransaction
                 
                 BindingSet bs = result.next();
                 decisions.add(
-                    DecisionTransaction.selectById(bs.getValue("d").stringValue())
-                );
+                    new Decision(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("arguments").stringValue(), 
+                    bs.getValue("state").stringValue()
+                
+                ));
             }
             
             if(decisions.isEmpty())
