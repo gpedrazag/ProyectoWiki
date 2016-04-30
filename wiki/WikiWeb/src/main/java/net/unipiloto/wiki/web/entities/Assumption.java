@@ -2,23 +2,23 @@ package net.unipiloto.wiki.web.entities;
 
 public class Assumption
 {
-    private int id;
+    private String id;
     private String description;
     private String source;
 
-    public Assumption(int id, String description, String source)
+    public Assumption(String id, String description, String source)
     {
         this.id = id;
         this.description = description;
         this.source = source;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

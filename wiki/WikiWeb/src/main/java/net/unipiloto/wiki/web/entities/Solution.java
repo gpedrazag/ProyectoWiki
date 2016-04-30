@@ -2,10 +2,10 @@ package net.unipiloto.wiki.web.entities;
 
 public class Solution extends Alternative
 {
-    private int id;
+    private String id;
     private String rationale;
 
-    public Solution(int id, String name, String description)
+    public Solution(String id, String name, String description)
     {
         super(id, name, description);
     }
@@ -20,12 +20,12 @@ public class Solution extends Alternative
         this.rationale = rationale;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

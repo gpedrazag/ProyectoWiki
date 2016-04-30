@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Artifact
 {
-    private int id;
+    private String id;
     private String description;
     private List<Decision> haveDecisions;
 
-    public Artifact(int id, String description)
+    public Artifact(String id, String description)
     {
         this.id = id;
         this.description = description;
@@ -24,12 +24,12 @@ public class Artifact
         this.haveDecisions = haveDecisions;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

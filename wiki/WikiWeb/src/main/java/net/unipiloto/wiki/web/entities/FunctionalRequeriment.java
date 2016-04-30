@@ -2,14 +2,14 @@ package net.unipiloto.wiki.web.entities;
 
 public class FunctionalRequeriment
 {
-    private int id;
+    private String id;
     public String name;
     public String actor;
     public String description;
     public String input;
     public String output;
 
-    public FunctionalRequeriment(int id, String name, String actor, String description, String input, String output)
+    public FunctionalRequeriment(String id, String name, String actor, String description, String input, String output)
     {
         this.id = id;
         this.name = name;
@@ -19,12 +19,12 @@ public class FunctionalRequeriment
         this.output = output;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

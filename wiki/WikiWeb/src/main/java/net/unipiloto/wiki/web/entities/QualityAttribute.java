@@ -4,7 +4,7 @@ import java.util.List;
 
 public class QualityAttribute
 {
-    private int id;
+    private String id;
     private String actor;
     private String enviroment;
     private String measure;
@@ -13,7 +13,7 @@ public class QualityAttribute
     private List<Artifact> triggerArtifacts;
     
 
-    public QualityAttribute(int id, String actor, String enviroment, String measure, String boost, String boostSource)
+    public QualityAttribute(String id, String actor, String enviroment, String measure, String boost, String boostSource)
     {
         this.id = id;
         this.actor = actor;
@@ -23,12 +23,12 @@ public class QualityAttribute
         this.boostSource = boostSource;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Decision
 {
-    private int id;
+    private String id;
     private String nombre;
     private String arguments;
     private String state;
-    private List<Constraint> mayHaveConstraints;
+    private List<Constraint> mayHaveConstraStrings;
     private List<Criteria> haveCriterias;
     private List<Assumption> mayHaveAssumptions;
     private List<Concern> haveAsTriggerConcerns;
@@ -19,7 +19,7 @@ public class Decision
     private List<Alternative> haveAlternatives;
     private Solution haveSolution;
 
-    public Decision(int id, String nombre, String arguments, String state)
+    public Decision(String id, String nombre, String arguments, String state)
     {
         this.id = id;
         this.nombre = nombre;
@@ -27,14 +27,14 @@ public class Decision
         this.state = state;
     }
 
-    public List<Constraint> getMayHaveConstraints()
+    public List<Constraint> getMayHaveConstraStrings()
     {
-        return mayHaveConstraints;
+        return mayHaveConstraStrings;
     }
 
-    public void setMayHaveConstraints(List<Constraint> mayHaveConstraints)
+    public void setMayHaveConstraStrings(List<Constraint> mayHaveConstraStrings)
     {
-        this.mayHaveConstraints = mayHaveConstraints;
+        this.mayHaveConstraStrings = mayHaveConstraStrings;
     }
 
     public List<Criteria> getHaveCriterias()
@@ -127,12 +127,12 @@ public class Decision
         this.haveSolution = haveSolution;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

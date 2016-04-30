@@ -2,21 +2,21 @@ package net.unipiloto.wiki.web.entities;
 
 public class Responsible
 {
-    private int id;
+    private String id;
     private String name;
 
-    public Responsible(int id, String name)
+    public Responsible(String id, String name)
     {
         this.id = id;
         this.name = name;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

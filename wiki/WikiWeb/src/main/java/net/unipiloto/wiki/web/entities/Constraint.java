@@ -2,13 +2,13 @@ package net.unipiloto.wiki.web.entities;
 
 public class Constraint
 {
-    private int id;
+    private String id;
     private String name;
     private String description;
     private String rationale;
     private String keyword;
     
-    public Constraint(int id, String name, String description, String rationale, String keyword)
+    public Constraint(String id, String name, String description, String rationale, String keyword)
     {
         this.id = id;
         this.name = name;
@@ -17,12 +17,12 @@ public class Constraint
         this.keyword = keyword;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }

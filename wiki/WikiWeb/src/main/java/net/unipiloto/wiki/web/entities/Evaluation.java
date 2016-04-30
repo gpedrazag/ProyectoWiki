@@ -2,12 +2,12 @@ package net.unipiloto.wiki.web.entities;
 
 public class Evaluation
 {
-    private int id;
+    private String id;
     public String pros;
     public String cons;
     public String valoration;
 
-    public Evaluation(int id, String pros, String cons, String valoration)
+    public Evaluation(String id, String pros, String cons, String valoration)
     {
         this.id = id;
         this.pros = pros;
@@ -15,12 +15,12 @@ public class Evaluation
         this.valoration = valoration;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }
 
-    public void setId(int id)
+    public void setId(String id)
     {
         this.id = id;
     }
