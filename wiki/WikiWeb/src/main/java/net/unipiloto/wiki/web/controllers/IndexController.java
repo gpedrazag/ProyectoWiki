@@ -22,7 +22,7 @@ public class IndexController
         return "wiki-main";
     }
     
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/prueba", method = RequestMethod.GET)
     @ResponseBody
     public String getArtifact()
     {

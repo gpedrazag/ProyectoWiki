@@ -2,10 +2,11 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import net.unipiloto.wiki.web.entities.Alternative;
-import static net.unipiloto.wiki.web.transactions.ConcernTransaction.delete;
-import static net.unipiloto.wiki.web.transactions.ConcernTransaction.insert;
 import net.unipiloto.wiki.web.tools.OntologyTools;
+import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
@@ -83,7 +84,7 @@ public class AlternativeTransaction
         }
     }
     
-    public static Alternative selectById(String id) 
+    public static String selectById(String id) 
     {
         Alternative alternative = null;
         Repository repo = OntologyTools.getInstance();;
@@ -95,7 +96,7 @@ public class AlternativeTransaction
                 "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
             );
@@ -109,6 +110,7 @@ public class AlternativeTransaction
                     bs.getValue("description").stringValue() 
                 );
             }
+            alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id));
         }
         finally
         {
@@ -116,6 +118,43 @@ public class AlternativeTransaction
             repo.shutDown();
         }
         
-        return alternative;
+        return JsonFactory.toJson(alternative);
+    }
+    
+    public static String selectAll()
+    {
+        List<Alternative> alternatives = new ArrayList<Alternative>();
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description WHERE {\n"
+                + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
+                + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
+                + "?alternative <http://www.semanticweb.org/sa#description> ?description "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                alternatives.add(new Alternative(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("id").stringValue()
+                ));
+                int i = alternatives.size() - 1;
+                alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId()));
+            }
+        }
+        finally
+        {
+            conn.close();
+            repo.shutDown();
+        }
+        
+        return JsonFactory.toJson(alternatives);
     }
 }

@@ -85,7 +85,7 @@ public class EvaluationTransaction
         }
     }
     
-    public static Evaluation getByAlternativeId(String alternativeId)
+    public static Evaluation selectByAlternativeId(String alternativeId)
     {
         Evaluation evaluation = null;
         
@@ -96,10 +96,9 @@ public class EvaluationTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id, ?pros, ?cons, ?valoration WHERE {"
-                + "<http://www.semanticweb.org/sa#"+alternativeId+"> <http://www.semanticweb.org/sa#alternativeLinkTo> ?d "
-                + "?d  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
+                + "<http://www.semanticweb.org/sa#"+alternativeId+"> <http://www.semanticweb.org/sa#alternativeLinkTo> ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id ."
-                + "?d <http://www.semanticweb.org/sa#description> ?description "
+                + "?d <http://www.semanticweb.org/sa#description> ?description . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
             );
