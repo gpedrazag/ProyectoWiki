@@ -285,11 +285,24 @@
 
         function eventLoad() {
 
-            
+            ajaxSetArtefacto();
 
         }
 
-        
+        function ajaxSetArtefacto(callback)
+        {
+            $.ajax({
+                url: "/artifact/getAll",
+                type: "POST",
+                dataType:"json"
+            }).done(function (data) {
+                alert(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+
 
         return this;
     };

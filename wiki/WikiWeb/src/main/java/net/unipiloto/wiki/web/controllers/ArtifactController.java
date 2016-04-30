@@ -24,5 +24,11 @@ public class ArtifactController {
     public String getArtifact(@RequestParam(value = "id") String id) {
         return ArtifactTransaction.selectById("artifact_" + id);
     }
+    
+    @RequestMapping(value = "/getAll", method = RequestMethod.POST)
+    @ResponseBody
+    public void getAllArtifact() {
+         ArtifactTransaction.selectAll();
+    }
 
 }
