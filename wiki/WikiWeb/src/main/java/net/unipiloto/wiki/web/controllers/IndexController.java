@@ -7,6 +7,7 @@ import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "/")
@@ -18,11 +19,14 @@ public class IndexController
     {
 
         OntologyTools.initRepository();
-        if(ArtifactTransaction.selectById("artifact_455") == null) 
-            ArtifactTransaction.insert("artifact_455", "Artefacto de prueba");
-        else
-            ArtifactTransaction.insert("artifact_455", "Artefacto de prueba");
         return "wiki-main";
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    @ResponseBody
+    public String getArtifact()
+    {
+        return ArtifactTransaction.selectById("artifact_455");
     }
     
     

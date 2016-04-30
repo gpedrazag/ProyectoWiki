@@ -57,7 +57,7 @@ public class CriteriaTransaction
         IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-           conn.begin();
+            conn.begin();
             conn.remove(
                 subject,
                 factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),

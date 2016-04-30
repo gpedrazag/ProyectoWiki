@@ -7,43 +7,34 @@ import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
-import org.openrdf.query.QueryLanguage;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
 public class SoftwareArchitectureTransaction
 {
-    public static void insert(int id, String name, String description) throws IOException, URISyntaxException
+    public static void insert(String id, String name, String description) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#softwarearchitecture_"+id);
+        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         IRI object = factory.createIRI("http://www.semanticweb.org/sa#SoftwareArchitecture");
         RepositoryConnection conn = repo.getConnection();
         try
         {
             conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
             conn.add(subject, RDF.TYPE, object);
-            String sparql = 
-                "INSERT {\n"+
-                "   <http://www.semanticweb.org/sa#softwarearchitecture_"+id+">\n"+
-                "   <http://www.semanticweb.org/sa#id>\n"+
-                "'"+id+"'\n"+
-                "} WHERE{};\n"+
-                "INSERT {\n"+
-                "   <http://www.semanticweb.org/sa#softwarearchitecture_"+id+">\n"+
-                "   <http://www.semanticweb.org/sa#name>\n"+
-                "'"+name+"'\n"+
-                "} WHERE{};\n"+
-                "INSERT {\n"+
-                "   <http://www.semanticweb.org/sa#softwarearchitecture_"+id+">\n"+
-                "   <http://www.semanticweb.org/sa#description>\n"+
-                "'"+description+"'\n"+
-                "}\n"+
-                "WHERE{}";
-            System.out.println(sparql);
-            conn.prepareUpdate(QueryLanguage.SPARQL, sparql);
+            conn.begin();
+            conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
+            conn.add(subject, RDF.TYPE, object);
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(name));
+            conn.commit();
+        }
+        catch(Exception ex)
+        {
+            conn.rollback();
         }
         finally
         {
@@ -53,27 +44,32 @@ public class SoftwareArchitectureTransaction
         
     }
     
-    public static void update(int id, String name, String description) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description) throws IOException, URISyntaxException
     {
         delete(id);
         insert(id, name, description);
     }
     
-    public static void delete(int id) throws IOException, URISyntaxException
+    public static void delete(String id) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
+        ValueFactory factory = repo.getValueFactory();
+        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#softwarearchitecture_"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#SoftwareArchitecture>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
+            conn.begin();
+            conn.remove(
+                subject,
+                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+                factory.createIRI("http://www.semanticweb.org/sa#SoftwareArchitecture")
+            );
+            conn.commit();
+        }
+        catch(Exception ex)
+        {
+            conn.rollback();
         }
         finally
         {

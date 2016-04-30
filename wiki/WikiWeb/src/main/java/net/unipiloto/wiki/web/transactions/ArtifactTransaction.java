@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.Artifact;
 import net.unipiloto.wiki.web.tools.OntologyTools;
+import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
@@ -82,7 +83,7 @@ public class ArtifactTransaction
         }
     }
     
-    public static Artifact selectById(String id) 
+    public static String selectById(String id) 
     {
         Artifact artifact = null;
         Repository repo = OntologyTools.getInstance();;
@@ -115,13 +116,43 @@ public class ArtifactTransaction
             repo.shutDown();
         }
         
-        return artifact;
+        return JsonFactory.toJson(artifact);
     }
     
-    public static List<Artifact> selectAll()
+    public static String selectAll()
     {
         List<Artifact> artifacts = new ArrayList<Artifact>();
-        return artifacts;
+        Repository repo = OntologyTools.getInstance();;
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description WHERE {\n"
+                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
+                + "?artifact <http://www.semanticweb.org/sa#id> ?id ."
+                + "?artifact <http://www.semanticweb.org/sa#description> ?description "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                artifacts.add(new Artifact(
+                    bs.getValue("id").stringValue(),
+                    bs.getValue("description").stringValue()
+                ));
+                int i = artifacts.size() - 1;
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.getAllDecisionsByArtifactId(artifacts.get(i).getId()));
+            }
+        }
+        finally
+        {
+            conn.close();
+            repo.shutDown();
+        }
+        
+        return JsonFactory.toJson(artifacts);
         
     }
     
