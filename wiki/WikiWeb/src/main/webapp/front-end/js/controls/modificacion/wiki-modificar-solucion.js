@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarSolucion = function (alt, des, id) {
+    $.fn.wikiModificarSolucion = function (sol, alt, des, id) {
 
 
         if (id === "m-12") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Solución"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-12-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -86,6 +86,9 @@
                             )
                     ;
 
+            $.each(sol, function (index, data) {
+                $("#slc-12-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "12"}));
+            });
 
             $.each(alt, function (index, data) {
                 $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
@@ -95,6 +98,7 @@
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
+            $("#slc-12-tp").on("change", eventLoad);
             $("#slc-1").on("change", eventSelected);
             $("#slc-7").on("change", eventSelected);
 
@@ -199,6 +203,10 @@
             alert(Justificación);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

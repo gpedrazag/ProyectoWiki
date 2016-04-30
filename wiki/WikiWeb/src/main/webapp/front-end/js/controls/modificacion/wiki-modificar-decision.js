@@ -17,7 +17,7 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Decisión"))
@@ -303,6 +303,9 @@
                                     )
                             );
 
+            $.each(des, function (index, data) {
+                $("#slc-7-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+            });
 
             $.each(des, function (index, data) {
                 $("#slc-7_1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_1"}));
@@ -352,7 +355,7 @@
                 $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
             });
 
-
+            $("#slc-7-tp").on("change", eventLoad);
             $("#slc-7_1").on("change", eventSelected);
             $("#slc-7_2").on("change", eventSelected);
             $("#slc-7_3").on("change", eventSelected);
@@ -819,6 +822,11 @@
             alert(Nombre + " " + Argumento + " " + estado);
         }
 
+
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

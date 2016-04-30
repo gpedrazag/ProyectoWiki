@@ -20,7 +20,7 @@
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Alternativa"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-1-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -111,26 +111,27 @@
                                     )
                             );
             $.each(alt_1, function (index, data) {
-                $("#slc-7-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+                $("#slc-1-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
             });
-            //Se llena el select con las decisiones
+           
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
-            //Se llena el select con las soluciones
+           
             $.each(sol, function (index, data) {
                 $("#slc-12").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "12"}));
             });
-            //Se llena el select con las avaluaciones
+            
             $.each(eval, function (index, data) {
                 $("#slc-8").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
             });
-            $("#slc-7-tp").on("change", eventLoad);
-            //Se asigana el evento para llenar la tablas donde se guardaran decisiones 
+            
+            $("#slc-1-tp").on("change", eventLoad);
+           
             $("#slc-7").on("change", eventSelected1);
-            //Se asigana el evento para llenar la tablas donde se guardaran soluciones 
+           
             $("#slc-12").on("change", eventSelected1);
-            //Se asigana el evento para llenar la tablas donde se guardaran avaluaciones 
+           
             $("#slc-8").on("change", eventSelected1);
         }
 
@@ -258,6 +259,7 @@
         function eventLoad() {
 
             var textOptionSelected = $('option:selected', this).html();
+            
             if (textOptionSelected === '...') {
                 $("#txt-1").val("");
                 $("#txt-area-1").val("");
@@ -294,47 +296,52 @@
                 $("#tbody-8").empty();
             } else {
 
-                $.each(alt_1, function (index, data) {
+                $.each(foo, function (index, data) {
 
-                    $("#txt-1").val(data.name);
-                    $("#txt-area-1").val(data.description);
+                    $("#txt-1").val(data.id);
+                    $("#txt-area-1").val(data.name);
 
-                });
+                    $.each(data.decisiones, function (index, data) {
 
-                $.each(des_1, function (index, data) {
-                    $("#tbody-7")
-                            .append($("<tr>").attr({"id": data.id, "value": "7"})
-                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
-                                    .append($("<td>")
-                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
-                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                    )
-                                            )
-                                    );
-                });
+                        $("#tbody-7")
+                                .append($("<tr>").attr({"id": data.id,"value": "7"})
+                                        .append($("<td>").html(data.name).attr({"width": "80%"}))
+                                        .append($("<td>")
+                                                .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+                                                        .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                        )
+                                                )
+                                        );
 
-                $.each(sol_1, function (index, data) {
-                    $("#tbody-12")
-                            .append($("<tr>").attr({"id": data.id, "value": "12"})
-                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
-                                    .append($("<td>")
-                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
-                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                    )
-                                            )
-                                    );
-                });
+                    });
 
-                $.each(eval_1, function (index, data) {
-                    $("#tbody-8")
-                            .append($("<tr>").attr({"id": data.id, "value": "8"})
-                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
-                                    .append($("<td>")
-                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
-                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                    )
-                                            )
-                                    );
+                    $.each(data.soluciones, function (index, data) {
+
+                        $("#tbody-12")
+                                .append($("<tr>").attr({"id": data.id,"value": "12"})
+                                        .append($("<td>").html(data.name).attr({"width": "80%"}))
+                                        .append($("<td>")
+                                                .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+                                                        .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                        )
+                                                )
+                                        );
+
+                    });
+
+                    $.each(data.evaluaciones, function (index, data) {
+
+                        $("#tbody-8")
+                                .append($("<tr>").attr({"id": data.id,"value": "8"})
+                                        .append($("<td>").html(data.name).attr({"width": "80%"}))
+                                        .append($("<td>")
+                                                .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+                                                        .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                        )
+                                                )
+                                        );
+
+                    });
                 });
 
                 $("#tbody-7 tr").each(function (index, data) {
@@ -344,6 +351,8 @@
                             $(data1).addClass("hidden");
                         }
                     });
+
+
                 });
 
                 $("#tbody-12 tr").each(function (index, data) {
@@ -353,8 +362,10 @@
                             $(data1).addClass("hidden");
                         }
                     });
-                });
 
+
+                });
+                
                 $("#tbody-8 tr").each(function (index, data) {
 
                     $("#slc-8 option").each(function (index, data1) {
@@ -362,6 +373,8 @@
                             $(data1).addClass("hidden");
                         }
                     });
+
+
                 });
 
             }
@@ -371,30 +384,48 @@
     };
 })(jQuery);
 
-
-
-
-//                $.each(foo, function (index, data) {
+//                $.each(alt_1, function (index, data) {
 //
-//                    $("#txt-1").val(data.id);
-//                    $("#txt-area-1").val(data.name);
+//                    $("#txt-1").val(data.name);
+//                    $("#txt-area-1").val(data.description);
 //
-//                    $.each(data.decisiones, function (index, data) {
-//
-//                        $("#tbody-7")
-//                                .append($("<tr>").attr({"id": data.id})
-//                                        .append($("<td>").html(data.name).attr({"width": "80%"}))
-//                                        .append($("<td>")
-//                                                .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
-//                                                        .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-//                                                        )
-//                                                )
-//                                        );
-//
-//                    });
 //                });
 //
+//                $.each(des_1, function (index, data) {
+//                    $("#tbody-7")
+//                            .append($("<tr>").attr({"id": data.id, "value": "7"})
+//                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
+//                                    .append($("<td>")
+//                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+//                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                    )
+//                                            )
+//                                    );
+//                });
 //
+//                $.each(sol_1, function (index, data) {
+//                    $("#tbody-12")
+//                            .append($("<tr>").attr({"id": data.id, "value": "12"})
+//                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
+//                                    .append($("<td>")
+//                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+//                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                    )
+//                                            )
+//                                    );
+//                });
+//
+//                $.each(eval_1, function (index, data) {
+//                    $("#tbody-8")
+//                            .append($("<tr>").attr({"id": data.id, "value": "8"})
+//                                    .append($("<td>").html(data.name).attr({"width": "80%"}))
+//                                    .append($("<td>")
+//                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
+//                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                    )
+//                                            )
+//                                    );
+//                });
 //
 //                $("#tbody-7 tr").each(function (index, data) {
 //
@@ -403,6 +434,24 @@
 //                            $(data1).addClass("hidden");
 //                        }
 //                    });
-//
-//
 //                });
+//
+//                $("#tbody-12 tr").each(function (index, data) {
+//
+//                    $("#slc-12 option").each(function (index, data1) {
+//                        if ($(data).attr("id") === $(data1).attr("value")) {
+//                            $(data1).addClass("hidden");
+//                        }
+//                    });
+//                });
+//
+//                $("#tbody-8 tr").each(function (index, data) {
+//
+//                    $("#slc-8 option").each(function (index, data1) {
+//                        if ($(data).attr("id") === $(data1).attr("value")) {
+//                            $(data1).addClass("hidden");
+//                        }
+//                    });
+//                });
+
+

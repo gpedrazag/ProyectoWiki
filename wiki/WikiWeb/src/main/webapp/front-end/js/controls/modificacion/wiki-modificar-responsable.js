@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarResponsable = function (des, id) {
+    $.fn.wikiModificarResponsable = function (resp, des, id) {
 
 
         if (id === "m-10") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Responsable"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-10-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -67,11 +67,16 @@
                             )
                     ;
 
+            $.each(resp, function (index, data) {
+                $("#slc-10-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "10"}));
+            });
+
 
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
+            $("#slc-10-tp").on("change", eventLoad);
             $("#slc-7").on("change", eventSelected);
 
 
@@ -139,6 +144,10 @@
             alert(Nombre);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

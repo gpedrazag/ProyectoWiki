@@ -24,14 +24,17 @@ $(document).ready(function () {
             "decisiones": [
                 {"id": "1", "name": "Decision  1", "description": "Descripcion de la Decision 1"},
                 {"id": "4", "name": "Decision  4", "description": "Descripcion de la Decision 4"},
-                {"id": "5", "name": "Decision  5", "description": "Descripcion de la Decision 5"}
-            ]
-        },
-        {"id": "2", "name": "Alternativa  2", "description": "Descripcion de la alternativa 2",
-            "decisiones": [
-                {"id": "3", "name": "Decision  3", "description": "Descripcion de la Decision 3"},
-                {"id": "4", "name": "Decision  4", "description": "Descripcion de la Decision 4"},
-                {"id": "1", "name": "Decision  1", "description": "Descripcion de la Decision 1"}
+                {"id": "2", "name": "Decision  2", "description": "Descripcion de la Decision 2"}
+            ],
+            "soluciones": [
+                {"id": "1", "name": "Solucion  1", "description": "Descripcion de la Solucion 1"},
+                {"id": "4", "name": "Solucion  4", "description": "Descripcion de la Solucion 4"},
+                {"id": "2", "name": "Solucion  2", "description": "Descripcion de la Solucion 2"}
+            ],
+            "evaluaciones": [
+                {"id": "1", "name": "Evaluacion  1", "description": "Descripcion de la Evaluacion 1"},
+                {"id": "2", "name": "Evaluacion  2", "description": "Descripcion de la Evaluacion 2"},
+                {"id": "3", "name": "Evaluacion  3", "description": "Descripcion de la Evaluacion 3"}
             ]
         }
     ];
@@ -88,18 +91,18 @@ $(document).ready(function () {
 
         var id = $(this).attr("id");
         $("<div>").wikiModificarAlternativa(eval_1, sol_1, foo, des_1, alt_1, des, sol, eval, id);
-        $("<div>").wikiModificarArquitectura(art, des, id);
-        $("<div>").wikiModificarArtefacto(atrical, arqsoft, des, id);
-        $("<div>").wikiModificarAsunto(des, atrical, reffunc, id);
-        $("<div>").wikiModificarAtrCalidad(art, asu, id);
-        $("<div>").wikiModificarCriterio(des, eval, id);
+        $("<div>").wikiModificarArquitectura(arqsoft, art, des, id);
+        $("<div>").wikiModificarArtefacto(art, atrical, arqsoft, des, id);
+        $("<div>").wikiModificarAsunto(asu, des, atrical, reffunc, id);
+        $("<div>").wikiModificarAtrCalidad(atrical, art, asu, id);
+        $("<div>").wikiModificarCriterio(cri, des, eval, id);
         $("<div>").wikiModificarDecision(des, arqsoft, resp, asu, cri, supo, rest, sol, alt, art, id);
-        $("<div>").wikiModificarEvaluacion(alt, cri, id);
-        $("<div>").wikiModificarRequerimientoFuncional(asu, id);
-        $("<div>").wikiModificarResponsable(des, id);
-        $("<div>").wikiModificarRestriccion(des, id);
-        $("<div>").wikiModificarSolucion(alt, des, id);
-        $("<div>").wikiModificarSuposicion(des, id);
+        $("<div>").wikiModificarEvaluacion(eval, alt, cri, id);
+        $("<div>").wikiModificarRequerimientoFuncional(reffunc, asu, id);
+        $("<div>").wikiModificarResponsable(resp, des, id);
+        $("<div>").wikiModificarRestriccion(rest, des, id);
+        $("<div>").wikiModificarSolucion(sol, alt, des, id);
+        $("<div>").wikiModificarSuposicion(supo, des, id);
 
     }
 

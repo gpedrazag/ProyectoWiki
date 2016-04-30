@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarAtrCalidad = function (art, asu, id) {
+    $.fn.wikiModificarAtrCalidad = function (atrical, art, asu, id) {
 
         //Si es  5 es Atributo de Calidad
         if (id === "m-5") {
@@ -21,7 +21,7 @@
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Atributo de Calidad"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-5-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -106,19 +106,23 @@
                                     )
 
                             );
+            
+            $.each(atrical, function (index, data) {
+                $("#slc-5-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "5"}));
+            });
 
-            //Se llena el select con los artefactos
             $.each(art, function (index, data) {
                 $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
             });
-            //Se llena el select con las asuntos
+
             $.each(asu, function (index, data) {
                 $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
             });
 
-            //Se asigana el evento para llenar la tablas donde se guardaran artefactos 
+            $("#slc-5-tp").on("change", eventLoad);
+            
             $("#slc-3").on("change", eventSelected5);
-            //Se asigana el evento para llenar la tablas donde se guardaran asuntos 
+
             $("#slc-4").on("change", eventSelected5);
 
         }
@@ -229,6 +233,10 @@
             alert(actor + " " + ambiente + " " + medida + " " + estímulo + " " + fuentedeestímulo);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

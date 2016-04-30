@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarEvaluacion = function (alt, cri, id) {
+    $.fn.wikiModificarEvaluacion = function (eval, alt, cri, id) {
 
 
         if (id === "m-8") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Evaluación"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-8-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -98,6 +98,9 @@
                             )
                     ;
 
+            $.each(eval, function (index, data) {
+                $("#slc-8-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
+            });
 
             $.each(alt, function (index, data) {
                 $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
@@ -109,7 +112,7 @@
 
 
 
-
+            $("#slc-8-tp").on("change", eventLoad);
             $("#slc-1").on("change", eventSelected);
             $("#slc-6").on("change", eventSelected);
 
@@ -225,6 +228,10 @@
             alert(Pros + " " + Contras + " " + Valoracion);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

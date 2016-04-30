@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarArquitectura = function (art, des, id) {
+    $.fn.wikiModificarArquitectura = function (arqsoft,art, des, id) {
 
         //Si es  1 es Arquitectura de software
         if (id === "m-2") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Arquitectura De Software"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-2-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -92,6 +92,10 @@
 
                             );
 
+
+            $.each(arqsoft, function (index, data) {
+                $("#slc-2-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "2"}));
+            });
             //Se llena el select con los artefactos
             $.each(art, function (index, data) {
                 $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
@@ -101,9 +105,10 @@
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
-            //Se asigana el evento para llenar la tablas donde se guardaran decisiones 
+            $("#slc-2-tp").on("change", eventLoad);
+            
             $("#slc-3").on("change", eventSelected2);
-            //Se asigana el evento para llenar la tablas donde se guardaran soluciones 
+            
             $("#slc-7").on("change", eventSelected2);
 
         }
@@ -155,7 +160,7 @@
 
 
                 $("#tbody-3")
-                        .append($("<tr>").attr({"id": idOptionSelected,"value": idClassOptionSelected})
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove2)
@@ -176,7 +181,7 @@
 
 
                 $("#tbody-7")
-                        .append($("<tr>").attr({"id": idOptionSelected,"value": idClassOptionSelected})
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove2)
@@ -213,6 +218,13 @@
 
             alert(name + " " + description);
         }
+
+        function eventLoad() {
+
+
+        }
+
+
 
         return this;
     };

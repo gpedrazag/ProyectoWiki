@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarRequerimientoFuncional = function (asu, id) {
+    $.fn.wikiModificarRequerimientoFuncional = function (reffunc, asu, id) {
 
 
         if (id === "m-9") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Requerimiento Funcional"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-9-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -86,11 +86,16 @@
                             )
                     ;
 
+            $.each(reffunc, function (index, data) {
+                $("#slc-9-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "9"}));
+            });
 
             $.each(asu, function (index, data) {
                 $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
             });
 
+
+            $("#slc-9-tp").on("change", eventLoad);
             $("#slc-4").on("change", eventSelected);
 
 
@@ -161,6 +166,10 @@
             alert(Nombre + " " + Actor + " " + Descripción + " " + Entrada + " " + salida);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

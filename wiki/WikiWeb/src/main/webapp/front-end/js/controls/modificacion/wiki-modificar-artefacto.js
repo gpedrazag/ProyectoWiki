@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarArtefacto = function (atrical, arqsoft, des, id) {
+    $.fn.wikiModificarArtefacto = function (art, atrical, arqsoft, des, id) {
 
         if (id === "m-3") {
 
@@ -16,11 +16,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Artefacto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-3-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -112,6 +112,9 @@
                                     )
                             );
 
+            $.each(art, function (index, data) {
+                $("#slc-3-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
+            });
 
             //Se llena el select con Atributo de Calidad
             $.each(atrical, function (index, data) {
@@ -127,6 +130,7 @@
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
+            $("#slc-3-tp").on("change", eventLoad);
             //Se asigana el evento para llenar la tablas donde se guardaran Atributo de Calidad 
             $("#slc-5").on("change", eventSelected3);
             //Se asigana el evento para llenar la tablas donde se guardaran Arquitectura de software 
@@ -278,6 +282,11 @@
             alert(id + " " + description);
         }
 
+
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

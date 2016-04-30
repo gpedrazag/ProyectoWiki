@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarSuposicion = function (des, id) {
+    $.fn.wikiModificarSuposicion = function (supo, des, id) {
 
 
         if (id === "m-13") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Suposición"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-13-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -73,10 +73,15 @@
                     ;
 
 
+            $.each(supo, function (index, data) {
+                $("#slc-13-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "13"}));
+            });
+
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
+            $("#slc-13-tp").on("change", eventLoad);
             $("#slc-7").on("change", eventSelected);
 
 
@@ -147,6 +152,10 @@
             alert(Descripción + " " + Fuente);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

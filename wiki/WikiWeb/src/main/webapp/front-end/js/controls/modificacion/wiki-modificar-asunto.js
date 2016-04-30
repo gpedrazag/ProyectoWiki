@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarAsunto = function (des, atrical, reffunc, id) {
+    $.fn.wikiModificarAsunto = function (asu, des, atrical, reffunc, id) {
 
         //Si es  1 es Asunto
         if (id === "m-4") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Asunto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-4-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -108,24 +108,29 @@
                                     )
                             );
 
-            //Se llena el select con las decisiones
+            $.each(asu, function (index, data) {
+                $("#slc-4-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+            });
+
+
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
-            //Se llena el select con  Atributo de Calidad
+
             $.each(atrical, function (index, data) {
                 $("#slc-5").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "5"}));
             });
-            //Se llena el select con Requerimiento funcional
+
             $.each(reffunc, function (index, data) {
                 $("#slc-9").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "9"}));
             });
 
-            //Se asigana el evento para llenar la tablas donde se guardaran decisiones 
+            $("#slc-4-tp").on("change", eventLoad);
+
             $("#slc-7").on("change", eventSelected4);
-            //Se asigana el evento para llenar la tablas donde se guardaran Atributo de Calidad 
+
             $("#slc-5").on("change", eventSelected4);
-            //Se asigana el evento para llenar la tablas donde se guardaran Requerimiento funcional 
+
             $("#slc-9").on("change", eventSelected4);
         }
 
@@ -271,7 +276,10 @@
             alert(asunto);
         }
 
+        function eventLoad() {
 
+
+        }
 
         return this;
     };

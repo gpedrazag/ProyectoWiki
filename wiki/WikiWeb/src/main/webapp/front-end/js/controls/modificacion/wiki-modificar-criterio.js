@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarCriterio = function (des, eval, id) {
+    $.fn.wikiModificarCriterio = function (cri, des, eval, id) {
 
 
         if (id === "m-6") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Criterio"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-6-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -92,6 +92,9 @@
 
                             );
 
+            $.each(cri, function (index, data) {
+                $("#slc-6-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "6"}));
+            });
 
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
@@ -101,6 +104,7 @@
                 $("#slc-8").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
             });
 
+            $("#slc-6-tp").on("change", eventLoad);
 
             $("#slc-7").on("change", eventSelected);
 
@@ -213,6 +217,10 @@
             alert(PalabraClave + " " + Descripcion);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };

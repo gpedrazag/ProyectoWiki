@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarRestriccion = function (des, id) {
+    $.fn.wikiModificarRestriccion = function (rest, des, id) {
 
 
         if (id === "m-11") {
@@ -17,11 +17,11 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Restricción"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-11-tp"})
                                     .append($("<option>").html("..."))
 
                                     )
@@ -82,11 +82,15 @@
                             )
                     ;
 
+            $.each(rest, function (index, data) {
+                $("#slc-11-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "11"}));
+            });
 
             $.each(des, function (index, data) {
                 $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
             });
 
+            $("#slc-11-tp").on("change", eventLoad);
             $("#slc-7").on("change", eventSelected);
 
 
@@ -158,6 +162,10 @@
             alert(Nombre + " " + Descripción + " " + Justificación + " " + Palabra + " " + clave);
         }
 
+        function eventLoad() {
+
+
+        }
 
         return this;
     };
