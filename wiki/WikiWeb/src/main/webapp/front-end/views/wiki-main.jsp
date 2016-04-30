@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="wiki-main.jsp">Wiki</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/front-end/views/wiki-main.jsp">Wiki</a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">

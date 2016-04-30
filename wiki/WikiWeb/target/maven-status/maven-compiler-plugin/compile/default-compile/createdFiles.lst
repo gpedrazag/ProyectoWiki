@@ -2,6 +2,7 @@ net\unipiloto\wiki\web\transactions\SolutionTransaction.class
 net\unipiloto\wiki\web\transactions\DecisionTransaction.class
 net\unipiloto\wiki\web\entities\Concern.class
 net\unipiloto\wiki\web\entities\Decision.class
+net\unipiloto\wiki\web\controllers\ArtifactController.class
 net\unipiloto\wiki\web\transactions\EvaluationTransaction.class
 net\unipiloto\wiki\web\entities\Evaluation.class
 net\unipiloto\wiki\web\transactions\ConstraintTransaction.class

@@ -266,6 +266,23 @@
             alert(list7);
 
             alert(id + " " + description);
+
+            ajaxSetArtefacto(id, description);
+        }
+
+        function ajaxSetArtefacto(id, desc)
+        {
+            $.ajax({
+                url: "/artifact/set",
+                data: {
+                    id: id,
+                    description: desc
+                },
+                type: "POST"
+            }).done(function () {
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
 
