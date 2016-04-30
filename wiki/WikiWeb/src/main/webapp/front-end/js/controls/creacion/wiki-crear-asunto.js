@@ -123,31 +123,37 @@
         function eventRemove4() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
+            var idClass = $(this).parent().parent().attr("value");
 
+            if (idClass === "7") {
+                $("#slc-7 option").each(function () {
 
-            $("#slc-7 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
+            }
 
-            });
+            if (idClass === "5") {
+                $("#slc-5 option").each(function () {
 
-            $("#slc-5 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
+            }
 
-            });
+            if (idClass === "9") {
+                $("#slc-9 option").each(function () {
 
-            $("#slc-9 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
-
-            });
+                });
+            }
 
         }
 
@@ -156,7 +162,7 @@
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
-
+            var idOptionSelected = $('option:selected', this).attr("value");
 
             //llena la tabla de decisiones
             if (idClassOptionSelected === "7") {
@@ -168,8 +174,8 @@
 
 
                 $("#tbody-7")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -188,8 +194,8 @@
 
 
                 $("#tbody-5")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -209,8 +215,8 @@
 
 
                 $("#tbody-9")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))

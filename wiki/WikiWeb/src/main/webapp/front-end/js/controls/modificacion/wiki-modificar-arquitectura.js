@@ -1,22 +1,32 @@
 (function ($) {
 
-    $.fn.wikiCrearArquitectura = function (art, des, id) {
+    $.fn.wikiModificarArquitectura = function (art, des, id) {
 
         //Si es  1 es Arquitectura de software
-        if (id === "c-2") {
+        if (id === "m-2") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de creacion");
+            $("#page-name").html("Formulario de modificación");
             $("#panel-heading-left").html("Arquitectura De Software");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+            
+            $("#row-content")
+                    .append($("<div>").addClass("form-group")
+                            .append($("<label>").html("Arquitectura De Software"))
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                                    .append($("<option>").html("..."))
+
+                                    )
+                            .append($("<p>").addClass("help-block").html("Seleccione la Arquitectura De Software que que va a modificar."))
+                            );
 
             //Se crea la parte izquierda del formulario
             $("#left-row")
@@ -102,23 +112,28 @@
         function eventRemove2() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
+            var idClass = $(this).parent().parent().attr("value");
+
+            if (idClass === "3") {
+                $("#slc-3 option").each(function () {
+
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
+
+                });
+            }
 
 
-            $("#slc-3 option").each(function () {
+            if (idClass === "7") {
+                $("#slc-7 option").each(function () {
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-            });
-
-            $("#slc-7 option").each(function () {
-
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
-
-            });
+                });
+            }
 
         }
 
@@ -127,6 +142,7 @@
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
+            var idOptionSelected = $('option:selected', this).attr("value");
 
 
             //llena la tabla de artefactos
@@ -139,8 +155,8 @@
 
 
                 $("#tbody-3")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected,"value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove2)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -160,8 +176,8 @@
 
 
                 $("#tbody-7")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected,"value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove2)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))

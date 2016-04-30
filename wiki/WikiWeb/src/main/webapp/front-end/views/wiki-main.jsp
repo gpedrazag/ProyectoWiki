@@ -259,7 +259,7 @@
                                         <a id="c-2" href="#crearArquitectura"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarArquitectura"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-2" href="#modificarArquitectura"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesArquitectura"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -273,7 +273,7 @@
                                         <a id="c-3" href="#crearArtefacto"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarArtefacto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-3" href="#modificarArtefacto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesArtefacto"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -287,7 +287,7 @@
                                         <a id="c-4" href="#crearAsunto"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarAsunto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-4" href="#modificarAsunto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesAsunto"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -301,7 +301,7 @@
                                         <a id="c-5" href="#crearAtributo"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarAtributo"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-5" href="#modificarAtributo"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesAtributo"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -315,7 +315,7 @@
                                         <a id="c-6" href="#crearCriterio"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarCriterio"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-6" href="#modificarCriterio"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesCriterio"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -329,7 +329,7 @@
                                         <a id="c-7" href="#crearDecisión"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarDecisión"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a  id="m-7" href="#modificarDecisión"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesDecisión"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -343,7 +343,7 @@
                                         <a id="c-8" href="#crearEvaluación"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarEvaluación"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-8" href="#modificarEvaluación"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesEvaluación"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -357,7 +357,7 @@
                                         <a  id="c-9" href="#crearRequerimiento"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarRequerimiento"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-9" href="#modificarRequerimiento"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesRequerimiento"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -371,7 +371,7 @@
                                         <a id="c-10" href="#crearResponsable"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarResponsable"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-10" href="#modificarResponsable"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesResponsable"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -385,7 +385,7 @@
                                         <a id="c-11" href="#crearRestricción"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarRestricción"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-11" href="#modificarRestricción"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesRestricción"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -399,7 +399,7 @@
                                         <a id="c-12" href="#crearSolución"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarSolución"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-12" href="#modificarSolución"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesSolución"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -413,7 +413,7 @@
                                         <a id="c-13" href="#crearSuposición"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
-                                        <a href="#modificarSuposición"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                        <a id="m-13" href="#modificarSuposición"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesSuposición"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -480,19 +480,35 @@
         <script src="../js/plugins/metisMenu.min.js"></script>
         <script src="../js/plugins/sb-admin-2.js"></script>
         <script src="../js/controls/wiki-main-control.js"></script>
-        <script src="../js/controls/wiki-crear-alternativa.js"></script>
-        <script src="../js/controls/wiki-crear-arquitectura.js"></script>
-        <script src="../js/controls/wiki-crear-artefacto.js"></script>
-        <script src="../js/controls/wiki-crear-asunto.js"></script>
-        <script src="../js/controls/wiki-crear-atr-calidad.js"></script>
-        <script src="../js/controls/wiki-crear-criterio.js"></script>
-        <script src="../js/controls/wiki-crear-decision.js"></script>
-        <script src="../js/controls/wiki-crear-evaluacion.js"></script>
-        <script src="../js/controls/wiki-crear-requerimiento-funcional.js"></script>
-        <script src="../js/controls/wiki-crear-responsable.js"></script>
-        <script src="../js/controls/wiki-crear-restriccion.js"></script>
-        <script src="../js/controls/wiki-crear-solucion.js"></script>
-        <script src="../js/controls/wiki-crear-suposicion.js"></script>
+
+        <script src="../js/controls/creacion/wiki-crear-alternativa.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-arquitectura.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-artefacto.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-asunto.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-atr-calidad.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-criterio.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-decision.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-evaluacion.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-requerimiento-funcional.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-responsable.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-restriccion.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-solucion.js"></script>
+        <script src="../js/controls/creacion/wiki-crear-suposicion.js"></script>
+
+
+        <script src="../js/controls/modificacion/wiki-modificar-alternativa.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-arquitectura.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-artefacto.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-asunto.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-atr-calidad.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-criterio.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-decision.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-evaluacion.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-requerimiento-funcional.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-responsable.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-restriccion.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-solucion.js"></script>
+        <script src="../js/controls/modificacion/wiki-modificar-suposicion.js"></script>
 
 
 

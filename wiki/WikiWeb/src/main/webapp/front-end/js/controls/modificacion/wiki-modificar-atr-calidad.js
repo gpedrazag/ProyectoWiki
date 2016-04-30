@@ -1,22 +1,32 @@
 (function ($) {
 
-    $.fn.wikiCrearAtrCalidad = function (art, asu, id) {
+    $.fn.wikiModificarAtrCalidad = function (art, asu, id) {
 
         //Si es  5 es Atributo de Calidad
-        if (id === "c-5") {
+        if (id === "m-5") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Arquitectura De Software");
+            $("#page-name").html("Formulario de modificación");
+            $("#panel-heading-left").html("Atributo de Calidad");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+
+            $("#row-content")
+                    .append($("<div>").addClass("form-group")
+                            .append($("<label>").html("Atributo de Calidad"))
+                            .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
+                                    .append($("<option>").html("..."))
+
+                                    )
+                            .append($("<p>").addClass("help-block").html("Seleccione el Atributo de Calidad que que va a modificar."))
+                            );
 
             //Se crea la parte izquierda del formulario
             $("#left-row")
@@ -118,7 +128,7 @@
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
-
+            var idOptionSelected = $('option:selected', this).attr("value");
 
             //llena la tabla de artefactos
             if (idClassOptionSelected === "3") {
@@ -130,8 +140,8 @@
 
 
                 $("#tbody-3")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove5)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -151,8 +161,8 @@
 
 
                 $("#tbody-4")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove5)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -174,7 +184,7 @@
 
             $("#slc-3 option").each(function () {
 
-                if (tableId === $(this).html()) {
+                if (tableId === $(this).attr("value")) {
                     $(this).removeClass("hidden");
                 }
 
@@ -182,7 +192,7 @@
 
             $("#slc-4 option").each(function () {
 
-                if (tableId === $(this).html()) {
+                if (tableId === $(this).attr("value")) {
                     $(this).removeClass("hidden");
                 }
 

@@ -1,26 +1,26 @@
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Responsible.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\tools\OntologyTools.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ResponsibleTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Assumption.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ConstraintTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Criteria.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Decision.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ConcernTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\DecisionTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Concern.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ArtifactTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\QualityAttribute.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Solution.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Artifact.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\SoftwareArchitecture.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\AlternativeTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\CriteriaTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\FunctionalRequeriment.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\SoftwareArchitectureTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Evaluation.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\AssumptionTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\EvaluationTransaction.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\controllers\IndexController.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Constraint.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Alternative.java
-P:\Proyecto Final de Grado\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\SolutionTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Responsible.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Criteria.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\SoftwareArchitecture.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ArtifactTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\tools\OntologyTools.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\CriteriaTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Decision.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Artifact.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\SoftwareArchitectureTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\QualityAttribute.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Assumption.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\AssumptionTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\controllers\IndexController.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\EvaluationTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ConcernTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ResponsibleTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\SolutionTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Alternative.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Solution.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\ConstraintTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Concern.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Constraint.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\FunctionalRequeriment.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\entities\Evaluation.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\DecisionTransaction.java
+E:\ProyectoWiki\wiki\WikiWeb\src\main\java\net\unipiloto\wiki\web\transactions\AlternativeTransaction.java

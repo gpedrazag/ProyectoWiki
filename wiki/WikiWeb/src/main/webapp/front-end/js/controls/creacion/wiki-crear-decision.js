@@ -363,7 +363,7 @@
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
-
+            var idOptionSelected = $('option:selected', this).attr("value");
 
             //llena la tabla de artefactos
             if (idClassOptionSelected === "7_1") {
@@ -375,8 +375,8 @@
 
 
                 $("#tbody-7_1")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -396,8 +396,8 @@
 
 
                 $("#tbody-7_2")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -417,8 +417,8 @@
 
 
                 $("#tbody-7_3")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -435,8 +435,8 @@
                 $("#slc-2 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-2")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -452,8 +452,8 @@
                 $("#slc-10 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-10")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -469,8 +469,8 @@
                 $("#slc-4 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-4")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -486,8 +486,8 @@
                 $("#slc-6 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-6")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -503,8 +503,8 @@
                 $("#slc-13 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-13")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -520,8 +520,8 @@
                 $("#slc-11 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-11")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -537,8 +537,8 @@
                 $("#slc-12 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-12")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -554,8 +554,8 @@
                 $("#slc-1 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-1")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -571,8 +571,8 @@
                 $("#slc-3 option[value=" + 0 + "]").attr("selected", true);
 
                 $("#tbody-3")
-                        .append($("<tr>").attr({"id": textOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width":"80%"}))
+                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -589,103 +589,115 @@
         function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
+            var idClass = $(this).parent().parent().attr("value");
 
+            if (idClass === "7_1")
+                $("#slc-7_1 option").each(function () {
 
-            $("#slc-7_1 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "7_2")
+                $("#slc-7_2 option").each(function () {
 
-            $("#slc-7_2 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "7_3")
+                $("#slc-7_3 option").each(function () {
 
-            $("#slc-7_3 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "2")
+                $("#slc-2 option").each(function () {
 
-            $("#slc-2 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "10")
+                $("#slc-10 option").each(function () {
 
-            $("#slc-10 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "4")
+                $("#slc-4 option").each(function () {
 
-            $("#slc-4 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "6")
+                $("#slc-6 option").each(function () {
 
-            $("#slc-6 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "13")
+                $("#slc-13 option").each(function () {
 
-            $("#slc-13 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "11")
+                $("#slc-11 option").each(function () {
 
-            $("#slc-11 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "12")
+                $("#slc-12 option").each(function () {
 
-            $("#slc-12 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "1")
+                $("#slc-1 option").each(function () {
 
-            $("#slc-1 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
+                });
 
-            });
+            if (idClass === "3")
+                $("#slc-3 option").each(function () {
 
-            $("#slc-3 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
 
-                if (tableId === $(this).html()) {
-                    $(this).removeClass("hidden");
-                }
-
-            });
+                });
         }
 
 

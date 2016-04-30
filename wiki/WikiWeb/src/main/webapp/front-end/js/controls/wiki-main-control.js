@@ -14,6 +14,28 @@ $(document).ready(function () {
     var sol = [{"id": "1", "name": "Solucion 1"}, {"id": "2", "name": "Solucion 2"}, {"id": "3", "name": "Solucion 3"}, {"id": "4", "name": "Solucion 4"}];
     var supo = [{"id": "1", "name": "Suposición 1"}, {"id": "2", "name": "Suposición 2"}, {"id": "3", "name": "Suposición 3"}, {"id": "4", "name": "Suposición 4"}];
 
+    var alt_1 = [{"id": "1", "name": "Alternativa  1", "description": "Descripcion de la alternativa 1"}];
+    var des_1 = [{"id": "3", "name": "Desicion 3"}, {"id": "4", "name": "Desicion 4"}];
+    var sol_1 = [{"id": "3", "name": "Solucion 3"}, {"id": "4", "name": "Solucion 4"}];
+    var eval_1 = [{"id": "3", "name": "Evaluacion 3"}, {"id": "4", "name": "Evaluacion 4"}];
+
+    var foo = [
+        {"id": "1", "name": "Alternativa  1", "description": "Descripcion de la alternativa 1",
+            "decisiones": [
+                {"id": "1", "name": "Decision  1", "description": "Descripcion de la Decision 1"},
+                {"id": "4", "name": "Decision  4", "description": "Descripcion de la Decision 4"},
+                {"id": "5", "name": "Decision  5", "description": "Descripcion de la Decision 5"}
+            ]
+        },
+        {"id": "2", "name": "Alternativa  2", "description": "Descripcion de la alternativa 2",
+            "decisiones": [
+                {"id": "3", "name": "Decision  3", "description": "Descripcion de la Decision 3"},
+                {"id": "4", "name": "Decision  4", "description": "Descripcion de la Decision 4"},
+                {"id": "1", "name": "Decision  1", "description": "Descripcion de la Decision 1"}
+            ]
+        }
+    ];
+
     $("#c-1").on("click", eventCreate);
     $("#c-2").on("click", eventCreate);
     $("#c-3").on("click", eventCreate);
@@ -27,6 +49,20 @@ $(document).ready(function () {
     $("#c-11").on("click", eventCreate);
     $("#c-12").on("click", eventCreate);
     $("#c-13").on("click", eventCreate);
+
+    $("#m-1").on("click", eventModify);
+    $("#m-2").on("click", eventModify);
+    $("#m-3").on("click", eventModify);
+    $("#m-4").on("click", eventModify);
+    $("#m-5").on("click", eventModify);
+    $("#m-6").on("click", eventModify);
+    $("#m-7").on("click", eventModify);
+    $("#m-8").on("click", eventModify);
+    $("#m-9").on("click", eventModify);
+    $("#m-10").on("click", eventModify);
+    $("#m-11").on("click", eventModify);
+    $("#m-12").on("click", eventModify);
+    $("#m-13").on("click", eventModify);
 
 
     function eventCreate() {
@@ -45,6 +81,25 @@ $(document).ready(function () {
         $("<div>").wikiCrearRestriccion(des, id);
         $("<div>").wikiCrearSolucion(alt, des, id);
         $("<div>").wikiCrearSuposicion(des, id);
+
+    }
+
+    function eventModify() {
+
+        var id = $(this).attr("id");
+        $("<div>").wikiModificarAlternativa(eval_1, sol_1, foo, des_1, alt_1, des, sol, eval, id);
+        $("<div>").wikiModificarArquitectura(art, des, id);
+        $("<div>").wikiModificarArtefacto(atrical, arqsoft, des, id);
+        $("<div>").wikiModificarAsunto(des, atrical, reffunc, id);
+        $("<div>").wikiModificarAtrCalidad(art, asu, id);
+        $("<div>").wikiModificarCriterio(des, eval, id);
+        $("<div>").wikiModificarDecision(des, arqsoft, resp, asu, cri, supo, rest, sol, alt, art, id);
+        $("<div>").wikiModificarEvaluacion(alt, cri, id);
+        $("<div>").wikiModificarRequerimientoFuncional(asu, id);
+        $("<div>").wikiModificarResponsable(des, id);
+        $("<div>").wikiModificarRestriccion(des, id);
+        $("<div>").wikiModificarSolucion(alt, des, id);
+        $("<div>").wikiModificarSuposicion(des, id);
 
     }
 
