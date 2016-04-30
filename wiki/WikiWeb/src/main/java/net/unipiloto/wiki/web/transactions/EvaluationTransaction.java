@@ -2,11 +2,17 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Evaluation;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
@@ -77,5 +83,45 @@ public class EvaluationTransaction
             conn.close();
             repo.shutDown();
         }
+    }
+    
+    public static Evaluation getByAlternativeId(String alternativeId)
+    {
+        Evaluation evaluation = null;
+        
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id, ?pros, ?cons, ?valoration WHERE {"
+                + "<http://www.semanticweb.org/sa#"+alternativeId+"> <http://www.semanticweb.org/sa#alternativeLinkTo> ?d "
+                + "?d  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
+                + "?d <http://www.semanticweb.org/sa#id> ?id ."
+                + "?d <http://www.semanticweb.org/sa#description> ?description "
+                + "?d <http://www.semanticweb.org/sa#name> ?name "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                evaluation = new Evaluation(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("pros").stringValue(), 
+                    bs.getValue("cons").stringValue(), 
+                    bs.getValue("valoration").stringValue()
+                );
+            }
+           
+        }
+        finally
+        {
+            conn.close();
+            repo.shutDown();
+        }
+        
+        return evaluation;
     }
 }
