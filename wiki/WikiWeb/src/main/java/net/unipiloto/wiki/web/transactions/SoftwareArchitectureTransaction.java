@@ -153,7 +153,7 @@ public class SoftwareArchitectureTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = sas.size() - 1;
-                sas.get(i).setDecisionsRelated(DecisionTransaction.selectAllDecisionsByArtifactId(sas.get(i).getId(),repo));
+                sas.get(i).setDecisionsRelated(DecisionTransaction.selectAllDecisionsByArtifactId(sas.get(i).getId(),conn));
                 sas.get(i).setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(sas.get(i).getId(), repo));
 
             }
