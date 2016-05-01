@@ -268,10 +268,10 @@
 //
 //            alert(id + " " + description);
             //alert("Entro al evento");
-            ajaxInsert(id, description);
+            ajaxInsertArtifact(id, description);
         }
 
-        function ajaxInsert(id, desc)
+        function ajaxInsertArtifact(id, desc)
         {
 
             $.ajax({
