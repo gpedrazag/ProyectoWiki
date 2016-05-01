@@ -41,13 +41,13 @@ public class ConcernController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return ConcernTransaction.selectById("artifact_" + id);
-//    }
-//
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return ConcernTransaction.selectAll();
-//    }
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return ConcernTransaction.selectById("artifact_" + id);
+    }
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return ConcernTransaction.selectAll();
+    }
 }
