@@ -191,20 +191,13 @@ public class QualityAttributeTransaction
         return JsonFactory.toJson(fr);
     }
     
-    public static String selectAll(String id, Repository repository)
+    public static String selectAll()
     {
         List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
-        
         Repository repo = null;
-        if(repository != null)
-        {
-            repo = repository;
-        }
-        else
-        {
-            repo = OntologyTools.getInstance();
-            repo.initialize();
-        }
+        repo = OntologyTools.getInstance();
+        repo.initialize();
+        
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -244,11 +237,7 @@ public class QualityAttributeTransaction
         }
         finally
         {
-            if(repository == null)
-            {
-                conn.close();
-                
-            }
+            conn.close();
         }
         
         return JsonFactory.toJson(qas);
