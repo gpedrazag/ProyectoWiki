@@ -112,8 +112,8 @@ public class SoftwareArchitectureTransaction
                     bs.getValue("description").stringValue()
                 );
                 
-                sa.setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(id, repo));
-                sa.setDecisionsRelated(DecisionTransaction.selectAllDecisionsBySoftwareArchitectureId(id, repo));
+                sa.setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(id, conn));
+                sa.setDecisionsRelated(DecisionTransaction.selectAllDecisionsBySoftwareArchitectureId(id, conn));
             }
         }
         finally
@@ -154,7 +154,7 @@ public class SoftwareArchitectureTransaction
                 ));
                 int i = sas.size() - 1;
                 sas.get(i).setDecisionsRelated(DecisionTransaction.selectAllDecisionsByArtifactId(sas.get(i).getId(),conn));
-                sas.get(i).setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(sas.get(i).getId(), repo));
+                sas.get(i).setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(sas.get(i).getId(), conn));
 
             }
         }

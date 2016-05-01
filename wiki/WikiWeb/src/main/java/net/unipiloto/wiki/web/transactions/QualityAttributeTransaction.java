@@ -89,20 +89,21 @@ public class QualityAttributeTransaction
         }
     }
     
-    public static List<QualityAttribute> selectQAByConcenrId(String id, Repository repository) 
+    public static List<QualityAttribute> selectQAByConcenrId(String id, RepositoryConnection connection) 
     {
         List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -139,7 +140,7 @@ public class QualityAttributeTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

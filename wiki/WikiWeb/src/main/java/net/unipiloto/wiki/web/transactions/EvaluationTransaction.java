@@ -85,13 +85,22 @@ public class EvaluationTransaction
         }
     }
     
-    public static Evaluation selectByAlternativeId(String alternativeId, Repository repository)
+    public static Evaluation selectByAlternativeId(String alternativeId, RepositoryConnection connection)
     {
         Evaluation evaluation = null;
         
-        Repository repo = repository == null ? OntologyTools.getInstance() : repository;
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -118,7 +127,7 @@ public class EvaluationTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
             }
@@ -127,13 +136,21 @@ public class EvaluationTransaction
         return evaluation;
     }
     
-    public static List<Evaluation> selectByCriteriaId(String id, Repository repository)
+    public static List<Evaluation> selectByCriteriaId(String id, RepositoryConnection connection)
     {
         List<Evaluation> evaluations = null;
-        
-        Repository repo = repository == null ? OntologyTools.getInstance() : repository;
-        repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -159,7 +176,7 @@ public class EvaluationTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
             }
@@ -205,20 +222,14 @@ public class EvaluationTransaction
         return JsonFactory.toJson(evaluation);
     }
     
-    public static String selectAll(String id, Repository repository)
+    public static String selectAll()
     {
         List<Evaluation> qas = new ArrayList<Evaluation>();
         
         Repository repo = null;
-        if(repository != null)
-        {
-            repo = repository;
-        }
-        else
-        {
-            repo = OntologyTools.getInstance();
-            repo.initialize();
-        }
+        repo = OntologyTools.getInstance();
+        repo.initialize();
+        
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -252,11 +263,8 @@ public class EvaluationTransaction
         }
         finally
         {
-            if(repository == null)
-            {
-                conn.close();
-                
-            }
+            conn.close();
+            
         }
         
         return JsonFactory.toJson(qas);

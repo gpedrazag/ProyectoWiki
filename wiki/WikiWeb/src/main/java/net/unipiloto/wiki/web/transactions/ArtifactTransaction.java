@@ -135,7 +135,7 @@ public class ArtifactTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?description WHERE {\n"
-                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://www.semanticweb.org/sa#Artifact>, sdsd . "
+                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "?artifact <http://www.semanticweb.org/sa#id> ?id . "
                 + "?artifact <http://www.semanticweb.org/sa#description> ?description "
                 + "}"
@@ -165,21 +165,22 @@ public class ArtifactTransaction
         
     }
     
-    public static List<Artifact> getAllArtifactsBySoftwareArchitectureId(String id, Repository repository)
+    public static List<Artifact> getAllArtifactsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
         List<Artifact> artifacts = new ArrayList<Artifact>();
         
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -208,7 +209,7 @@ public class ArtifactTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

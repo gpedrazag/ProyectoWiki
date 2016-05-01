@@ -83,20 +83,21 @@ public class CriteriaTransaction
         }
     }
     
-    public static List<Criteria> selectAllCriteriasByDecisionId(String id, Repository repository)
+    public static List<Criteria> selectAllCriteriasByDecisionId(String id, RepositoryConnection connection)
     {
         List<Criteria> criterias = new ArrayList<Criteria>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -120,7 +121,7 @@ public class CriteriaTransaction
                 ));
                 
                 int i = criterias.size() - 1;
-                criterias.get(i).setLinkedEvaluations(EvaluationTransaction.selectByCriteriaId(criterias.get(i).getId(), repository));
+                criterias.get(i).setLinkedEvaluations(EvaluationTransaction.selectByCriteriaId(criterias.get(i).getId(), conn));
             }
             
             if(criterias.isEmpty())
@@ -130,7 +131,7 @@ public class CriteriaTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 
