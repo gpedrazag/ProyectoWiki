@@ -115,8 +115,9 @@ public class ConcernTransaction
                     bs.getValue("id").stringValue(), 
                     bs.getValue("concern").stringValue()
                 ));
-                int i = concerns.size();
+                int i = concerns.size() - 1;
                 concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), repo));
+                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), repo));
             }
             
             if(concerns.isEmpty())
@@ -160,6 +161,7 @@ public class ConcernTransaction
                     bs.getValue("concern").stringValue()
                 );
                 concern.setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(id, repo));
+                concern.setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(id, repo));
             }
         }
         finally
@@ -206,6 +208,7 @@ public class ConcernTransaction
                 ));
                 int i = concerns.size() - 1;
                 concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), repo));
+                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), repo));
             }
             
             if(concerns.isEmpty())

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import net.unipiloto.wiki.web.entities.FunctionalRequeriment;
+import net.unipiloto.wiki.web.entities.QualityAttribute;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
@@ -18,15 +18,15 @@ import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
-public class FunctionalRequerimentTransaction
+public class QualityAttributeTransaction
 {
-    public static void insert(String id, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
+    public static void insert(String id, String actor, String enviroment, String measure, String boost, String boostSource) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         ValueFactory factory = repo.getValueFactory();
         IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
-        IRI object = factory.createIRI("http://www.semanticweb.org/sa#FunctionalRequeriment");
+        IRI object = factory.createIRI("http://www.semanticweb.org/sa#QualityAttributeStage");
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -34,11 +34,11 @@ public class FunctionalRequerimentTransaction
             conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#actor"), factory.createLiteral(description));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(description));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#input"), factory.createLiteral(input));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#output"), factory.createLiteral(output));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#actor"), factory.createLiteral(actor));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#enviroment"), factory.createLiteral(enviroment));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#measure"), factory.createLiteral(measure));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#boost"), factory.createLiteral(boost));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#boostSource"), factory.createLiteral(boostSource));
             conn.commit();
         }
         catch(Exception ex)
@@ -53,11 +53,11 @@ public class FunctionalRequerimentTransaction
         
     }
     
-    public static void update(String id, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
+    public static void update(String id, String actor, String enviroment, String measure, String boost, String boostSource) throws IOException, URISyntaxException
     {
         
         delete(id);
-        insert(id, name, actor, description, input, output);
+        insert(id, actor, enviroment, measure, boost, boostSource);
         
     }
     
@@ -74,7 +74,7 @@ public class FunctionalRequerimentTransaction
             conn.remove(
                 subject,
                 factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-                factory.createIRI("http://www.semanticweb.org/sa#FunctionalRequeriment")
+                factory.createIRI("http://www.semanticweb.org/sa#QualityAttributeStage")
             );
             conn.commit();
         }
@@ -89,9 +89,9 @@ public class FunctionalRequerimentTransaction
         }
     }
     
-    public static List<FunctionalRequeriment> selectFRByConcernId(String id, Repository repository)
+    public static List<QualityAttribute> selectQAByConcenrId(String id, Repository repository) 
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
         Repository repo = null;
         if(repository != null)
         {
@@ -106,35 +106,35 @@ public class FunctionalRequerimentTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {"
+                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#determinedBy> ?d . "
-                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttribute> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#name> ?name . "
                 +"?d <http://www.semanticweb.org/sa#actor> ?actor . "
-                +"?d <http://www.semanticweb.org/sa#description> ?description . "
-                +"?d <http://www.semanticweb.org/sa#input> ?input . "
-                +"?d <http://www.semanticweb.org/sa#output> ?output "
+                +"?d <http://www.semanticweb.org/sa#enviroment> ?enviroment . "
+                +"?d <http://www.semanticweb.org/sa#measure> ?measure . "
+                +"?d <http://www.semanticweb.org/sa#boost> ?boost . "
+                +"?d <http://www.semanticweb.org/sa#boostSource> ?boostSource "
                 +"}"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
             {
                 BindingSet bs = result.next();
-                frs.add(
-                    new FunctionalRequeriment(
+                qas.add(
+                    new QualityAttribute(
                         bs.getValue("id").stringValue(), 
-                        bs.getValue("name").stringValue(), 
                         bs.getValue("actor").stringValue(), 
-                        bs.getValue("description").stringValue(), 
-                        bs.getValue("input").stringValue(), 
-                        bs.getValue("output").stringValue()
+                        bs.getValue("enviroment").stringValue(), 
+                        bs.getValue("measure").stringValue(), 
+                        bs.getValue("boost").stringValue(), 
+                        bs.getValue("boostSource").stringValue()
                     ));
             }
             
-            if(frs.isEmpty())
+            if(qas.isEmpty())
             {
-                frs = null;
+                qas = null;
             }
         }
         finally
@@ -146,39 +146,39 @@ public class FunctionalRequerimentTransaction
             }
         }
         
-        return frs;
+        return qas;
     }
     
     public static String selectById(String id)
     {
-        FunctionalRequeriment fr = null;
+        QualityAttribute fr = null;
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {\n"
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
+                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {\n"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#actor> ?actor . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#input> ?input . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#output> ?output "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?actor . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#actor> ?enviroment . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?measure . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#input> ?boost . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#output> ?boostSource "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
             {
                 BindingSet bs = result.next();
-                fr = new FunctionalRequeriment(
+                fr = new QualityAttribute(
                     bs.getValue("id").stringValue(), 
-                        bs.getValue("name").stringValue(), 
                         bs.getValue("actor").stringValue(), 
-                        bs.getValue("description").stringValue(), 
-                        bs.getValue("input").stringValue(), 
-                        bs.getValue("output").stringValue()
+                        bs.getValue("enviroment").stringValue(), 
+                        bs.getValue("measure").stringValue(), 
+                        bs.getValue("boost").stringValue(), 
+                        bs.getValue("boostSource").stringValue()
                 );
             }
         }
@@ -192,7 +192,7 @@ public class FunctionalRequerimentTransaction
     
     public static String selectAll(String id, Repository repository)
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
         
         Repository repo = null;
         if(repository != null)
@@ -208,33 +208,37 @@ public class FunctionalRequerimentTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {"
-                +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
+                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
+                +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#name> ?name . "
-                +"?d <http://www.semanticweb.org/sa#actor> ?actor . "
-                +"?d <http://www.semanticweb.org/sa#description> ?description . "
-                +"?d <http://www.semanticweb.org/sa#input> ?input . "
-                +"?d <http://www.semanticweb.org/sa#output> ?output "
+                +"?d <http://www.semanticweb.org/sa#name> ?actor . "
+                +"?d <http://www.semanticweb.org/sa#actor> ?enviroment . "
+                +"?d <http://www.semanticweb.org/sa#description> ?measure . "
+                +"?d <http://www.semanticweb.org/sa#input> ?boost . "
+                +"?d <http://www.semanticweb.org/sa#output> ?boostSource "
                 +"}"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
             {
+                
                 BindingSet bs = result.next();
-                frs.add(new FunctionalRequeriment(
+                qas.add(new QualityAttribute(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(), 
                     bs.getValue("actor").stringValue(), 
-                    bs.getValue("description").stringValue(), 
-                    bs.getValue("input").stringValue(), 
-                    bs.getValue("output").stringValue()
+                    bs.getValue("enviroment").stringValue(), 
+                    bs.getValue("measure").stringValue(), 
+                    bs.getValue("boost").stringValue(), 
+                    bs.getValue("boostSource").stringValue()
                 ));
+                
+                int i = qas.size() - 1;
+                
             }
             
-            if(frs.isEmpty())
+            if(qas.isEmpty())
             {
-                frs = null;
+                qas = null;
             }
         }
         finally
@@ -246,6 +250,6 @@ public class FunctionalRequerimentTransaction
             }
         }
         
-        return JsonFactory.toJson(frs);
+        return JsonFactory.toJson(qas);
     }
 }

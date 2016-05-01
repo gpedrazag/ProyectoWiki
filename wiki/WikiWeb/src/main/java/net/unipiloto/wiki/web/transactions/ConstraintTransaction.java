@@ -64,16 +64,21 @@ public class ConstraintTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
+        ValueFactory factory = repo.getValueFactory();
+        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            String sparql = 
-                "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#"+id+"> "
-                + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
-                + "<http://www.semanticweb.org/sa#Constraint>}\n"
-                + "WHERE{}"
-            ;
-            conn.prepareUpdate(sparql);
+            conn.begin();
+            conn.remove(
+                subject,
+                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+                factory.createIRI("http://www.semanticweb.org/sa#Constraint")
+            );
+            conn.commit();
+        }
+        catch(Exception ex)
+        {
+            conn.rollback();
         }
         finally
         {
