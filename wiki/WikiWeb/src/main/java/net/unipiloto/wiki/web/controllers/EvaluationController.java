@@ -4,29 +4,29 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
+import net.unipiloto.wiki.web.transactions.EvaluationTransaction;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/artifact")
-public class ArtifactController {
+@RequestMapping(value = "/evaluation")
+public class EvaluationController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description) {
+    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
         try {
-            ArtifactTransaction.insert("artifact_" + id, description, null);
+            EvaluationTransaction.insert("evaluation_" + id, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description) {
+    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
         try {
-            ArtifactTransaction.update("artifact_" + id, description, null);
+            EvaluationTransaction.update("evaluation_" + id, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -35,20 +35,20 @@ public class ArtifactController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            ArtifactTransaction.delete("artifact_" + id);
+            EvaluationTransaction.delete("evaluation_" + id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-    public String selectById(@RequestParam(value = "id") String id) {
-        return ArtifactTransaction.selectById("artifact_" + id);
-    }
-
-    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-    public String selectAll() {
-        return ArtifactTransaction.selectAll();
-    }
+//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+//    public String selectById(@RequestParam(value = "id") String id) {
+//        return EvaluationTransaction.selectById("artifact_" + id);
+//    }
+//
+//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+//    public String selectAll() {
+//        return AlternativeTransaction.selectAll();
+//    }
 
 }
