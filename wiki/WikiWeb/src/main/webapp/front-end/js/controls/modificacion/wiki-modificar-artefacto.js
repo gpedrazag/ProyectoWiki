@@ -286,7 +286,7 @@
         function eventLoad() {
 
             //alert();
-            ajaxSetArtefacto("455");
+            ajaxSetArtefacto("1");
 
         }
 
@@ -300,7 +300,7 @@
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {
-                alert(data.id);
+                alert(data.description);
             }).fail(function (jrxml, errorThrow) {
 
             });
