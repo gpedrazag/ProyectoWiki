@@ -41,11 +41,11 @@ public class EvaluationController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return EvaluationTransaction.selectById("artifact_" + id);
-//    }
-//
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return EvaluationTransaction.selectById("artifact_" + id);
+    }
+
 //    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
 //    public String selectAll() {
 //        return AlternativeTransaction.selectAll();
