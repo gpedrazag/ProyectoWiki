@@ -39,6 +39,13 @@ public class QualityAttributeTransaction
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#measure"), factory.createLiteral(measure));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#boost"), factory.createLiteral(boost));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#boostSource"), factory.createLiteral(boostSource));
+            if(triggerArtifacts != null)
+            {
+                for(String s : triggerArtifacts)
+                {
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#triggerAn"), factory.createLiteral("http://www.semanticweb.org/sa#"+id));
+                }
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -131,6 +138,8 @@ public class QualityAttributeTransaction
                         bs.getValue("boost").stringValue(), 
                         bs.getValue("boostSource").stringValue()
                     ));
+                int i = qas.size()-1;
+                qas.get(i).setTriggerArtifacts(ArtifactTransaction.selectByQAId(qas.get(i).getId(), connection));
             }
             
             if(qas.isEmpty())
@@ -181,6 +190,7 @@ public class QualityAttributeTransaction
                         bs.getValue("boost").stringValue(), 
                         bs.getValue("boostSource").stringValue()
                 );
+                fr.setTriggerArtifacts(ArtifactTransaction.selectByQAId(id, conn));
             }
         }
         finally
@@ -226,7 +236,8 @@ public class QualityAttributeTransaction
                     bs.getValue("boostSource").stringValue()
                 ));
                 
-                int i = qas.size() - 1;
+                int i = qas.size()-1;
+                qas.get(i).setTriggerArtifacts(ArtifactTransaction.selectByQAId(qas.get(i).getId(), conn));
                 
             }
             

@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class ResponsibleTransaction
 {
-    public static void insert(String id, String name) throws IOException, URISyntaxException
+    public static void insert(String id, String name, List<String> decisions) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -37,6 +37,13 @@ public class ResponsibleTransaction
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
+            if(decisions != null)
+            {
+                for(String decision : decisions)
+                {
+                   conn.add(factory.createIRI("http://www.semanticweb.org/sa#"+decision),factory.createIRI("http://www.semanticweb.org/sa#decisionHave"),subject); 
+                }
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -51,10 +58,10 @@ public class ResponsibleTransaction
         
     }
     
-    public static void update(String id, String name) throws IOException, URISyntaxException
+    public static void update(String id, String name, List<String> decisions) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, name);
+        insert(id, name, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
