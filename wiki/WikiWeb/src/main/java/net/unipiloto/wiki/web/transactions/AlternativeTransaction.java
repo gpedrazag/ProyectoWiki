@@ -93,7 +93,7 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
+                "SELECT ?id ?description ?name WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
@@ -110,7 +110,7 @@ public class AlternativeTransaction
                     bs.getValue("description").stringValue() 
                 );
             }
-            alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id));
+            alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id, repo));
         }
         finally
         {
@@ -147,7 +147,7 @@ public class AlternativeTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = alternatives.size() - 1;
-                alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId()));
+                alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId(), repo));
             }
         }
         finally

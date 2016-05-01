@@ -118,6 +118,9 @@ public class CriteriaTransaction
                     bs.getValue("description").stringValue(),
                     bs.getValue("keyword").stringValue()
                 ));
+                
+                int i = criterias.size() - 1;
+                criterias.get(i).setLinkedEvaluations(EvaluationTransaction.selectByCriteriaId(criterias.get(i).getId(), repository));
             }
             
             if(criterias.isEmpty())
