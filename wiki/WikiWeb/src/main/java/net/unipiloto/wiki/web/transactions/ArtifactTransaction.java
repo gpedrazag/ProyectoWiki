@@ -35,9 +35,12 @@ public class ArtifactTransaction
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(description));
-            for(String decision : decisions)
+            if(decisions != null)
             {
-               conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#artifactHave"), factory.createIRI("http://www.semanticweb.org/sa#"+decision)); 
+                for(String decision : decisions)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#artifactHave"), factory.createIRI("http://www.semanticweb.org/sa#"+decision)); 
+                }
             }
             conn.commit();
         }
