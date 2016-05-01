@@ -119,10 +119,9 @@ public class ArtifactTransaction
         }
         finally
         {
-            //mi comentarios
             conn.close();
             repo.shutDown();
-            //otro cambio
+            //xcxcvxcxcv
         }
         
         return JsonFactory.toJson(artifact);
