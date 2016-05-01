@@ -160,6 +160,7 @@ public class ArtifactTransaction
         {
             conn.close();
             repo.shutDown();
+            conn.close();
         }
         
         return JsonFactory.toJson(artifacts);
