@@ -119,8 +119,10 @@ public class ArtifactTransaction
         }
         finally
         {
+            //mi comentarios
             conn.close();
             repo.shutDown();
+            //otro cambio
         }
         
         return JsonFactory.toJson(artifact);
@@ -158,14 +160,8 @@ public class ArtifactTransaction
         }
         finally
         {
-            //mi comentario
             conn.close();
             repo.shutDown();
-<<<<<<< HEAD
-            //ssdsdsdf
-=======
-            conn.close();
->>>>>>> 6027e0c8792bd35ecdf2a25e85b4b2ccea2c1b2c
         }
         
         return JsonFactory.toJson(artifacts);
