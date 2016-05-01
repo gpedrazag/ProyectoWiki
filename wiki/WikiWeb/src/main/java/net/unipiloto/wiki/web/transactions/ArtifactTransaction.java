@@ -135,7 +135,7 @@ public class ArtifactTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?description WHERE {\n"
-                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
+                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>, <http://www.semanticweb.org/sa#Artifact>, sdsd . "
                 + "?artifact <http://www.semanticweb.org/sa#id> ?id . "
                 + "?artifact <http://www.semanticweb.org/sa#description> ?description "
                 + "}"

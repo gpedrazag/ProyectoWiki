@@ -110,7 +110,7 @@ public class DecisionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?name ?arguments ?state WHERE {\n"
-                + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d . "
+                + "<http://www.semanticweb.org/sa#"+artifactId+">, <http://www.semanticweb.org/sa#artifactHave>, ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "

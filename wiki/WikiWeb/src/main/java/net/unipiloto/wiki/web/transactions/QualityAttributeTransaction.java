@@ -209,7 +209,7 @@ public class QualityAttributeTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
-                +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#name> ?actor . "
                 +"?d <http://www.semanticweb.org/sa#actor> ?enviroment . "
