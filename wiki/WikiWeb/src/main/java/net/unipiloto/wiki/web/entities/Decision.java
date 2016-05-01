@@ -8,7 +8,7 @@ public class Decision
     private String nombre;
     private String arguments;
     private String state;
-    private List<Constraint> mayHaveConstraStrings;
+    private List<Constraint> mayHaveConstraints;
     private List<Criteria> haveCriterias;
     private List<Assumption> mayHaveAssumptions;
     private List<Concern> haveAsTriggerConcerns;
@@ -27,14 +27,14 @@ public class Decision
         this.state = state;
     }
 
-    public List<Constraint> getMayHaveConstraStrings()
+    public List<Constraint> getMayHaveConstraints()
     {
-        return mayHaveConstraStrings;
+        return mayHaveConstraints;
     }
 
-    public void setMayHaveConstraStrings(List<Constraint> mayHaveConstraStrings)
+    public void setMayHaveConstraints(List<Constraint> mayHaveConstraints)
     {
-        this.mayHaveConstraStrings = mayHaveConstraStrings;
+        this.mayHaveConstraints = mayHaveConstraints;
     }
 
     public List<Criteria> getHaveCriterias()

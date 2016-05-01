@@ -2,11 +2,18 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Criteria;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
@@ -37,7 +44,7 @@ public class CriteriaTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -72,7 +79,61 @@ public class CriteriaTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
+    }
+    
+    public static List<Criteria> selectAllCriteriasByDecisionId(String id, Repository repository)
+    {
+        List<Criteria> criterias = new ArrayList<Criteria>();
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description ?keyword WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description . "
+                +"?d <http://www.semanticweb.org/sa#keyword> ?keyword "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                criterias.add(
+                    new Criteria(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("description").stringValue(),
+                    bs.getValue("keyword").stringValue()
+                ));
+            }
+            
+            if(criterias.isEmpty())
+            {
+                criterias = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return criterias;
     }
 }

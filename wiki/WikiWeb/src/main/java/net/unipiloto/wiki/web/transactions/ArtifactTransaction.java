@@ -51,7 +51,7 @@ public class ArtifactTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -86,7 +86,7 @@ public class ArtifactTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
     }
     
@@ -120,8 +120,6 @@ public class ArtifactTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
-            //xcxcvxcxcv
         }
         
         return JsonFactory.toJson(artifact);
@@ -160,12 +158,63 @@ public class ArtifactTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
         return JsonFactory.toJson(artifacts);
         
     }
     
-    
+    public static List<Artifact> getAllArtifactsBySoftwareArchitectureId(String id, Repository repository)
+    {
+        List<Artifact> artifacts = new ArrayList<Artifact>();
+        
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#composeBy> ?d . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                artifacts.add(
+                    new Artifact(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("description").stringValue()
+                ));
+            }
+            
+            if(artifacts.isEmpty())
+            {
+                artifacts = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return artifacts;
+    }
 }

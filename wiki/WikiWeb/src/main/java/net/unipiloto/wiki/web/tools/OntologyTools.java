@@ -25,7 +25,7 @@ public class OntologyTools
         {
             repo = initRepository();
         }
-        repo.shutDown();
+        
         return repo;
     }
     
@@ -65,7 +65,7 @@ public class OntologyTools
                 
             }
         }
-        repo.shutDown();
+        
         return repo;
     }
     

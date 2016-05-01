@@ -2,11 +2,18 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Constraint;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
@@ -39,7 +46,7 @@ public class ConstraintTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -61,7 +68,7 @@ public class ConstraintTransaction
         {
             String sparql = 
                 "DELETE {\n"
-                + "<http://www.semanticweb.org/sa#constraint_"+id+"> "
+                + "<http://www.semanticweb.org/sa#"+id+"> "
                 + "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
                 + "<http://www.semanticweb.org/sa#Constraint>}\n"
                 + "WHERE{}"
@@ -71,7 +78,65 @@ public class ConstraintTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
+    }
+    
+    public static List<Constraint> selectAllConstraintByDecisionId(String id, Repository repository)
+    {
+        List<Constraint> constraints = new ArrayList<Constraint>();
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?name ?description ?rationale ?keyword WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionMayHave> ?d . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description . "
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale . "
+                +"?d <http://www.semanticweb.org/sa#keyword> ?keyword "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                constraints.add(
+                    new Constraint(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(),
+                    bs.getValue("description").stringValue(),
+                    bs.getValue("rationale").stringValue(),
+                    bs.getValue("keyword").stringValue()
+                ));
+            }
+            
+            if(constraints.isEmpty())
+            {
+                constraints = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return constraints;
     }
 }

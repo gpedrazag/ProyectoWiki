@@ -2,11 +2,18 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Responsible;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
@@ -38,7 +45,7 @@ public class ResponsibleTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -73,7 +80,59 @@ public class ResponsibleTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
+    }
+    
+    public static List<Responsible> selectAllResponsiblesByDecisionId(String id, Repository repository)
+    {
+        List<Responsible> responsibles = new ArrayList<Responsible>();
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?name WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                responsibles.add(
+                    new Responsible(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue()
+                ));
+            }
+            
+            if(responsibles.isEmpty())
+            {
+                responsibles = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return responsibles;
     }
 }

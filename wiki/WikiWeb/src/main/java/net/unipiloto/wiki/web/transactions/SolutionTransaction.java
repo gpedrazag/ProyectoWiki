@@ -2,11 +2,19 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Solution;
 import net.unipiloto.wiki.web.tools.OntologyTools;
+import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
 import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 
@@ -32,7 +40,7 @@ public class SolutionTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -67,7 +75,148 @@ public class SolutionTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
+    }
+    
+    public static Solution selectSolutionByDecisionId(String id, Repository repository)
+    {
+        Solution solution = null;
+        
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?rationale WHERE {"
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                solution = new Solution(
+                    bs.getValue("id").stringValue(), 
+                    "", 
+                    ""       
+                );
+                solution.setRationale(bs.getValue("rationale").stringValue());
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return solution;
+    }
+    
+    public static String selectById(String id)
+    {
+        Solution solution = null;
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?rationale WHERE {\n"
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#rationale> ?rationale "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                solution = new Solution(
+                    bs.getValue("id").stringValue(),
+                    "",
+                    ""
+                );
+                solution.setRationale(bs.getValue("rationale").stringValue());
+            }
+        }
+        finally
+        {
+            conn.close();
+        }
+        
+        return JsonFactory.toJson(solution);
+    }
+    
+    public static String selectAll(String id, Repository repository)
+    {
+        List<Solution> solutions = new ArrayList<Solution>();
+        
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?rationale WHERE {"
+                +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                solutions.add(
+                    new Solution(
+                    bs.getValue("id").stringValue(), 
+                    "",
+                    ""
+                ));
+                int i = solutions.size() - 1;
+                solutions.get(i).setRationale(bs.getValue("rationale").stringValue());
+            }
+            
+            if(solutions.isEmpty())
+            {
+                solutions = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return JsonFactory.toJson(solutions);
     }
 }

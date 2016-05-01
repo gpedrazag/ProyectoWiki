@@ -45,7 +45,7 @@ public class AlternativeTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -80,7 +80,7 @@ public class AlternativeTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
     }
     
@@ -115,7 +115,7 @@ public class AlternativeTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
         return JsonFactory.toJson(alternative);
@@ -130,10 +130,11 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {\n"
-                + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
+                "SELECT ?id ?description ?name WHERE {\n"
+                + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
-                + "?alternative <http://www.semanticweb.org/sa#description> ?description "
+                + "?alternative <http://www.semanticweb.org/sa#description> ?description . "
+                + "?alternative <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();
@@ -142,8 +143,8 @@ public class AlternativeTransaction
                 BindingSet bs = result.next();
                 alternatives.add(new Alternative(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("id").stringValue(), 
-                    bs.getValue("id").stringValue()
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("description").stringValue()
                 ));
                 int i = alternatives.size() - 1;
                 alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId()));
@@ -152,9 +153,63 @@ public class AlternativeTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
         return JsonFactory.toJson(alternatives);
+    }
+    
+    public static List<Alternative> selectAllAlternativesByDecisionId(String id, Repository repository)
+    {
+        List<Alternative> concerns = new ArrayList<Alternative>();
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description ?name WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                concerns.add(
+                    new Alternative(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("description").stringValue()
+                ));
+            }
+            
+            if(concerns.isEmpty())
+            {
+                concerns = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return concerns;
     }
 }

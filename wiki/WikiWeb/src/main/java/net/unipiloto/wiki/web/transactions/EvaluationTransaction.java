@@ -2,7 +2,6 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import net.unipiloto.wiki.web.entities.Evaluation;
 import net.unipiloto.wiki.web.tools.OntologyTools;
 import org.openrdf.model.IRI;
@@ -46,7 +45,7 @@ public class EvaluationTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
     }
@@ -81,7 +80,7 @@ public class EvaluationTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
     }
     
@@ -118,7 +117,7 @@ public class EvaluationTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
         
         return evaluation;

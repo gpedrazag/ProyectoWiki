@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.Decision;
 import net.unipiloto.wiki.web.tools.OntologyTools;
+import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
@@ -48,7 +49,7 @@ public class DecisionTransaction
             finally
             {
                 conn.close();
-                repo.shutDown();
+                
             }
         }
         
@@ -84,7 +85,7 @@ public class DecisionTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
+            
         }
     }
     
@@ -106,8 +107,66 @@ public class DecisionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?d WHERE {"
+                "SELECT ?id ?name ?arguments ?state WHERE {"
                 + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d . "
+                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                + "?d <http://www.semanticweb.org/sa#name> ?name . "
+                + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
+                + "?d <http://www.semanticweb.org/sa#state> ?state "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                decisions.add(
+                    new Decision(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("arguments").stringValue(), 
+                    bs.getValue("state").stringValue()
+                ));
+                
+            }
+            
+            if(decisions.isEmpty())
+            {
+                decisions = null;
+            }
+        }
+        finally
+        {
+            if(repository == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return decisions;
+    }
+    
+    public static List<Decision> selectAllDecisionsBySoftwareArchitectureId(String id, Repository repository)
+    {
+        List<Decision> decisions = new ArrayList<Decision>();
+        
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?name ?arguments ?state WHERE {"
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#isaSetOf> ?d . "
                  +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
@@ -138,14 +197,14 @@ public class DecisionTransaction
             if(repository == null)
             {
                 conn.close();
-                repo.shutDown();
+                
             }
         }
         
         return decisions;
     }
     
-    public static Decision selectById(String id)
+    public static String selectById(String id)
     {
         Decision decision = null;
         Repository repo = OntologyTools.getInstance();;
@@ -172,13 +231,66 @@ public class DecisionTransaction
                     bs.getValue("arguments").stringValue(), 
                     bs.getValue("state").stringValue()
                 );
+                
+                decision.setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(id, repo));
+                decision.setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(id, repo));
+                decision.setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(id, repo));
+                decision.setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(id, repo));
+                decision.setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(id, repo));
             }
         }
         finally
         {
             conn.close();
-            repo.shutDown();
         }
-        return decision;
+        return JsonFactory.toJson(decision);
+    }
+    
+    public static String selectAll()
+    {
+        List<Decision> decisions = new ArrayList<Decision>();
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?name ?arguments ?state WHERE {\n"
+                + "?decision <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
+                + "?decision <http://www.semanticweb.org/sa#id> ?id . "
+                + "?decision <http://www.semanticweb.org/sa#name> ?name . "
+                + "?decision <http://www.semanticweb.org/sa#arguments> ?arguments . "
+                + "?decision <http://www.semanticweb.org/sa#state> ?state "
+                + "}"
+
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+
+                decisions.add(new Decision(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("arguments").stringValue(), 
+                    bs.getValue("state").stringValue()
+                ));
+                int i = decisions.size() - 1;
+                
+                decisions.get(i).setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(decisions.get(i).getId(), repo));
+                decisions.get(i).setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(decisions.get(i).getId(), repo));
+                decisions.get(i).setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(decisions.get(i).getId(), repo));
+                decisions.get(i).setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(decisions.get(i).getId(), repo));
+                decisions.get(i).setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(decisions.get(i).getId(), repo));
+
+            }
+        }
+        finally
+        {
+            conn.close();
+            
+        }
+        
+        return JsonFactory.toJson(decisions);
     }
 }
