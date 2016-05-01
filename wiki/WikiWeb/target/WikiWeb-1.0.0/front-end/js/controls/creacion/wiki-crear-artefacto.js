@@ -275,7 +275,7 @@
         {
 
             $.ajax({
-                url: "artifact/set",
+                url: "WikiWeb/artifact/set",
                 data: {
                     id: id,
                     description: desc

@@ -22,7 +22,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/front-end/views/wiki-main.jsp">Wiki</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/wiki-main.jsp">Wiki</a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
@@ -269,8 +269,8 @@
                             <li>
                                 <a href="#"><i></i>Artefacto<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li>
-                                        <a id="c-3" ><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
+                                    <li >
+                                        <a id="c-3" href="#modificarArtefacto"><i class="fa fa-plus-square-o" aria-hidden="true">&nbsp</i>Crear</a>
                                     </li>
                                     <li>
                                         <a id="m-3" href="#modificarArtefacto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
