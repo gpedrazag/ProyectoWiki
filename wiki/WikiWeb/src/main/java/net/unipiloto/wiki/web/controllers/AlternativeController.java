@@ -15,18 +15,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class AlternativeController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "evaluationId") String evaluationId) {
         try {
-            AlternativeTransaction.insert("alternative_" + id, name, description);
+            AlternativeTransaction.insert(
+                    "alternative_" + id,
+                    name,
+                    description,
+                    evaluationId);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "evaluationId") String evaluationId) {
         try {
-            AlternativeTransaction.update("alternative_" + id, name, description);
+            AlternativeTransaction.update(
+                    "alternative_" + id,
+                    name,
+                    description,
+                    evaluationId);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

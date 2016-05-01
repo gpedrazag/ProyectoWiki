@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.DecisionTransaction;
@@ -16,18 +17,62 @@ import org.springframework.web.bind.annotation.RestController;
 public class DecisionController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "arguments") String arguments, @RequestParam(value = "state") String state) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "arguments") String arguments,
+            @RequestParam(value = "state") String state,
+            @RequestParam(value = "mayHaveConstraints") List<String> mayHaveConstraints,
+            @RequestParam(value = "haveCriterias") List<String> haveCriterias,
+            @RequestParam(value = "mayHaveAssumptions") List<String> mayHaveAssumptions,
+            @RequestParam(value = "haveAsTriggerConcerns") List<String> haveAsTriggerConcerns,
+            @RequestParam(value = "haveResponsibles") List<String> haveResponsibles,
+            @RequestParam(value = "haveAlternatives") List<String> haveAlternatives,
+            @RequestParam(value = "haveSolution") String haveSolution) {
         try {
-            DecisionTransaction.insert("decision_" + id, name, arguments, state);
+            DecisionTransaction.insert(
+                    "decision_" + id,
+                    name, arguments,
+                    state,
+                    mayHaveConstraints,
+                    haveCriterias,
+                    mayHaveAssumptions,
+                    haveAsTriggerConcerns,
+                    haveResponsibles,
+                    haveAlternatives,
+                    haveSolution);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "arguments") String arguments, @RequestParam(value = "state") String state) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "arguments") String arguments,
+            @RequestParam(value = "state") String state,
+            @RequestParam(value = "mayHaveConstraints") List<String> mayHaveConstraints,
+            @RequestParam(value = "haveCriterias") List<String> haveCriterias,
+            @RequestParam(value = "mayHaveAssumptions") List<String> mayHaveAssumptions,
+            @RequestParam(value = "haveAsTriggerConcerns") List<String> haveAsTriggerConcerns,
+            @RequestParam(value = "haveResponsibles") List<String> haveResponsibles,
+            @RequestParam(value = "haveAlternatives") List<String> haveAlternatives,
+            @RequestParam(value = "haveSolution") String haveSolution
+    ) {
         try {
-            DecisionTransaction.update("decision_" + id, name, arguments, state);
+            DecisionTransaction.update(
+                    "decision_" + id,
+                    name, arguments,
+                    state,
+                    mayHaveConstraints,
+                    haveCriterias,
+                    mayHaveAssumptions,
+                    haveAsTriggerConcerns,
+                    haveResponsibles,
+                    haveAlternatives,
+                    haveSolution
+            );
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,8 +92,8 @@ public class DecisionController {
         return JsonFactory.toJson(DecisionTransaction.selectById("decision_" + id));
     }
 
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return DecisionTransaction.selectAll());
-//    }
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return DecisionTransaction.selectAll();
+    }
 }

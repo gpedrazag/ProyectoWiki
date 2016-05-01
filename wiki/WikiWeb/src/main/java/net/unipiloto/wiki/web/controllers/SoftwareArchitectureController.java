@@ -15,18 +15,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class SoftwareArchitectureController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description) {
         try {
-            SoftwareArchitectureTransaction.insert("SoftwareArchitecture_" + id, name, description);
+            SoftwareArchitectureTransaction.insert(
+                    "SoftwareArchitecture_" + id,
+                    name,
+                    description);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "name") String name,
+            @RequestParam(value = "description") String description) {
         try {
-            SoftwareArchitectureTransaction.update("SoftwareArchitecture_" + id, name, description);
+            SoftwareArchitectureTransaction.update(
+                    "SoftwareArchitecture_" + id,
+                    name,
+                    description);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

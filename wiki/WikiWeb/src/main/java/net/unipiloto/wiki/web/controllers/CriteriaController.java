@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.CriteriaTransaction;
@@ -15,18 +16,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class CriteriaController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "keyword") String keyword, @RequestParam(value = "description") String description) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "keyword") String keyword,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "linkedEvaluations") List<String> linkedEvaluations) {
         try {
-            CriteriaTransaction.insert("criteria_" + id, keyword, description);
+            CriteriaTransaction.insert(
+                    "criteria_" + id,
+                    keyword,
+                    description,
+                    linkedEvaluations);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "keyword") String keyword, @RequestParam(value = "description") String description) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "keyword") String keyword,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "linkedEvaluations") List<String> linkedEvaluations) {
         try {
-            CriteriaTransaction.update("criteria_" + id, keyword, description);
+            CriteriaTransaction.update(
+                    "criteria_" + id,
+                    keyword,
+                    description,
+                    linkedEvaluations);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,13 +58,13 @@ public class CriteriaController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return CriteriaTransaction.selectById("artifact_" + id);
-//    }
-//
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return CriteriaTransaction.selectAll();
-//    }
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return CriteriaTransaction.selectById("artifact_" + id);
+    }
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return CriteriaTransaction.selectAll();
+    }
 }
