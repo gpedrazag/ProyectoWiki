@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/artifact/")
+@RequestMapping(value = "/artifact")
 public class ArtifactController {
 
     @RequestMapping(value = "/set", method = RequestMethod.POST)
