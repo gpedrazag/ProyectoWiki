@@ -104,7 +104,7 @@ public class EvaluationTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?pros ?cons ?valoration WHERE {"
+                "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
                 + "<http://www.semanticweb.org/sa#"+alternativeId+"> <http://www.semanticweb.org/sa#alternativeLinkTo> ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
@@ -154,7 +154,7 @@ public class EvaluationTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?pros ?cons ?valoration WHERE {"
+                "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#criteriaLinkTo> ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
@@ -194,7 +194,7 @@ public class EvaluationTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?pros ?cons ?valoration WHERE {\n"
+                "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {\n"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Evaluation> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#pros> ?pros . "
@@ -234,7 +234,7 @@ public class EvaluationTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?pros ?cons ?valoration WHERE {"
+                "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
                 +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Evaluation> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?pros . "

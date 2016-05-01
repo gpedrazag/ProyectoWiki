@@ -109,7 +109,7 @@ public class CriteriaTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?keyword WHERE {"
+                "SELECT DISTINCT ?id ?description ?keyword WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
@@ -157,7 +157,7 @@ public class CriteriaTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?keyword WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?keyword WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Criteria> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
@@ -194,7 +194,7 @@ public class CriteriaTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?keyword WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?keyword WHERE {\n"
                 + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Criteria> . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#description> ?description . "

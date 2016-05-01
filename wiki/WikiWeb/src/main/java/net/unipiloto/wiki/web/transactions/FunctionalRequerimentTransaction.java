@@ -107,7 +107,7 @@ public class FunctionalRequerimentTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {"
+                "SELECT DISTINCT ?id ?name ?actor ?description ?input ?output WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#determinedBy> ?d . "
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
@@ -159,7 +159,7 @@ public class FunctionalRequerimentTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?actor ?description ?input ?output WHERE {\n"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
@@ -203,7 +203,7 @@ public class FunctionalRequerimentTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?actor ?description ?input ?output WHERE {"
+                "SELECT DISTINCT ?id ?name ?actor ?description ?input ?output WHERE {"
                 +"?d http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#FunctionalRequeriment> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#name> ?name . "

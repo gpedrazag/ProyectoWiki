@@ -177,7 +177,7 @@ public class DecisionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?arguments ?state WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
@@ -235,7 +235,7 @@ public class DecisionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?arguments ?state WHERE {"
+                "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#isaSetOf> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
@@ -283,7 +283,7 @@ public class DecisionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?arguments ?state WHERE {"
+                "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {"
                 + "<http://www.semanticweb.org/sa#"+id+" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
                 + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#name> ?name . "
@@ -327,7 +327,7 @@ public class DecisionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?arguments ?state WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {\n"
                 + "?decision <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
                 + "?decision <http://www.semanticweb.org/sa#id> ?id . "
                 + "?decision <http://www.semanticweb.org/sa#name> ?name . "

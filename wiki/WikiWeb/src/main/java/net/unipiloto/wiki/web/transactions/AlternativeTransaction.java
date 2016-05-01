@@ -106,7 +106,7 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {"
+                "SELECT DISTINCT ?id ?description ?name WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
@@ -152,7 +152,7 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
@@ -189,7 +189,7 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
                 + "?alternative <http://www.semanticweb.org/sa#description> ?description . "
