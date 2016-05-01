@@ -89,21 +89,23 @@ public class DecisionTransaction
         }
     }
     
-    public static List<Decision> selectAllDecisionsByArtifactId(String artifactId, Repository repository)
+    public static List<Decision> selectAllDecisionsByArtifactId(String artifactId, RepositoryConnection connection)
     {
         List<Decision> decisions = new ArrayList<Decision>();
         
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
+         
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -137,7 +139,7 @@ public class DecisionTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

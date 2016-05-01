@@ -114,7 +114,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 );
                 
-                artifact.setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifact.getId(), repo));
+                artifact.setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifact.getId(), conn));
             }
         }
         finally
@@ -151,7 +151,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;
-                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId(),repo));
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId(),conn));
 
             }
         }
