@@ -103,7 +103,7 @@ public class AssumptionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?source WHERE {"
+                "SELECT DISTINCT ?id ?description ?source WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionMayHave> ?d . "
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Assumption> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
@@ -149,7 +149,7 @@ public class AssumptionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description ?source WHERE {\n"
+                "SELECT DISTINCT DISTINCT ?id ?description ?source WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Assumption> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
@@ -185,7 +185,7 @@ public class AssumptionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?source WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?source WHERE {\n"
                 + "?assumption <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Assumption> . "
                 + "?assumption <http://www.semanticweb.org/sa#id> ?id ."
                 + "?assumption <http://www.semanticweb.org/sa#description> ?description . "

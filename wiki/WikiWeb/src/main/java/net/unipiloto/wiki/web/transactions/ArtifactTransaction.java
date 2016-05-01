@@ -99,7 +99,7 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {\n"
+                "SELECT DISTINCT ?id ?description WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description "
@@ -134,7 +134,7 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {\n"
+                "SELECT DISTINCT ?id ?description WHERE {\n"
                 + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "?artifact <http://www.semanticweb.org/sa#id> ?id . "
                 + "?artifact <http://www.semanticweb.org/sa#description> ?description "
@@ -184,7 +184,7 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {"
+                "SELECT DISTINCT ?id ?description WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#composeBy> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?description "

@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class QualityAttributeTransaction
 {
-    public static void insert(String id, String actor, String enviroment, String measure, String boost, String boostSource) throws IOException, URISyntaxException
+    public static void insert(String id, String actor, String enviroment, String measure, String boost, String boostSource, List<String> triggerArtifacts) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -107,7 +107,7 @@ public class QualityAttributeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
+                "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#determinedBy> ?d . "
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttribute> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
@@ -159,7 +159,7 @@ public class QualityAttributeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {\n"
+                "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {\n"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?actor . "
@@ -202,7 +202,7 @@ public class QualityAttributeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
+                "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#name> ?actor . "

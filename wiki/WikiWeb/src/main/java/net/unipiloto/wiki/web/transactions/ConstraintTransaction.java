@@ -106,7 +106,7 @@ public class ConstraintTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?description ?rationale ?keyword WHERE {"
+                "SELECT DISTINCT ?id ?name ?description ?rationale ?keyword WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionMayHave> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#name> ?name . "
@@ -156,7 +156,7 @@ public class ConstraintTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Constraint> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
@@ -196,7 +196,7 @@ public class ConstraintTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 +"?constraint <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Constraint> . "
                 +"?constraint <http://www.semanticweb.org/sa#id> ?id . "
                 +"?constraint <http://www.semanticweb.org/sa#name> ?name . "

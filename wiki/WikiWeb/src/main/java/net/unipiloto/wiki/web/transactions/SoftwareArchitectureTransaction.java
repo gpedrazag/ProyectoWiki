@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class SoftwareArchitectureTransaction
 {
-    public static void insert(String id, String name, String description) throws IOException, URISyntaxException
+    public static void insert(String id, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -38,6 +38,20 @@ public class SoftwareArchitectureTransaction
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(name));
+            if(relatedArtifacts != null)
+            {
+                for(String s : relatedArtifacts)
+                {
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#composeBy"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                }
+            }
+            if(decisionsRelated != null)
+            {
+                for(String s : decisionsRelated)
+                {
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#isaSetOf"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                }
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -51,10 +65,10 @@ public class SoftwareArchitectureTransaction
         
     }
     
-    public static void update(String id, String name, String description) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, name, description);
+        insert(id, name, description, relatedArtifacts, decisionsRelated);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -93,7 +107,7 @@ public class SoftwareArchitectureTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?name ?description WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?description WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
@@ -131,7 +145,7 @@ public class SoftwareArchitectureTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
                 + "?sa <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#SoftwareArchitecture> . "
                 + "?sa <http://www.semanticweb.org/sa#id> ?id . "
                 + "?sa <http://www.semanticweb.org/sa#description> ?description . "
