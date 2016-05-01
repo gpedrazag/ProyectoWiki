@@ -164,20 +164,13 @@ public class SolutionTransaction
         return JsonFactory.toJson(solution);
     }
     
-    public static String selectAll(String id, Repository repository)
+    public static String selectAll()
     {
         List<Solution> solutions = new ArrayList<Solution>();
-        
         Repository repo = null;
-        if(repository != null)
-        {
-            repo = repository;
-        }
-        else
-        {
-            repo = OntologyTools.getInstance();
-            repo.initialize();
-        }
+        repo = OntologyTools.getInstance();
+        repo.initialize();
+        
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -210,11 +203,7 @@ public class SolutionTransaction
         }
         finally
         {
-            if(repository == null)
-            {
-                conn.close();
-                
-            }
+            conn.close();
         }
         
         return JsonFactory.toJson(solutions);

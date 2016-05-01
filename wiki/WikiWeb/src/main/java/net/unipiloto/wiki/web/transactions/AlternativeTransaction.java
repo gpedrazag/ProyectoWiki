@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class AlternativeTransaction
 {
-    public static void insert(String id, String name, String description) throws IOException, URISyntaxException
+    public static void insert(String id, String name, String description, String evaluationId) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -36,6 +36,10 @@ public class AlternativeTransaction
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(description));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
+            if(!evaluationId.equals(""))
+            {
+                conn.add(subject, factory.createIRI("<http://www.semanticweb.org/sa#alternativeLinkTo>"), factory.createIRI("http://www.semanticweb.org/sa#"+evaluationId));
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -50,10 +54,10 @@ public class AlternativeTransaction
         
     }
     
-    public static void update(String id, String name, String description) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description, String evaluationId) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, name, description);
+        insert(id, name, description, evaluationId);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

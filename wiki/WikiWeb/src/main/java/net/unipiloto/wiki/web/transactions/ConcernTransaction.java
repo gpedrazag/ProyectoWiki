@@ -20,7 +20,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class ConcernTransaction
 {
-    public static void insert(String id, String concern) throws IOException, URISyntaxException
+    public static void insert(String id, String concern, List<String> describedByQA, List<String> describedByFR) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -35,6 +35,20 @@ public class ConcernTransaction
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#concern"), factory.createLiteral(concern));
+            if(describedByFR != null)
+            {
+                for(String s : describedByFR)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#determinedBy"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                }
+            }
+            if(describedByQA != null)
+            {
+                for(String s : describedByQA)
+                {
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#determinedBy"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                }
+            }
             conn.commit();
         }
         catch(Exception ex)
@@ -49,10 +63,10 @@ public class ConcernTransaction
         
     }
     
-    public static void update(String id, String concern) throws IOException, URISyntaxException
+    public static void update(String id, String concern, List<String> describedByQA, List<String> describedByFR) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, concern);
+        insert(id, concern, describedByQA, describedByFR);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -173,20 +187,14 @@ public class ConcernTransaction
         return JsonFactory.toJson(concern);
     }
     
-    public static String selectAll(String id, Repository repository)
+    public static String selectAll()
     {
         List<Concern> concerns = new ArrayList<Concern>();
         
         Repository repo = null;
-        if(repository != null)
-        {
-            repo = repository;
-        }
-        else
-        {
-            repo = OntologyTools.getInstance();
-            repo.initialize();
-        }
+        repo = OntologyTools.getInstance();
+        repo.initialize();
+        
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -219,11 +227,7 @@ public class ConcernTransaction
         }
         finally
         {
-            if(repository == null)
-            {
-                conn.close();
-                
-            }
+            conn.close();
         }
         
         return JsonFactory.toJson(concerns);

@@ -47,7 +47,6 @@ public class SoftwareArchitectureTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
         }
         
     }
@@ -82,7 +81,6 @@ public class SoftwareArchitectureTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
         }
     }
     
@@ -97,8 +95,8 @@ public class SoftwareArchitectureTransaction
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?name ?description WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
             );
@@ -119,7 +117,6 @@ public class SoftwareArchitectureTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
         }
         
         return JsonFactory.toJson(sa);
@@ -134,11 +131,11 @@ public class SoftwareArchitectureTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {\n"
+                "SELECT ?id ?description ?name WHERE {\n"
                 + "?sa <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#SoftwareArchitecture> . "
                 + "?sa <http://www.semanticweb.org/sa#id> ?id . "
                 + "?sa <http://www.semanticweb.org/sa#description> ?description . "
-                + "?sa <http://www.semanticweb.org/sa#description> ?name "
+                + "?sa <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
 
             );
@@ -161,7 +158,6 @@ public class SoftwareArchitectureTransaction
         finally
         {
             conn.close();
-            repo.shutDown();
         }
         
         return JsonFactory.toJson(sas);

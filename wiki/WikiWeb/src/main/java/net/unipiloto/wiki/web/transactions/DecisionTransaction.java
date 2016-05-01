@@ -20,7 +20,18 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class DecisionTransaction
 {
-    public static void insert(String id, String name, String arguments, String state) throws IOException, URISyntaxException
+    public static void insert(
+        String id, 
+        String name, 
+        String arguments, 
+        String state,
+        List<String> mayHaveConstraints,
+        List<String> haveCriterias,
+        List<String> mayHaveAssumptions,
+        List<String> haveAsTriggerConcerns,
+        List<String> haveResponsibles,
+        List<String> haveAlternatives,
+        String haveSolution) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -40,6 +51,53 @@ public class DecisionTransaction
                 conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
                 conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#arguments"), factory.createLiteral(arguments));
                 conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#state"), factory.createLiteral(state));
+                if(mayHaveConstraints != null)
+                {
+                    for(String s : mayHaveConstraints)
+                    {
+                        conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                    }
+                }
+                if(haveCriterias != null)
+                {
+                    for(String s : haveCriterias)
+                    {
+                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
+                    }
+                }
+                if(mayHaveAssumptions != null)
+                {
+                    for(String s : mayHaveAssumptions)
+                    {
+                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                    }
+                }
+                if(haveAsTriggerConcerns != null)
+                {
+                    for(String s : haveAsTriggerConcerns)
+                    {
+                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#havaAsTrigger"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
+                    }
+                }
+                if(haveResponsibles != null)
+                {
+                    for(String s : haveResponsibles)
+                    {
+                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
+                    }
+                }
+                if(haveAlternatives != null)
+                {
+                    for(String s : haveAlternatives)
+                    {
+                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
+                    }
+                }
+                
+                if(!haveSolution.equals(""))
+                {
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+haveSolution));  
+                }
                 conn.commit();
             }
             catch(Exception ex)
@@ -55,10 +113,20 @@ public class DecisionTransaction
         
     }
     
-    public static void update(String id, String name, String arguments, String state) throws IOException, URISyntaxException
+    public static void update(
+        String id, 
+        String name, 
+        String arguments, 
+        String state,List<String> mayHaveConstraints,
+        List<String> haveCriterias,
+        List<String> mayHaveAssumptions,
+        List<String> haveAsTriggerConcerns,
+        List<String> haveResponsibles,
+        List<String> haveAlternatives,
+        String haveSolution) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, name, arguments, state);
+        insert(id, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -239,6 +307,8 @@ public class DecisionTransaction
                 decision.setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(id, conn));
                 decision.setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(id, conn));
                 decision.setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(id, conn));
+                decision.setMayHaveAssumptions(AssumptionTransaction.selectAllAssumptionsByDecisionId(id, conn));
+                decision.setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(id, conn));
             }
         }
         finally
@@ -284,7 +354,8 @@ public class DecisionTransaction
                 decisions.get(i).setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(decisions.get(i).getId(), conn));
                 decisions.get(i).setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(decisions.get(i).getId(), conn));
                 decisions.get(i).setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(decisions.get(i).getId(), conn));
-
+                decisions.get(i).setMayHaveAssumptions(AssumptionTransaction.selectAllAssumptionsByDecisionId(decisions.get(i).getId(), conn));
+                decisions.get(i).setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(decisions.get(i).getId(), conn));
             }
         }
         finally
