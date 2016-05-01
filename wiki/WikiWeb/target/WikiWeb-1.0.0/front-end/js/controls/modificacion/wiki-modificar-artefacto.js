@@ -113,7 +113,7 @@
                             );
 
 
-            ajaxSelectAll(function (data) {
+            ajaxSelectAllArtifact(function (data) {
                 $.each(data, function (index, artList) {
                     $("#slc-3-tp").append($("<option>").html(artList.id).attr({"value": artList.id, "idClass": "3"}));
                 });
@@ -297,7 +297,7 @@
 
         }
 
-        function ajaxSelectAll(callback)
+        function ajaxSelectAllArtifact(callback)
         {
             $.ajax({
                 url: "WikiWeb/artifact/selectAll",
@@ -309,6 +309,34 @@
                 callback(null);
             });
         }
+        
+        function ajaxSelectAllQualityAttribute(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/xxxx/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+        
+        function ajaxSelectAllSoftwareArchitecture(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/xxxx/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+        
+        
 
 
 
