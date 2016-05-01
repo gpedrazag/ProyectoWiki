@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.QualityAttributeTransaction;
@@ -21,14 +22,16 @@ public class QualityAttributeController {
             @RequestParam(value = "enviroment") String enviroment,
             @RequestParam(value = "measure") String measure,
             @RequestParam(value = "boost") String boost,
-            @RequestParam(value = "boostSource") String boostSource) {
+            @RequestParam(value = "boostSource") String boostSource,
+            @RequestParam(value = "triggerArtifacts") List<String> triggerArtifacts) {
         try {
             QualityAttributeTransaction.insert(
                     "qualityAttribute_" + id, actor,
                     enviroment,
                     measure,
                     boost,
-                    boostSource);
+                    boostSource,
+                    triggerArtifacts);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,7 +44,8 @@ public class QualityAttributeController {
             @RequestParam(value = "enviroment") String enviroment,
             @RequestParam(value = "measure") String measure,
             @RequestParam(value = "boost") String boost,
-            @RequestParam(value = "boostSource") String boostSource) {
+            @RequestParam(value = "boostSource") String boostSource,
+            @RequestParam(value = "triggerArtifacts") List<String> triggerArtifacts) {
         try {
             QualityAttributeTransaction.update(
                     "qualityAttribute_" + id,
@@ -49,7 +53,8 @@ public class QualityAttributeController {
                     enviroment,
                     measure,
                     boost,
-                    boostSource);
+                    boostSource,
+                    triggerArtifacts);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

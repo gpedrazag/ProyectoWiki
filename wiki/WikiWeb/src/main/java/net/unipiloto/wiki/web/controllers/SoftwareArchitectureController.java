@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.SoftwareArchitectureTransaction;
@@ -18,12 +19,16 @@ public class SoftwareArchitectureController {
     public void insert(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "description") String description) {
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "relatedArtifacts") List<String> relatedArtifacts,
+            @RequestParam(value = "decisionsRelated") List<String> decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.insert(
                     "SoftwareArchitecture_" + id,
                     name,
-                    description);
+                    description,
+                    relatedArtifacts,
+                    decisionsRelated);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -33,12 +38,16 @@ public class SoftwareArchitectureController {
     public void update(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "description") String description) {
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "relatedArtifacts") List<String> relatedArtifacts,
+            @RequestParam(value = "decisionsRelated") List<String> decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.update(
                     "SoftwareArchitecture_" + id,
                     name,
-                    description);
+                    description,
+                    relatedArtifacts,
+                    decisionsRelated);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -20,7 +20,7 @@ public class DecisionController {
     public void insert(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "arguments") String arguments,
+            @RequestParam(value = "arguments") String argumen,
             @RequestParam(value = "state") String state,
             @RequestParam(value = "mayHaveConstraints") List<String> mayHaveConstraints,
             @RequestParam(value = "haveCriterias") List<String> haveCriterias,
@@ -32,7 +32,8 @@ public class DecisionController {
         try {
             DecisionTransaction.insert(
                     "decision_" + id,
-                    name, arguments,
+                    name,
+                    argumen,
                     state,
                     mayHaveConstraints,
                     haveCriterias,
