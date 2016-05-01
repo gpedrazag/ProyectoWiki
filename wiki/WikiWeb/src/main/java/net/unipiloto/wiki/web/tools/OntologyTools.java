@@ -62,10 +62,10 @@ public class OntologyTools
             finally
             {
                 conn.close();
-                repo.shutDown();
+                
             }
         }
-        
+        repo.shutDown();
         return repo;
     }
     
