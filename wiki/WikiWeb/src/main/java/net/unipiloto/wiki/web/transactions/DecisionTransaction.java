@@ -125,7 +125,6 @@ public class DecisionTransaction
                     bs.getValue("name").stringValue(), 
                     bs.getValue("arguments").stringValue(), 
                     bs.getValue("state").stringValue()
-                
                 ));
             }
             

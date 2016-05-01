@@ -142,7 +142,7 @@ public class ArtifactTransaction
                 + "}"
 
             );
-            TupleQueryResult result = tq.evaluate();
+            TupleQueryResult result = tq.evaluate(); //sdsdsdds;
             while(result.hasNext())
             {
                 BindingSet bs = result.next();
@@ -158,8 +158,10 @@ public class ArtifactTransaction
         }
         finally
         {
+            //mi comentario
             conn.close();
             repo.shutDown();
+            //ssdsdsdf
         }
         
         return JsonFactory.toJson(artifacts);
