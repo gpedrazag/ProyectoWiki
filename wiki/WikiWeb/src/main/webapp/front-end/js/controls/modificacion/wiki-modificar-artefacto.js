@@ -286,11 +286,15 @@
         function eventLoad() {
 
             //alert();
-            ajaxSetArtefacto("1");
+            ajaxSetArtefacto("455", function (data) {
+//                alert(data.id + " " + data.description);
+                $("#txt-3").val(data.id);
+                $("#txt-area-3").val(data.description);
+            });
 
         }
 
-        function ajaxSetArtefacto(id)
+        function ajaxSetArtefacto(id, miCallback)
         {
             $.ajax({
                 url: "WikiWeb/artifact/get",
@@ -300,9 +304,9 @@
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {
-                alert(data.description);
+                miCallback(data);
             }).fail(function (jrxml, errorThrow) {
-
+                miCallback(null);
             });
         }
 
