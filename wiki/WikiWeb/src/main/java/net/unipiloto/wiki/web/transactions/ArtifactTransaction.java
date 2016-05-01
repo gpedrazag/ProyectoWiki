@@ -165,6 +165,62 @@ public class ArtifactTransaction
         
     }
     
+    public static List<Artifact> selectByQAId(String id, RepositoryConnection connection)
+    {
+        List<Artifact> artifacts = new ArrayList<Artifact>();
+        
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT DISTINCT ?id ?description WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#triggerAn> ?d . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                artifacts.add(
+                    new Artifact(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("description").stringValue()
+                ));
+                int i = artifacts.size() - 1;
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId(),conn));
+            }
+            
+            if(artifacts.isEmpty())
+            {
+                artifacts = null;
+            }
+        }
+        finally
+        {
+            if(connection == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return artifacts;
+    }
+    
     public static List<Artifact> getAllArtifactsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
         List<Artifact> artifacts = new ArrayList<Artifact>();
@@ -200,6 +256,8 @@ public class ArtifactTransaction
                     bs.getValue("id").stringValue(), 
                     bs.getValue("description").stringValue()
                 ));
+                int i = artifacts.size() - 1;
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId(),conn));
             }
             
             if(artifacts.isEmpty())
