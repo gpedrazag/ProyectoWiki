@@ -112,8 +112,11 @@
                                     )
                             );
 
-            $.each(art, function (index, data) {
-                $("#slc-3-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
+
+            ajaxSelectAllArtifact(function (data) {
+                $.each(data, function (index, artList) {
+                    $("#slc-3-tp").append($("<option>").html(artList.id).attr({"value": artList.id, "idClass": "3"}));
+                });
             });
 
             //Se llena el select con Atributo de Calidad
@@ -285,30 +288,55 @@
 
         function eventLoad() {
 
-            //alert();
-            ajaxSetArtefacto("455", function (data) {
+
+//            ajaxGetAll("455", function (data) {
 //                alert(data.id + " " + data.description);
-                $("#txt-3").val(data.id);
-                $("#txt-area-3").val(data.description);
-            });
+//                $("#txt-3").val(data.id);
+//                $("#txt-area-3").val(data.description);
+//            });
 
         }
 
-        function ajaxSetArtefacto(id, miCallback)
+        function ajaxSelectAllArtifact(callback)
         {
             $.ajax({
-                url: "WikiWeb/artifact/get",
-                data: {
-                    id: id
-                },
+                url: "WikiWeb/artifact/selectAll",
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {
-                miCallback(data);
+                callback(data);
             }).fail(function (jrxml, errorThrow) {
-                miCallback(null);
+                callback(null);
             });
         }
+        
+        function ajaxSelectAllQualityAttribute(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/xxxx/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+        
+        function ajaxSelectAllSoftwareArchitecture(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/xxxx/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+        
+        
 
 
 

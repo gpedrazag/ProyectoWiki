@@ -112,8 +112,11 @@
                                     )
                             );
 
-            $.each(art, function (index, data) {
-                $("#slc-3-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
+
+            ajaxSelectAll(function (data) {
+                $.each(data, function (index, artList) {
+                    $("#slc-3-tp").append($("<option>").html(artList.id).attr({"value": artList.id, "idClass": "3"}));
+                });
             });
 
             //Se llena el select con Atributo de Calidad
@@ -285,28 +288,25 @@
 
         function eventLoad() {
 
-            //alert();
-            ajaxSetArtefacto("455");
+
+//            ajaxGetAll("455", function (data) {
+//                alert(data.id + " " + data.description);
+//                $("#txt-3").val(data.id);
+//                $("#txt-area-3").val(data.description);
+//            });
 
         }
 
-        function ajaxSetArtefacto(id)
+        function ajaxSelectAll(callback)
         {
             $.ajax({
-<<<<<<< HEAD
-                url: "WikiWeb/artifact/getAll",
-=======
-                url: "WikiWeb/artifact/get",
-                data: {
-                    id: id
-                },
->>>>>>> d69fa05e1034704dff8bcd0e4ec475cce50739ea
+                url: "WikiWeb/artifact/selectAll",
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {
-                alert(data.id);
+                callback(data);
             }).fail(function (jrxml, errorThrow) {
-
+                callback(null);
             });
         }
 

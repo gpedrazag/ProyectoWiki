@@ -267,24 +267,24 @@
 //            alert(list7);
 //
 //            alert(id + " " + description);
-            alert("Entro al evento");
-            ajaxSetArtefacto(id, description);
+            //alert("Entro al evento");
+            ajaxInsert(id, description);
         }
 
-        function ajaxSetArtefacto(id, desc)
+        function ajaxInsert(id, desc)
         {
 
             $.ajax({
-                url: "WikiWeb/artifact/set",
+                url: "WikiWeb/artifact/insert",
                 data: {
                     id: id,
                     description: desc
                 },
                 method: "POST"
             }).done(function () {
-                alert("Entro al ajax");
+                alert("Incerto el artefacto");
             }).fail(function (jrxml, errorThrow) {
-                alert(jrxml + " " + errorThrow);
+                alert("Error no se pudo insertar el artefacto");
             });
         }
 
