@@ -284,22 +284,25 @@
 
 
         function eventLoad() {
-            
+
             //alert();
-            ajaxSetArtefacto();
+            ajaxSetArtefacto("455");
 
         }
 
-        function ajaxSetArtefacto()
+        function ajaxSetArtefacto(id)
         {
             $.ajax({
-                url: "artifact/getAll",
+                url: "WikiWeb/artifact/get",
+                data: {
+                    id: id
+                },
                 method: "POST",
-                dataType:"json"
+                dataType: "json"
             }).done(function (data) {
-                alert(data);
+                alert(data.id);
             }).fail(function (jrxml, errorThrow) {
-                
+
             });
         }
 

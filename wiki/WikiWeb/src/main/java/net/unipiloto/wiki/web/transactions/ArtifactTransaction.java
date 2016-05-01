@@ -134,23 +134,27 @@ public class ArtifactTransaction
         RepositoryConnection conn = repo.getConnection();
         try
         {
+//            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+//                "SELECT ?id ?description WHERE {\n"
+//                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
+//                + "?artifact <http://www.semanticweb.org/sa#id> ?id ."
+//                + "?artifact <http://www.semanticweb.org/sa#description> ?description "
+//                + "}"
+//            );
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description WHERE {\n"
-                + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
-                + "?artifact <http://www.semanticweb.org/sa#id> ?id ."
-                + "?artifact <http://www.semanticweb.org/sa#description> ?description "
-                + "}"
+                "SELECT ?x ?p ?y WHERE {?x ?p ?y}"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
             {
                 BindingSet bs = result.next();
-                artifacts.add(new Artifact(
-                    bs.getValue("id").stringValue(),
-                    bs.getValue("description").stringValue()
-                ));
-                int i = artifacts.size() - 1;
-                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId()));
+//                artifacts.add(new Artifact(
+//                    bs.getValue("id").stringValue(),
+//                    bs.getValue("description").stringValue()
+//                ));
+//                int i = artifacts.size() - 1;
+//                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId()));
+                System.out.println(bs.getValue("x").stringValue()+"  "+ bs.getValue("p").stringValue()+"  "+ bs.getValue("y").stringValue());
             }
         }
         finally

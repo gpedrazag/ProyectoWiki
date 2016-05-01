@@ -14,7 +14,7 @@ public class ArtifactController {
 
     @RequestMapping(value = "/set", method = RequestMethod.POST)
     public void setArtifact(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description) throws IOException, URISyntaxException {
-        ArtifactTransaction.insert(id, description, null);
+        ArtifactTransaction.insert("artifact_"+id, description, null);
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
