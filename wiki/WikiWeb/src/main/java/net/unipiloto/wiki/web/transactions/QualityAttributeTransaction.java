@@ -53,11 +53,11 @@ public class QualityAttributeTransaction
         
     }
     
-    public static void update(String id, String actor, String enviroment, String measure, String boost, String boostSource) throws IOException, URISyntaxException
+    public static void update(String id, String actor, String enviroment, String measure, String boost, String boostSource, List<String> triggerArtifacts) throws IOException, URISyntaxException
     {
         
         delete(id);
-        insert(id, actor, enviroment, measure, boost, boostSource);
+        insert(id, actor, enviroment, measure, boost, boostSource, triggerArtifacts);
         
     }
     
