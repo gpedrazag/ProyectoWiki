@@ -267,6 +267,28 @@
             alert(list8);
 
             alert(name + " " + description);
+            
+            var id = 30;
+            
+            ajaxSetAlternativa(id,name,description);
+        }
+        
+        function ajaxSetAlternativa(id,name,description)
+        {
+
+            $.ajax({
+                url: "WikiWeb/alternative/insert",
+                data: {
+                    id: id,
+                    name:name,
+                    description: description
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Entro al ajax");
+            }).fail(function (jrxml, errorThrow) {
+                alert(jrxml + " " + errorThrow);
+            });
         }
 
 
