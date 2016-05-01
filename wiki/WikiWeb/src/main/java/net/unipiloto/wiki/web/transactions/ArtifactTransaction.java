@@ -114,7 +114,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 );
                 
-                artifact.setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifact.getId()));
+                artifact.setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifact.getId(), repo));
             }
         }
         finally
@@ -129,7 +129,7 @@ public class ArtifactTransaction
     public static String selectAll()
     {
         List<Artifact> artifacts = new ArrayList<Artifact>();
-        Repository repo = OntologyTools.getInstance();;
+        Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
@@ -137,7 +137,7 @@ public class ArtifactTransaction
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?description WHERE {\n"
                 + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
-                + "?artifact <http://www.semanticweb.org/sa#id> ?id ."
+                + "?artifact <http://www.semanticweb.org/sa#id> ?id . "
                 + "?artifact <http://www.semanticweb.org/sa#description> ?description "
                 + "}"
             );
@@ -150,7 +150,7 @@ public class ArtifactTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;
-                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId()));
+                artifacts.get(i).setHaveDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(artifacts.get(i).getId(),repo));
             }
         }
         finally

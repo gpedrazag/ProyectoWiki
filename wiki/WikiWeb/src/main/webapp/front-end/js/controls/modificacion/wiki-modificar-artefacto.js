@@ -293,7 +293,7 @@
         function ajaxSetArtefacto()
         {
             $.ajax({
-                url: "artifact/getAll",
+                url: "WikiWeb/artifact/getAll",
                 method: "POST",
                 dataType:"json"
             }).done(function (data) {

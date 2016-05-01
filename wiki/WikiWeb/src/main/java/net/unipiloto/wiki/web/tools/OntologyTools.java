@@ -25,6 +25,7 @@ public class OntologyTools
         {
             repo = initRepository();
         }
+        repo.shutDown();
         return repo;
     }
     
