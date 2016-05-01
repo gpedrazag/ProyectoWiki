@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
@@ -15,18 +16,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArtifactController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "decisions") List<String> decisions) {
         try {
-            ArtifactTransaction.insert("artifact_" + id, description, null);
+            ArtifactTransaction.insert(
+                    "artifact_" + id,
+                    description,
+                    decisions);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "description") String description,
+            @RequestParam(value = "decisions") List<String> decisions) {
         try {
-            ArtifactTransaction.update("artifact_" + id, description, null);
+            ArtifactTransaction.update(
+                    "artifact_" + id,
+                    description,
+                    decisions);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

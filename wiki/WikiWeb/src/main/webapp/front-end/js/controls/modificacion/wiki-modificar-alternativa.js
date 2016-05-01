@@ -161,9 +161,7 @@
                         }
                     });
                 });
-
-                $("#tbody-7").empty();
-                $("#tbody-12").empty();
+               
                 $("#tbody-8").empty();
             } else {
 

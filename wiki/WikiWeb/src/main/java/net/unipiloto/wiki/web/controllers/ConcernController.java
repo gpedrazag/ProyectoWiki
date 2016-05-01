@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.ConcernTransaction;
@@ -15,18 +16,34 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConcernController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "concern") String concern) {
+    public void insert(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "concern") String concern,
+            @RequestParam(value = "describedByQA") List<String> describedByQA,
+            @RequestParam(value = "describedByFR") List<String> describedByFR) {
         try {
-            ConcernTransaction.insert("concern_" + id, concern);
+            ConcernTransaction.insert(
+                    "concern_" + id,
+                    concern,
+                    describedByQA,
+                    describedByFR);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String concern) {
+    public void update(
+            @RequestParam(value = "id") String id,
+            @RequestParam(value = "concern") String concern,
+            @RequestParam(value = "describedByQA") List<String> describedByQA,
+            @RequestParam(value = "describedByFR") List<String> describedByFR) {
         try {
-            ConcernTransaction.update("concern_" + id, concern);
+            ConcernTransaction.update(
+                    "concern_" + id,
+                    concern,
+                    describedByQA,
+                    describedByFR);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -116,10 +116,10 @@
             var name = $("#txt-1").val();
             var description = $("#txt-area-1").val();
 
-            var list8 = [];
+            var list8 = "";
 
             $.each($("#tbody-8 tr"), function (index, data) {
-                list8.push($(data).attr("id"));
+                list8 = $(data).attr("id");
 
             });
 
@@ -129,24 +129,24 @@
 
             var id = 0;
 
-            ajaxInsert1(id, name, description);
+            ajaxInsert1(id, name, description, list8);
         }
 
-        function ajaxInsert1(id, name, description)
+        function ajaxInsert1(id, name, description, evaluationId)
         {
-
             $.ajax({
                 url: "WikiWeb/alternative/insert",
                 data: {
                     id: id,
                     name: name,
-                    description: description
+                    description: description,
+                    evaluationId: evaluationId
                 },
                 method: "POST"
             }).done(function () {
                 alert("Incerto la alternativa");
             }).fail(function (jrxml, errorThrow) {
-                
+                alert("Error no se pudo insertar la alternativa");
             });
         }
 
