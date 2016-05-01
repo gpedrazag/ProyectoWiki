@@ -18,7 +18,7 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -38,36 +38,29 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión compatible"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_1"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión compatible"))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión No compatible"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_2"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión compatible"))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión se descompone"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_3"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión en que se descompone"))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Arquitectura de software"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-2"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Arquitectura de software que tiene relacion con la Decisión."))
-                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Decisión compatible"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_1"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión compatible"))
+//                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Decisión No compatible"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_2"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión compatible"))
+//                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Decisión se descompone"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-7_3"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión en que se descompone"))
+//                            )
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Responsable"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-10"})
@@ -118,71 +111,50 @@
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Alternativa que tiene relacion con la Decisión."))
                             )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Artefacto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-3"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Artefacto  que tiene relacion con la Decisión."))
-                            )
                     ;
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_1"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Dec compatible"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7_1"})
-
-                                                    )
-                                            )
-                                    )
-
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_2"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Dec No compatible"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7_2"})
-
-                                                    )
-                                            )
-                                    )
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_3"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Dec descomponer"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7_3"})
-
-                                                    )
-                                            )
-                                    )
-                            )
-                    .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-2"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Arqu de software"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-2"})
-
-                                                    )
-                                            )
-                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_1"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Dec compatible"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-7_1"})
+//
+//                                                    )
+//                                            )
+//                                    )
+//
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_2"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Dec No compatible"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-7_2"})
+//
+//                                                    )
+//                                            )
+//                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7_3"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Dec descomponer"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-7_3"})
+//
+//                                                    )
+//                                            )
+//                                    )
+//                            )
                             .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-10"})
                                     .append($("<table>").addClass("table table-hover")
                                             .append($("<thead>")
@@ -278,69 +250,63 @@
                                                     )
                                             )
                                     )
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-3"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Artefacto"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-3"})
-
-                                                    )
-                                            )
-                                    )
                             );
 
 
-            $.each(des, function (index, data) {
-                $("#slc-7_1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_1"}));
+//            $.each(des, function (index, data) {
+//                $("#slc-7_1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_1"}));
+//            });
+//
+//            $.each(des, function (index, data) {
+//                $("#slc-7_2").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_2"}));
+//            });
+//
+//            $.each(des, function (index, data) {
+//                $("#slc-7_3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_3"}));
+//            });
+
+            ajaxSelectAll10(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-10").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "10"}));
+                });
             });
 
-            $.each(des, function (index, data) {
-                $("#slc-7_2").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_2"}));
+            ajaxSelectAll4(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+                });
             });
 
-            $.each(des, function (index, data) {
-                $("#slc-7_3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7_3"}));
+            ajaxSelectAll6(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-6").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "6"}));
+                });
             });
 
-            $.each(arqsoft, function (index, data) {
-                $("#slc-2").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "2"}));
+            ajaxSelectAll13(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-13").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "13"}));
+                });
             });
 
-            $.each(resp, function (index, data) {
-                $("#slc-10").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "10"}));
+            ajaxSelectAll11(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-11").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "11"}));
+                });
             });
 
-            $.each(asu, function (index, data) {
-                $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+            ajaxSelectAll12(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-12").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "12"}));
+                });
             });
 
-            $.each(cri, function (index, data) {
-                $("#slc-6").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "6"}));
+            ajaxSelectAll1(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
+                });
             });
 
-            $.each(supo, function (index, data) {
-                $("#slc-13").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "13"}));
-            });
-
-            $.each(rest, function (index, data) {
-                $("#slc-11").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "11"}));
-            });
-
-            $.each(sol, function (index, data) {
-                $("#slc-12").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "12"}));
-            });
-
-            $.each(alt, function (index, data) {
-                $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
-            });
-
-            $.each(art, function (index, data) {
-                $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
-            });
 
 
             $("#slc-7_1").on("change", eventSelected);
@@ -358,92 +324,76 @@
 
         }
 
-        //evento para llenar las tablas en atributos de calidad
+
         function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "7_1") {
 
-                $("#slc-7_1 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7_1 option:selected").addClass("hidden");
-                $("#slc-7_1 option[value=" + 0 + "]").attr("selected", true);
+//            if (idClassOptionSelected === "7_1") {
+//
+//                $("#slc-7_1 option[value=" + 0 + "]").attr("selected", false);
+//                $("#slc-7_1 option:selected").addClass("hidden");
+//                $("#slc-7_1 option[value=" + 0 + "]").attr("selected", true);
+//
+//
+//
+//                $("#tbody-7_1")
+//                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+//                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
+//                                .append($("<td>")
+//                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+//                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                )
+//                                        )
+//                                );
+//
+//            }
+//
+//           
+//            if (idClassOptionSelected === "7_2") {
+//
+//                $("#slc-7_2 option[value=" + 0 + "]").attr("selected", false);
+//                $("#slc-7_2 option:selected").addClass("hidden");
+//                $("#slc-7_2 option[value=" + 0 + "]").attr("selected", true);
+//
+//
+//
+//                $("#tbody-7_2")
+//                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+//                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
+//                                .append($("<td>")
+//                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+//                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                )
+//                                        )
+//                                );
+//
+//            }
+//
+//            //llena la tabla de artefactos
+//            if (idClassOptionSelected === "7_3") {
+//
+//                $("#slc-7_3 option[value=" + 0 + "]").attr("selected", false);
+//                $("#slc-7_3 option:selected").addClass("hidden");
+//                $("#slc-7_3 option[value=" + 0 + "]").attr("selected", true);
+//
+//
+//
+//                $("#tbody-7_3")
+//                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+//                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
+//                                .append($("<td>")
+//                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+//                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                )
+//                                        )
+//                                );
+//
+//            }
 
-
-
-                $("#tbody-7_1")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "7_2") {
-
-                $("#slc-7_2 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7_2 option:selected").addClass("hidden");
-                $("#slc-7_2 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-7_2")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "7_3") {
-
-                $("#slc-7_3 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7_3 option:selected").addClass("hidden");
-                $("#slc-7_3 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-7_3")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-
-            if (idClassOptionSelected === "2") {
-
-                $("#slc-2 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-2 option:selected").addClass("hidden");
-                $("#slc-2 option[value=" + 0 + "]").attr("selected", true);
-
-                $("#tbody-2")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-            }
 
             if (idClassOptionSelected === "10") {
 
@@ -564,68 +514,39 @@
                                 );
             }
 
-            if (idClassOptionSelected === "3") {
-
-                $("#slc-3 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-3 option:selected").addClass("hidden");
-                $("#slc-3 option[value=" + 0 + "]").attr("selected", true);
-
-                $("#tbody-3")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-            }
         }
 
-
-
-
-        //evento para remover de las tablas en las atributos de calidad
         function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
             var idClass = $(this).parent().parent().attr("value");
 
-            if (idClass === "7_1")
-                $("#slc-7_1 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-
-            if (idClass === "7_2")
-                $("#slc-7_2 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-
-            if (idClass === "7_3")
-                $("#slc-7_3 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-
-            if (idClass === "2")
-                $("#slc-2 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
+//            if (idClass === "7_1")
+//                $("#slc-7_1 option").each(function () {
+//
+//                    if (tableId === $(this).attr("value")) {
+//                        $(this).removeClass("hidden");
+//                    }
+//
+//                });
+//
+//            if (idClass === "7_2")
+//                $("#slc-7_2 option").each(function () {
+//
+//                    if (tableId === $(this).attr("value")) {
+//                        $(this).removeClass("hidden");
+//                    }
+//
+//                });
+//
+//            if (idClass === "7_3")
+//                $("#slc-7_3 option").each(function () {
+//
+//                    if (tableId === $(this).attr("value")) {
+//                        $(this).removeClass("hidden");
+//                    }
+//
+//                });
 
             if (idClass === "10")
                 $("#slc-10 option").each(function () {
@@ -689,15 +610,6 @@
                     }
 
                 });
-
-            if (idClass === "3")
-                $("#slc-3 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
         }
 
 
@@ -707,10 +619,9 @@
             var Nombre = $("#txt-1-7").val();
             var Argumento = $("#txt-2-7").val();
             var estado = $("#txt-3-7").val();
-            var list7_1 = [];
-            var list7_2 = [];
-            var list7_3 = [];
-            var list2 = [];
+//            var list7_1 = [];
+//            var list7_2 = [];
+//            var list7_3 = [];
             var list10 = [];
             var list4 = [];
             var list6 = [];
@@ -718,37 +629,28 @@
             var list11 = [];
             var list12 = [];
             var list1 = [];
-            var list3 = [];
 
+//            $.each($("#tbody-7_1 tr"), function (index, data) {
+//                list7_1.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7_1);
+//
+//            $.each($("#tbody-7_2 tr"), function (index, data) {
+//                list7_2.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7_2);
+//
+//            $.each($("#tbody-7_3 tr"), function (index, data) {
+//                list7_3.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7_3);
 
-
-            $.each($("#tbody-7_1 tr"), function (index, data) {
-                list7_1.push($(data).attr("id"));
-
-            });
-
-            alert(list7_1);
-
-            $.each($("#tbody-7_2 tr"), function (index, data) {
-                list7_2.push($(data).attr("id"));
-
-            });
-
-            alert(list7_2);
-
-            $.each($("#tbody-7_3 tr"), function (index, data) {
-                list7_3.push($(data).attr("id"));
-
-            });
-
-            alert(list7_3);
-
-            $.each($("#tbody-2 tr"), function (index, data) {
-                list2.push($(data).attr("id"));
-
-            });
-
-            alert(list2);
 
             $.each($("#tbody-10 tr"), function (index, data) {
                 list10.push($(data).attr("id"));
@@ -799,16 +701,126 @@
 
             alert(list1);
 
-            $.each($("#tbody-3 tr"), function (index, data) {
-                list3.push($(data).attr("id"));
-
-            });
-
-            alert(list3);
-
             alert(Nombre + " " + Argumento + " " + estado);
+
+            ajaxInsert7(Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
         }
 
+        function ajaxInsert7(id, name, argumen, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution)
+        {
+            $.ajax({
+                url: "WikiWeb/decision/insert",
+                data: {
+                    id: id,
+                    name: name,
+                    argumen: argumen,
+                    state: state,
+                    mayHaveConstraints: mayHaveConstraints,
+                    haveCriterias: haveCriterias,
+                    mayHaveAssumptions: mayHaveAssumptions,
+                    haveAsTriggerConcerns: haveAsTriggerConcerns,
+                    haveResponsibles: haveResponsibles,
+                    haveAlternatives: haveAlternatives,
+                    haveSolution: haveSolution
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto la alternativa");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo insertar la alternativa");
+            });
+        }
+
+        function ajaxSelectAll10(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/responsible/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll4(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/concern/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll6(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/criteria/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll13(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/assumption/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll11(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/constraint/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll12(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/solution/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll1(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/alternative/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
 
         return this;
     };

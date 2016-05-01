@@ -18,7 +18,6 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-            //Se crea la parte izquierda del formulario
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Descripción"))
@@ -34,44 +33,44 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión  que tiene relación con la Solución."))
-                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Decisión"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-7"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión  que tiene relación con la Solución."))
+//                            )
                     ;
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Decisión"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7"})
-                                                    )
-                                            )
-                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Decisión"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-7"})
+//                                                    )
+//                                            )
+//                                    )
                             )
                     ;
 
 
-            $.each(des, function (index, data) {
-                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
-            });
-
-            $("#slc-7").on("change", eventSelected);
+//            $.each(des, function (index, data) {
+//                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+//            });
+//
+//            $("#slc-7").on("change", eventSelected);
 
 
         }
-        //evento para llenar las tablas en atributos de calidad
+
         function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
@@ -97,10 +96,6 @@
             }
         }
 
-
-
-
-        //evento para remover de las tablas en las atributos de calidad
         function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
@@ -116,25 +111,42 @@
                 });
         }
 
-
-        //evento que guarda los datos de una atributo de calidad
         function eventsave() {
 
 
-            var Descripción = $("#txt-1-7").val();
-            var Fuente = $("#txt-2-7").val();
+            var description = $("#txt-1-7").val();
+            var source = $("#txt-2-7").val();
+//
+//            var list7 = [];
+//
+//
+//            $.each($("#tbody-7 tr"), function (index, data) {
+//                list7.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7);
 
-            var list7 = [];
+            alert(description + " " + source);
+            
+            ajaxInsert13(id, description, source)
+        }
 
-
-            $.each($("#tbody-7 tr"), function (index, data) {
-                list7.push($(data).attr("id"));
-
+        function ajaxInsert13(id, description, source)
+        {
+            $.ajax({
+                url: "WikiWeb/assumption/insert",
+                data: {
+                    id: id,
+                    description: description,
+                    source: source
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto la alternativa");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo insertar la alternativa");
             });
-
-            alert(list7);
-
-            alert(Descripción + " " + Fuente);
         }
 
 

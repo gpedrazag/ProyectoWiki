@@ -2,7 +2,6 @@
 
     $.fn.wikiCrearResponsable = function (des, id) {
 
-
         if (id === "c-10") {
 
             $("#left-row").empty();
@@ -18,7 +17,7 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -29,7 +28,7 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Decisión"))
@@ -57,16 +56,16 @@
                             )
                     ;
 
-
-            $.each(des, function (index, data) {
-                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+            ajaxSelectAll7(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+                });
             });
 
             $("#slc-7").on("change", eventSelected);
 
-
         }
-        //evento para llenar las tablas en atributos de calidad
+
         function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
@@ -92,10 +91,6 @@
             }
         }
 
-
-
-
-        //evento para remover de las tablas en las atributos de calidad
         function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
@@ -111,11 +106,9 @@
                 });
         }
 
-
-        //evento que guarda los datos de una atributo de calidad
         function eventsave() {
 
-            var Nombre = $("#txt-1-7").val();
+            var name = $("#txt-1-7").val();
 
             var list7 = [];
 
@@ -126,7 +119,40 @@
 
             alert(list7);
 
-            alert(Nombre);
+            alert(name);
+            var id = 0;
+
+            ajaxInsert10(id, name, list7);
+        }
+
+        function ajaxInsert10(id, name, decisions)
+        {
+            $.ajax({
+                url: "WikiWeb/responsible/insert",
+                data: {
+                    id: id,
+                    name: name,
+                    description: decisions
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto la alternativa");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo insertar la alternativa");
+            });
+        }
+
+        function ajaxSelectAll7(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/decision/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
 

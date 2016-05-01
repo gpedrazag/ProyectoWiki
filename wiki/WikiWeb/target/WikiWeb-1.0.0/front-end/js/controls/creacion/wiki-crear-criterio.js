@@ -60,7 +60,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -129,7 +129,7 @@
         function ajaxInsert6(id, keyword, description, linkedEvaluations)
         {
             $.ajax({
-                url: "WikiWeb/alternative/insert",
+                url: "WikiWeb/criteria/insert",
                 data: {
                     id: id,
                     keyword: keyword,
@@ -138,9 +138,9 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la alternativa");
+                alert("Incerto la criteria");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la alternativa");
+                alert("Error no se pudo insertar la criteria");
             });
         }
 

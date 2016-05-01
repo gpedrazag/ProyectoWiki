@@ -2,6 +2,7 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.ResponsibleTransaction;
@@ -15,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResponsibleController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name) {
+    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "decisions") List<String> decisions) {
         try {
-            ResponsibleTransaction.insert("responsible_" + id, name);
+            ResponsibleTransaction.insert("responsible_" + id, name, decisions);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name) {
+    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "decisions") List<String> decisions) {
         try {
-            ResponsibleTransaction.update("responsible_" + id, name);
+            ResponsibleTransaction.update("responsible_" + id, name, decisions);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,14 +42,13 @@ public class ResponsibleController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return ResponsibleTransaction.selectById("responsible_" + id);
-//    }
-//
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return ResponsibleTransaction.selectAll();
-//    }
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return ResponsibleTransaction.selectById("responsible_" + id);
+    }
 
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return ResponsibleTransaction.selectAll();
+    }
 }

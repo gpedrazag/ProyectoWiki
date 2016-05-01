@@ -17,7 +17,7 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-           
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -28,7 +28,7 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            
+
             $("#right-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Decisión"))
@@ -56,16 +56,16 @@
                             )
                     ;
 
-
-            $.each(des, function (index, data) {
-                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+            ajaxSelectAll7(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+                });
             });
 
             $("#slc-7").on("change", eventSelected);
 
-
         }
-       
+
         function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
@@ -108,7 +108,7 @@
 
         function eventsave() {
 
-            var Nombre = $("#txt-1-7").val();
+            var name = $("#txt-1-7").val();
 
             var list7 = [];
 
@@ -119,18 +119,20 @@
 
             alert(list7);
 
-            alert(Nombre);
+            alert(name);
+            var id = 0;
+
+            ajaxInsert10(id, name, list7);
         }
-        
-        function ajaxInsert10(id, name, description, evaluationId)
+
+        function ajaxInsert10(id, name, decisions)
         {
             $.ajax({
-                url: "WikiWeb/alternative/insert",
+                url: "WikiWeb/responsible/insert",
                 data: {
                     id: id,
                     name: name,
-                    description: description,
-                    evaluationId: evaluationId
+                    description: decisions
                 },
                 method: "POST"
             }).done(function () {
@@ -140,10 +142,10 @@
             });
         }
 
-        function ajaxSelectAll8(callback)
+        function ajaxSelectAll7(callback)
         {
             $.ajax({
-                url: "WikiWeb/evaluation/selectAll",
+                url: "WikiWeb/decision/selectAll",
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {

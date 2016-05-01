@@ -18,7 +18,7 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Justificación"))
@@ -29,64 +29,64 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Alternativa"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-1"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Alternativa  que tiene relación con la Solución."))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión  que tiene relación con la Solución."))
-                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Alternativa"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-1"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Alternativa  que tiene relación con la Solución."))
+//                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Decisión"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-7"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione la Decisión  que tiene relación con la Solución."))
+//                            )
                     ;
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-1"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Alternativa"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-1"})
-                                                    )
-                                            )
-                                    )
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Decisión"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7"})
-                                                    )
-                                            )
-                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-1"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Alternativa"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-1"})
+//                                                    )
+//                                            )
+//                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Decisión"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-7"})
+//                                                    )
+//                                            )
+//                                    )
                             )
                     ;
 
 
-            $.each(alt, function (index, data) {
-                $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
-            });
-
-            $.each(des, function (index, data) {
-                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
-            });
-
-            $("#slc-1").on("change", eventSelected);
-            $("#slc-7").on("change", eventSelected);
+//            $.each(alt, function (index, data) {
+//                $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
+//            });
+//
+//            $.each(des, function (index, data) {
+//                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+//            });
+//
+//            $("#slc-1").on("change", eventSelected);
+//            $("#slc-7").on("change", eventSelected);
 
 
         }
@@ -167,28 +167,47 @@
         function eventsave() {
 
 
-            var Justificación = $("#txt-1-7").val();
+            var rationale = $("#txt-1-7").val();
 
-            var list1 = [];
-            var list7 = [];
+//            var list1 = [];
+//            var list7 = [];
+//
+//            $.each($("#tbody-1 tr"), function (index, data) {
+//                list1.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list1);
+//
+//            $.each($("#tbody-7 tr"), function (index, data) {
+//                list7.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list7);
 
-            $.each($("#tbody-1 tr"), function (index, data) {
-                list1.push($(data).attr("id"));
+            alert(rationale);
 
-            });
+            var id = 0;
 
-            alert(list1);
-
-            $.each($("#tbody-7 tr"), function (index, data) {
-                list7.push($(data).attr("id"));
-
-            });
-
-            alert(list7);
-
-            alert(Justificación);
+            ajaxInsert12(id, rationale);
         }
 
+        function ajaxInsert12(id, rationale)
+        {
+            $.ajax({
+                url: "WikiWeb/solution/insert",
+                data: {
+                    id: id,
+                    rationale: rationale
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto la solution");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo insertar la solution");
+            });
+        }
 
         return this;
     };

@@ -18,7 +18,7 @@
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -50,38 +50,38 @@
                     ;
             //Se crea la parte derecha del formulario
             $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Asunto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-4"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Asunto que tiene relación con el Requerimiento Funcional."))
-                            )
+//                    .append($("<div>").addClass("form-group")
+//                            .append($("<label>").html("Asunto"))
+//                            .append($("<select>").addClass("form-control").attr({"id": "slc-4"})
+//                                    .append($("<option>").html("...").attr({"value": "0"}))
+//                                    )
+//                            .append($("<p>").addClass("help-block").html("Seleccione el Asunto que tiene relación con el Requerimiento Funcional."))
+//                            )
                     ;
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-4"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Asunto"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-4"})
-                                                    )
-                                            )
-                                    )
+//                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-4"})
+//                                    .append($("<table>").addClass("table table-hover")
+//                                            .append($("<thead>")
+//                                                    .append($("<tr>").addClass("active")
+//                                                            .append($("<th>").html("Asunto"))
+//                                                            .append($("<th>"))
+//                                                            )
+//                                                    )
+//                                            .append($("<tbody>").attr({"id": "tbody-4"})
+//                                                    )
+//                                            )
+//                                    )
                             )
                     ;
 
 
-            $.each(asu, function (index, data) {
-                $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
-            });
-
-            $("#slc-4").on("change", eventSelected);
+//            $.each(asu, function (index, data) {
+//                $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+//            });
+//
+//            $("#slc-4").on("change", eventSelected);
 
 
         }
@@ -134,23 +134,46 @@
         //evento que guarda los datos de una atributo de calidad
         function eventsave() {
 
-            var Nombre = $("#txt-1-7").val();
-            var Actor = $("#txt-2-7").val();
-            var Descripción = $("#txt-3-7").val();
-            var Entrada = $("#txt-4-7").val();
-            var salida = $("#txt-5-7").val();
-            var list4 = [];
+            var name = $("#txt-1-7").val();
+            var actor = $("#txt-2-7").val();
+            var description = $("#txt-3-7").val();
+            var input = $("#txt-4-7").val();
+            var output = $("#txt-5-7").val();
+//            var list4 = [];
 
-            $.each($("#tbody-4 tr"), function (index, data) {
-                list4.push($(data).attr("id"));
+//            $.each($("#tbody-4 tr"), function (index, data) {
+//                list4.push($(data).attr("id"));
+//
+//            });
+//
+//            alert(list4);
 
-            });
+            alert(id + name + actor + description + input + output);
 
-            alert(list4);
+            var id = 0;
 
-            alert(Nombre + " " + Actor + " " + Descripción + " " + Entrada + " " + salida);
+            ajaxInsert9(id, name, actor, description, input, output);
         }
 
+        function ajaxInsert9(id, name, actor, description, input, output)
+        {
+            $.ajax({
+                url: "WikiWeb/functionalRequeriment/insert",
+                data: {
+                    id: id,
+                    name: name,
+                    actor: actor,
+                    description: description,
+                    input: input,
+                    output: output
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto la functionalRequeriment");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo insertar la functionalRequeriment");
+            });
+        }
 
         return this;
     };
