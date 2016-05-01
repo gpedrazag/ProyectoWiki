@@ -89,20 +89,21 @@ public class FunctionalRequerimentTransaction
         }
     }
     
-    public static List<FunctionalRequeriment> selectFRByConcernId(String id, Repository repository)
+    public static List<FunctionalRequeriment> selectFRByConcernId(String id, RepositoryConnection connection)
     {
         List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -139,7 +140,7 @@ public class FunctionalRequerimentTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

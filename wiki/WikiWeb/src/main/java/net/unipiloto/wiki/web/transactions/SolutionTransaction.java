@@ -79,21 +79,21 @@ public class SolutionTransaction
         }
     }
     
-    public static Solution selectSolutionByDecisionId(String id, Repository repository)
+    public static Solution selectSolutionByDecisionId(String id, RepositoryConnection connection)
     {
         Solution solution = null;
-        
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -119,7 +119,7 @@ public class SolutionTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

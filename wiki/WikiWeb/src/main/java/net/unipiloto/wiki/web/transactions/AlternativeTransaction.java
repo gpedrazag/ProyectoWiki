@@ -84,6 +84,61 @@ public class AlternativeTransaction
         }
     }
     
+    public static List<Alternative> selectAllAlternativesByDecisionId(String id, RepositoryConnection connection)
+    {
+        List<Alternative> concerns = new ArrayList<Alternative>();
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description ?name WHERE {"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
+                +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#description> ?description . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name "
+                +"}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                concerns.add(
+                    new Alternative(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("description").stringValue()
+                ));
+            }
+            
+            if(concerns.isEmpty())
+            {
+                concerns = null;
+            }
+        }
+        finally
+        {
+            if(connection == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return concerns;
+    }
+    
     public static String selectById(String id) 
     {
         Alternative alternative = null;
@@ -110,7 +165,7 @@ public class AlternativeTransaction
                     bs.getValue("description").stringValue() 
                 );
             }
-            alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id, repo));
+            alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id, conn));
         }
         finally
         {
@@ -147,7 +202,7 @@ public class AlternativeTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = alternatives.size() - 1;
-                alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId(), repo));
+                alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId(), conn));
             }
         }
         finally
@@ -157,59 +212,5 @@ public class AlternativeTransaction
         }
         
         return JsonFactory.toJson(alternatives);
-    }
-    
-    public static List<Alternative> selectAllAlternativesByDecisionId(String id, Repository repository)
-    {
-        List<Alternative> concerns = new ArrayList<Alternative>();
-        Repository repo = null;
-        if(repository != null)
-        {
-            repo = repository;
-        }
-        else
-        {
-            repo = OntologyTools.getInstance();
-            repo.initialize();
-        }
-        RepositoryConnection conn = repo.getConnection();
-        try
-        {
-            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT ?id ?description ?name WHERE {"
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
-                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
-                +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#description> ?description . "
-                +"?d <http://www.semanticweb.org/sa#name> ?name "
-                +"}"
-            );
-            TupleQueryResult result = tq.evaluate();
-            while(result.hasNext())
-            {
-                BindingSet bs = result.next();
-                concerns.add(
-                    new Alternative(
-                    bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(), 
-                    bs.getValue("description").stringValue()
-                ));
-            }
-            
-            if(concerns.isEmpty())
-            {
-                concerns = null;
-            }
-        }
-        finally
-        {
-            if(repository == null)
-            {
-                conn.close();
-                
-            }
-        }
-        
-        return concerns;
     }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.Constraint;
 import net.unipiloto.wiki.web.tools.OntologyTools;
+import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
 import org.openrdf.model.vocabulary.OWL;
@@ -87,20 +88,21 @@ public class ConstraintTransaction
         }
     }
     
-    public static List<Constraint> selectAllConstraintByDecisionId(String id, Repository repository)
+    public static List<Constraint> selectAllConstraintByDecisionId(String id, RepositoryConnection connection)
     {
         List<Constraint> constraints = new ArrayList<Constraint>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -135,7 +137,7 @@ public class ConstraintTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 
@@ -143,5 +145,85 @@ public class ConstraintTransaction
         }
         
         return constraints;
+    }
+    
+    public static String selectById(String id) 
+    {
+        Constraint constraint = null;
+        Repository repo = OntologyTools.getInstance();;
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description ?name WHERE {\n"
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Constraint> . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#rationale> ?rationale . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#keyword> ?keyword "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                constraint = new Constraint(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(),
+                    bs.getValue("description").stringValue(),
+                    bs.getValue("rationale").stringValue(),
+                    bs.getValue("keyword").stringValue()
+                );
+            }
+        }
+        finally
+        {
+            conn.close();
+            
+        }
+        
+        return JsonFactory.toJson(constraint);
+    }
+    
+    public static String selectAll()
+    {
+        List<Constraint> constraints = new ArrayList<Constraint>();
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT ?id ?description ?name WHERE {\n"
+                +"?constraint <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Constraint> . "
+                +"?constraint <http://www.semanticweb.org/sa#id> ?id . "
+                +"?constraint <http://www.semanticweb.org/sa#name> ?name . "
+                +"?constraint <http://www.semanticweb.org/sa#description> ?description . "
+                +"?constraint <http://www.semanticweb.org/sa#rationale> ?rationale . "
+                +"?constraint <http://www.semanticweb.org/sa#keyword> ?keyword "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                BindingSet bs = result.next();
+                constraints.add(new Constraint(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(),
+                    bs.getValue("description").stringValue(),
+                    bs.getValue("rationale").stringValue(),
+                    bs.getValue("keyword").stringValue()
+                ));
+            }
+        }
+        finally
+        {
+            conn.close();
+            
+        }
+        
+        return JsonFactory.toJson(constraints);
     }
 }

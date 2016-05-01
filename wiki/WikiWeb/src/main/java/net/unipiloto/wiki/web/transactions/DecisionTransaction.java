@@ -110,7 +110,7 @@ public class DecisionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT ?id ?name ?arguments ?state WHERE {\n"
-                + "<http://www.semanticweb.org/sa#"+artifactId+">, <http://www.semanticweb.org/sa#artifactHave>, ?d . "
+                + "<http://www.semanticweb.org/sa#"+artifactId+"> <http://www.semanticweb.org/sa#artifactHave> ?d . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
@@ -149,21 +149,21 @@ public class DecisionTransaction
         return decisions;
     }
     
-    public static List<Decision> selectAllDecisionsBySoftwareArchitectureId(String id, Repository repository)
+    public static List<Decision> selectAllDecisionsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
         List<Decision> decisions = new ArrayList<Decision>();
-        
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -196,7 +196,7 @@ public class DecisionTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 
@@ -234,11 +234,11 @@ public class DecisionTransaction
                     bs.getValue("state").stringValue()
                 );
                 
-                decision.setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(id, repo));
-                decision.setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(id, repo));
-                decision.setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(id, repo));
-                decision.setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(id, repo));
-                decision.setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(id, repo));
+                decision.setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(id, conn));
+                decision.setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(id, conn));
+                decision.setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(id, conn));
+                decision.setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(id, conn));
+                decision.setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(id, conn));
             }
         }
         finally
@@ -279,11 +279,11 @@ public class DecisionTransaction
                 ));
                 int i = decisions.size() - 1;
                 
-                decisions.get(i).setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(decisions.get(i).getId(), repo));
-                decisions.get(i).setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(decisions.get(i).getId(), repo));
-                decisions.get(i).setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(decisions.get(i).getId(), repo));
-                decisions.get(i).setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(decisions.get(i).getId(), repo));
-                decisions.get(i).setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(decisions.get(i).getId(), repo));
+                decisions.get(i).setHaveAlternatives(AlternativeTransaction.selectAllAlternativesByDecisionId(decisions.get(i).getId(), conn));
+                decisions.get(i).setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(decisions.get(i).getId(), conn));
+                decisions.get(i).setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(decisions.get(i).getId(), conn));
+                decisions.get(i).setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(decisions.get(i).getId(), conn));
+                decisions.get(i).setHaveSolution(SolutionTransaction.selectSolutionByDecisionId(decisions.get(i).getId(), conn));
 
             }
         }

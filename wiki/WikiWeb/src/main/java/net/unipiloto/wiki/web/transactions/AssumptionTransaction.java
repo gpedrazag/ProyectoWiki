@@ -85,20 +85,21 @@ public class AssumptionTransaction
         }
     }
     
-    public static List<Assumption> selectAllAssumptionsByDecisionId(String id, Repository repository)
+    public static List<Assumption> selectAllAssumptionsByDecisionId(String id, RepositoryConnection connection)
     {
         List<Assumption> assumptions = new ArrayList<Assumption>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -129,7 +130,7 @@ public class AssumptionTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 

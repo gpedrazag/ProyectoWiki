@@ -83,20 +83,21 @@ public class ConcernTransaction
         }
     }
     
-    public static List<Concern> selectAllConcernsByDecisionId(String id, Repository repository)
+    public static List<Concern> selectAllConcernsByDecisionId(String id, RepositoryConnection connection)
     {
         List<Concern> concerns = new ArrayList<Concern>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -116,8 +117,8 @@ public class ConcernTransaction
                     bs.getValue("concern").stringValue()
                 ));
                 int i = concerns.size() - 1;
-                concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), repo));
-                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), repo));
+                concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), conn));
+                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), conn));
             }
             
             if(concerns.isEmpty())
@@ -127,7 +128,7 @@ public class ConcernTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 
@@ -160,8 +161,8 @@ public class ConcernTransaction
                     bs.getValue("id").stringValue(),
                     bs.getValue("concern").stringValue()
                 );
-                concern.setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(id, repo));
-                concern.setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(id, repo));
+                concern.setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(id, conn));
+                concern.setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(id, conn));
             }
         }
         finally
@@ -207,8 +208,8 @@ public class ConcernTransaction
                     bs.getValue("concern").stringValue()
                 ));
                 int i = concerns.size() - 1;
-                concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), repo));
-                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), repo));
+                concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), conn));
+                concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), conn));
             }
             
             if(concerns.isEmpty())

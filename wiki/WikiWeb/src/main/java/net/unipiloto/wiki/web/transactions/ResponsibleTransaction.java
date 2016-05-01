@@ -84,20 +84,21 @@ public class ResponsibleTransaction
         }
     }
     
-    public static List<Responsible> selectAllResponsiblesByDecisionId(String id, Repository repository)
+    public static List<Responsible> selectAllResponsiblesByDecisionId(String id, RepositoryConnection connection)
     {
         List<Responsible> responsibles = new ArrayList<Responsible>();
         Repository repo = null;
-        if(repository != null)
+        RepositoryConnection conn = null;
+        if(connection != null)
         {
-            repo = repository;
+            conn = connection;
         }
         else
         {
             repo = OntologyTools.getInstance();
             repo.initialize();
+            conn = repo.getConnection();
         }
-        RepositoryConnection conn = repo.getConnection();
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
@@ -126,7 +127,7 @@ public class ResponsibleTransaction
         }
         finally
         {
-            if(repository == null)
+            if(connection == null)
             {
                 conn.close();
                 
