@@ -88,12 +88,20 @@ public class DecisionTransaction
         }
     }
     
-    public static List<Decision> selectAllDecisionsByArtifactId(String artifactId)
+    public static List<Decision> selectAllDecisionsByArtifactId(String artifactId, Repository repository)
     {
         List<Decision> decisions = new ArrayList<Decision>();
         
-        Repository repo = OntologyTools.getInstance();
-        repo.initialize();
+        Repository repo = null;
+        if(repository != null)
+        {
+            repo = repository;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+        }
         RepositoryConnection conn = repo.getConnection();
         try
         {
@@ -128,8 +136,11 @@ public class DecisionTransaction
         }
         finally
         {
-            conn.close();
-            repo.shutDown();
+            if(repository == null)
+            {
+                conn.close();
+                repo.shutDown();
+            }
         }
         
         return decisions;
