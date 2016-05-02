@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarResponsable = function (resp, des, id) {
+    $.fn.wikiModificarResponsable = function (id) {
 
 
         if (id === "m-10") {

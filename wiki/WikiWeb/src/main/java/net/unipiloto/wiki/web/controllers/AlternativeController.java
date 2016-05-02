@@ -16,13 +16,11 @@ public class AlternativeController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "evaluationId") String evaluationId) {
         try {
             AlternativeTransaction.insert(
-                    "alternative_" + id,
                     name,
                     description,
                     evaluationId);

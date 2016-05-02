@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarSuposicion = function (supo, des, id) {
+    $.fn.wikiModificarSuposicion = function (id) {
 
 
         if (id === "m-13") {

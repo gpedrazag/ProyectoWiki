@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarAlternativa = function (eval_1, sol_1, foo, des_1, alt_1, des, sol, eval, id) {
+    $.fn.wikiModificarAlternativa = function (id) {
 
         if (id === "m-1") {
 
