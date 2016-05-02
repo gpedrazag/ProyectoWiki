@@ -79,7 +79,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -148,29 +148,9 @@
 
         function eventLoad() {
 
-//            <div class="modal fade" tabindex="-1" role="dialog">
-            //  <div class="modal-dialog">
-            //    <div class="modal-content">
-            //      <div class="modal-header">
-            //        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            //        <h4 class="modal-title">Modal title</h4>
-            //      </div>
-            //      <div class="modal-body">
-            //        <p>One fine body&hellip;</p>
-            //      </div>
-            //      <div class="modal-footer">
-            //        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            //        <button type="button" class="btn btn-primary">Save changes</button>
-            //      </div>
-            //    </div><!-- /.modal-content -->
-            //  </div><!-- /.modal-dialog -->
-            //</div><!-- /.modal -->
-
-
-
-
             var textOptionSelected = $('option:selected', this).html();
             var id = $('option:selected', this).attr("value");
+            $("#tbody-8 tr").empty();
 
             if (textOptionSelected === '...') {
                 $("#txt-1").val("");
@@ -194,55 +174,37 @@
                         if (data.id == id) {
                             $("#txt-1").val(data.name);
                             $("#txt-area-1").val(data.description);
-                        }
 
-                        $("<div>").addClass("modal fade").attr({"id":"myModal","role": "dialog"})
-                                .append($("<div>").addClass("modal-dialog")
-                                        .append($("<div>").addClass("modal-content")
-                                                .append($("<div>").addClass("modal-body")
-                                                        .append($("<div>").addClass("form-group")
-                                                                .append($("<label>").html("Nombre"))
-                                                                .append($("<input>").addClass("form-control").attr({"id": "txt-1"}).html(data.name))
-                                                                )
-                                                        .append($("<div>").addClass("form-group")
-                                                                .append($("<label>").html("Descripción"))
-                                                                .append($("<textarea>").addClass("form-control").attr({"id": "txt-area-1"}).html(data.description))
+                            if (data.haveEvaluation !== undefined) {
+                                //alert(data.haveEvaluation.id);
+
+                                $("#tbody-8")
+                                        .append($("<tr>").attr({"id": data.haveEvaluation.id, "value": "8"})
+                                                .append($("<td>").html(data.haveEvaluation.id).attr({"width": "80%"}))
+                                                .append($("<td>")
+                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
                                                                 )
                                                         )
-                                                .append($("<div>").addClass("modal-footer")
-                                                        .append($("<button>").addClass("btn btn-default").attr({"type": "button", "data-dismiss": "modal"}).html("Cerrar"))
-                                                        .append($("<button>").addClass("btn btn-primary").attr({"type": "button", "data-dismiss": "modal"}).html("Aceptar"))
-                                                        )
-                                                )
-                                        );
-                        $('#myModal').modal();
-//                        $.each(data.evaluaciones, function (index, data) {
-//
-//                            $("#tbody-8")
-//                                    .append($("<tr>").attr({"id": data.id, "value": "8"})
-//                                            .append($("<td>").html(data.name).attr({"width": "80%"}))
-//                                            .append($("<td>")
-//                                                    .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-//                                                            .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-//                                                            )
-//                                                    )
-//                                            );
-//
-//                        });
+                                                );
+                               // $("#tbody-8").empty();
+                                $("#tbody-8 tr").each(function (index, data) {
+
+                                    $("#slc-8 option").each(function (index, data1) {
+                                        if ($(data).attr("id") === $(data1).attr("value")) {
+                                            $(data1).addClass("hidden");
+                                        }
+                                    });
+
+
+                                });
+                            }
+                        }
                     });
                 });
 
 
-                $("#tbody-8 tr").each(function (index, data) {
 
-                    $("#slc-8 option").each(function (index, data1) {
-                        if ($(data).attr("id") === $(data1).attr("value")) {
-                            $(data1).addClass("hidden");
-                        }
-                    });
-
-
-                });
 
             }
         }
