@@ -177,8 +177,8 @@
         }
 
         function eventsave(event) {
-                 event.preventDefault();
-            
+            event.preventDefault();
+
             var name = $("#txt-2").val();
             var description = $("#txt-area-2").val();
             var list3 = [];
@@ -201,17 +201,14 @@
 
             alert(name + " " + description);
 
-            var id = 0;
-
-            ajaxInsert2(id, name, description, list3, list7);
+            ajaxInsert2(name, description, list3, list7);
         }
 
-        function ajaxInsert2(id, name, description, relatedArtifacts, decisionsRelated)
+        function ajaxInsert2(name, description, relatedArtifacts, decisionsRelated)
         {
             $.ajax({
                 url: "WikiWeb/SoftwareArchitecture/insert",
                 data: {
-                    id: id,
                     name: name,
                     description: description,
                     relatedArtifacts: relatedArtifacts,

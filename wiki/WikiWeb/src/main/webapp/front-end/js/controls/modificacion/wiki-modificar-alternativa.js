@@ -92,19 +92,6 @@
 
         function eventSelected() {
 
-
-            $("#dialogo").dialog({
-                autoOpen: true, // no abrir automáticamente
-                resizable: true, //permite cambiar el tamaño
-                height: 220, // altura
-                modal: true, //capa principal, fondo opaco
-                buttons: {//crear botón de cerrar
-                    "Cerrar": function () {
-                        $(this).dialog("close");
-                    }
-                }
-            });
-            
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
@@ -161,6 +148,27 @@
 
         function eventLoad() {
 
+//            <div class="modal fade" tabindex="-1" role="dialog">
+            //  <div class="modal-dialog">
+            //    <div class="modal-content">
+            //      <div class="modal-header">
+            //        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            //        <h4 class="modal-title">Modal title</h4>
+            //      </div>
+            //      <div class="modal-body">
+            //        <p>One fine body&hellip;</p>
+            //      </div>
+            //      <div class="modal-footer">
+            //        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            //        <button type="button" class="btn btn-primary">Save changes</button>
+            //      </div>
+            //    </div><!-- /.modal-content -->
+            //  </div><!-- /.modal-dialog -->
+            //</div><!-- /.modal -->
+
+
+
+
             var textOptionSelected = $('option:selected', this).html();
             var id = $('option:selected', this).attr("value");
 
@@ -188,7 +196,26 @@
                             $("#txt-area-1").val(data.description);
                         }
 
-
+                        $("<div>").addClass("modal fade").attr({"id":"myModal","role": "dialog"})
+                                .append($("<div>").addClass("modal-dialog")
+                                        .append($("<div>").addClass("modal-content")
+                                                .append($("<div>").addClass("modal-body")
+                                                        .append($("<div>").addClass("form-group")
+                                                                .append($("<label>").html("Nombre"))
+                                                                .append($("<input>").addClass("form-control").attr({"id": "txt-1"}).html(data.name))
+                                                                )
+                                                        .append($("<div>").addClass("form-group")
+                                                                .append($("<label>").html("Descripción"))
+                                                                .append($("<textarea>").addClass("form-control").attr({"id": "txt-area-1"}).html(data.description))
+                                                                )
+                                                        )
+                                                .append($("<div>").addClass("modal-footer")
+                                                        .append($("<button>").addClass("btn btn-default").attr({"type": "button", "data-dismiss": "modal"}).html("Cerrar"))
+                                                        .append($("<button>").addClass("btn btn-primary").attr({"type": "button", "data-dismiss": "modal"}).html("Aceptar"))
+                                                        )
+                                                )
+                                        );
+                        $('#myModal').modal();
 //                        $.each(data.evaluaciones, function (index, data) {
 //
 //                            $("#tbody-8")

@@ -129,15 +129,14 @@
 
             alert(description + " " + source);
 
-            ajaxInsert13(id, description, source)
+            ajaxInsert13(description, source);
         }
 
-        function ajaxInsert13(id, description, source)
+        function ajaxInsert13(description, source)
         {
             $.ajax({
                 url: "WikiWeb/assumption/insert",
                 data: {
-                    id: id,
                     description: description,
                     source: source
                 },

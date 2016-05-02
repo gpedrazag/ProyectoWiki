@@ -170,7 +170,7 @@
 
 //evento que guarda los datos de una atributo de calidad
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var pros = $("#txt-1-7").val();
             var cons = $("#txt-2-7").val();
             var valoration = $("#txt-3-7").val();
@@ -185,18 +185,16 @@
 //            });
 //            alert(list6);
             alert(pros + " " + cons + " " + valoration);
-            
-            var id = 0;
-            
-            ajaxInsert8(id, pros, cons, valoration);
+
+
+            ajaxInsert8(pros, cons, valoration);
         }
 
-        function ajaxInsert8(id, pros, cons, valoration)
+        function ajaxInsert8(pros, cons, valoration)
         {
             $.ajax({
                 url: "WikiWeb/evaluation/insert",
                 data: {
-                    id: id,
                     pros: pros,
                     cons: cons,
                     valoration: valoration

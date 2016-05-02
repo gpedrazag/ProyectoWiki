@@ -107,7 +107,7 @@
         }
 
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var name = $("#txt-1-7").val();
 
             var list7 = [];
@@ -120,17 +120,15 @@
             alert(list7);
 
             alert(name);
-            var id = 0;
 
-            ajaxInsert10(id, name, list7);
+            ajaxInsert10(name, list7);
         }
 
-        function ajaxInsert10(id, name, decisions)
+        function ajaxInsert10(name, decisions)
         {
             $.ajax({
                 url: "WikiWeb/responsible/insert",
                 data: {
-                    id: id,
                     name: name,
                     description: decisions
                 },

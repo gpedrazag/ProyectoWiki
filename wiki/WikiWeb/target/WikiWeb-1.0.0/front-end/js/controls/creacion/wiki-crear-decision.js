@@ -706,12 +706,11 @@
             ajaxInsert7(Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
         }
 
-        function ajaxInsert7(id, name, argumen, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution)
+        function ajaxInsert7(name, argumen, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution)
         {
             $.ajax({
                 url: "WikiWeb/decision/insert",
                 data: {
-                    id: id,
                     name: name,
                     argumen: argumen,
                     state: state,

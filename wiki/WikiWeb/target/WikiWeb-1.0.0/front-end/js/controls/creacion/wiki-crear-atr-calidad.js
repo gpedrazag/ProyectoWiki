@@ -123,7 +123,7 @@
         }
 
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var actor = $("#txt-1-5").val();
             var ambiente = $("#txt-2-5").val();
             var medida = $("#txt-3-5").val();
@@ -145,12 +145,11 @@
         }
 
 
-        function ajaxInsert5(id, actor, enviroment, measure, boost, boostSource, triggerArtifacts)
+        function ajaxInsert5(actor, enviroment, measure, boost, boostSource, triggerArtifacts)
         {
             $.ajax({
                 url: "WikiWeb/qualityAttribute/insert",
                 data: {
-                    id: id,
                     actor: actor,
                     enviroment: enviroment,
                     measure: measure,

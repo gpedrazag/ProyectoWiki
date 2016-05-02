@@ -62,7 +62,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
