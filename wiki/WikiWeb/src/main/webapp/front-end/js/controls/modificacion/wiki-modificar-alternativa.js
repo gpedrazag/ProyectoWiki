@@ -71,7 +71,7 @@
                             );
 
             ajaxSelectAll1(function (data) {
-                
+
                 $.each(data, function (index, data) {
                     $("#slc-1-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
                 });
@@ -92,6 +92,19 @@
 
         function eventSelected() {
 
+
+            $("#dialogo").dialog({
+                autoOpen: true, // no abrir automáticamente
+                resizable: true, //permite cambiar el tamaño
+                height: 220, // altura
+                modal: true, //capa principal, fondo opaco
+                buttons: {//crear botón de cerrar
+                    "Cerrar": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+            
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
@@ -149,6 +162,7 @@
         function eventLoad() {
 
             var textOptionSelected = $('option:selected', this).html();
+            var id = $('option:selected', this).attr("value");
 
             if (textOptionSelected === '...') {
                 $("#txt-1").val("");
@@ -166,25 +180,31 @@
                 $("#tbody-8").empty();
             } else {
 
-                $.each(foo, function (index, data) {
+                ajaxSelectAll1(function (data) {
+                    $.each(data, function (index, data) {
 
-                    $("#txt-1").val(data.id);
-                    $("#txt-area-1").val(data.name);
+                        if (data.id == id) {
+                            $("#txt-1").val(data.name);
+                            $("#txt-area-1").val(data.description);
+                        }
 
-                    $.each(data.evaluaciones, function (index, data) {
 
-                        $("#tbody-8")
-                                .append($("<tr>").attr({"id": data.id, "value": "8"})
-                                        .append($("<td>").html(data.name).attr({"width": "80%"}))
-                                        .append($("<td>")
-                                                .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove1)
-                                                        .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                        )
-                                                )
-                                        );
-
+//                        $.each(data.evaluaciones, function (index, data) {
+//
+//                            $("#tbody-8")
+//                                    .append($("<tr>").attr({"id": data.id, "value": "8"})
+//                                            .append($("<td>").html(data.name).attr({"width": "80%"}))
+//                                            .append($("<td>")
+//                                                    .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+//                                                            .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+//                                                            )
+//                                                    )
+//                                            );
+//
+//                        });
                     });
                 });
+
 
                 $("#tbody-8 tr").each(function (index, data) {
 

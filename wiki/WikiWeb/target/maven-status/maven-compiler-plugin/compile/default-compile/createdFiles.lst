@@ -20,6 +20,7 @@ net\unipiloto\wiki\web\controllers\SolutionController.class
 net\unipiloto\wiki\web\transactions\ConcernTransaction.class
 net\unipiloto\wiki\web\transactions\CriteriaTransaction.class
 net\unipiloto\wiki\web\entities\FunctionalRequeriment.class
+net\unipiloto\wiki\web\transactions\AlternativeTransaction$1.class
 net\unipiloto\wiki\web\transactions\QualityAttributeTransaction.class
 net\unipiloto\wiki\web\entities\Artifact.class
 net\unipiloto\wiki\web\tools\OntologyTools.class
