@@ -112,9 +112,9 @@
         }
 
         function eventsave(event) {
-            
-             event.preventDefault();
-            
+
+            event.preventDefault();
+
             var name = $("#txt-1").val();
             var description = $("#txt-area-1").val();
 
@@ -129,17 +129,14 @@
 
             alert(name + " " + description);
 
-            var id = 0;
-
-            ajaxInsert1(id, name, description, list8);
+            ajaxInsert1(name, description, list8);
         }
 
-        function ajaxInsert1(id, name, description, evaluationId)
+        function ajaxInsert1(name, description, evaluationId)
         {
             $.ajax({
                 url: "WikiWeb/alternative/insert",
                 data: {
-                    id: id,
                     name: name,
                     description: description,
                     evaluationId: evaluationId
