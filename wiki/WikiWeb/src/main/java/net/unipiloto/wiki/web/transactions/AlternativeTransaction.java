@@ -32,7 +32,7 @@ public class AlternativeTransaction
             String id = "";
             if(ids != null)
             {
-                 id = "alternative_"+ids.get(ids.size()-1)+1;
+                 id = "alternative_"+(ids.get(0)+1);
             }
             else
             {
@@ -232,49 +232,40 @@ public class AlternativeTransaction
     private static List<Integer> selectAllIds(RepositoryConnection conn)
     {
         List<Integer> ids = new ArrayList<Integer>();
-        try
+        TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+            "SELECT DISTINCT ?id WHERE {\n"
+            + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
+            + "?alternative <http://www.semanticweb.org/sa#id> ?id "
+            + "}"
+        );
+        TupleQueryResult result = tq.evaluate();
+        while(result.hasNext())
         {
-            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id WHERE {\n"
-                + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
-                + "?alternative <http://www.semanticweb.org/sa#id> ?id "
-                + "}"
-            );
-            TupleQueryResult result = tq.evaluate();
-            while(result.hasNext())
-            {
-                BindingSet bs = result.next();
-                ids.add(Integer.parseInt(bs.getValue("id").stringValue()));
-            }
-            if(ids.isEmpty())
-            {
-                ids = null;
-            }
-            else
-            {
-                ids.sort(new Comparator<Integer>() {
-                    @Override
-                    public int compare(Integer t, Integer t1)
+            BindingSet bs = result.next();
+            ids.add(Integer.parseInt(bs.getValue("id").stringValue().split("_")[1]));
+        }
+        if(ids.isEmpty())
+        {
+            ids = null;
+        }
+        else
+        {
+            ids.sort(new Comparator<Integer>() {
+                @Override
+                public int compare(Integer t, Integer t1)
+                {
+                    if(t1 > t)
                     {
-                        if(t1 > t)
-                        {
-                            return 1;
-                        }
-                        else if (t1 < t)
-                        {
-                            return -1;
-                        }
-                        return 0;
+                        return 1;
                     }
-                });
-            }
+                    else if (t1 < t)
+                    {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
         }
-        finally
-        {
-            conn.close();
-            
-        }
-        
         return ids;
     }
 }
