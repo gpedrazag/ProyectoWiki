@@ -169,8 +169,8 @@
 
 
 //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var pros = $("#txt-1-7").val();
             var cons = $("#txt-2-7").val();
             var valoration = $("#txt-3-7").val();

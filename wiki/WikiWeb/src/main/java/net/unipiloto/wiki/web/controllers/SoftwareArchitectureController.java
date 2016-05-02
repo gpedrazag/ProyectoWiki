@@ -62,13 +62,13 @@ public class SoftwareArchitectureController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return SoftwareArchitectureTransaction.selectById("artifact_" + id);
-//    }
-//
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return SoftwareArchitectureTransaction.selectAll();
-//    }
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return SoftwareArchitectureTransaction.selectById("artifact_" + id);
+    }
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return SoftwareArchitectureTransaction.selectAll();
+    }
 }

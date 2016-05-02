@@ -132,8 +132,8 @@
 
 
         //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var name = $("#txt-1-7").val();
             var actor = $("#txt-2-7").val();
             var description = $("#txt-3-7").val();

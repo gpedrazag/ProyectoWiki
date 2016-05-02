@@ -122,8 +122,8 @@
             });
         }
 
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var actor = $("#txt-1-5").val();
             var ambiente = $("#txt-2-5").val();
             var medida = $("#txt-3-5").val();

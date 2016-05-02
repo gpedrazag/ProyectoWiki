@@ -167,8 +167,8 @@
         }
 
         //evento que guarda los datos de una alternativa
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var asunto = $("#txt-4").val();
             var list5 = [];
             var list9 = [];

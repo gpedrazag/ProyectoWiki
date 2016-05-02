@@ -107,8 +107,8 @@
                 });
         }
 
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var PalabraClave = $("#txt-1-6").val();
             var Descripcion = $("#txt-2-6").val();
             var list8 = [];

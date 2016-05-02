@@ -25,7 +25,7 @@
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Alternativa que que va a modificar."))
                             );
-            
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -40,7 +40,7 @@
                     .append($("<button>").attr({"id": "btn-1"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            
+
             $("#right-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Evaluación"))
@@ -71,6 +71,7 @@
                             );
 
             ajaxSelectAll1(function (data) {
+                
                 $.each(data, function (index, data) {
                     $("#slc-1-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
                 });
@@ -88,13 +89,13 @@
             $("#slc-8").on("change", eventSelected);
         }
 
-       
+
         function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
-                       
+
             if (idClassOptionSelected === "8") {
 
                 $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
@@ -112,7 +113,7 @@
             }
 
         }
-        
+
         function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
@@ -129,7 +130,7 @@
             }
 
         }
-        
+
         function eventsave() {
 
             var name = $("#txt-1").val();
@@ -161,7 +162,7 @@
                         }
                     });
                 });
-               
+
                 $("#tbody-8").empty();
             } else {
 

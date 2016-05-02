@@ -111,8 +111,10 @@
 
         }
 
-        function eventsave() {
-
+        function eventsave(event) {
+            
+             event.preventDefault();
+            
             var name = $("#txt-1").val();
             var description = $("#txt-area-1").val();
 

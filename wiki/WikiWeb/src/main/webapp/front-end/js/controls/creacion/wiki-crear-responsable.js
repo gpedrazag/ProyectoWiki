@@ -106,8 +106,8 @@
                 });
         }
 
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
             var name = $("#txt-1-7").val();
 
             var list7 = [];

@@ -99,7 +99,7 @@
 
         }
 
-                function eventRemove() {
+        function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
             var idClass = $(this).parent().parent().attr("value");
@@ -134,7 +134,7 @@
             var idOptionSelected = $('option:selected', this).attr("value");
 
 
-          
+
             if (idClassOptionSelected === "3") {
 
                 $("#slc-3 option[value=" + 0 + "]").attr("selected", false);
@@ -176,8 +176,9 @@
             }
         }
 
-        function eventsave() {
-
+        function eventsave(event) {
+                 event.preventDefault();
+            
             var name = $("#txt-2").val();
             var description = $("#txt-area-2").val();
             var list3 = [];

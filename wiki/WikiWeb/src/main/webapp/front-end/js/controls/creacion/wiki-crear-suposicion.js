@@ -111,9 +111,9 @@
                 });
         }
 
-        function eventsave() {
+        function eventsave(event) {
 
-
+            event.preventDefault();
             var description = $("#txt-1-7").val();
             var source = $("#txt-2-7").val();
 //
@@ -128,7 +128,7 @@
 //            alert(list7);
 
             alert(description + " " + source);
-            
+
             ajaxInsert13(id, description, source)
         }
 

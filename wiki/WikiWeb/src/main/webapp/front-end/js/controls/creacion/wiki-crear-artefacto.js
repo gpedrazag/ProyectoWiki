@@ -1,6 +1,6 @@
-6(function ($) {
+(function ($) {
 
-    $.fn.wikiCrearArtefacto = function (atrical, arqsoft, des, id) {
+    $.fn.wikiCrearArtefacto = function (id) {
 
         if (id === "c-3") {
 
@@ -100,7 +100,7 @@
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
             var idClass = $(this).parent().parent().attr("value");
-           
+
             if (idClass === "7") {
                 $("#slc-7 option").each(function () {
 
@@ -112,7 +112,7 @@
             }
 
         }
-        
+
         function eventsave(event) {
 
             event.preventDefault();

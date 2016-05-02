@@ -164,8 +164,8 @@
 
 
         //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
+        function eventsave(event) {
+             event.preventDefault();
 
             var rationale = $("#txt-1-7").val();
 

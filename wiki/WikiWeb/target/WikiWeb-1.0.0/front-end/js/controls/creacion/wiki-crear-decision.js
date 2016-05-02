@@ -614,8 +614,8 @@
 
 
         //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
+        function eventsave(event) {
+            event.preventDefault();
             var Nombre = $("#txt-1-7").val();
             var Argumento = $("#txt-2-7").val();
             var estado = $("#txt-3-7").val();

@@ -17,7 +17,7 @@ public class ConstraintController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description, @RequestParam(value = "rationale") String rationale, @RequestParam(value = "keyword") String keyword) {
         try {
-            ConstraintTransaction.insert("constraint_" + id, name, description, rationale,keyword);
+            ConstraintTransaction.insert("constraint_" + id, name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -26,7 +26,7 @@ public class ConstraintController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description, @RequestParam(value = "rationale") String rationale, @RequestParam(value = "keyword") String keyword) {
         try {
-            ConstraintTransaction.update("constraint_" + id, name, description, rationale,keyword);
+            ConstraintTransaction.update("constraint_" + id, name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,13 +41,13 @@ public class ConstraintController {
         }
     }
 
-//    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
-//    public String selectById(@RequestParam(value = "id") String id) {
-//        return ConstraintTransaction.selectById("constraint_" + id);
-//    }
-//
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return ConstraintTransaction.selectAll());
-//    }
+    @RequestMapping(value = "/selectById", method = RequestMethod.POST)
+    public String selectById(@RequestParam(value = "id") String id) {
+        return ConstraintTransaction.selectById("constraint_" + id);
+    }
+
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return ConstraintTransaction.selectAll();
+    }
 }

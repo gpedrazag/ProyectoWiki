@@ -46,9 +46,9 @@ public class EvaluationController {
         return EvaluationTransaction.selectById("artifact_" + id);
     }
 
-//    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
-//    public String selectAll() {
-//        return AlternativeTransaction.selectAll();
-//    }
+    @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
+    public String selectAll() {
+        return EvaluationTransaction.selectAll();
+    }
 
 }
