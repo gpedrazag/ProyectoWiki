@@ -3,6 +3,7 @@ package net.unipiloto.wiki.web.transactions;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.Decision;
 import net.unipiloto.wiki.web.tools.OntologyTools;
@@ -21,7 +22,6 @@ import org.openrdf.repository.RepositoryConnection;
 public class DecisionTransaction
 {
     public static void insert(
-        String id, 
         String name, 
         String arguments, 
         String state,
@@ -35,82 +35,88 @@ public class DecisionTransaction
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
-        ValueFactory factory = repo.getValueFactory();
-        
-        if(selectById(id) == null)
+            
+        RepositoryConnection conn = repo.getConnection();
+        try
         {
+            List<Integer> ids = selectAllIds(conn);
+            String id = "";
+            if(ids != null)
+            {
+                id = "decision_"+(ids.get(0)+1);
+            }
+            else
+            {
+                id = "decision_1";
+            }
+            ValueFactory factory = repo.getValueFactory();
             IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
             IRI object = factory.createIRI("http://www.semanticweb.org/sa#Decision");
-            RepositoryConnection conn = repo.getConnection();
-            try
+            conn.begin();
+            conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
+            conn.add(subject, RDF.TYPE, object);
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#arguments"), factory.createLiteral(arguments));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#state"), factory.createLiteral(state));
+            if(mayHaveConstraints != null)
             {
-                conn.begin();
-                conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
-                conn.add(subject, RDF.TYPE, object);
-                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
-                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
-                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#arguments"), factory.createLiteral(arguments));
-                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#state"), factory.createLiteral(state));
-                if(mayHaveConstraints != null)
+                for(String s : mayHaveConstraints)
                 {
-                    for(String s : mayHaveConstraints)
-                    {
-                        conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
-                    }
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
                 }
-                if(haveCriterias != null)
-                {
-                    for(String s : haveCriterias)
-                    {
-                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
-                    }
-                }
-                if(mayHaveAssumptions != null)
-                {
-                    for(String s : mayHaveAssumptions)
-                    {
-                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
-                    }
-                }
-                if(haveAsTriggerConcerns != null)
-                {
-                    for(String s : haveAsTriggerConcerns)
-                    {
-                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#havaAsTrigger"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
-                    }
-                }
-                if(haveResponsibles != null)
-                {
-                    for(String s : haveResponsibles)
-                    {
-                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
-                    }
-                }
-                if(haveAlternatives != null)
-                {
-                    for(String s : haveAlternatives)
-                    {
-                       conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
-                    }
-                }
-                
-                if(!haveSolution.equals(""))
-                {
-                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+haveSolution));  
-                }
-                conn.commit();
             }
-            catch(Exception ex)
+            if(haveCriterias != null)
             {
-                conn.rollback();
+                for(String s : haveCriterias)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
+                }
             }
-            finally
+            if(mayHaveAssumptions != null)
             {
-                conn.close();
-                
+                for(String s : mayHaveAssumptions)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionMayHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
+                }
             }
+            if(haveAsTriggerConcerns != null)
+            {
+                for(String s : haveAsTriggerConcerns)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#havaAsTrigger"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
+                }
+            }
+            if(haveResponsibles != null)
+            {
+                for(String s : haveResponsibles)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s)); 
+                }
+            }
+            if(haveAlternatives != null)
+            {
+                for(String s : haveAlternatives)
+                {
+                   conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+s));  
+                }
+            }
+
+            if(!haveSolution.equals(""))
+            {
+                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#decisionHave"), factory.createIRI("http://www.semanticweb.org/sa#"+haveSolution));  
+            }
+            conn.commit();
         }
-        
+        catch(Exception ex)
+        {
+            conn.rollback();
+        }
+        finally
+        {
+            conn.close();
+
+        }
     }
     
     public static void update(
@@ -126,7 +132,7 @@ public class DecisionTransaction
         String haveSolution) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(id, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
+        insert(name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -365,5 +371,45 @@ public class DecisionTransaction
         }
         
         return JsonFactory.toJson(decisions);
+    }
+    
+    private static List<Integer> selectAllIds(RepositoryConnection conn)
+    {
+        List<Integer> ids = new ArrayList<Integer>();
+        TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+            "SELECT DISTINCT ?id WHERE {\n"
+            + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
+            + "?alternative <http://www.semanticweb.org/sa#id> ?id "
+            + "}"
+        );
+        TupleQueryResult result = tq.evaluate();
+        while(result.hasNext())
+        {
+            BindingSet bs = result.next();
+            ids.add(Integer.parseInt(bs.getValue("id").stringValue().split("_")[1]));
+        }
+        if(ids.isEmpty())
+        {
+            ids = null;
+        }
+        else
+        {
+            ids.sort(new Comparator<Integer>() {
+                @Override
+                public int compare(Integer t, Integer t1)
+                {
+                    if(t1 > t)
+                    {
+                        return 1;
+                    }
+                    else if (t1 < t)
+                    {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+        }
+        return ids;
     }
 }
