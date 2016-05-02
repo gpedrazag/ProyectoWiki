@@ -248,9 +248,9 @@ public class EvaluationTransaction
                 "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Evaluation> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#description> ?pros . "
-                +"?d <http://www.semanticweb.org/sa#name> ?cons . "
-                +"?d <http://www.semanticweb.org/sa#name> ?valoration "
+                +"?d <http://www.semanticweb.org/sa#pros> ?pros . "
+                +"?d <http://www.semanticweb.org/sa#cons> ?cons . "
+                +"?d <http://www.semanticweb.org/sa#valoration> ?valoration "
                 +"}"
             );
             TupleQueryResult result = tq.evaluate();
