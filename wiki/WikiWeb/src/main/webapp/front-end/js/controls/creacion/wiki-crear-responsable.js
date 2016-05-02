@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearResponsable = function (des, id) {
+    $.fn.wikiCrearResponsable = function (id) {
 
         if (id === "c-10") {
 

@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearEvaluacion = function (alt, cri, id) {
+    $.fn.wikiCrearEvaluacion = function (id) {
 
 
         if (id === "c-8") {

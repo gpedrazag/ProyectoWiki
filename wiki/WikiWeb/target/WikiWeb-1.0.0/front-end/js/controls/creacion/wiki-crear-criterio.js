@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearCriterio = function (des, eval, id) {
+    $.fn.wikiCrearCriterio = function (id) {
 
         if (id === "c-6") {
 

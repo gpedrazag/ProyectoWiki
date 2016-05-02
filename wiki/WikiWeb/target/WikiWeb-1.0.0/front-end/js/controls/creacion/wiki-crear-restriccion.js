@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearRestriccion = function (des, id) {
+    $.fn.wikiCrearRestriccion = function (id) {
 
 
         if (id === "c-11") {

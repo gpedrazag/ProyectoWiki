@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearSolucion = function (alt, des, id) {
+    $.fn.wikiCrearSolucion = function (id) {
 
 
         if (id === "c-12") {

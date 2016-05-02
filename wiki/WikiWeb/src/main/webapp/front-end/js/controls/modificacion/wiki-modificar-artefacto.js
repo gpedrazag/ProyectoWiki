@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarArtefacto = function (art, atrical, arqsoft, des, id) {
+    $.fn.wikiModificarArtefacto = function (id) {
 
         if (id === "m-3") {
 

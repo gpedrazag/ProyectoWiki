@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearAtrCalidad = function (art, asu, id) {
+    $.fn.wikiCrearAtrCalidad = function (id) {
 
         if (id === "c-5") {
 

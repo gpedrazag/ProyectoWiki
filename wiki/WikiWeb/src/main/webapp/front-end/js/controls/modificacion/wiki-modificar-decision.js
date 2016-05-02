@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarDecision = function (des, arqsoft, resp, asu, cri, supo, rest, sol, alt, art, id) {
+    $.fn.wikiModificarDecision = function (id) {
 
 
         if (id === "m-7") {

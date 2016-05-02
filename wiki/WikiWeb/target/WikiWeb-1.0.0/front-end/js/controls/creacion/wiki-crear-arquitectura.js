@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearArquitectura = function (art, des, id) {
+    $.fn.wikiCrearArquitectura = function (id) {
 
         if (id === "c-2") {
 

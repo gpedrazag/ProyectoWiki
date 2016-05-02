@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearRequerimientoFuncional = function (asu, id) {
+    $.fn.wikiCrearRequerimientoFuncional = function (id) {
 
 
         if (id === "c-9") {

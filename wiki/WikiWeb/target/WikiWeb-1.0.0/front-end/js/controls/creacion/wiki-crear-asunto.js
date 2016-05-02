@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearAsunto = function (des, atrical, reffunc, id) {
+    $.fn.wikiCrearAsunto = function (id) {
 
         if (id === "c-4") {
 

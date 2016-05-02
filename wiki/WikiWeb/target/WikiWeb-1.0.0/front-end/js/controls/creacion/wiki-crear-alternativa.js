@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiCrearAlternativa = function (des, sol, eval, id) {
+    $.fn.wikiCrearAlternativa = function (id) {
 
         if (id === "c-1") {
 

@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarRestriccion = function (rest, des, id) {
+    $.fn.wikiModificarRestriccion = function (id) {
 
 
         if (id === "m-11") {

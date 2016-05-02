@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarArquitectura = function (arqsoft,art, des, id) {
+    $.fn.wikiModificarArquitectura = function (id) {
 
         //Si es  1 es Arquitectura de software
         if (id === "m-2") {
