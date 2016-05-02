@@ -133,7 +133,7 @@
 
         //evento que guarda los datos de una atributo de calidad
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var name = $("#txt-1-7").val();
             var actor = $("#txt-2-7").val();
             var description = $("#txt-3-7").val();
@@ -150,17 +150,14 @@
 
             alert(id + name + actor + description + input + output);
 
-            var id = 0;
-
-            ajaxInsert9(id, name, actor, description, input, output);
+            ajaxInsert9(name, actor, description, input, output);
         }
 
-        function ajaxInsert9(id, name, actor, description, input, output)
+        function ajaxInsert9(name, actor, description, input, output)
         {
             $.ajax({
                 url: "WikiWeb/functionalRequeriment/insert",
                 data: {
-                    id: id,
                     name: name,
                     actor: actor,
                     description: description,

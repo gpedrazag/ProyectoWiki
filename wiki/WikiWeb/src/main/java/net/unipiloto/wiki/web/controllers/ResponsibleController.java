@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResponsibleController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "decisions") List<String> decisions) {
+    public void insert(@RequestParam(value = "name") String name, @RequestParam(value = "decisions") List<String> decisions) {
         try {
-            ResponsibleTransaction.insert("responsible_" + id, name, decisions);
+            ResponsibleTransaction.insert(name, decisions);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

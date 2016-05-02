@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConstraintController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "description") String description, @RequestParam(value = "rationale") String rationale, @RequestParam(value = "keyword") String keyword) {
+    public void insert(@RequestParam(value = "name") String name, @RequestParam(value = "description") String description, @RequestParam(value = "rationale") String rationale, @RequestParam(value = "keyword") String keyword) {
         try {
-            ConstraintTransaction.insert("constraint_" + id, name, description, rationale, keyword);
+            ConstraintTransaction.insert(name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

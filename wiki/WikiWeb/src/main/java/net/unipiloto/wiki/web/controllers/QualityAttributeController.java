@@ -17,7 +17,6 @@ public class QualityAttributeController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "actor") String actor,
             @RequestParam(value = "enviroment") String enviroment,
             @RequestParam(value = "measure") String measure,
@@ -26,7 +25,7 @@ public class QualityAttributeController {
             @RequestParam(value = "triggerArtifacts") List<String> triggerArtifacts) {
         try {
             QualityAttributeTransaction.insert(
-                    "qualityAttribute_" + id, actor,
+                    actor,
                     enviroment,
                     measure,
                     boost,

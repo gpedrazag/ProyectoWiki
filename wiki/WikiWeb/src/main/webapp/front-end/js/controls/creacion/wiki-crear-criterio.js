@@ -108,7 +108,7 @@
         }
 
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var PalabraClave = $("#txt-1-6").val();
             var Descripcion = $("#txt-2-6").val();
             var list8 = [];
@@ -121,17 +121,14 @@
 
             alert(PalabraClave + " " + Descripcion);
 
-            var id = 0;
-
-            ajaxInsert6(id, PalabraClave, Descripcion, list8);
+            ajaxInsert6(PalabraClave, Descripcion, list8);
         }
 
-        function ajaxInsert6(id, keyword, description, linkedEvaluations)
+        function ajaxInsert6(keyword, description, linkedEvaluations)
         {
             $.ajax({
                 url: "WikiWeb/criteria/insert",
                 data: {
-                    id: id,
                     keyword: keyword,
                     description: description,
                     linkedEvaluations: linkedEvaluations

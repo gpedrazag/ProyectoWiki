@@ -17,13 +17,11 @@ public class CriteriaController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "keyword") String keyword,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "linkedEvaluations") List<String> linkedEvaluations) {
         try {
             CriteriaTransaction.insert(
-                    "criteria_" + id,
                     keyword,
                     description,
                     linkedEvaluations);

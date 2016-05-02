@@ -168,7 +168,7 @@
 
         //evento que guarda los datos de una alternativa
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var asunto = $("#txt-4").val();
             var list5 = [];
             var list9 = [];
@@ -188,15 +188,14 @@
 
             alert(asunto);
 
-            ajaxInsert4(id, asunto, list5, list9);
+            ajaxInsert4(asunto, list5, list9);
         }
 
-        function ajaxInsert4(id, concern, describedByQA, describedByFR)
+        function ajaxInsert4(concern, describedByQA, describedByFR)
         {
             $.ajax({
                 url: "WikiWeb/concern/insert",
                 data: {
-                    id: id,
                     concern: concern,
                     describedByQA: describedByQA,
                     describedByFR: describedByFR

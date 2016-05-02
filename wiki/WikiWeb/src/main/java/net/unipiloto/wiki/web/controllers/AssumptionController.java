@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AssumptionController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description, @RequestParam(value = "source") String source) {
+    public void insert(@RequestParam(value = "description") String description, @RequestParam(value = "source") String source) {
         try {
-            AssumptionTransaction.insert("assumption_" + id, description, source);
+            AssumptionTransaction.insert(description, source);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -16,7 +16,6 @@ public class FunctionalRequerimentController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "actor") String actor,
             @RequestParam(value = "description") String description,
@@ -24,7 +23,6 @@ public class FunctionalRequerimentController {
             @RequestParam(value = "output") String output) {
         try {
             FunctionalRequerimentTransaction.insert(
-                    "functionalRequeriment_" + id,
                     name,
                     actor,
                     description,

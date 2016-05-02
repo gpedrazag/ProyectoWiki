@@ -17,13 +17,11 @@ public class ConcernController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "concern") String concern,
             @RequestParam(value = "describedByQA") List<String> describedByQA,
             @RequestParam(value = "describedByFR") List<String> describedByFR) {
         try {
             ConcernTransaction.insert(
-                    "concern_" + id,
                     concern,
                     describedByQA,
                     describedByFR);

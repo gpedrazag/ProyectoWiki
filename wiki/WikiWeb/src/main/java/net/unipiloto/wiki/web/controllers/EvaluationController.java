@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class EvaluationController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
+    public void insert(@RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
         try {
-            EvaluationTransaction.insert("evaluation_" + id, pros, cons, valoration);
+            EvaluationTransaction.insert(pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -165,7 +165,7 @@
 
         //evento que guarda los datos de una atributo de calidad
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
 
             var rationale = $("#txt-1-7").val();
 
@@ -188,17 +188,14 @@
 
             alert(rationale);
 
-            var id = 0;
-
-            ajaxInsert12(id, rationale);
+            ajaxInsert12(rationale);
         }
 
-        function ajaxInsert12(id, rationale)
+        function ajaxInsert12(rationale)
         {
             $.ajax({
                 url: "WikiWeb/solution/insert",
                 data: {
-                    id: id,
                     rationale: rationale
                 },
                 method: "POST"

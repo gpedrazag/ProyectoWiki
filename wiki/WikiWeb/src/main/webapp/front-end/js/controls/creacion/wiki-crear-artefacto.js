@@ -127,17 +127,14 @@
 
             alert(list7);
 
-            alert(id + " " + description);
-
-            ajaxInsert3(id, description, list7);
+            ajaxInsert3(description, list7);
         }
 
-        function ajaxInsert3(id, description, decision)
+        function ajaxInsert3(description, decision)
         {
             $.ajax({
                 url: "WikiWeb/artifact/insert",
                 data: {
-                    id: id,
                     description: description,
                     decision: decision
                 },

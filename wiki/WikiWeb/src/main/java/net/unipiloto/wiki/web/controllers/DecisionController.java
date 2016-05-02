@@ -18,7 +18,6 @@ public class DecisionController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "arguments") String argumen,
             @RequestParam(value = "state") String state,
@@ -31,7 +30,6 @@ public class DecisionController {
             @RequestParam(value = "haveSolution") String haveSolution) {
         try {
             DecisionTransaction.insert(
-                    "decision_" + id,
                     name,
                     argumen,
                     state,

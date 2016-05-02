@@ -122,12 +122,12 @@
         }
 
         function eventsave(event) {
-             event.preventDefault();
+            event.preventDefault();
             var name = $("#txt-1-7").val();
             var description = $("#txt-2-7").val();
             var rationale = $("#txt-3-7").val();
             var keyword = $("#txt-4-7").val();
-            
+
 //            var list7 = [];
 //
 //            $.each($("#tbody-7 tr"), function (index, data) {
@@ -137,9 +137,7 @@
 //
 //            alert(list7);
 
-            var id = 0;
-
-            ajaxInsert11(id, name, description, rationale, keyword);
+            ajaxInsert11(name, description, rationale, keyword);
         }
 
         function ajaxInsert11(id, name, description, rationale, keyword)
@@ -147,7 +145,6 @@
             $.ajax({
                 url: "WikiWeb/constraint/insert",
                 data: {
-                    id: id,
                     name: name,
                     description: description,
                     rationale: rationale,

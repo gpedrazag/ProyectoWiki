@@ -17,14 +17,12 @@ public class SoftwareArchitectureController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
-            @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "relatedArtifacts") List<String> relatedArtifacts,
             @RequestParam(value = "decisionsRelated") List<String> decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.insert(
-                    "SoftwareArchitecture_" + id,
                     name,
                     description,
                     relatedArtifacts,

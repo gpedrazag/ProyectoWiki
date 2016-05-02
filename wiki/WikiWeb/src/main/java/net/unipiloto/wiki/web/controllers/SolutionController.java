@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SolutionController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "id") String id, @RequestParam(value = "rationale") String rationale) {
+    public void insert(@RequestParam(value = "rationale") String rationale) {
         try {
-            SolutionTransaction.insert("solution_" + id, rationale);
+            SolutionTransaction.insert(rationale);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
