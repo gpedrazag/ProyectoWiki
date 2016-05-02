@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarAtrCalidad = function (atrical, art, asu, id) {
+    $.fn.wikiModificarAtrCalidad = function (id) {
 
         //Si es  5 es Atributo de Calidad
         if (id === "m-5") {

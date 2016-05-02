@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarCriterio = function (cri, des, eval, id) {
+    $.fn.wikiModificarCriterio = function (id) {
 
 
         if (id === "m-6") {

@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarSolucion = function (sol, alt, des, id) {
+    $.fn.wikiModificarSolucion = function (id) {
 
 
         if (id === "m-12") {

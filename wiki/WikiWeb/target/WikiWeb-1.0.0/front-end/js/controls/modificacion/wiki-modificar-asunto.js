@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarAsunto = function (asu, des, atrical, reffunc, id) {
+    $.fn.wikiModificarAsunto = function (id) {
 
         //Si es  1 es Asunto
         if (id === "m-4") {

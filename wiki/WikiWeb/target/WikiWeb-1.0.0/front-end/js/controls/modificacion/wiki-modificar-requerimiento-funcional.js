@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiModificarRequerimientoFuncional = function (reffunc, asu, id) {
+    $.fn.wikiModificarRequerimientoFuncional = function (id) {
 
 
         if (id === "m-9") {
