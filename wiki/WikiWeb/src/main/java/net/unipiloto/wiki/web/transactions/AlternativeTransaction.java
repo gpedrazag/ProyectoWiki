@@ -25,7 +25,7 @@ public class AlternativeTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#alternative_"+id);
+        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         IRI object = factory.createIRI("http://www.semanticweb.org/sa#Alternative");
         RepositoryConnection conn = repo.getConnection();
         try
@@ -38,7 +38,7 @@ public class AlternativeTransaction
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
             if(!evaluationId.equals(""))
             {
-                conn.add(subject, factory.createIRI("<http://www.semanticweb.org/sa#alternativeLinkTo>"), factory.createIRI("http://www.semanticweb.org/sa#"+evaluationId));
+                conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#alternativeLinkTo"), factory.createIRI("http://www.semanticweb.org/sa#"+evaluationId));
             }
             conn.commit();
         }
