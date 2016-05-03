@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.SoftwareArchitectureTransaction;
+import org.boon.json.JsonFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,14 +20,14 @@ public class SoftwareArchitectureController {
     public void insert(
             @RequestParam(value = "name") String name,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "relatedArtifacts") List<String> relatedArtifacts,
-            @RequestParam(value = "decisionsRelated") List<String> decisionsRelated) {
+            @RequestParam(value = "relatedArtifacts") String relatedArtifacts,
+            @RequestParam(value = "decisionsRelated") String decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.insert(
                     name,
                     description,
-                    relatedArtifacts,
-                    decisionsRelated);
+                    JsonFactory.fromJsonArray(relatedArtifacts, String.class),
+                    JsonFactory.fromJsonArray(decisionsRelated, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

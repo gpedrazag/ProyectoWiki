@@ -211,8 +211,8 @@
                 data: {
                     name: name,
                     description: description,
-                    relatedArtifacts: relatedArtifacts,
-                    decisionsRelated: decisionsRelated
+                    relatedArtifacts: JSON.stringify(relatedArtifacts),
+                    decisionsRelated: JSON.stringify(decisionsRelated)
                 },
                 method: "POST"
             }).done(function () {
