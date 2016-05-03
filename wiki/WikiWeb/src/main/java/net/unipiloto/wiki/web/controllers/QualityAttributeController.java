@@ -2,10 +2,10 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.QualityAttributeTransaction;
+import org.boon.json.JsonFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +22,7 @@ public class QualityAttributeController {
             @RequestParam(value = "measure") String measure,
             @RequestParam(value = "boost") String boost,
             @RequestParam(value = "boostSource") String boostSource,
-            @RequestParam(value = "triggerArtifacts") List<String> triggerArtifacts) {
+            @RequestParam(value = "triggerArtifacts") String triggerArtifacts) {
         try {
             QualityAttributeTransaction.insert(
                     actor,
@@ -30,7 +30,7 @@ public class QualityAttributeController {
                     measure,
                     boost,
                     boostSource,
-                    triggerArtifacts);
+                    JsonFactory.fromJsonArray(triggerArtifacts, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,7 +44,7 @@ public class QualityAttributeController {
             @RequestParam(value = "measure") String measure,
             @RequestParam(value = "boost") String boost,
             @RequestParam(value = "boostSource") String boostSource,
-            @RequestParam(value = "triggerArtifacts") List<String> triggerArtifacts) {
+            @RequestParam(value = "triggerArtifacts") String triggerArtifacts) {
         try {
             QualityAttributeTransaction.update(
                     "qualityAttribute_" + id,
@@ -53,7 +53,7 @@ public class QualityAttributeController {
                     measure,
                     boost,
                     boostSource,
-                    triggerArtifacts);
+                    JsonFactory.fromJsonArray(triggerArtifacts, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

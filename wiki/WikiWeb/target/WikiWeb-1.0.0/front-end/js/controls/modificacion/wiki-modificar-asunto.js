@@ -2,15 +2,14 @@
 
     $.fn.wikiModificarAsunto = function (id) {
 
-        //Si es  1 es Asunto
-        if (id === "m-4") {
+        if (id === "c-4") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
+            $("#page-name").html("Formulario de Modificacion");
             $("#panel-heading-left").html("Asunto");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
@@ -23,30 +22,21 @@
                             .append($("<label>").html("Asunto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-4-tp"})
                                     .append($("<option>").html("..."))
-
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Asunto que que va a modificar."))
                             );
 
-            //Se crea la parte izquierda del formulario
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Asunto"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-4"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el Asunto."))
                             )
-                    .append($("<button>").attr({"id": "btn-4"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave4))
+                    .append($("<button>").attr({"id": "btn-4"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Decisión"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-7"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la decisión que tiene relación con un Asunto."))
-                            )
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Atributo de Calidad"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-5"})
@@ -65,20 +55,6 @@
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-7"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Decisiónes"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-7"})
-
-                                                    )
-                                            )
-                                    )
-
                             .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-5"})
                                     .append($("<table>").addClass("table table-hover")
                                             .append($("<thead>")
@@ -108,177 +84,252 @@
                                     )
                             );
 
-            $.each(asu, function (index, data) {
-                $("#slc-4-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+            ajaxSelectAll4(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-4-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "4"}));
+                });
             });
 
-
-            $.each(des, function (index, data) {
-                $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+            ajaxSelectAll5(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-5").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "5"}));
+                });
             });
 
-            $.each(atrical, function (index, data) {
-                $("#slc-5").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "5"}));
+            ajaxSelectAll9(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-9").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "9"}));
+                });
             });
 
-            $.each(reffunc, function (index, data) {
-                $("#slc-9").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "9"}));
-            });
 
             $("#slc-4-tp").on("change", eventLoad);
-
-            $("#slc-7").on("change", eventSelected4);
-
-            $("#slc-5").on("change", eventSelected4);
-
-            $("#slc-9").on("change", eventSelected4);
+            $("#slc-5").on("change", eventSelected);
+            $("#slc-9").on("change", eventSelected);
         }
 
-        //evento para remover de las tablas en asuntos
-        function eventRemove4() {
-            $(this).parent().parent().remove();
-            var tableId = $(this).parent().parent().attr("id");
-            var idClass = $(this).parent().parent().attr("value");
-
-            if (idClass === "7") {
-                $("#slc-7 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-            }
-
-            if (idClass === "5") {
-                $("#slc-5 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-            }
-
-            if (idClass === "9") {
-                $("#slc-9 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-            }
-
-        }
-
-        //evento para llenar las tablas en las Asunto
-        function eventSelected4() {
+        function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-            //llena la tabla de decisiones
-            if (idClassOptionSelected === "7") {
-
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7 option:selected").addClass("hidden");
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-7")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-            //llena la tabla de atributo de calidad
             if (idClassOptionSelected === "5") {
 
                 $("#slc-5 option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-5 option:selected").addClass("hidden");
                 $("#slc-5 option[value=" + 0 + "]").attr("selected", true);
 
-
-
                 $("#tbody-5")
                         .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
+                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
                                                 )
                                         )
                                 );
-
             }
 
-            //llena la tabla de Requerimiento funcional
             if (idClassOptionSelected === "9") {
 
                 $("#slc-9 option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-9 option:selected").addClass("hidden");
                 $("#slc-9 option[value=" + 0 + "]").attr("selected", true);
 
-
-
                 $("#tbody-9")
                         .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove4)
+                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
                                                 )
                                         )
                                 );
-
             }
 
         }
 
-        //evento que guarda los datos de una alternativa
-        function eventsave4() {
+        function eventRemove() {
+            $(this).parent().parent().remove();
+            var tableId = $(this).parent().parent().attr("id");
+            var idClass = $(this).parent().parent().attr("value");
 
+            if (idClass === "5") {
+                $("#slc-5 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
+                });
+            }
+
+            if (idClass === "9") {
+                $("#slc-9 option").each(function () {
+                    if (tableId === $(this).attr("value")) {
+                        $(this).removeClass("hidden");
+                    }
+                });
+            }
+
+        }
+
+        function eventsave(event) {
+            event.preventDefault();
             var asunto = $("#txt-4").val();
-            var list7 = [];
+            var id = $('option:selected', "#slc-4-tp").attr("value");
             var list5 = [];
             var list9 = [];
 
-
-            $.each($("#tbody-7 tr"), function (index, data) {
-                list7.push($(data).attr("id"));
-
-            });
-
-            alert(list7);
-
             $.each($("#tbody-5 tr"), function (index, data) {
                 list5.push($(data).attr("id"));
-
             });
-
-            alert(list5);
 
             $.each($("#tbody-9 tr"), function (index, data) {
                 list9.push($(data).attr("id"));
 
             });
 
-            alert(list9);
-
-            alert(asunto);
+            ajaxUpdate4(id,asunto, list5, list9);
         }
 
         function eventLoad() {
+            var textOptionSelected = $('option:selected', this).html();
+            var id = $('option:selected', this).attr("value");
+            $("#tbody-5 tr").empty();
+            $("#tbody-9 tr").empty();
+
+            if (textOptionSelected === '...') {
+                $("#txt-4").val("");
+
+                $("#tbody-5 tr").each(function (index, data) {
+
+                    $("#slc-5 option").each(function (index, data1) {
+                        if ($(data).attr("id") === $(data1).attr("value")) {
+                            $(data1).removeClass("hidden");
+                        }
+                    });
+                });
+
+                $("#tbody-9 tr").each(function (index, data) {
+
+                    $("#slc-9 option").each(function (index, data1) {
+                        if ($(data).attr("id") === $(data1).attr("value")) {
+                            $(data1).removeClass("hidden");
+                        }
+                    });
+                });
 
 
+            } else {
+
+                ajaxSelectAll2(function (data) {
+                    $.each(data, function (index, data) {
+
+                        if (data.id == id) {
+                            $("#txt-4").val(data.name);
+
+                            if (data.describedByQA !== undefined) {
+                                $("#tbody-5")
+                                        .append($("<tr>").attr({"id": data.describedByQA.id, "value": "8"})
+                                                .append($("<td>").html(data.describedByQA.id).attr({"width": "80%"}))
+                                                .append($("<td>")
+                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                )
+                                                        )
+                                                );
+
+                                $("#tbody-5 tr").each(function (index, data) {
+
+                                    $("#slc-5 option").each(function (index, data1) {
+                                        if ($(data).attr("id") === $(data1).attr("value")) {
+                                            $(data1).addClass("hidden");
+                                        }
+                                    });
+                                });
+                            }
+
+                            if (data.describedByFR !== undefined) {
+                                $("#tbody-9")
+                                        .append($("<tr>").attr({"id": data.describedByFR.id, "value": "8"})
+                                                .append($("<td>").html(data.describedByFR.id).attr({"width": "80%"}))
+                                                .append($("<td>")
+                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                )
+                                                        )
+                                                );
+
+                                $("#tbody-9 tr").each(function (index, data) {
+
+                                    $("#slc-9 option").each(function (index, data1) {
+                                        if ($(data).attr("id") === $(data1).attr("value")) {
+                                            $(data1).addClass("hidden");
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        function ajaxUpdate4(id, concern, describedByQA, describedByFR)
+        {
+            $.ajax({
+                url: "WikiWeb/concern/update",
+                data: {
+                    id: id,
+                    concern: concern,
+                    describedByQA: JSON.stringify(describedByQA),
+                    describedByFR: JSON.stringify(describedByFR)
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Creo");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error");
+            });
+        }
+        
+        function ajaxSelectAll4(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/concern/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll5(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/qualityAttribute/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll9(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/functionalRequeriment/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
         return this;

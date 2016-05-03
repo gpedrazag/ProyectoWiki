@@ -125,24 +125,23 @@
 
             });
 
-            alert(list7);
-
-            ajaxInsert3(description, list7);
+            ajaxInsert3(id, description, list7);
         }
 
-        function ajaxInsert3(description, decision)
+        function ajaxInsert3(id, description, decision)
         {
             $.ajax({
                 url: "WikiWeb/artifact/insert",
                 data: {
+                    id: id,
                     description: description,
-                    decision: decision
+                    decision: JSON.stringify(decision)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto el artefacto");
+                alert("Creo");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar el artefacto");
+                alert("Error");
             });
         }
 

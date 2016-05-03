@@ -125,10 +125,6 @@
 
             });
 
-            alert(list8);
-
-            alert(name + " " + description);
-
             ajaxInsert1(name, description, list8);
         }
 
@@ -143,9 +139,9 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la alternativa");
+                alert("Creo");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la alternativa");
+                alert("Error");
             });
         }
 

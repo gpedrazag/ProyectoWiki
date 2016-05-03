@@ -2,15 +2,14 @@
 
     $.fn.wikiModificarRequerimientoFuncional = function (id) {
 
-
-        if (id === "m-9") {
+        if (id === "c-9") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
+            $("#page-name").html("Formulario De Modificacion");
             $("#panel-heading-left").html("Requerimiento Funcional");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
@@ -23,12 +22,11 @@
                             .append($("<label>").html("Requerimiento Funcional"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-9-tp"})
                                     .append($("<option>").html("..."))
-
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Requerimiento Funcional que que va a modificar."))
                             );
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Nombre"))
@@ -58,117 +56,95 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
-            $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Asunto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-4"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Asunto que tiene relación con el Requerimiento Funcional."))
-                            )
-                    ;
+
+            $("#right-row");
 
             $("#panel-foot")
-                    .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-4"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Asunto"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-4"})
-                                                    )
-                                            )
-                                    )
-                            )
-                    ;
+                    .append($("<div>").addClass("col-lg-12"));
 
-            $.each(reffunc, function (index, data) {
-                $("#slc-9-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "9"}));
+            ajaxSelectAll9(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-9-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "9"}));
+                });
             });
-
-            $.each(asu, function (index, data) {
-                $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
-            });
-
 
             $("#slc-9-tp").on("change", eventLoad);
-            $("#slc-4").on("change", eventSelected);
-
 
         }
-        //evento para llenar las tablas en atributos de calidad
-        function eventSelected() {
 
-            var textOptionSelected = $('option:selected', this).html();
-            var idClassOptionSelected = $('option:selected', this).attr("idClass");
-            var idOptionSelected = $('option:selected', this).attr("value");
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "4") {
+        function eventsave(event) {
+            event.preventDefault();
+            var name = $("#txt-1-7").val();
+            var actor = $("#txt-2-7").val();
+            var description = $("#txt-3-7").val();
+            var input = $("#txt-4-7").val();
+            var output = $("#txt-5-7").val();
+            var id = $('option:selected', "#slc-9-tp").attr("value");
 
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-4 option:selected").addClass("hidden");
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-4")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove).append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-            }
-        }
-
-
-
-
-        //evento para remover de las tablas en las atributos de calidad
-        function eventRemove() {
-            $(this).parent().parent().remove();
-            var tableId = $(this).parent().parent().attr("id");
-            var idClass = $(this).parent().parent().attr("value");
-
-            if (idClass === "4")
-                $("#slc-4 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-        }
-
-
-        //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
-            var Nombre = $("#txt-1-7").val();
-            var Actor = $("#txt-2-7").val();
-            var Descripción = $("#txt-3-7").val();
-            var Entrada = $("#txt-4-7").val();
-            var salida = $("#txt-5-7").val();
-            var list4 = [];
-
-            $.each($("#tbody-4 tr"), function (index, data) {
-                list4.push($(data).attr("id"));
-
-            });
-
-            alert(list4);
-
-            alert(Nombre + " " + Actor + " " + Descripción + " " + Entrada + " " + salida);
+            ajaxUpdate9(id, name, actor, description, input, output);
         }
 
         function eventLoad() {
+            var textOptionSelected = $('option:selected', this).html();
 
+            var id = $('option:selected', this).attr("value");
 
+            if (textOptionSelected === '...') {
+                $("#txt-1-7").val("");
+                $("#txt-2-7").val("");
+                $("#txt-3-7").val("");
+                $("#txt-4-7").val("");
+                $("#txt-5-7").val("");
+
+            } else {
+
+                ajaxSelectAll9(function (data) {
+                    $.each(data, function (index, data) {
+
+                        if (data.id == id) {
+                            $("#txt-1-7").val(data.name);
+                            $("#txt-2-7").val(data.actor);
+                            $("#txt-3-7").val(data.description);
+                            $("#txt-4-7").val(data.input);
+                            $("#txt-5-7").val(data.output);
+
+                        }
+                    });
+                });
+            }
+        }
+
+        function ajaxUpdate9(id, name, actor, description, input, output)
+        {
+            $.ajax({
+                url: "WikiWeb/functionalRequeriment/update",
+                data: {
+                    id: id,
+                    name: name,
+                    actor: actor,
+                    description: description,
+                    input: input,
+                    output: output
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error");
+            });
+        }
+
+        function ajaxSelectAll9(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/functionalRequeriment/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
         return this;

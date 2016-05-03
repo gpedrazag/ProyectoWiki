@@ -71,14 +71,12 @@
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
-            //llena la tabla de artefactos
+
             if (idClassOptionSelected === "7") {
 
                 $("#slc-7 option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-7 option:selected").addClass("hidden");
                 $("#slc-7 option[value=" + 0 + "]").attr("selected", true);
-
-
 
                 $("#tbody-7")
                         .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
@@ -117,10 +115,6 @@
 
             });
 
-            alert(list7);
-
-            alert(name);
-
             ajaxInsert10(name, list7);
         }
 
@@ -130,13 +124,13 @@
                 url: "WikiWeb/responsible/insert",
                 data: {
                     name: name,
-                    description: decisions
+                    description: JSON.stringify(decisions)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la alternativa");
+                alert("Incerto");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la alternativa");
+                alert("Error");
             });
         }
 
@@ -152,7 +146,6 @@
                 callback(null);
             });
         }
-
 
         return this;
     };

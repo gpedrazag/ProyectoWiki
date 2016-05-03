@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.ConcernTransaction;
+import org.boon.json.JsonFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,13 +19,13 @@ public class ConcernController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
             @RequestParam(value = "concern") String concern,
-            @RequestParam(value = "describedByQA") List<String> describedByQA,
-            @RequestParam(value = "describedByFR") List<String> describedByFR) {
+            @RequestParam(value = "describedByQA") String describedByQA,
+            @RequestParam(value = "describedByFR") String describedByFR) {
         try {
             ConcernTransaction.insert(
                     concern,
-                    describedByQA,
-                    describedByFR);
+                    JsonFactory.fromJsonArray(describedByQA, String.class),
+                    JsonFactory.fromJsonArray(describedByFR, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -34,14 +35,14 @@ public class ConcernController {
     public void update(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "concern") String concern,
-            @RequestParam(value = "describedByQA") List<String> describedByQA,
-            @RequestParam(value = "describedByFR") List<String> describedByFR) {
+            @RequestParam(value = "describedByQA") String describedByQA,
+            @RequestParam(value = "describedByFR") String describedByFR) {
         try {
             ConcernTransaction.update(
                     "concern_" + id,
                     concern,
-                    describedByQA,
-                    describedByFR);
+                    JsonFactory.fromJsonArray(describedByQA, String.class),
+                    JsonFactory.fromJsonArray(describedByFR, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,7 +59,7 @@ public class ConcernController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return ConcernTransaction.selectById("artifact_" + id);
+        return ConcernTransaction.selectById("concern_" + id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

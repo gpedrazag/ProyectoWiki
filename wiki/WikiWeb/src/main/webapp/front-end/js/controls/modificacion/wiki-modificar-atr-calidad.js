@@ -2,16 +2,15 @@
 
     $.fn.wikiModificarAtrCalidad = function (id) {
 
-        //Si es  5 es Atributo de Calidad
-        if (id === "m-5") {
+        if (id === "c-5") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
-            $("#panel-heading-left").html("Atributo de Calidad");
+            $("#page-name").html("Formulario De Modificacion");
+            $("#panel-heading-left").html("Atributo De Calidad");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
@@ -20,15 +19,14 @@
 
             $("#row-content")
                     .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Atributo de Calidad"))
+                            .append($("<label>").html("Atributo De Calidad"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-5-tp"})
                                     .append($("<option>").html("..."))
-
                                     )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Atributo de Calidad que que va a modificar."))
+                            .append($("<p>").addClass("help-block").html("Seleccione el Atributo De Calidad que va a modificar."))
                             );
 
-            //Se crea la parte izquierda del formulario
+
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Actor"))
@@ -55,10 +53,10 @@
                             .append($("<input>").addClass("form-control").attr({"id": "txt-5-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la fuente de estímulo del Atributo de Calidad."))
                             )
-                    .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave5))
+                    .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
+
             $("#right-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Artefacto"))
@@ -66,13 +64,6 @@
                                     .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Artefacto que tiene relación Atributo de Calidad."))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Asunto"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-4"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Asunto que tiene relación Atributo de Calidad."))
                             )
                     ;
             $("#panel-foot")
@@ -90,51 +81,32 @@
                                                     )
                                             )
                                     )
-
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-4"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Asuntos"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-4"})
-
-                                                    )
-                                            )
-                                    )
-
                             );
-            
-            $.each(atrical, function (index, data) {
-                $("#slc-5-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "5"}));
+
+            ajaxSelectAll5(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-5-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "5"}));
+                });
             });
 
-            $.each(art, function (index, data) {
-                $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
-            });
-
-            $.each(asu, function (index, data) {
-                $("#slc-4").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "4"}));
+            ajaxSelectAll3(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-3").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "3"}));
+                });
             });
 
             $("#slc-5-tp").on("change", eventLoad);
-            
-            $("#slc-3").on("change", eventSelected5);
-
-            $("#slc-4").on("change", eventSelected5);
+            $("#slc-3").on("change", eventSelected);
 
         }
 
-        //evento para llenar las tablas en atributos de calidad
-        function eventSelected5() {
+
+        function eventSelected() {
 
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-            //llena la tabla de artefactos
             if (idClassOptionSelected === "3") {
 
                 $("#slc-3 option[value=" + 0 + "]").attr("selected", false);
@@ -147,95 +119,152 @@
                         .append($("<tr>").attr({"id": idOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove5)
+                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                 .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
                                                 )
                                         )
                                 );
-
-            }
-
-            //llena la tabla de asuntos
-            if (idClassOptionSelected === "4") {
-
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-4 option:selected").addClass("hidden");
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-4")
-                        .append($("<tr>").attr({"id": idOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove5)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
             }
         }
 
-
-
-
-        //evento para remover de las tablas en las atributos de calidad
-        function eventRemove5() {
+        function eventRemove() {
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
-
 
             $("#slc-3 option").each(function () {
 
                 if (tableId === $(this).attr("value")) {
                     $(this).removeClass("hidden");
                 }
-
-            });
-
-            $("#slc-4 option").each(function () {
-
-                if (tableId === $(this).attr("value")) {
-                    $(this).removeClass("hidden");
-                }
-
             });
         }
 
-
-        //evento que guarda los datos de una atributo de calidad
-        function eventsave5() {
-
+        function eventsave(event) {
+            event.preventDefault();
             var actor = $("#txt-1-5").val();
             var ambiente = $("#txt-2-5").val();
             var medida = $("#txt-3-5").val();
             var estímulo = $("#txt-4-5").val();
             var fuentedeestímulo = $("#txt-5-5").val();
-            var list3 = [];
-            var list4 = [];
+            var id = $('option:selected', "#slc-5-tp").attr("value");
 
+            var list3 = [];
 
             $.each($("#tbody-3 tr"), function (index, data) {
                 list3.push($(data).attr("id"));
 
             });
 
-            alert(list3);
-
-            $.each($("#tbody-4 tr"), function (index, data) {
-                list4.push($(data).attr("id"));
-
-            });
-
-            alert(list4);
-
-            alert(actor + " " + ambiente + " " + medida + " " + estímulo + " " + fuentedeestímulo);
+            ajaxUpdate5(id, actor, ambiente, medida, estímulo, fuentedeestímulo, list3);
         }
 
         function eventLoad() {
+            var textOptionSelected = $('option:selected', this).html();
+
+            var id = $('option:selected', this).attr("value");
+            $("#tbody-3 tr").empty();
+
+            if (textOptionSelected === '...') {
+                $("#txt-1-5").val("");
+                $("#txt-2-5").val("");
+                $("#txt-3-5").val("");
+                $("#txt-4-5").val("");
+                $("#txt-5-5").val("");
+
+                $("#tbody-3 tr").each(function (index, data) {
+
+                    $("#slc-3 option").each(function (index, data1) {
+                        if ($(data).attr("id") === $(data1).attr("value")) {
+                            $(data1).removeClass("hidden");
+                        }
+                    });
+                });
 
 
+            } else {
+
+                ajaxSelectAll3(function (data) {
+                    $.each(data, function (index, data) {
+
+                        if (data.id == id) {
+                            $("#txt-1-5").val(data.actor);
+                            $("#txt-2-5").val(data.enviroment);
+                            $("#txt-3-5").val(data.measure);
+                            $("#txt-4-5").val(data.boost);
+                            $("#txt-5-5").val(data.boostSource);
+
+                            if (data.triggerArtifacts !== undefined) {
+
+                                $("#tbody-3")
+                                        .append($("<tr>").attr({"id": data.triggerArtifacts.id, "value": "8"})
+                                                .append($("<td>").html(data.triggerArtifacts.id).attr({"width": "80%"}))
+                                                .append($("<td>")
+                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                )
+                                                        )
+                                                );
+
+                                $("#tbody-3 tr").each(function (index, data) {
+
+                                    $("#slc-3 option").each(function (index, data1) {
+                                        if ($(data).attr("id") === $(data1).attr("value")) {
+                                            $(data1).addClass("hidden");
+                                        }
+                                    });
+                                });
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        function ajaxUpdate5(id, actor, enviroment, measure, boost, boostSource, triggerArtifacts)
+        {
+            $.ajax({
+                url: "WikiWeb/qualityAttribute/update",
+                data: {
+                    id: id,
+                    actor: actor,
+                    enviroment: enviroment,
+                    measure: measure,
+                    boost: boost,
+                    boostSource: boostSource,
+                    triggerArtifacts: JSON.stringify(triggerArtifacts)
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error no se pudo");
+            });
+        }
+
+        function ajaxSelectAll5(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/qualityAttribute/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
+        }
+
+        function ajaxSelectAll3(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/artifact/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
         return this;

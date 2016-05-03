@@ -131,18 +131,22 @@
 
         }
 
-        function eventsave() {
+        function eventsave(event) {
+
+            event.preventDefault();
 
             var name = $("#txt-1").val();
             var description = $("#txt-area-1").val();
+            var id = $('option:selected', "#slc-1-tp").attr("value");
 
-            var list8 = [];
+            var list8 = "";
 
             $.each($("#tbody-8 tr"), function (index, data) {
-                list8.push($(data).attr("id"));
+                list8 = $(data).attr("id");
+
             });
-            alert(list8);
-            alert(name + " " + description);
+
+            ajaxUpdate1(id, name, description, list8);
         }
 
 
@@ -187,7 +191,7 @@
                                                                 )
                                                         )
                                                 );
-                               // $("#tbody-8").empty();
+                                // $("#tbody-8").empty();
                                 $("#tbody-8 tr").each(function (index, data) {
 
                                     $("#slc-8 option").each(function (index, data1) {
@@ -195,18 +199,30 @@
                                             $(data1).addClass("hidden");
                                         }
                                     });
-
-
                                 });
                             }
                         }
                     });
                 });
-
-
-
-
             }
+        }
+
+        function ajaxUpdate1(id, name, description, evaluationId)
+        {
+            $.ajax({
+                url: "WikiWeb/alternative/update",
+                data: {
+                    id: id,
+                    name: name,
+                    description: description,
+                    evaluationId: evaluationId
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Modifico");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error");
+            });
         }
 
         function ajaxSelectAll1(callback)

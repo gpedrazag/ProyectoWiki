@@ -2,7 +2,6 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.SoftwareArchitectureTransaction;
@@ -38,15 +37,15 @@ public class SoftwareArchitectureController {
             @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "relatedArtifacts") List<String> relatedArtifacts,
-            @RequestParam(value = "decisionsRelated") List<String> decisionsRelated) {
+            @RequestParam(value = "relatedArtifacts") String relatedArtifacts,
+            @RequestParam(value = "decisionsRelated") String decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.update(
-                    "SoftwareArchitecture_" + id,
+                    "sa_" + id,
                     name,
                     description,
-                    relatedArtifacts,
-                    decisionsRelated);
+                    JsonFactory.fromJsonArray(relatedArtifacts, String.class),
+                    JsonFactory.fromJsonArray(decisionsRelated, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,7 +62,7 @@ public class SoftwareArchitectureController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return SoftwareArchitectureTransaction.selectById("artifact_" + id);
+        return SoftwareArchitectureTransaction.selectById("SoftwareArchitecture_" + id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

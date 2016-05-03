@@ -8,6 +8,7 @@
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/metisMenu.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/sb-admin-2.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 
     </head>
     <body>

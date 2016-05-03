@@ -2,10 +2,10 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
+import org.boon.json.JsonFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +19,12 @@ public class ArtifactController {
     public void insert(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "decisions") List<String> decisions) {
+            @RequestParam(value = "decisions") String decisions) {
         try {
             ArtifactTransaction.insert(
                     "artifact_" + id,
                     description,
-                    decisions);
+                    JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -34,12 +34,12 @@ public class ArtifactController {
     public void update(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "description") String description,
-            @RequestParam(value = "decisions") List<String> decisions) {
+            @RequestParam(value = "decisions") String decisions) {
         try {
             ArtifactTransaction.update(
                     "artifact_" + id,
                     description,
-                    decisions);
+                    JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }

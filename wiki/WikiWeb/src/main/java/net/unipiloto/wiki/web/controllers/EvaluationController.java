@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class EvaluationController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insert(@RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
+    public void insert(
+            @RequestParam(value = "pros") String pros,
+            @RequestParam(value = "cons") String cons,
+            @RequestParam(value = "valoration") String valoration) {
         try {
             EvaluationTransaction.insert(pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
@@ -24,7 +27,10 @@ public class EvaluationController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "pros") String pros, @RequestParam(value = "cons") String cons, @RequestParam(value = "valoration") String valoration) {
+    public void update(@RequestParam(value = "id") String id,
+            @RequestParam(value = "pros") String pros,
+            @RequestParam(value = "cons") String cons,
+            @RequestParam(value = "valoration") String valoration) {
         try {
             EvaluationTransaction.update("evaluation_" + id, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
@@ -43,7 +49,7 @@ public class EvaluationController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return EvaluationTransaction.selectById("artifact_" + id);
+        return EvaluationTransaction.selectById("evaluation_" + id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

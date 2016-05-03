@@ -83,7 +83,7 @@
 
             ajaxSelectAll3(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-3").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "3"}));
+                    $("#slc-3").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "3"}));
                 });
             });
 
@@ -211,14 +211,14 @@
                 data: {
                     name: name,
                     description: description,
-                    relatedArtifacts: relatedArtifacts,
-                    decisionsRelated: decisionsRelated
+                    relatedArtifacts: JSON.stringify(relatedArtifacts),
+                    decisionsRelated: JSON.stringify(decisionsRelated)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la alternativa");
+                alert("Creo");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la alternativa");
+                alert("Error");
             });
         }
 

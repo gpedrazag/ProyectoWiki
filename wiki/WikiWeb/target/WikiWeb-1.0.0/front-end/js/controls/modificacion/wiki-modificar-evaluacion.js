@@ -1,16 +1,14 @@
 (function ($) {
 
     $.fn.wikiModificarEvaluacion = function (id) {
-
-
-        if (id === "m-8") {
+        if (id === "c-8") {
 
             $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
+            $("#page-name").html("Formulario De Modificaion");
             $("#panel-heading-left").html("Evaluación");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
@@ -20,15 +18,13 @@
 
             $("#row-content")
                     .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Evaluación"))
+                            .append($("<label>").html("Asunto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-8-tp"})
                                     .append($("<option>").html("..."))
-
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Evaluación que que va a modificar."))
                             );
 
-            //Se crea la parte izquierda del formulario
             $("#left-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Pros"))
@@ -48,189 +44,87 @@
                     .append($("<button>").attr({"id": "btn-5"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
                     .append($("<button>").addClass("btn btn-default").html("Reset Button"))
                     ;
-            //Se crea la parte derecha del formulario
-            $("#right-row")
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Alternativa"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-1"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione la Alternativa que tiene relación con la Evaluación."))
-                            )
-                    .append($("<div>").addClass("form-group")
-                            .append($("<label>").html("Criterio"))
-                            .append($("<select>").addClass("form-control").attr({"id": "slc-6"})
-                                    .append($("<option>").html("...").attr({"value": "0"}))
-                                    )
-                            .append($("<p>").addClass("help-block").html("Seleccione el Criterio  que tiene relación con la Evaluación."))
-                            )
-                    ;
 
+            $("#right-row");
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-1"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Alternativa"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-1"})
+                            );
 
-                                                    )
-                                            )
-                                    )
-
-                            .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-6"})
-                                    .append($("<table>").addClass("table table-hover")
-                                            .append($("<thead>")
-                                                    .append($("<tr>").addClass("active")
-                                                            .append($("<th>").html("Criterio"))
-                                                            .append($("<th>"))
-                                                            )
-                                                    )
-                                            .append($("<tbody>").attr({"id": "tbody-6"})
-
-                                                    )
-                                            )
-                                    )
-                            )
-                    ;
-
-            $.each(eval, function (index, data) {
-                $("#slc-8-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "8"}));
+            ajaxSelectAll8(function (data) {
+                $.each(data, function (index, data) {
+                    $("#slc-8-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                });
             });
-
-            $.each(alt, function (index, data) {
-                $("#slc-1").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
-            });
-
-            $.each(cri, function (index, data) {
-                $("#slc-6").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "6"}));
-            });
-
-
 
             $("#slc-8-tp").on("change", eventLoad);
-            $("#slc-1").on("change", eventSelected);
-            $("#slc-6").on("change", eventSelected);
-
-        }
-        //evento para llenar las tablas en atributos de calidad
-        function eventSelected() {
-
-            var textOptionSelected = $('option:selected', this).html();
-            var idClassOptionSelected = $('option:selected', this).attr("idClass");
-            var idOptionSelected = $('option:selected', this).attr("value");
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "1") {
-
-                $("#slc-1 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-1 option:selected").addClass("hidden");
-                $("#slc-1 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-1")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove).append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-
-            //llena la tabla de artefactos
-            if (idClassOptionSelected === "6") {
-
-                $("#slc-6 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-6 option:selected").addClass("hidden");
-                $("#slc-6 option[value=" + 0 + "]").attr("selected", true);
-
-
-
-                $("#tbody-6")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
-                                );
-
-            }
-
 
         }
 
+        function eventsave(event) {
+            event.preventDefault();
+            var pros = $("#txt-1-7").val();
+            var cons = $("#txt-2-7").val();
+            var valoration = $("#txt-3-7").val();
+            var id = $('option:selected', "#slc-8-tp").attr("value");
 
-
-
-        //evento para remover de las tablas en las atributos de calidad
-        function eventRemove() {
-            $(this).parent().parent().remove();
-            var tableId = $(this).parent().parent().attr("id");
-            var idClass = $(this).parent().parent().attr("value");
-
-            if (idClass === "1")
-                $("#slc-1 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-
-            if (idClass === "6")
-                $("#slc-6 option").each(function () {
-
-                    if (tableId === $(this).attr("value")) {
-                        $(this).removeClass("hidden");
-                    }
-
-                });
-
-
-        }
-
-
-        //evento que guarda los datos de una atributo de calidad
-        function eventsave() {
-
-            var Pros = $("#txt-1-7").val();
-            var Contras = $("#txt-2-7").val();
-            var Valoracion = $("#txt-3-7").val();
-            var list1 = [];
-            var list6 = [];
-
-
-
-
-            $.each($("#tbody-1 tr"), function (index, data) {
-                list1.push($(data).attr("id"));
-
-            });
-
-            alert(list1);
-
-            $.each($("#tbody-6 tr"), function (index, data) {
-                list6.push($(data).attr("id"));
-
-            });
-
-            alert(list6);
-
-
-            alert(Pros + " " + Contras + " " + Valoracion);
+            ajaxUpdate8(id, pros, cons, valoration);
         }
 
         function eventLoad() {
+            var textOptionSelected = $('option:selected', this).html();
 
+            var id = $('option:selected', this).attr("value");
 
+            if (textOptionSelected === '...') {
+                $("#txt-1-7").val("");
+                $("#txt-2-7").val("");
+                $("#txt-3-7").val("");
+
+            } else {
+
+                ajaxSelectAll8(function (data) {
+                    $.each(data, function (index, data) {
+
+                        if (data.id == id) {
+                            $("#txt-1-7").val(data.pros);
+                            $("#txt-2-7").val(data.cons);
+                            $("#txt-3-7").val(data.valoration);
+                           
+                        }
+                    });
+                });
+            }
+        }
+
+        function ajaxUpdate8(id, pros, cons, valoration)
+        {
+            $.ajax({
+                url: "WikiWeb/evaluation/update",
+                data: {
+                    id: id,
+                    pros: pros,
+                    cons: cons,
+                    valoration: valoration
+                },
+                method: "POST"
+            }).done(function () {
+                alert("Incerto");
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error");
+            });
+        }
+
+        function ajaxSelectAll8(callback)
+        {
+            $.ajax({
+                url: "WikiWeb/evaluation/selectAll",
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                callback(data);
+            }).fail(function (jrxml, errorThrow) {
+                callback(null);
+            });
         }
 
         return this;

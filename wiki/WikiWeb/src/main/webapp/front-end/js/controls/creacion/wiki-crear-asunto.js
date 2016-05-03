@@ -97,14 +97,11 @@
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-
             if (idClassOptionSelected === "5") {
 
                 $("#slc-5 option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-5 option:selected").addClass("hidden");
                 $("#slc-5 option[value=" + 0 + "]").attr("selected", true);
-
-
 
                 $("#tbody-5")
                         .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
@@ -115,7 +112,6 @@
                                                 )
                                         )
                                 );
-
             }
 
             if (idClassOptionSelected === "9") {
@@ -123,8 +119,6 @@
                 $("#slc-9 option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-9 option:selected").addClass("hidden");
                 $("#slc-9 option[value=" + 0 + "]").attr("selected", true);
-
-
 
                 $("#tbody-9")
                         .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
@@ -146,27 +140,22 @@
 
             if (idClass === "5") {
                 $("#slc-5 option").each(function () {
-
                     if (tableId === $(this).attr("value")) {
                         $(this).removeClass("hidden");
                     }
-
                 });
             }
 
             if (idClass === "9") {
                 $("#slc-9 option").each(function () {
-
                     if (tableId === $(this).attr("value")) {
                         $(this).removeClass("hidden");
                     }
-
                 });
             }
 
         }
 
-        //evento que guarda los datos de una alternativa
         function eventsave(event) {
             event.preventDefault();
             var asunto = $("#txt-4").val();
@@ -177,16 +166,10 @@
                 list5.push($(data).attr("id"));
             });
 
-            alert(list5);
-
             $.each($("#tbody-9 tr"), function (index, data) {
                 list9.push($(data).attr("id"));
 
             });
-
-            alert(list9);
-
-            alert(asunto);
 
             ajaxInsert4(asunto, list5, list9);
         }
@@ -197,14 +180,14 @@
                 url: "WikiWeb/concern/insert",
                 data: {
                     concern: concern,
-                    describedByQA: describedByQA,
-                    describedByFR: describedByFR
+                    describedByQA: JSON.stringify(describedByQA),
+                    describedByFR: JSON.stringify(describedByFR)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto el artefacto");
+                alert("Creo");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar el artefacto");
+                alert("Error");
             });
         }
 

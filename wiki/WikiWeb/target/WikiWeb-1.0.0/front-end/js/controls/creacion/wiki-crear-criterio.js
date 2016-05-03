@@ -117,10 +117,6 @@
                 list8.push($(data).attr("id"));
             });
 
-            alert(list8);
-
-            alert(PalabraClave + " " + Descripcion);
-
             ajaxInsert6(PalabraClave, Descripcion, list8);
         }
 
@@ -131,13 +127,13 @@
                 data: {
                     keyword: keyword,
                     description: description,
-                    linkedEvaluations: linkedEvaluations
+                    linkedEvaluations: JSON.stringify(linkedEvaluations)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la criteria");
+                alert("Incerto");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la criteria");
+                alert("Error");
             });
         }
 

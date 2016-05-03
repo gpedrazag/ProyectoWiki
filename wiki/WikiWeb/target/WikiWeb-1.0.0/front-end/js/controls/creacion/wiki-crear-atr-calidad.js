@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Arquitectura De Software");
+            $("#panel-heading-left").html("Atributo De Calidad");
             $("#panel-heading-right").html("Relaciones");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
@@ -75,11 +75,11 @@
                             );
             ajaxSelectAll3(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-4").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "4"}));
+                    $("#slc-3").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "3"}));
                 });
             });
 
-            $("#slc-4").on("change", eventSelected);
+            $("#slc-3").on("change", eventSelected);
 
         }
 
@@ -90,15 +90,15 @@
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-            if (idClassOptionSelected === "4") {
+            if (idClassOptionSelected === "3") {
 
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-4 option:selected").addClass("hidden");
-                $("#slc-4 option[value=" + 0 + "]").attr("selected", true);
+                $("#slc-3 option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-3 option:selected").addClass("hidden");
+                $("#slc-3 option[value=" + 0 + "]").attr("selected", true);
 
 
 
-                $("#tbody-4")
+                $("#tbody-3")
                         .append($("<tr>").attr({"id": idOptionSelected})
                                 .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
                                 .append($("<td>")
@@ -114,7 +114,7 @@
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
 
-            $("#slc-4 option").each(function () {
+            $("#slc-3 option").each(function () {
 
                 if (tableId === $(this).attr("value")) {
                     $(this).removeClass("hidden");
@@ -130,18 +130,18 @@
             var estímulo = $("#txt-4-5").val();
             var fuentedeestímulo = $("#txt-5-5").val();
 
-            var list4 = [];
+            var list3 = [];
 
-            $.each($("#tbody-4 tr"), function (index, data) {
-                list4.push($(data).attr("id"));
+            $.each($("#tbody-3 tr"), function (index, data) {
+                list3.push($(data).attr("id"));
 
             });
 
-            alert(list4);
+            alert(list3);
 
             alert(actor + " " + ambiente + " " + medida + " " + estímulo + " " + fuentedeestímulo);
 
-            ajaxInsert5(actor, ambiente, medida, estímulo, fuentedeestímulo, list4);
+            ajaxInsert5(actor, ambiente, medida, estímulo, fuentedeestímulo, list3);
         }
 
 
@@ -155,7 +155,7 @@
                     measure: measure,
                     boost: boost,
                     boostSource: boostSource,
-                    triggerArtifacts: triggerArtifacts
+                    triggerArtifacts: JSON.stringify(triggerArtifacts)
                 },
                 method: "POST"
             }).done(function () {
