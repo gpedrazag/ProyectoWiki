@@ -80,13 +80,13 @@
             ajaxSelectAll1(function (data) {
 
                 $.each(data, function (index, data) {
-                    $("#slc-1-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "1"}));
+                    $("#slc-1-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
                 });
             });
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html("Evaluacion "+data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 

@@ -68,7 +68,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html("Evaluacion "+data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -98,9 +98,10 @@
                                                     .append($("<thead>")
                                                             .append($("<tr>").addClass("active")
                                                                     .append($("<th>").html("Id"))
-                                                                    .append($("<th>").html("Nombre"))
-                                                                    .append($("<th>").html("Descripcion"))
-                                                                    .append($("<th>").html(""))
+                                                                    .append($("<th>").html("Pros"))
+                                                                    .append($("<th>").html("Cons"))
+                                                                    .append($("<th>").html("Valoración"))
+                                                                    
                                                                     )
                                                             )
                                                     .append($("<tbody>").attr({"id": "tbody-1"})
@@ -144,12 +145,12 @@
             });
 
             ajaxSelectById1(idOptionSelected, function (data) {
-                alert(data.id);
                 $(modal).find("#tbody-1")
                         .append($("<tr>").attr({"id": data.id, "value": "1"})
-                                .append($("<td>").html(data.id).attr({"width": "20%"}))
-                                .append($("<td>").html(data.name).attr({"width": "40%"}))
-                                .append($("<td>").html(data.description).attr({"width": "40%"}))
+                                .append($("<td>").html("Evaluation "+data.id.split("_")[1]).attr({"width": "25%"}))
+                                .append($("<td>").html(data.pros).attr({"width": "25%"}))
+                                .append($("<td>").html(data.cons).attr({"width": "25%"}))
+                                .append($("<td>").html(data.valoration).attr({"width": "25%"}))
                                 );
             });
         }
@@ -218,10 +219,10 @@
             });
         }
 
-        function ajaxSelectById1(id)
+        function ajaxSelectById1(id, callback)
         {
             $.ajax({
-                url: "WikiWeb/alternative/selectById",
+                url: "WikiWeb/evaluation/selectById",
                 data: {
                     id: id
                 },
@@ -229,6 +230,7 @@
                 dataType: "json"
             }).done(function (data) {
                 alert("Encontro"+" "+data.id);
+                callback(data);
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

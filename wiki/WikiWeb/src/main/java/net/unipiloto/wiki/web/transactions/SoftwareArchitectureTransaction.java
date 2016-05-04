@@ -46,9 +46,6 @@ public class SoftwareArchitectureTransaction
             conn.begin();
             conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
             conn.add(subject, RDF.TYPE, object);
-            conn.begin();
-            conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
-            conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(name));
