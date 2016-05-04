@@ -4,14 +4,20 @@
 
         if (id === "c-9") {
 
-            $("#left-row").empty();
+           $("#left-row").empty();
             $("#right-row").empty();
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario De Creacion");
-            $("#panel-heading-left").html("Requerimiento Funcional");
+            $("#page-name").html("Formulario de creacion");
+            $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");

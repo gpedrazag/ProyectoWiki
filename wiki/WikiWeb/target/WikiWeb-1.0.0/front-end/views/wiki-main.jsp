@@ -8,6 +8,7 @@
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/metisMenu.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/sb-admin-2.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="${pageContext.request.contextPath}/front-end/css/controls/wiki-control.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
 
     </head>
@@ -249,6 +250,9 @@
                                         <a id="m-1" href="#modificarAlternativa"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-1" href="#eliminarAlternativa"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a id="r-1" href="#relacionesAlternativa"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -461,7 +465,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading" id="panel-heading-right">
+                                            <div class="panel-heading" id="panel-foot-down">
                                                 <h5>Relaciones que se van a guardar</h5>
                                             </div>
                                             <div class="panel-body"  id="panel-foot">
@@ -511,7 +515,7 @@
         <script src="${pageContext.request.contextPath}/front-end/js/controls/modificacion/wiki-modificar-solucion.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/modificacion/wiki-modificar-suposicion.js"></script>
 
-
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-alternativa.js"></script>
 
     </body>
 </html>

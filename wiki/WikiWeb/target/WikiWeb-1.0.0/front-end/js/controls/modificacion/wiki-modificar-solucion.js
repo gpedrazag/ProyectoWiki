@@ -8,9 +8,15 @@
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario De Modificacion");
-            $("#panel-heading-left").html("Solución");
+            $("#page-name").html("Formulario de creModificacionacion");
+            $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");

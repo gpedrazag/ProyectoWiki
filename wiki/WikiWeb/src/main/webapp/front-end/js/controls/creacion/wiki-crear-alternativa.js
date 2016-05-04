@@ -12,6 +12,12 @@
             $("#page-name").html("Formulario de creacion");
             $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
@@ -75,23 +81,77 @@
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
 
-            if (idClassOptionSelected === "8") {
+            var modal = $("<div>").attr({"id": "my-modal", "tabindex": "-1", "role": "dialog"}).addClass("modal fade")
+                    //<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"> 
+                    .append($("<div>").addClass("modal-dialog modal-lg")
+                            .append($("<div>").addClass("modal-content")
+                                    .append($("<div>").addClass("modal-header").css({"padding": "8px 10px"})
+                                            .append($("<button>").addClass("close").attr({"type": "button", "data-dismiss": "modal", "aria-label": "close"})
+                                                    .append($("<span>").attr("aria-hidden", "true").html("&times;")
+                                                            )
+                                                    )
+                                            .append($("<h4>").addClass("modal-title").html("Esta Seguro De Agregar Esta Relacion?")
+                                                    )
+                                            )
+                                    .append($("<div>").addClass("modal-body")
+                                            .append($("<table>").addClass("table table-hover")
+                                                    .append($("<thead>")
+                                                            .append($("<tr>").addClass("active")
+                                                                    .append($("<th>").html("Id"))
+                                                                    .append($("<th>").html("Nombre"))
+                                                                    .append($("<th>").html("Descripcion"))
+                                                                    .append($("<th>").html(""))
+                                                                    )
+                                                            )
+                                                    .append($("<tbody>").attr({"id": "tbody-1"})
 
-                $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-8 option:selected").addClass("hidden");
-                $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
+                                                            )
+                                                    )
+                                            )
+                                    .append($("<div>").addClass("modal-footer").css({"padding": "8px 10px"})
+                                            .append($("<button>").addClass("btn btn-primary").attr({"data-dismiss": "modal", "type": "button"}).html("Aceptar").on("click", function () {
 
-                $("#tbody-8")
-                        .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
-                                .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
-                                .append($("<td>")
-                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                )
-                                        )
+                                                if (idClassOptionSelected === "8") {
+
+                                                    $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
+                                                    $("#slc-8 option:selected").addClass("hidden");
+                                                    $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
+
+                                                    $("#tbody-8")
+                                                            .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
+                                                                    .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
+                                                                    .append($("<td>")
+                                                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                                    )
+                                                                            )
+                                                                    );
+                                                }
+                                            }))
+                                            .append($("<button>").addClass("btn btn-default").attr({"data-dismiss": "modal", "type": "button"}).html("Cancelar").on("click", function () {
+
+                                                $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
+                                                $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
+
+                                            }))
+                                            )
+                                    )
+                            );
+
+
+            $(modal).modal({keyboard: true}).on("hidden.bs.modal", function () {
+                $("#my-modal").remove();
+            });
+
+            ajaxSelectById1(idOptionSelected, function (data) {
+                alert(data.id);
+                $(modal).find("#tbody-1")
+                        .append($("<tr>").attr({"id": data.id, "value": "1"})
+                                .append($("<td>").html(data.id).attr({"width": "20%"}))
+                                .append($("<td>").html(data.name).attr({"width": "40%"}))
+                                .append($("<td>").html(data.description).attr({"width": "40%"}))
                                 );
-            }
-
+            });
         }
 
         function eventRemove() {
@@ -155,6 +215,22 @@
                 callback(data);
             }).fail(function (jrxml, errorThrow) {
                 callback(null);
+            });
+        }
+
+        function ajaxSelectById1(id)
+        {
+            $.ajax({
+                url: "WikiWeb/alternative/selectById",
+                data: {
+                    id: id
+                },
+                method: "POST",
+                dataType: "json"
+            }).done(function (data) {
+                alert("Encontro"+" "+data.id);
+            }).fail(function (jrxml, errorThrow) {
+                alert("Error");
             });
         }
 

@@ -1,6 +1,6 @@
 (function ($) {
 
-    $.fn.wikiInicioPrueba = function () {
+    $.fn.wikiRelacionAlternativa = function () {
         
 
         

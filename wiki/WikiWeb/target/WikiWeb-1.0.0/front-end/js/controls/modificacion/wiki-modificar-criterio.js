@@ -9,9 +9,15 @@
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario De Modificacion");
-            $("#panel-heading-left").html("Criterio");
+            $("#page-name").html("Formulario de Modificacion");
+            $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
@@ -69,7 +75,7 @@
 
             ajaxSelectAll6(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-6-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "6"}));
+                    $("#slc-6-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "6"}));
                 });
             });
 

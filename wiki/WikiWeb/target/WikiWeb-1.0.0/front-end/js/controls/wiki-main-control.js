@@ -28,6 +28,8 @@ $(document).ready(function () {
     $("#m-12").on("click", eventModify);
     $("#m-13").on("click", eventModify);
 
+    $("#d-1").on("click", eventDelete);
+
 
     function eventCreate() {
 
@@ -67,7 +69,10 @@ $(document).ready(function () {
 
     }
 
-
+    function eventDelete() {
+        var id = $(this).attr("id");
+        $("<div>").wikiEliminarAlternativa(id);
+    }
 
 });
 

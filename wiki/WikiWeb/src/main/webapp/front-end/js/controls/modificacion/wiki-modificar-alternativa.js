@@ -9,13 +9,20 @@
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
+            $("#page-name").html("Formulario de Modificacion");
             $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+
             $("#row-content")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Alternativa"))
@@ -73,7 +80,7 @@
             ajaxSelectAll1(function (data) {
 
                 $.each(data, function (index, data) {
-                    $("#slc-1-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "1"}));
+                    $("#slc-1-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "1"}));
                 });
             });
 

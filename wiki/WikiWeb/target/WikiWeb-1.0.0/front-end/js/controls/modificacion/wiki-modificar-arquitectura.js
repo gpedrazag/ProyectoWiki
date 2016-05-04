@@ -9,9 +9,15 @@
             $("#row-content").empty();
             $("#row-foot").empty();
             $("#panel-foot").empty();
-            $("#page-name").html("Formulario de modificación");
-            $("#panel-heading-left").html("Arquitectura De Software");
+            $("#page-name").html("Formulario de Modificacion");
+            $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
+
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
+
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
@@ -92,7 +98,7 @@
 
             ajaxSelectAll2(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-2-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "2"}));
+                    $("#slc-2-tp").append($("<option>").html(data.id).attr({"value": "Arquitectura de Software "+(data.id).split("_")[1], "idClass": "2"}));
                 });
             });
 
@@ -104,7 +110,7 @@
 
             ajaxSelectAll7(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-7").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "7"}));
+                    $("#slc-7").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "7"}));
                 });
             });
 
