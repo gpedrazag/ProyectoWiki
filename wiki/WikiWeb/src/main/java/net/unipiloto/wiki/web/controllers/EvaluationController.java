@@ -20,7 +20,7 @@ public class EvaluationController {
             @RequestParam(value = "cons") String cons,
             @RequestParam(value = "valoration") String valoration) {
         try {
-            EvaluationTransaction.insert(pros, cons, valoration);
+            EvaluationTransaction.insert(null, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -32,7 +32,7 @@ public class EvaluationController {
             @RequestParam(value = "cons") String cons,
             @RequestParam(value = "valoration") String valoration) {
         try {
-            EvaluationTransaction.update("evaluation_" + id, pros, cons, valoration);
+            EvaluationTransaction.update(id, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -41,7 +41,7 @@ public class EvaluationController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            EvaluationTransaction.delete("evaluation_" + id);
+            EvaluationTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +49,7 @@ public class EvaluationController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return EvaluationTransaction.selectById("evaluation_" + id);
+        return EvaluationTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

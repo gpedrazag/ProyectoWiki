@@ -21,6 +21,7 @@ public class AlternativeController {
             @RequestParam(value = "evaluationId") String evaluationId) {
         try {
             AlternativeTransaction.insert(
+                    null,
                     name,
                     description,
                     evaluationId);
@@ -37,7 +38,7 @@ public class AlternativeController {
             @RequestParam(value = "evaluationId") String evaluationId) {
         try {
             AlternativeTransaction.update(
-                    "alternative_" + id,
+                    id,
                     name,
                     description,
                     evaluationId);
@@ -49,7 +50,7 @@ public class AlternativeController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            AlternativeTransaction.delete("alternative_" + id);
+            AlternativeTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,7 +58,7 @@ public class AlternativeController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return AlternativeTransaction.selectById("alternative_" + id);
+        return AlternativeTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

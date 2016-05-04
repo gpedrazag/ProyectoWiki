@@ -25,6 +25,7 @@ public class QualityAttributeController {
             @RequestParam(value = "triggerArtifacts") String triggerArtifacts) {
         try {
             QualityAttributeTransaction.insert(
+                    null,
                     actor,
                     enviroment,
                     measure,
@@ -47,7 +48,7 @@ public class QualityAttributeController {
             @RequestParam(value = "triggerArtifacts") String triggerArtifacts) {
         try {
             QualityAttributeTransaction.update(
-                    "qualityAttribute_" + id,
+                    id,
                     actor,
                     enviroment,
                     measure,
@@ -62,7 +63,7 @@ public class QualityAttributeController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            QualityAttributeTransaction.delete("qualityAttribute_" + id);
+            QualityAttributeTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,7 +71,7 @@ public class QualityAttributeController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return QualityAttributeTransaction.selectById("qualityAttribute_" + id);
+        return QualityAttributeTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

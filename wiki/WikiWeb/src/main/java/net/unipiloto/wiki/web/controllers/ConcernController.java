@@ -23,6 +23,7 @@ public class ConcernController {
             @RequestParam(value = "describedByFR") String describedByFR) {
         try {
             ConcernTransaction.insert(
+                    null,
                     concern,
                     JsonFactory.fromJsonArray(describedByQA, String.class),
                     JsonFactory.fromJsonArray(describedByFR, String.class));
@@ -51,7 +52,7 @@ public class ConcernController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            ConcernTransaction.delete("concern_" + id);
+            ConcernTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -59,7 +60,7 @@ public class ConcernController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return ConcernTransaction.selectById("concern_" + id);
+        return ConcernTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

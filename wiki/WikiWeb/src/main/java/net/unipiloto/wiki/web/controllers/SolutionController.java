@@ -17,7 +17,7 @@ public class SolutionController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestParam(value = "rationale") String rationale) {
         try {
-            SolutionTransaction.insert(rationale);
+            SolutionTransaction.insert(null,rationale);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -26,7 +26,7 @@ public class SolutionController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestParam(value = "id") String id, @RequestParam(value = "rationale") String rationale) {
         try {
-            SolutionTransaction.update("solution_" + id, rationale);
+            SolutionTransaction.update(id, rationale);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -35,7 +35,7 @@ public class SolutionController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            SolutionTransaction.delete("solution_" + id);
+            SolutionTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,7 +43,7 @@ public class SolutionController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return SolutionTransaction.selectById("solution_" + id);
+        return SolutionTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

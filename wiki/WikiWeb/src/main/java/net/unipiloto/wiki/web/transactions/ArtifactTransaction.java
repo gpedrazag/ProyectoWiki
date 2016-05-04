@@ -67,17 +67,18 @@ public class ArtifactTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
-        ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            conn.begin();
-            conn.remove(
-                subject,
-                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-                factory.createIRI("http://www.semanticweb.org/sa#Alternative")
-            );
-            conn.commit();
+            conn.prepareUpdate(
+                "DELETE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }\n"
+                +"WHERE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }"
+                
+            ).execute();
+            conn.prepareUpdate(
+                "DELETE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }\n"
+                +"WHERE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }"
+                
+            ).execute();
         }
         catch(Exception ex)
         {

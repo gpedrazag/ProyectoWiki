@@ -22,6 +22,7 @@ public class CriteriaController {
             @RequestParam(value = "linkedEvaluations") String linkedEvaluations) {
         try {
             CriteriaTransaction.insert(
+                    null,
                     keyword,
                     description,
                     JsonFactory.fromJsonArray(linkedEvaluations, String.class));
@@ -38,7 +39,7 @@ public class CriteriaController {
             @RequestParam(value = "linkedEvaluations") String linkedEvaluations) {
         try {
             CriteriaTransaction.update(
-                    "criteria_" + id,
+                    id,
                     keyword,
                     description,
                     JsonFactory.fromJsonArray(linkedEvaluations, String.class));
@@ -50,7 +51,7 @@ public class CriteriaController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            CriteriaTransaction.delete("criteria_" + id);
+            CriteriaTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -58,7 +59,7 @@ public class CriteriaController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return CriteriaTransaction.selectById("criteria_" + id);
+        return CriteriaTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

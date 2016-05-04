@@ -23,6 +23,7 @@ public class SoftwareArchitectureController {
             @RequestParam(value = "decisionsRelated") String decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.insert(
+                    null,
                     name,
                     description,
                     JsonFactory.fromJsonArray(relatedArtifacts, String.class),
@@ -41,7 +42,7 @@ public class SoftwareArchitectureController {
             @RequestParam(value = "decisionsRelated") String decisionsRelated) {
         try {
             SoftwareArchitectureTransaction.update(
-                    "sa_" + id,
+                    id,
                     name,
                     description,
                     JsonFactory.fromJsonArray(relatedArtifacts, String.class),
@@ -54,7 +55,7 @@ public class SoftwareArchitectureController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            SoftwareArchitectureTransaction.delete("SoftwareArchitecture_" + id);
+            SoftwareArchitectureTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -62,7 +63,7 @@ public class SoftwareArchitectureController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return SoftwareArchitectureTransaction.selectById("SoftwareArchitecture_" + id);
+        return SoftwareArchitectureTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

@@ -92,7 +92,7 @@
 
             ajaxSelectAll2(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-2-tp").append($("<option>").html(data.name).attr({"value": data.id, "idClass": "2"}));
+                    $("#slc-2-tp").append($("<option>").html(data.name).attr({"value": "Arquitectura de Software "+(data.id).split("_")[1], "idClass": "2"}));
                 });
             });
 

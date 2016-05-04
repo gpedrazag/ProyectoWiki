@@ -18,7 +18,7 @@ public class ResponsibleController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestParam(value = "name") String name, @RequestParam(value = "decisions") String decisions) {
         try {
-            ResponsibleTransaction.insert(name, JsonFactory.fromJsonArray(decisions, String.class));
+            ResponsibleTransaction.insert(null, name, JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -30,7 +30,7 @@ public class ResponsibleController {
             @RequestParam(value = "name") String name,
             @RequestParam(value = "decisions") String decisions) {
         try {
-            ResponsibleTransaction.update("responsible_" + id, name, JsonFactory.fromJsonArray(decisions, String.class));
+            ResponsibleTransaction.update(id, name, JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -39,7 +39,7 @@ public class ResponsibleController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            ResponsibleTransaction.delete("responsible_" + id);
+            ResponsibleTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,7 +47,7 @@ public class ResponsibleController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return ResponsibleTransaction.selectById("responsible_" + id);
+        return ResponsibleTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

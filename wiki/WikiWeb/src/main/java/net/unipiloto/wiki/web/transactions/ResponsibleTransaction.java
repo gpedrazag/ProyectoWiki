@@ -21,22 +21,24 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class ResponsibleTransaction
 {
-    public static void insert(String name, List<String> decisions) throws IOException, URISyntaxException
+    public static void insert(String id, String name, List<String> decisions) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
         {
-            List<Integer> ids = selectAllIds(conn);
-            String id = "";
-            if(ids != null)
+            if(id==null)
             {
-                id = "responsible_"+(ids.get(0)+1);
-            }
-            else
-            {
-                id = "responsible_1";
+                List<Integer> ids = selectAllIds(conn);
+                if(ids != null)
+                {
+                    id = "responsible_"+(ids.get(0)+1);
+                }
+                else
+                {
+                    id = "responsible_1";
+                }
             }
             ValueFactory factory = repo.getValueFactory();
             IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
@@ -73,7 +75,7 @@ public class ResponsibleTransaction
     public static void update(String id, String name, List<String> decisions) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(name, decisions);
+        insert(id, name, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -81,17 +83,18 @@ public class ResponsibleTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
-        ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            conn.begin();
-            conn.remove(
-                subject,
-                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-                factory.createIRI("http://www.semanticweb.org/sa#Responsible")
-            );
-            conn.commit();
+            conn.prepareUpdate(
+                "DELETE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }\n"
+                +"WHERE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }"
+                
+            ).execute();
+            conn.prepareUpdate(
+                "DELETE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }\n"
+                +"WHERE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }"
+                
+            ).execute();
         }
         catch(Exception ex)
         {

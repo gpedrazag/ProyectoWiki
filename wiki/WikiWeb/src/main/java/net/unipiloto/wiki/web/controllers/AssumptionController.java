@@ -17,7 +17,7 @@ public class AssumptionController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(@RequestParam(value = "description") String description, @RequestParam(value = "source") String source) {
         try {
-            AssumptionTransaction.insert(description, source);
+            AssumptionTransaction.insert(null,description, source);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -26,7 +26,7 @@ public class AssumptionController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description, @RequestParam(value = "source") String source) {
         try {
-            AssumptionTransaction.update("assumption_" + id, description, source);
+            AssumptionTransaction.update(id, description, source);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -35,7 +35,7 @@ public class AssumptionController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            AssumptionTransaction.delete("assumption_" + id);
+            AssumptionTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,7 +43,7 @@ public class AssumptionController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return AssumptionTransaction.selectById("assumption_" + id);
+        return AssumptionTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

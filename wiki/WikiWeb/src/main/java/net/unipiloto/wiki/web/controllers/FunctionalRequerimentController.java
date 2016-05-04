@@ -23,6 +23,7 @@ public class FunctionalRequerimentController {
             @RequestParam(value = "output") String output) {
         try {
             FunctionalRequerimentTransaction.insert(
+                    null,
                     name,
                     actor,
                     description,
@@ -43,7 +44,7 @@ public class FunctionalRequerimentController {
             @RequestParam(value = "output") String output) {
         try {
             FunctionalRequerimentTransaction.update(
-                    "functionalRequeriment_" + id,
+                    id,
                     name,
                     actor,
                     description,
@@ -57,7 +58,7 @@ public class FunctionalRequerimentController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            FunctionalRequerimentTransaction.delete("functionalRequeriment_" + id);
+            FunctionalRequerimentTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -65,7 +66,7 @@ public class FunctionalRequerimentController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return FunctionalRequerimentTransaction.selectById("functionalRequeriment_" + id);
+        return FunctionalRequerimentTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

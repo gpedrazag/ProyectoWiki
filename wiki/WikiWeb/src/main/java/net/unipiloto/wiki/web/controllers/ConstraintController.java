@@ -21,7 +21,7 @@ public class ConstraintController {
             @RequestParam(value = "rationale") String rationale,
             @RequestParam(value = "keyword") String keyword) {
         try {
-            ConstraintTransaction.insert(name, description, rationale, keyword);
+            ConstraintTransaction.insert(null, name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -35,7 +35,7 @@ public class ConstraintController {
             @RequestParam(value = "rationale") String rationale,
             @RequestParam(value = "keyword") String keyword) {
         try {
-            ConstraintTransaction.update("constraint_" + id, name, description, rationale, keyword);
+            ConstraintTransaction.update(id, name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -44,7 +44,7 @@ public class ConstraintController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            ConstraintTransaction.delete("constraint_" + id);
+            ConstraintTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,7 +52,7 @@ public class ConstraintController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return ConstraintTransaction.selectById("constraint_" + id);
+        return ConstraintTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

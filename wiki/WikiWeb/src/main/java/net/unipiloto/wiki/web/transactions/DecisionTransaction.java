@@ -22,6 +22,7 @@ import org.openrdf.repository.RepositoryConnection;
 public class DecisionTransaction
 {
     public static void insert(
+        String id,
         String name, 
         String arguments, 
         String state,
@@ -39,15 +40,17 @@ public class DecisionTransaction
         RepositoryConnection conn = repo.getConnection();
         try
         {
-            List<Integer> ids = selectAllIds(conn);
-            String id = "";
-            if(ids != null)
+            if(id == null)
             {
-                id = "decision_"+(ids.get(0)+1);
-            }
-            else
-            {
-                id = "decision_1";
+                List<Integer> ids = selectAllIds(conn);
+                if(ids != null)
+                {
+                    id = "decision_"+(ids.get(0)+1);
+                }
+                else
+                {
+                    id = "decision_1";
+                }
             }
             ValueFactory factory = repo.getValueFactory();
             IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
@@ -132,7 +135,7 @@ public class DecisionTransaction
         String haveSolution) throws IOException, URISyntaxException
     {
         delete(id);
-        insert(name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
+        insert(id, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -140,17 +143,18 @@ public class DecisionTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
-        ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            conn.begin();
-            conn.remove(
-                subject,
-                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-                factory.createIRI("http://www.semanticweb.org/sa#Decision")
-            );
-            conn.commit();
+            conn.prepareUpdate(
+                "DELETE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }\n"
+                +"WHERE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }"
+                
+            ).execute();
+            conn.prepareUpdate(
+                "DELETE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }\n"
+                +"WHERE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }"
+                
+            ).execute();
         }
         catch(Exception ex)
         {

@@ -21,22 +21,24 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class FunctionalRequerimentTransaction
 {
-    public static void insert(String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
+    public static void insert(String id, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
     {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         try
         {
-            List<Integer> ids = selectAllIds(conn);
-            String id = "";
-            if(ids != null)
+            if(id == null)
             {
-                id = "fr_"+(ids.get(0)+1);
-            }
-            else
-            {
-                id = "fr_1";
+                List<Integer> ids = selectAllIds(conn);
+                if(ids != null)
+                {
+                    id = "fr_"+(ids.get(0)+1);
+                }
+                else
+                {
+                    id = "fr_1";
+                }
             }
             ValueFactory factory = repo.getValueFactory();
             IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
@@ -68,7 +70,7 @@ public class FunctionalRequerimentTransaction
     {
         
         delete(id);
-        insert(name, actor, description, input, output);
+        insert(id, name, actor, description, input, output);
         
     }
     
@@ -77,17 +79,18 @@ public class FunctionalRequerimentTransaction
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
-        ValueFactory factory = repo.getValueFactory();
-        IRI subject = factory.createIRI("http://www.semanticweb.org/sa#"+id);
         try
         {
-            conn.begin();
-            conn.remove(
-                subject,
-                factory.createIRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-                factory.createIRI("http://www.semanticweb.org/sa#FunctionalRequeriment")
-            );
-            conn.commit();
+            conn.prepareUpdate(
+                "DELETE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }\n"
+                +"WHERE { <http://www.semanticweb.org/sa#"+id+"> ?p ?d2 }"
+                
+            ).execute();
+            conn.prepareUpdate(
+                "DELETE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }\n"
+                +"WHERE { ?d1 ?p <http://www.semanticweb.org/sa#"+id+"> }"
+                
+            ).execute();
         }
         catch(Exception ex)
         {

@@ -30,6 +30,7 @@ public class DecisionController {
             @RequestParam(value = "haveSolution") String haveSolution) {
         try {
             DecisionTransaction.insert(
+                    null,
                     name,
                     argumen,
                     state,
@@ -61,7 +62,7 @@ public class DecisionController {
     ) {
         try {
             DecisionTransaction.update(
-                    "decision_" + id,
+                    id,
                     name, arguments,
                     state,
                     mayHaveConstraints,
@@ -80,7 +81,7 @@ public class DecisionController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            DecisionTransaction.delete("decision_" + id);
+            DecisionTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,7 +89,7 @@ public class DecisionController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return JsonFactory.toJson(DecisionTransaction.selectById("decision_" + id));
+        return JsonFactory.toJson(DecisionTransaction.selectById(id));
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)
