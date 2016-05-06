@@ -1,7 +1,7 @@
 (function ($) {
 
     $.fn.wikiModificarEvaluacion = function (id) {
-        if (id === "c-8") {
+        if (id === "m-8") {
 
             $("#left-row").empty();
             $("#right-row").empty();

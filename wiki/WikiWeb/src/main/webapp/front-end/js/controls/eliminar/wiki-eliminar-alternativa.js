@@ -46,7 +46,7 @@
 
                         $("#tbody-1")
                                 .append($("<tr>").attr({"id": data.id, "value": "1"})
-                                        .append($("<td>").html(data.id).attr({"width": "20%"}))
+                                        .append($("<td>").html("Alternativa " + data.id.split("_")[1]).attr({"width": "20%"}))
                                         .append($("<td>").html(data.name).attr({"width": "40%"}))
                                         .append($("<td>").html(data.description).attr({"width": "40%"}))
                                         .append($("<td>")
@@ -63,9 +63,7 @@
         function eventRemove() {
 
             var tableId = $(this).parent().parent().attr("id");
-            alert(tableId);
             var idClass = $(this).parent().parent().attr("value");
-
             ajaxDelete1(tableId);
             $(this).parent().parent().remove();
 
@@ -79,7 +77,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Borro");
+                swal({title: "Eliminacion Compeltada!!!", text: "Se elimino correctamente la alternativa", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

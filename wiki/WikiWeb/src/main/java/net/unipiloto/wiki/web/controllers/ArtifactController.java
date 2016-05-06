@@ -22,7 +22,7 @@ public class ArtifactController {
             @RequestParam(value = "decisions") String decisions) {
         try {
             ArtifactTransaction.insert(
-                    "artifact_" + id,
+                    id,
                     description,
                     JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
@@ -37,7 +37,7 @@ public class ArtifactController {
             @RequestParam(value = "decisions") String decisions) {
         try {
             ArtifactTransaction.update(
-                    "artifact_" + id,
+                    id,
                     description,
                     JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
@@ -48,7 +48,7 @@ public class ArtifactController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(@RequestParam(value = "id") String id) {
         try {
-            ArtifactTransaction.delete("artifact_" + id);
+            ArtifactTransaction.delete(id);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -56,7 +56,7 @@ public class ArtifactController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return ArtifactTransaction.selectById("artifact_" + id);
+        return ArtifactTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

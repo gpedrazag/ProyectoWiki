@@ -2,7 +2,7 @@
 
     $.fn.wikiModificarRequerimientoFuncional = function (id) {
 
-        if (id === "c-9") {
+        if (id === "m-9") {
 
             $("#left-row").empty();
             $("#right-row").empty();

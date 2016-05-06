@@ -2,7 +2,7 @@
 
     $.fn.wikiModificarDecision = function (id) {
 
-        if (id === "c-7") {
+        if (id === "m-7") {
 
             $("#left-row").empty();
             $("#right-row").empty();

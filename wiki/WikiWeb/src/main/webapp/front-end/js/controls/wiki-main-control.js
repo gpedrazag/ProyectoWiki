@@ -29,6 +29,18 @@ $(document).ready(function () {
     $("#m-13").on("click", eventModify);
 
     $("#d-1").on("click", eventDelete);
+    $("#d-2").on("click", eventDelete);
+    $("#d-3").on("click", eventDelete);
+    $("#d-4").on("click", eventDelete);
+    $("#d-5").on("click", eventDelete);
+    $("#d-6").on("click", eventDelete);
+    $("#d-7").on("click", eventDelete);
+    $("#d-8").on("click", eventDelete);
+    $("#d-9").on("click", eventDelete);
+    $("#d-10").on("click", eventDelete);
+    $("#d-11").on("click", eventDelete);
+    $("#d-12").on("click", eventDelete);
+    $("#d-13").on("click", eventDelete);
 
 
     function eventCreate() {
@@ -72,6 +84,9 @@ $(document).ready(function () {
     function eventDelete() {
         var id = $(this).attr("id");
         $("<div>").wikiEliminarAlternativa(id);
+        $("<div>").wikiEliminarArquitectura(id);
+        $("<div>").wikiEliminarArtefacto(id);
+
     }
 
 });

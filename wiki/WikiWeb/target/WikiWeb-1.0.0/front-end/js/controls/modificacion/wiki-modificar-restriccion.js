@@ -1,7 +1,7 @@
 (function ($) {
 
     $.fn.wikiModificarRestriccion = function (id) {
-        if (id === "c-11") {
+        if (id === "m-11") {
 
             $("#left-row").empty();
             $("#right-row").empty();

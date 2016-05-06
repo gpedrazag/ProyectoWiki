@@ -294,11 +294,11 @@ public class DecisionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {"
-                + "<http://www.semanticweb.org/sa#"+id+" <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
-                + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#id> ?id . "
-                + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#name> ?name . "
-                + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#arguments> ?arguments . "
-                + "<http://www.semanticweb.org/sa#"+id+" <http://www.semanticweb.org/sa#state> ?state "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#arguments> ?arguments . "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#state> ?state "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();

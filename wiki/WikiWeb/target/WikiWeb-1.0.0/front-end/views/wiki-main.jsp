@@ -7,6 +7,7 @@
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/bootstrap.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/metisMenu.min.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/sb-admin-2.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/front-end/css/plugins/sweetalert.css" rel="stylesheet">
         <link href="${pageContext.request.contextPath}/front-end/css/plugins/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="${pageContext.request.contextPath}/front-end/css/controls/wiki-control.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
@@ -267,6 +268,9 @@
                                         <a id="m-2" href="#modificarArquitectura"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-2" href="#eliminarArquitectura"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesArquitectura"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -279,6 +283,9 @@
                                     </li>
                                     <li>
                                         <a id="m-3" href="#modificarArtefacto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-3" href="#eliminarArtefacto"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesArtefacto"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -295,6 +302,9 @@
                                         <a id="m-4" href="#modificarAsunto"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-4" href="#eliminarAsunto"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesAsunto"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -307,6 +317,9 @@
                                     </li>
                                     <li>
                                         <a id="m-5" href="#modificarAtributo"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-5" href="#eliminarAtributo"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesAtributo"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -323,6 +336,9 @@
                                         <a id="m-6" href="#modificarCriterio"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-6" href="#eliminarCriterio"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesCriterio"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -335,6 +351,9 @@
                                     </li>
                                     <li>
                                         <a  id="m-7" href="#modificarDecisión"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-7" href="#eliminarDecisión"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesDecisión"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -351,6 +370,9 @@
                                         <a id="m-8" href="#modificarEvaluación"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-8" href="#eliminarEvaluación"><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesEvaluación"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -363,6 +385,9 @@
                                     </li>
                                     <li>
                                         <a id="m-9" href="#modificarRequerimiento"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-9" href="#eliminarRequerimiento><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesRequerimiento"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -379,6 +404,9 @@
                                         <a id="m-10" href="#modificarResponsable"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-10" href="#eliminarResponsable><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesResponsable"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -391,6 +419,9 @@
                                     </li>
                                     <li>
                                         <a id="m-11" href="#modificarRestricción"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-11" href="#eliminarRestricción><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesRestricción"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -407,6 +438,9 @@
                                         <a id="m-12" href="#modificarSolución"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
+                                        <a id="d-12" href="#eliminarSolución><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                    </li>
+                                    <li>
                                         <a href="#relacionesSolución"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
@@ -419,6 +453,9 @@
                                     </li>
                                     <li>
                                         <a id="m-13" href="#modificarSuposición"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
+                                    </li>
+                                    <li>
+                                        <a id="d-13" href="#eliminarSuposición><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesSuposición"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -483,6 +520,8 @@
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/metisMenu.min.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/plugins/sweetalert.min.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/plugins/sweetalert-dev.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/sb-admin-2.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/wiki-main-control.js"></script>
 
@@ -516,6 +555,8 @@
         <script src="${pageContext.request.contextPath}/front-end/js/controls/modificacion/wiki-modificar-suposicion.js"></script>
 
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-alternativa.js"></script>
-
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-arquitectura.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-artefacto.js"></script>
+        
     </body>
 </html>

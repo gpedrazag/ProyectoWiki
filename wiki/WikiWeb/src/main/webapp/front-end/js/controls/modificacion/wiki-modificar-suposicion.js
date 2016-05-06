@@ -1,7 +1,7 @@
 (function ($) {
 
     $.fn.wikiModificarSuposicion = function (id) {
-        if (id === "c-13") {
+        if (id === "m-13") {
 
             $("#left-row").empty();
             $("#right-row").empty();

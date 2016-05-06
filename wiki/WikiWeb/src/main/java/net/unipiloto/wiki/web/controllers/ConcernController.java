@@ -40,7 +40,7 @@ public class ConcernController {
             @RequestParam(value = "describedByFR") String describedByFR) {
         try {
             ConcernTransaction.update(
-                    "concern_" + id,
+                    id,
                     concern,
                     JsonFactory.fromJsonArray(describedByQA, String.class),
                     JsonFactory.fromJsonArray(describedByFR, String.class));

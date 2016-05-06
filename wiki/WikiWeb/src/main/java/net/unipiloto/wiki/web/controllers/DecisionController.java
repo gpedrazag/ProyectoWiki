@@ -19,27 +19,27 @@ public class DecisionController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "arguments") String argumen,
+            @RequestParam(value = "argument") String arguments,
             @RequestParam(value = "state") String state,
-            @RequestParam(value = "mayHaveConstraints") List<String> mayHaveConstraints,
-            @RequestParam(value = "haveCriterias") List<String> haveCriterias,
-            @RequestParam(value = "mayHaveAssumptions") List<String> mayHaveAssumptions,
-            @RequestParam(value = "haveAsTriggerConcerns") List<String> haveAsTriggerConcerns,
-            @RequestParam(value = "haveResponsibles") List<String> haveResponsibles,
-            @RequestParam(value = "haveAlternatives") List<String> haveAlternatives,
-            @RequestParam(value = "haveSolution") String haveSolution) {
+            @RequestParam(value = "mayHaveConstraints") String mayHaveConstraints,
+            @RequestParam(value = "haveCriterias") String haveCriterias,
+            @RequestParam(value = "mayHaveAssumptions") String mayHaveAssumptions,
+            @RequestParam(value = "haveAsTriggerConcerns") String haveAsTriggerConcerns,
+            @RequestParam(value = "haveResponsibles") String haveResponsibles,
+            @RequestParam(value = "haveAlternatives") String haveAlternatives,
+            @RequestParam(value = "haveSol") String haveSolution) {
         try {
             DecisionTransaction.insert(
                     null,
                     name,
-                    argumen,
+                    arguments,
                     state,
-                    mayHaveConstraints,
-                    haveCriterias,
-                    mayHaveAssumptions,
-                    haveAsTriggerConcerns,
-                    haveResponsibles,
-                    haveAlternatives,
+                    JsonFactory.fromJsonArray(mayHaveConstraints, String.class),
+                    JsonFactory.fromJsonArray(haveCriterias, String.class),
+                    JsonFactory.fromJsonArray(mayHaveAssumptions, String.class),
+                    JsonFactory.fromJsonArray(haveAsTriggerConcerns, String.class),
+                    JsonFactory.fromJsonArray(haveResponsibles, String.class),
+                    JsonFactory.fromJsonArray(haveAlternatives, String.class),
                     haveSolution);
         } catch (IOException | URISyntaxException ex) {
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,27 +50,28 @@ public class DecisionController {
     public void update(
             @RequestParam(value = "id") String id,
             @RequestParam(value = "name") String name,
-            @RequestParam(value = "arguments") String arguments,
+            @RequestParam(value = "argument") String arguments,
             @RequestParam(value = "state") String state,
-            @RequestParam(value = "mayHaveConstraints") List<String> mayHaveConstraints,
-            @RequestParam(value = "haveCriterias") List<String> haveCriterias,
-            @RequestParam(value = "mayHaveAssumptions") List<String> mayHaveAssumptions,
-            @RequestParam(value = "haveAsTriggerConcerns") List<String> haveAsTriggerConcerns,
-            @RequestParam(value = "haveResponsibles") List<String> haveResponsibles,
-            @RequestParam(value = "haveAlternatives") List<String> haveAlternatives,
+            @RequestParam(value = "mayHaveConstraints") String mayHaveConstraints,
+            @RequestParam(value = "haveCriterias") String haveCriterias,
+            @RequestParam(value = "mayHaveAssumptions") String mayHaveAssumptions,
+            @RequestParam(value = "haveAsTriggerConcerns") String haveAsTriggerConcerns,
+            @RequestParam(value = "haveResponsibles") String haveResponsibles,
+            @RequestParam(value = "haveAlternatives") String haveAlternatives,
             @RequestParam(value = "haveSolution") String haveSolution
     ) {
         try {
             DecisionTransaction.update(
                     id,
-                    name, arguments,
+                    name,
+                    arguments,
                     state,
-                    mayHaveConstraints,
-                    haveCriterias,
-                    mayHaveAssumptions,
-                    haveAsTriggerConcerns,
-                    haveResponsibles,
-                    haveAlternatives,
+                    JsonFactory.fromJsonArray(mayHaveConstraints, String.class),
+                    JsonFactory.fromJsonArray(haveCriterias, String.class),
+                    JsonFactory.fromJsonArray(mayHaveAssumptions, String.class),
+                    JsonFactory.fromJsonArray(haveAsTriggerConcerns, String.class),
+                    JsonFactory.fromJsonArray(haveResponsibles, String.class),
+                    JsonFactory.fromJsonArray(haveAlternatives, String.class),
                     haveSolution
             );
         } catch (IOException | URISyntaxException ex) {
@@ -89,7 +90,7 @@ public class DecisionController {
 
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
     public String selectById(@RequestParam(value = "id") String id) {
-        return JsonFactory.toJson(DecisionTransaction.selectById(id));
+        return DecisionTransaction.selectById(id);
     }
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.POST)

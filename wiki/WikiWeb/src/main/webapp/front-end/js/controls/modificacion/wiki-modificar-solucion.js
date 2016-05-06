@@ -1,7 +1,7 @@
 (function ($) {
 
     $.fn.wikiModificarSolucion = function (id) {
-        if (id === "c-12") {
+        if (id === "m-12") {
 
             $("#left-row").empty();
             $("#right-row").empty();

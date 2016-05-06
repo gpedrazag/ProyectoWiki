@@ -2,7 +2,7 @@
 
     $.fn.wikiModificarAtrCalidad = function (id) {
 
-        if (id === "c-5") {
+        if (id === "m-5") {
 
             $("#left-row").empty();
             $("#right-row").empty();

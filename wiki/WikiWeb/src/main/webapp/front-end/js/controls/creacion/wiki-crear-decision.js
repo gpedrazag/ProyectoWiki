@@ -457,7 +457,7 @@
             var list6 = [];
             var list13 = [];
             var list11 = [];
-            var list12 = [];
+            var list12 = "";
             var list1 = [];
 
             $.each($("#tbody-10 tr"), function (index, data) {
@@ -504,7 +504,7 @@
                 url: "WikiWeb/decision/insert",
                 data: {
                     name: name,
-                    argumen: argumen,
+                    argument: argumen,
                     state: state,
                     mayHaveConstraints: JSON.stringify(mayHaveConstraints),
                     haveCriterias: JSON.stringify(haveCriterias),
@@ -512,13 +512,13 @@
                     haveAsTriggerConcerns: JSON.stringify(haveAsTriggerConcerns),
                     haveResponsibles: JSON.stringify(haveResponsibles),
                     haveAlternatives: JSON.stringify(haveAlternatives),
-                    haveSolution: haveSolution
+                    haveSol: haveSolution
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto la alternativa");
+                alert("Incerto");
             }).fail(function (jrxml, errorThrow) {
-                alert("Error no se pudo insertar la alternativa");
+                alert("Error");
             });
         }
 

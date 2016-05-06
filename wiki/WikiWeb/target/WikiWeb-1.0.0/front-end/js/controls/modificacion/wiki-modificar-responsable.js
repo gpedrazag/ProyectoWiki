@@ -2,7 +2,7 @@
 
     $.fn.wikiModificarResponsable = function (id) {
 
-        if (id === "c-10") {
+        if (id === "m-10") {
 
             $("#left-row").empty();
             $("#right-row").empty();

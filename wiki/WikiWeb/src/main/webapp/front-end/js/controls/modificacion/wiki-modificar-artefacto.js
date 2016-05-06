@@ -138,7 +138,6 @@
 
             event.preventDefault();
             var id = $("#txt-3").val();
-            var ids = $('option:selected', "#slc-3-tp").attr("value");
             var description = $("#txt-area-3").val();
             var list7 = [];
 
@@ -147,13 +146,45 @@
 
             });
 
-            ajaxUpdatet3(id, description, list7);
+            var ok = true;
+
+            if (id == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (description == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (ok == true) {
+                $("#frm-1").removeClass("has-error");
+                $("#frm-2").removeClass("has-error");
+                ajaxUpdatet3(id, description, list7);
+                $("#txt-3").val("");
+                $("#txt-area-3").val("");
+                $("#tbody-7").empty();
+                $("#slc-7 option").removeClass("hidden");
+                $("#slc-7 option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-7 option[value=" + 0 + "]").attr("selected", true);
+                $("#slc-3-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-3-tp option[value=" + 0 + "]").attr("selected", true);
+            }
+
+
         }
 
 
         function eventLoad() {
             var textOptionSelected = $('option:selected', this).html();
-           
+
             var id = $('option:selected', this).attr("value");
             $("#tbody-7 tr").empty();
 
@@ -177,26 +208,31 @@
                     $.each(data, function (index, data) {
 
                         if (data.id == id) {
-                            $("#txt-3").val(data.name);
+                            $("#txt-3").val(data.id);
                             $("#txt-area-3").val(data.description);
 
                             if (data.haveDecisions !== undefined) {
 
-                                $("#tbody-7")
-                                        .append($("<tr>").attr({"id": data.decisionsRelated.id, "value": "8"})
-                                                .append($("<td>").html(data.decisionsRelated.name).attr({"width": "80%"}))
-                                                .append($("<td>")
-                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                                )
-                                                        )
-                                                );
-                       
+                                $.each(data.haveDecisions, function (index, data) {
+                                    $("#tbody-7")
+                                            .append($("<tr>").attr({"id": data.id, "value": "8"})
+                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>")
+                                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                    )
+                                                            )
+                                                    );
+                                });
+
+
                                 $("#tbody-7 tr").each(function (index, data) {
 
                                     $("#slc-7 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -214,11 +250,11 @@
                 data: {
                     id: id,
                     description: description,
-                    decision: JSON.stringify(decision)
+                    decisions: JSON.stringify(decision)
                 },
                 method: "POST"
             }).done(function () {
-                alert("Creo");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente el Artefacto", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

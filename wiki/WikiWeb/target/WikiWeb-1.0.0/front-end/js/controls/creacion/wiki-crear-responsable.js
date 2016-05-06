@@ -130,7 +130,7 @@
                 url: "WikiWeb/responsible/insert",
                 data: {
                     name: name,
-                    description: JSON.stringify(decisions)
+                    decisions: JSON.stringify(decisions)
                 },
                 method: "POST"
             }).done(function () {

@@ -2,7 +2,7 @@
 
     $.fn.wikiModificarCriterio = function (id) {
 
-        if (id === "c-6") {
+        if (id === "m-6") {
 
             $("#left-row").empty();
             $("#right-row").empty();

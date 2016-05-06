@@ -12,32 +12,28 @@
             $("#page-name").html("Formulario de creacion");
             $("#panel-heading-left").html("Alternativa");
             $("#panel-heading-right").html("Relaciones");
-
             $("#panel-heading-left").removeClass("hidden");
             $("#panel-heading-right").removeClass("hidden");
             $("#left-row").removeClass("hidden");
             $("#right-row").removeClass("hidden");
-
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Nombre"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el nombre de la alternativa."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Descripción"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-area-1"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la descripción de la alternativa."))
                             )
                     .append($("<button>").attr({"id": "btn-1"}).addClass("btn btn-primary").html("Guardar").css({"margin-right": "10px"}).on("click", eventsave))
-                    .append($("<button>").addClass("btn btn-default").html("Reset Button"))
+                    .append($("<button>").addClass("btn btn-default").attr({"type": "reset"}).html("Reset Button"))
                     ;
-
             $("#right-row")
                     .append($("<div>").addClass("form-group")
                             .append($("<label>").html("Evaluación"))
@@ -48,7 +44,6 @@
 
                             )
                     ;
-
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
                             .append($("<div>").addClass("col-lg-4").attr({"id": "row-foot-8"})
@@ -65,13 +60,11 @@
                                             )
                                     )
                             );
-
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html("Evaluacion "+data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html("Evaluacion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
-
             $("#slc-8").on("change", eventSelected);
         }
 
@@ -80,7 +73,6 @@
             var textOptionSelected = $('option:selected', this).html();
             var idClassOptionSelected = $('option:selected', this).attr("idClass");
             var idOptionSelected = $('option:selected', this).attr("value");
-
             var modal = $("<div>").attr({"id": "my-modal", "tabindex": "-1", "role": "dialog"}).addClass("modal fade")
                     //<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"> 
                     .append($("<div>").addClass("modal-dialog modal-lg")
@@ -101,7 +93,7 @@
                                                                     .append($("<th>").html("Pros"))
                                                                     .append($("<th>").html("Cons"))
                                                                     .append($("<th>").html("Valoración"))
-                                                                    
+
                                                                     )
                                                             )
                                                     .append($("<tbody>").attr({"id": "tbody-1"})
@@ -117,7 +109,6 @@
                                                     $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
                                                     $("#slc-8 option:selected").addClass("hidden");
                                                     $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
-
                                                     $("#tbody-8")
                                                             .append($("<tr>").attr({"id": idOptionSelected, "value": idClassOptionSelected})
                                                                     .append($("<td>").html(textOptionSelected).attr({"width": "80%"}))
@@ -133,21 +124,17 @@
 
                                                 $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
                                                 $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
-
                                             }))
                                             )
                                     )
                             );
-
-
             $(modal).modal({keyboard: true}).on("hidden.bs.modal", function () {
                 $("#my-modal").remove();
             });
-
-            ajaxSelectById1(idOptionSelected, function (data) {
+            ajaxSelectById8(idOptionSelected, function (data) {
                 $(modal).find("#tbody-1")
                         .append($("<tr>").attr({"id": data.id, "value": "1"})
-                                .append($("<td>").html("Evaluation "+data.id.split("_")[1]).attr({"width": "25%"}))
+                                .append($("<td>").html("Evaluation " + data.id.split("_")[1]).attr({"width": "25%"}))
                                 .append($("<td>").html(data.pros).attr({"width": "25%"}))
                                 .append($("<td>").html(data.cons).attr({"width": "25%"}))
                                 .append($("<td>").html(data.valoration).attr({"width": "25%"}))
@@ -159,7 +146,6 @@
             $(this).parent().parent().remove();
             var tableId = $(this).parent().parent().attr("id");
             var idClass = $(this).parent().parent().attr("value");
-
             if (idClass === "8") {
                 $("#slc-8 option").each(function () {
 
@@ -175,18 +161,42 @@
         function eventsave(event) {
 
             event.preventDefault();
-
             var name = $("#txt-1").val();
             var description = $("#txt-area-1").val();
-
             var list8 = "";
-
             $.each($("#tbody-8 tr"), function (index, data) {
                 list8 = $(data).attr("id");
-
             });
 
-            ajaxInsert1(name, description, list8);
+            var ok = true;
+
+            if (name == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (description == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (ok == true) {
+                $("#frm-1").removeClass("has-error");
+                $("#frm-2").removeClass("has-error");
+                ajaxInsert1(name, description, list8);
+                $("#txt-1").val("");
+                $("#txt-area-1").val("");
+                $("#tbody-8").empty();
+                $("#slc-8 option").removeClass("hidden");
+            }
+
+
         }
 
         function ajaxInsert1(name, description, evaluationId)
@@ -200,7 +210,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Creo");
+                swal({title: "Creacion Compeltada!!!", text: "Se creo correctamente la alternativa", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });
@@ -219,7 +229,7 @@
             });
         }
 
-        function ajaxSelectById1(id, callback)
+        function ajaxSelectById8(id, callback)
         {
             $.ajax({
                 url: "WikiWeb/evaluation/selectById",
@@ -229,7 +239,6 @@
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {
-                alert("Encontro"+" "+data.id);
                 callback(data);
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
@@ -238,7 +247,6 @@
 
         return this;
     };
-
 })(jQuery);
 
 
