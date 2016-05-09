@@ -91,13 +91,13 @@
 
             ajaxSelectAll5(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-5-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "5"}));
+                    $("#slc-5-tp").append($("<option>").html("Atributo de Calidad " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "5"}));
                 });
             });
 
             ajaxSelectAll3(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-3").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "3"}));
+                    $("#slc-3").append($("<option>").html("Artefacto " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "3"}));
                 });
             });
 
@@ -152,6 +152,7 @@
             var medida = $("#txt-3-5").val();
             var estímulo = $("#txt-4-5").val();
             var fuentedeestímulo = $("#txt-5-5").val();
+            var id = $('option:selected', "#slc-5-tp").attr("value");
 
             var list3 = [];
 
@@ -244,7 +245,7 @@
 
             } else {
 
-                ajaxSelectAll3(function (data) {
+                ajaxSelectAll5(function (data) {
                     $.each(data, function (index, data) {
 
                         if (data.id == id) {
@@ -256,8 +257,8 @@
 
                             if (data.triggerArtifacts !== undefined) {
 
-                                $("#tbody-3")
-                                        .append($("<tr>").attr({"id": data.triggerArtifacts.id, "value": "8"})
+                                $("#tbody-5")
+                                        .append($("<tr>").attr({"id": data.triggerArtifacts.id, "value": "5"})
                                                 .append($("<td>").html(data.triggerArtifacts.id).attr({"width": "80%"}))
                                                 .append($("<td>")
                                                         .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
@@ -266,11 +267,13 @@
                                                         )
                                                 );
 
-                                $("#tbody-3 tr").each(function (index, data) {
+                                $("#tbody-5 tr").each(function (index, data) {
 
-                                    $("#slc-3 option").each(function (index, data1) {
+                                    $("#slc-5 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        }else{
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
