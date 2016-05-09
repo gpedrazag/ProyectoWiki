@@ -163,11 +163,11 @@ public class AssumptionTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT DISTINCT ?id ?description ?source WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?source WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Assumption> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#source> ?name "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#source> ?source "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();
@@ -176,8 +176,8 @@ public class AssumptionTransaction
                 BindingSet bs = result.next();
                 assumption = new Assumption(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(),
-                    bs.getValue("description").stringValue() 
+                    bs.getValue("description").stringValue(),
+                    bs.getValue("source").stringValue() 
                 );
             }
         }
