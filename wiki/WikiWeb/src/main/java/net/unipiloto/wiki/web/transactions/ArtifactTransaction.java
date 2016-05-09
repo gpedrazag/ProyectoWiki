@@ -56,10 +56,10 @@ public class ArtifactTransaction
         
     }
     
-    public static void update(String id, String description, List<String> decisions) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String description, List<String> decisions) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, description, decisions);
+        delete(oldId);
+        insert(newId, description, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
