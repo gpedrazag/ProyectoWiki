@@ -67,7 +67,7 @@
 
             ajaxSelectAll7(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-7").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "7"}));
+                    $("#slc-7").append($("<option>").html("Decision " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "7"}));
                 });
             });
 

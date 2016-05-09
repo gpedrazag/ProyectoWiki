@@ -62,7 +62,7 @@
 
             ajaxSelectAll11(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-11-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "11"}));
+                    $("#slc-11-tp").append($("<option>").html("Restriccion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "11"}));
                 });
             });
 
@@ -123,7 +123,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente la restriccion", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

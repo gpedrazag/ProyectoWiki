@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creaModificacioncion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Responsable");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -73,13 +73,13 @@
 
             ajaxSelectAll10(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-10-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "10"}));
+                    $("#slc-10-tp").append($("<option>").html("Responsable " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "10"}));
                 });
             });
 
             ajaxSelectAll7(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-7").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "7"}));
+                    $("#slc-7").append($("<option>").html("Decision " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "7"}));
                 });
             });
 
@@ -206,7 +206,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente el responsable", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

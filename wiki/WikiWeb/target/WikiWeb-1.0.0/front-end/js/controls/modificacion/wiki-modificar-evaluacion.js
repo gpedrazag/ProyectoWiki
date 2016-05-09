@@ -9,7 +9,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de Modificacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Evaluacion");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -26,7 +26,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Asunto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-8-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Evaluación que que va a modificar."))
                             );
@@ -58,7 +58,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8-tp").append($("<option>").html("Evaluacion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -95,7 +95,7 @@
                             $("#txt-1-7").val(data.pros);
                             $("#txt-2-7").val(data.cons);
                             $("#txt-3-7").val(data.valoration);
-                           
+
                         }
                     });
                 });
@@ -114,7 +114,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+               swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente la evaluacion", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

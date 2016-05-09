@@ -54,7 +54,7 @@
 
             ajaxSelectAll12(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-12-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "12"}));
+                    $("#slc-12-tp").append($("<option>").html("Solucion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "12"}));
                 });
             });
 
@@ -102,7 +102,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente la solucion", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Errorn");
             });

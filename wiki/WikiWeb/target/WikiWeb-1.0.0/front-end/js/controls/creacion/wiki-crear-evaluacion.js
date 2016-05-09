@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Evaluacion");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -70,7 +70,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Creacion Compeltada!!!", text: "Se creo correctamente la evaluacion", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });
