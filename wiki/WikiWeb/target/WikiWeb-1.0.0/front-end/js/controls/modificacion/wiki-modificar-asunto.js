@@ -97,13 +97,13 @@
 
             ajaxSelectAll5(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-5").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "5"}));
+                    $("#slc-5").append($("<option>").html("Atributo de calidad " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "5"}));
                 });
             });
 
             ajaxSelectAll9(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-9").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "9"}));
+                    $("#slc-9").append($("<option>").html("Requerimiento Funcional " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "9"}));
                 });
             });
 
@@ -293,6 +293,7 @@
         function eventsave(event) {
             event.preventDefault();
             var asunto = $("#txt-4").val();
+            var id = $('option:selected', "#slc-4-tp").attr("value");
             var list5 = [];
             var list9 = [];
 

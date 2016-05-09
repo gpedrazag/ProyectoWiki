@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Atributo de Calidad");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
