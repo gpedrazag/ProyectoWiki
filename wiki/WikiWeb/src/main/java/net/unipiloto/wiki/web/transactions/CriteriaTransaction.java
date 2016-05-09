@@ -212,7 +212,7 @@ public class CriteriaTransaction
                 + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Criteria> . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#description> ?description . "
-                + "?d <http://www.semanticweb.org/sa#description> ?keyword "
+                + "?d <http://www.semanticweb.org/sa#keyword> ?keyword "
                 + "}"
 
             );
