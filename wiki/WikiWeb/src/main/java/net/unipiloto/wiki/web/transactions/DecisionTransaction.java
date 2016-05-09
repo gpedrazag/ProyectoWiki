@@ -227,6 +227,67 @@ public class DecisionTransaction
         return decisions;
     }
     
+    public static List<Decision> selectAllDecisionsByResponsibleId(String responsibleId, RepositoryConnection connection)
+    {
+        List<Decision> decisions = new ArrayList<Decision>();
+        
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+         
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
+                "SELECT DISTINCT ?id ?name ?arguments ?state WHERE {\n"
+                + "?d <http://www.semanticweb.org/sa#decisionHave> <http://www.semanticweb.org/sa#"+responsibleId+"> . "
+                + "?d <http://www.semanticweb.org/sa#id> ?id . "
+                + "?d <http://www.semanticweb.org/sa#name> ?name . "
+                + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
+                + "?d <http://www.semanticweb.org/sa#state> ?state "
+                + "}"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while(result.hasNext())
+            {
+                
+                BindingSet bs = result.next();
+                decisions.add(
+                    new Decision(
+                    bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(), 
+                    bs.getValue("arguments").stringValue(), 
+                    bs.getValue("state").stringValue()
+                ));
+                
+            }
+            
+            if(decisions.isEmpty())
+            {
+                decisions = null;
+            }
+        }
+        finally
+        {
+            if(connection == null)
+            {
+                conn.close();
+                
+            }
+        }
+        
+        return decisions;
+    }
+    
+    
     public static List<Decision> selectAllDecisionsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
         List<Decision> decisions = new ArrayList<Decision>();
