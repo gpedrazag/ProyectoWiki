@@ -14,7 +14,7 @@
             $("#panel-heading-right").addClass("hidden");
             $("#left-row").addClass("hidden");
             $("#right-row").addClass("hidden");
-            $("#panel-foot-down").html("Alternativa");
+            $("#panel-foot-down").html("Criterio");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");

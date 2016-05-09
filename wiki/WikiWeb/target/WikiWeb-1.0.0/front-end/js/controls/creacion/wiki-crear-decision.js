@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Desicion");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -25,17 +25,17 @@
 
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Nombre"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese el Nombre de la Decisión."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Argumento"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-2-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese el Argumento de la Decisión."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Estado"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-3-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese el Estado de la Decisión."))
@@ -199,43 +199,43 @@
 
             ajaxSelectAll10(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-10").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "10"}));
+                    $("#slc-10").append($("<option>").html("Responsable " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "10"}));
                 });
             });
 
             ajaxSelectAll4(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-4").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "4"}));
+                    $("#slc-4").append($("<option>").html("Asunto " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "4"}));
                 });
             });
 
             ajaxSelectAll6(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-6").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "6"}));
+                    $("#slc-6").append($("<option>").html("Criterio " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "6"}));
                 });
             });
 
             ajaxSelectAll13(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-13").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "13"}));
+                    $("#slc-13").append($("<option>").html("Suposicion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "13"}));
                 });
             });
 
             ajaxSelectAll11(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-11").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "11"}));
+                    $("#slc-11").append($("<option>").html("Restriccion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "11"}));
                 });
             });
 
             ajaxSelectAll12(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-12").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "12"}));
+                    $("#slc-12").append($("<option>").html("Solucion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "12"}));
                 });
             });
 
             ajaxSelectAll1(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-1").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "1"}));
+                    $("#slc-1").append($("<option>").html("Alternativa " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "1"}));
                 });
             });
 
@@ -495,7 +495,58 @@
 
             });
 
-            ajaxInsert7(Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
+            var ok = true;
+
+            if (Nombre == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (Argumento == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (estado == "")
+            {
+                $("#frm-3").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-3").removeClass("has-error");
+            }
+
+            if (ok == true) {
+
+                ajaxInsert7(Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
+                
+                $("#txt-1-7").val("");
+                $("#txt-2-7").val("");
+                $("#txt-3-7").val("");
+                $("#tbody-10").empty();
+                $("#tbody-4").empty();
+                $("#tbody-6").empty();
+                $("#tbody-13").empty();
+                $("#tbody-11").empty();
+                $("#tbody-12").empty();
+                $("#tbody-1").empty();
+
+                $("#slc-10 option").removeClass("hidden");
+                $("#slc-4 option").removeClass("hidden");
+                $("#slc-6 option").removeClass("hidden");
+                $("#slc-13 option").removeClass("hidden");
+                $("#slc-12 option").removeClass("hidden");
+                $("#slc-11 option").removeClass("hidden");
+                $("#slc-1 option").removeClass("hidden");
+
+            }
+
+
         }
 
         function ajaxInsert7(name, argumen, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution)
@@ -516,7 +567,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Creacion Compeltada!!!", text: "Se creo correctamente la decision", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

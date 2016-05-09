@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de Modificacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Decision");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -27,7 +27,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Decisión"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-7-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Decisión que que va a modificar."))
                             );
@@ -206,49 +206,49 @@
 
             ajaxSelectAll7(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-7-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "7"}));
+                    $("#slc-7-tp").append($("<option>").html("Decision " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "7"}));
                 });
             });
 
             ajaxSelectAll10(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-10").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "10"}));
+                    $("#slc-10").append($("<option>").html("Responsable " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "10"}));
                 });
             });
 
             ajaxSelectAll4(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-4").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "4"}));
+                    $("#slc-4").append($("<option>").html("Asunto " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "4"}));
                 });
             });
 
             ajaxSelectAll6(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-6").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "6"}));
+                    $("#slc-6").append($("<option>").html("Criterio " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "6"}));
                 });
             });
 
             ajaxSelectAll13(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-13").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "13"}));
+                    $("#slc-13").append($("<option>").html("Suposicion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "13"}));
                 });
             });
 
             ajaxSelectAll11(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-11").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "11"}));
+                    $("#slc-11").append($("<option>").html("Restriccion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "11"}));
                 });
             });
 
             ajaxSelectAll12(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-12").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "12"}));
+                    $("#slc-12").append($("<option>").html("Solucion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "12"}));
                 });
             });
 
             ajaxSelectAll1(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-1").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "1"}));
+                    $("#slc-1").append($("<option>").html("Alternativa " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "1"}));
                 });
             });
 
@@ -462,17 +462,18 @@
 
 
         function eventsave(event) {
+
+            var id = $('option:selected', "#slc-7-tp").attr("value");
             event.preventDefault();
             var Nombre = $("#txt-1-7").val();
             var Argumento = $("#txt-2-7").val();
             var estado = $("#txt-3-7").val();
-            var id = $('option:selected', "#slc-7-tp").attr("value");
             var list10 = [];
             var list4 = [];
             var list6 = [];
             var list13 = [];
             var list11 = [];
-            var list12 = [];
+            var list12 = "";
             var list1 = [];
 
             $.each($("#tbody-10 tr"), function (index, data) {
@@ -510,7 +511,60 @@
 
             });
 
-            ajaxUpdate7(id, Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
+            var ok = true;
+
+            if (Nombre == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (Argumento == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (estado == "")
+            {
+                $("#frm-3").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-3").removeClass("has-error");
+            }
+
+            if (ok == true) {
+
+                ajaxUpdate7(id, Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
+
+                $("#txt-1-7").val("");
+                $("#txt-2-7").val("");
+                $("#txt-3-7").val("");
+                $("#tbody-10").empty();
+                $("#tbody-4").empty();
+                $("#tbody-6").empty();
+                $("#tbody-13").empty();
+                $("#tbody-11").empty();
+                $("#tbody-12").empty();
+                $("#tbody-1").empty();
+
+                $("#slc-10 option").removeClass("hidden");
+                $("#slc-4 option").removeClass("hidden");
+                $("#slc-6 option").removeClass("hidden");
+                $("#slc-13 option").removeClass("hidden");
+                $("#slc-12 option").removeClass("hidden");
+                $("#slc-11 option").removeClass("hidden");
+                $("#slc-1 option").removeClass("hidden");
+
+                $("#slc-7-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-7-tp option[value=" + 0 + "]").attr("selected", true);
+
+            }
+
         }
 
 
@@ -621,6 +675,8 @@
                                     $("#slc-10 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -642,6 +698,8 @@
                                     $("#slc-4 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -663,6 +721,8 @@
                                     $("#slc-6 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -684,6 +744,8 @@
                                     $("#slc-13 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -705,6 +767,8 @@
                                     $("#slc-11 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -726,6 +790,8 @@
                                     $("#slc-12 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });
@@ -747,6 +813,8 @@
                                     $("#slc-1 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });

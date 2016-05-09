@@ -83,13 +83,13 @@
 
             ajaxSelectAll5(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-5").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "5"}));
+                    $("#slc-5").append($("<option>").html("Atributo de Calidad " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "5"}));
                 });
             });
 
             ajaxSelectAll9(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-9").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "9"}));
+                    $("#slc-9").append($("<option>").html("Requerimiento Funcional " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "9"}));
                 });
             });
 

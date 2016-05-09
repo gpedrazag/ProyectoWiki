@@ -81,7 +81,7 @@
                             );
             ajaxSelectAll3(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-3").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "3"}));
+                    $("#slc-3").append($("<option>").html("Artefacto " + data.id).attr({"value": data.id, "idClass": "3"}));
                 });
             });
 

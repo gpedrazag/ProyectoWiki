@@ -16,7 +16,7 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
-            
+
             $("#panel-heading-left").removeClass("hidden");
             $("#panel-heading-right").removeClass("hidden");
             $("#left-row").removeClass("hidden");
@@ -26,7 +26,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Asunto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-4-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Asunto que que va a modificar."))
                             );
@@ -412,6 +412,8 @@
                                     $("#slc-9 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
+                                        } else {
+                                            $(data1).removeClass("hidden");
                                         }
                                     });
                                 });

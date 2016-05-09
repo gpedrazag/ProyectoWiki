@@ -24,12 +24,12 @@
             $("#row-foot").removeClass("hidden");
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Palabra clave"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1-6"}))
                             .append($("<p>").addClass("help-block").html("Ingreses Palabra clave del Criterio."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Descripción"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-2-6"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la Descripción del Criterio."))
