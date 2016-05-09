@@ -131,7 +131,7 @@ public class ArtifactTransaction
         List<Artifact> artifacts = new ArrayList<Artifact>();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
+        RepositoryConnection conn = repo.getConnection(); 
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
