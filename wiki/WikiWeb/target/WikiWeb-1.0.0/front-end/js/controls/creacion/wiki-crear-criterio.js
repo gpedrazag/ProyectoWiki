@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Criterio");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -66,7 +66,7 @@
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html("Evaluacion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -114,16 +114,48 @@
         }
 
         function eventsave(event) {
-            event.preventDefault();
+           event.preventDefault();
             var PalabraClave = $("#txt-1-6").val();
             var Descripcion = $("#txt-2-6").val();
+            var id = $('option:selected', "#slc-6-tp").attr("value");
             var list8 = [];
 
             $.each($("#tbody-8 tr"), function (index, data) {
                 list8.push($(data).attr("id"));
             });
 
-            ajaxInsert6(PalabraClave, Descripcion, list8);
+            var ok = true;
+
+            if (PalabraClave == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (Descripcion == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (ok == true) {
+
+                ajaxInsert6(PalabraClave, Descripcion, list8);
+                $("#txt-1-6").val("");
+                $("#txt-2-6").val("");
+                $("#txt-area-2-6").val("");
+                $("#tbody-8").empty();
+                $("#slc-8 option").removeClass("hidden");
+
+                $("#slc-6-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-6-tp option[value=" + 0 + "]").attr("selected", true);
+            }
+
+            
         }
 
         function ajaxInsert6(keyword, description, linkedEvaluations)
@@ -137,7 +169,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                 swal({title: "Creacion Compeltada!!!", text: "Se creo correctamente el criterio", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

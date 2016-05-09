@@ -24,16 +24,16 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Responsable"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-10-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Responsable que que va a modificar."))
                             );
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Nombre"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese el Nombre del Responsable."))

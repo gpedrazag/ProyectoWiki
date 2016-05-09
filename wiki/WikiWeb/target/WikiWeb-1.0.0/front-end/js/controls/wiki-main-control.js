@@ -86,6 +86,15 @@ $(document).ready(function () {
         $("<div>").wikiEliminarAlternativa(id);
         $("<div>").wikiEliminarArquitectura(id);
         $("<div>").wikiEliminarArtefacto(id);
+        $("<div>").wikiEliminarAsunto(id);
+        $("<div>").wikiEliminarAtributoDeCalidad(id);
+        $("<div>").wikiEliminarCriterio(id);
+        $("<div>").wikiEliminarDecision(id);
+        $("<div>").wikiEliminarEvaluacion(id);
+        $("<div>").wikiEliminarRequerimiento(id);
+        $("<div>").wikiEliminarResponsable(id);
+        $("<div>").wikiEliminarRestriccion(id);
+        $("<div>").wikiEliminarSolucion(id);
 
     }
 

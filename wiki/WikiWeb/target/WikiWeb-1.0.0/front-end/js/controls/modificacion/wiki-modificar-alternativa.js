@@ -27,7 +27,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Alternativa"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-1-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
 
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Alternativa que que va a modificar."))
@@ -236,8 +236,8 @@
                 $("#txt-area-1").val("");
                 $("#tbody-8").empty();
                 $("#slc-8 option").removeClass("hidden");
-                $("#slc-8 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-8 option[value=" + 0 + "]").attr("selected", true);
+                $("#slc-1-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-1-tp option[value=" + 0 + "]").attr("selected", true);
             }
         }
 

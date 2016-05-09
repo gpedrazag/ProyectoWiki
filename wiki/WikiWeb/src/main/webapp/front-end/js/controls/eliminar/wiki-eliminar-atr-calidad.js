@@ -1,8 +1,8 @@
 (function ($) {
 
-    $.fn.wikiEliminararquitectura = function (id) {
+    $.fn.wikiEliminarAtributoDeCalidad = function (id) {
 
-        if (id === "d-2") {
+        if (id === "d-5") {
 
             $("#left-row").empty();
             $("#right-row").empty();
@@ -14,7 +14,7 @@
             $("#panel-heading-right").addClass("hidden");
             $("#left-row").addClass("hidden");
             $("#right-row").addClass("hidden");
-            $("#panel-foot-down").html("Alternativa");
+            $("#panel-foot-down").html("Atributo de Calidad");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
@@ -22,7 +22,7 @@
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")
-                            .append($("<div>").addClass("col-lg-10").attr({"id": "row-foot-2"})
+                            .append($("<div>").addClass("col-lg-10").attr({"id": "row-foot-5"})
                                     .append($("<table>").addClass("table table-hover")
                                             .append($("<thead>")
                                                     .append($("<tr>").addClass("active")
@@ -32,23 +32,25 @@
                                                             .append($("<th>").html(""))
                                                             )
                                                     )
-                                            .append($("<tbody>").attr({"id": "tbody-2"})
+                                            .append($("<tbody>").attr({"id": "tbody-5"})
 
                                                     )
                                             )
                                     )
                             );
 
-            ajaxSelectAll2(function (data) {
+            ajaxSelectAll5(function (data) {
                 $.each(data, function (index, data) {
 
                     if (data !== undefined) {
 
-                        $("#tbody-1")
-                                .append($("<tr>").attr({"id": data.id, "value": "1"})
-                                        .append($("<td>").html("Arquitectura " + data.id.split("_")[1]).attr({"width": "20%"}))
-                                        .append($("<td>").html(data.name).attr({"width": "40%"}))
-                                        .append($("<td>").html(data.description).attr({"width": "40%"}))
+                        $("#tbody-5")
+                                .append($("<tr>").attr({"id": data.id, "value": "5"})
+                                        .append($("<td>").html("Atributo de Calidad " + data.id.split("_")[1]).attr({"width": "20%"}))
+                                        .append($("<td>").html(data.actor).attr({"width": "20%"}))
+                                        .append($("<td>").html(data.enviroment).attr({"width": "20%"}))
+                                        .append($("<td>").html(data.boost).attr({"width": "20%"}))
+                                        .append($("<td>").html(data.boostSource).attr({"width": "20%"}))
                                         .append($("<td>")
                                                 .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                         .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -64,28 +66,28 @@
 
             var tableId = $(this).parent().parent().attr("id");
             var idClass = $(this).parent().parent().attr("value");
-            ajaxDelete2(tableId);
+            ajaxDelete5(tableId);
             $(this).parent().parent().remove();
 
         }
 
-        function ajaxDelete2(id) {
+        function ajaxDelete5(id) {
             $.ajax({
-                url: "WikiWeb/SoftwareArchitecture/delete",
+                url: "WikiWeb/qualityAttribute/delete",
                 data: {
                     id: id
                 },
                 method: "POST"
             }).done(function () {
-                swal({title: "Eliminacion Compeltada!!!", text: "Se elimino correctamente la Arquitectura", timer: 2000, showConfirmButton: false, type: "success"});
+                swal({title: "Eliminacion Compeltada!!!", text: "Se elimino correctamente el Atributo de Calidad", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });
         }
 
-        function ajaxSelectAll2(callback) {
+        function ajaxSelectAll5(callback) {
             $.ajax({
-                url: "WikiWeb/SoftwareArchitecture/selectAll",
+                url: "WikiWeb/qualityAttribute/selectAll",
                 method: "POST",
                 dataType: "json"
             }).done(function (data) {

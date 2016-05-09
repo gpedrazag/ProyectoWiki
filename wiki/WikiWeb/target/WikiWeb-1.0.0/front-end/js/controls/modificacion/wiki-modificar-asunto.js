@@ -16,12 +16,17 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+            
+            $("#panel-heading-left").removeClass("hidden");
+            $("#panel-heading-right").removeClass("hidden");
+            $("#left-row").removeClass("hidden");
+            $("#right-row").removeClass("hidden");
 
             $("#row-content")
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Asunto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-4-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Asunto que que va a modificar."))
                             );
@@ -44,7 +49,7 @@
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Atributo de Calidad que tiene relación con un Asunto."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Requerimiento funcional"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-9"})
                                     .append($("<option>").html("...").attr({"value": "0"}))
@@ -86,7 +91,7 @@
 
             ajaxSelectAll4(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-4-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "4"}));
+                    $("#slc-4-tp").append($("<option>").html("Asunto " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "4"}));
                 });
             });
 
@@ -318,6 +323,8 @@
                 $("#tbody-9").empty();
                 $("#slc-5 option").removeClass("hidden");
                 $("#slc-9 option").removeClass("hidden");
+                $("#slc-4-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-4-tp option[value=" + 0 + "]").attr("selected", true);
             }
 
 

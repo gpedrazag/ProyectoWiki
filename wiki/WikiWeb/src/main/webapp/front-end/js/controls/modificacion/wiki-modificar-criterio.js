@@ -24,21 +24,21 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Criterio"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-6-tp"})
-                                    .append($("<option>").html("..."))
+                            .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Criterio que que va a modificar."))
                             );
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Palabra clave"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1-6"}))
                             .append($("<p>").addClass("help-block").html("Ingreses Palabra clave del Criterio."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Descripción"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-2-6"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la Descripción del Criterio."))
@@ -75,13 +75,13 @@
 
             ajaxSelectAll6(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-6-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "6"}));
+                    $("#slc-6-tp").append($("<option>").html("Criterio " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "6"}));
                 });
             });
 
             ajaxSelectAll8(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-8").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "8"}));
+                    $("#slc-8").append($("<option>").html("Evaluacion " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "8"}));
                 });
             });
 
@@ -139,7 +139,37 @@
                 list8.push($(data).attr("id"));
             });
 
-            ajaxUpdate6(id, PalabraClave, Descripcion, list8);
+            var ok = true;
+
+            if (PalabraClave == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (Descripcion == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (ok == true) {
+
+                ajaxUpdate6(id, PalabraClave, Descripcion, list8);
+                $("#txt-1-6").val("");
+                $("#txt-2-6").val("");
+                $("#tbody-8").empty();
+                $("#slc-8 option").removeClass("hidden");
+
+                $("#slc-6-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-6-tp option[value=" + 0 + "]").attr("selected", true);
+            }
+
+
         }
 
         function eventLoad() {
@@ -168,8 +198,8 @@
                     $.each(data, function (index, data) {
 
                         if (data.id == id) {
-                            $("#txt-1-6").val(data.keyword);
-                            $("#txt-2-6").val(data.description);
+                            $("#txt-1-6").val(data.description);
+                            $("#txt-2-6").val(data.keyword);
 
                             if (data.linkedEvaluations !== undefined) {
 
@@ -210,7 +240,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente el criterio", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

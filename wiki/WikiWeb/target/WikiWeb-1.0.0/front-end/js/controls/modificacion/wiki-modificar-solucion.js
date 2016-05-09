@@ -23,16 +23,16 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Solución"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-12-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Solución que que va a modificar."))
                             );
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Justificación"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-1-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese la Justificación de la Solución."))

@@ -24,37 +24,37 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Atributo De Calidad"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-5-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Atributo De Calidad que va a modificar."))
                             );
 
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Actor"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-1-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el Actor del Atributo de Calidad."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("ambiente"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-2-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el ambiente del Atributo de Calidad."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Medida"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-3-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la medida del Atributo de Calidad."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-4"})
                             .append($("<label>").html("Estímulo"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-4-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el estímulo del Atributo de Calidad."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-5"})
                             .append($("<label>").html("Fuente de estímulo"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-5-5"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la fuente de estímulo del Atributo de Calidad."))
@@ -152,7 +152,6 @@
             var medida = $("#txt-3-5").val();
             var estímulo = $("#txt-4-5").val();
             var fuentedeestímulo = $("#txt-5-5").val();
-            var id = $('option:selected', "#slc-5-tp").attr("value");
 
             var list3 = [];
 
@@ -161,7 +160,63 @@
 
             });
 
-            ajaxUpdate5(id, actor, ambiente, medida, estímulo, fuentedeestímulo, list3);
+            var ok = true;
+
+            if (actor == "")
+            {
+                $("#frm-1").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-1").removeClass("has-error");
+            }
+
+            if (ambiente == "")
+            {
+                $("#frm-2").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-2").removeClass("has-error");
+            }
+
+            if (medida == "")
+            {
+                $("#frm-3").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-3").removeClass("has-error");
+            }
+
+            if (estímulo == "")
+            {
+                $("#frm-4").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-4").removeClass("has-error");
+            }
+
+            if (fuentedeestímulo == "")
+            {
+                $("#frm-5").addClass("has-error");
+                ok = false;
+            } else {
+                $("#frm-5").removeClass("has-error");
+            }
+
+            if (ok == true) {
+
+                ajaxUpdate5(id, actor, ambiente, medida, estímulo, fuentedeestímulo, list3);
+                $("#txt-1-5").val("");
+                $("#txt-2-5").val("");
+                $("#txt-3-5").val("");
+                $("#txt-4-5").val("");
+                $("#txt-5-5").val("");
+
+                $("#tbody-3").empty();
+                $("#slc-3 option").removeClass("hidden");
+                $("#slc-5-tp option[value=" + 0 + "]").attr("selected", false);
+                $("#slc-5-tp option[value=" + 0 + "]").attr("selected", true);
+            }
+
         }
 
         function eventLoad() {

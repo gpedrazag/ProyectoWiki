@@ -1,8 +1,8 @@
 (function ($) {
 
-    $.fn.wikiEliminararquitectura = function (id) {
+    $.fn.wikiEliminarSolucion = function (id) {
 
-        if (id === "d-2") {
+        if (id === "d-12") {
 
             $("#left-row").empty();
             $("#right-row").empty();

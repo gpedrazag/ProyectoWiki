@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de Modificacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Arquitectura de Software");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -27,7 +27,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Arquitectura De Software"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-2-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
 
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Arquitectura De Software que que va a modificar."))
@@ -313,7 +313,6 @@
                 list3.push($(data).attr("id"));
             });
 
-
             $.each($("#tbody-7 tr"), function (index, data) {
                 list7.push($(data).attr("id"));
             });
@@ -337,8 +336,8 @@
             }
 
             if (ok == true) {
-                $("#frm-1").removeClass("has-error");
-                $("#frm-2").removeClass("has-error");
+
+
                 ajaxUpdate2(id, name, description, list3, list7);
                 $("#txt-2").val("");
                 $("#txt-area-2").val("");
@@ -346,10 +345,6 @@
                 $("#tbody-7").empty();
                 $("#slc-3 option").removeClass("hidden");
                 $("#slc-7 option").removeClass("hidden");
-                $("#slc-3 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-3 option[value=" + 0 + "]").attr("selected", true);
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", true);
                 $("#slc-2-tp option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-2-tp option[value=" + 0 + "]").attr("selected", true);
             }

@@ -557,6 +557,16 @@
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-alternativa.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-arquitectura.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-artefacto.js"></script>
-        
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-asunto.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-atr-calidad.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-criterio.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-decision.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-evaluacion.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-requerimiento-funcional.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-responsable.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-restriccion.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-solucion.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-suposicion.js"></script>
+
     </body>
 </html>

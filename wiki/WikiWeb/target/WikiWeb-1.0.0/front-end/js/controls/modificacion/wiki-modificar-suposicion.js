@@ -23,21 +23,21 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Suposición"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-13-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value":"0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione la Suposición que que va a modificar."))
                             );
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Descripción"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-1-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese la Descripción de la Suposición."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Fuente"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-2-7"}))
                             .append($("<p>").addClass("help-block").html("Ingrese la Fuente de la Suposición."))

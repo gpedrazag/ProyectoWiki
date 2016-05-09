@@ -2,7 +2,6 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.unipiloto.wiki.web.transactions.DecisionTransaction;

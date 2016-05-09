@@ -24,22 +24,22 @@
             $("#row-foot").removeClass("hidden");
 
             $("#row-content")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Artefacto"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-3-tp"})
-                                    .append($("<option>").html("..."))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
 
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Artefacto que que va a modificar."))
                             );
 
             $("#left-row")
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-1"})
                             .append($("<label>").html("Id"))
                             .append($("<input>").addClass("form-control").attr({"id": "txt-3"}))
                             .append($("<p>").addClass("help-block").html("Ingreses el id del artefacto."))
                             )
-                    .append($("<div>").addClass("form-group")
+                    .append($("<div>").addClass("form-group").attr({"id": "frm-2"})
                             .append($("<label>").html("Descripción"))
                             .append($("<textarea>").addClass("form-control").attr({"id": "txt-area-3"}))
                             .append($("<p>").addClass("help-block").html("Ingreses la descripción del artefacto."))
@@ -172,8 +172,6 @@
                 $("#txt-area-3").val("");
                 $("#tbody-7").empty();
                 $("#slc-7 option").removeClass("hidden");
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", false);
-                $("#slc-7 option[value=" + 0 + "]").attr("selected", true);
                 $("#slc-3-tp option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-3-tp option[value=" + 0 + "]").attr("selected", true);
             }

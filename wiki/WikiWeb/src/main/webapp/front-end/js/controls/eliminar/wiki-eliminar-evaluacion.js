@@ -1,8 +1,8 @@
 (function ($) {
 
-    $.fn.wikiEliminararquitectura = function (id) {
+    $.fn.wikiEliminarEvaluacion = function (id) {
 
-        if (id === "d-2") {
+        if (id === "d-8") {
 
             $("#left-row").empty();
             $("#right-row").empty();
@@ -14,7 +14,7 @@
             $("#panel-heading-right").addClass("hidden");
             $("#left-row").addClass("hidden");
             $("#right-row").addClass("hidden");
-            $("#panel-foot-down").html("Alternativa");
+            $("#panel-foot-down").html("evaluacion");
             $("#header").removeClass("hidden");
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
