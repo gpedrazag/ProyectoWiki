@@ -46,9 +46,6 @@ public class ResponsibleTransaction
             conn.begin();
             conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
             conn.add(subject, RDF.TYPE, object);
-            conn.begin();
-            conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
-            conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
             if(decisions != null)
@@ -184,6 +181,7 @@ public class ResponsibleTransaction
                     bs.getValue("name").stringValue()
                 );
             }
+            responsible.setDecisions(DecisionTransaction.selectAllDecisionsByResponsibleId(id, conn));
         }
         finally
         {
@@ -205,7 +203,7 @@ public class ResponsibleTransaction
                 "SELECT DISTINCT ?id ?name WHERE {\n"
                 + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Responsible> . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
-                + "?d <http://www.semanticweb.org/sa#description> ?name "
+                + "?d <http://www.semanticweb.org/sa#name> ?name "
                 + "}"
 
             );
@@ -218,6 +216,9 @@ public class ResponsibleTransaction
                     bs.getValue("id").stringValue(), 
                     bs.getValue("name").stringValue()
                 ));
+                
+                int i = responsibles.size() -1 ;
+                responsibles.get(i).setDecisions(DecisionTransaction.selectAllDecisionsByResponsibleId(responsibles.get(0).getId(), conn));
             }
         }
         finally
