@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/artifact")
-public class ArtifactController {
+public class ArtifactController { 
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
