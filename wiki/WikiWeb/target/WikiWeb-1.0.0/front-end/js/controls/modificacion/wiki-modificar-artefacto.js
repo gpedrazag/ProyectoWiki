@@ -137,7 +137,8 @@
         function eventsave(event) {
 
             event.preventDefault();
-            var id = $("#txt-3").val();
+            var oldId = $('option:selected', "#slc-3-tp").attr("value");
+            var newId = $("#txt-3").val();
             var description = $("#txt-area-3").val();
             var list7 = [];
 
@@ -167,14 +168,16 @@
             if (ok == true) {
                 $("#frm-1").removeClass("has-error");
                 $("#frm-2").removeClass("has-error");
-                ajaxUpdatet3(id, description, list7);
+                ajaxUpdatet3(newId, oldId, description, list7);
                 $("#txt-3").val("");
                 $("#txt-area-3").val("");
                 $("#tbody-7").empty();
                 $("#slc-7 option").removeClass("hidden");
+
                 $("#slc-3-tp option[value=" + 0 + "]").attr("selected", false);
                 $("#slc-3-tp option[value=" + 0 + "]").attr("selected", true);
             }
+
 
 
         }
@@ -241,18 +244,20 @@
             }
         }
 
-        function ajaxUpdatet3(id, description, decision)
+        function ajaxUpdatet3(newId, oldId, description, decision)
         {
             $.ajax({
                 url: "WikiWeb/artifact/update",
                 data: {
-                    id: id,
+                    newId: newId,
+                    oldId: oldId,
                     description: description,
                     decisions: JSON.stringify(decision)
                 },
                 method: "POST"
             }).done(function () {
                 swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente el Artefacto", timer: 2000, showConfirmButton: false, type: "success"});
+                $("#m-3").trigger("click");
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

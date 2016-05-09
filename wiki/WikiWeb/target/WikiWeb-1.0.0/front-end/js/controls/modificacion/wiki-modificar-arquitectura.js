@@ -508,7 +508,7 @@
         function ajaxSelectById3(id, callback)
         {
             $.ajax({
-                url: "WikiWeb/artifact/selectById",
+                url: "WikiWeb/SoftwareArchitecture/selectById",
                 data: {
                     id: id
                 },

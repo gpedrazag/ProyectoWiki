@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/artifact")
-public class ArtifactController { 
+public class ArtifactController {
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public void insert(
@@ -32,12 +32,14 @@ public class ArtifactController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(
-            @RequestParam(value = "id") String id,
+            @RequestParam(value = "newId") String newId,
+            @RequestParam(value = "oldId") String oldId,
             @RequestParam(value = "description") String description,
             @RequestParam(value = "decisions") String decisions) {
         try {
             ArtifactTransaction.update(
-                    id,
+                    newId,
+                    oldId,
                     description,
                     JsonFactory.fromJsonArray(decisions, String.class));
         } catch (IOException | URISyntaxException ex) {
