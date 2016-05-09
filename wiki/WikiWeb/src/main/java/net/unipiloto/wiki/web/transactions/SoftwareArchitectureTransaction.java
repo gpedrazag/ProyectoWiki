@@ -48,7 +48,7 @@ public class SoftwareArchitectureTransaction
             conn.add(subject, RDF.TYPE, object);
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
             conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#name"), factory.createLiteral(name));
-            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(name));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#description"), factory.createLiteral(description));
             if(relatedArtifacts != null)
             {
                 for(String s : relatedArtifacts)
