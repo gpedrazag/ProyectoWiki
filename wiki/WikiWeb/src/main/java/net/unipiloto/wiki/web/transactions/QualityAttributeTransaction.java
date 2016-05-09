@@ -185,11 +185,11 @@ public class QualityAttributeTransaction
                 "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {\n"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?actor . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#actor> ?enviroment . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?measure . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#input> ?boost . "
-                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#output> ?boostSource "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#actor> ?actor . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#enviroment> ?enviroment . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#measure> ?measure . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#boost> ?boost . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#boostSource> ?boostSource "
                 + "}"
             );
             TupleQueryResult result = tq.evaluate();
@@ -229,11 +229,11 @@ public class QualityAttributeTransaction
                 "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#name> ?actor . "
-                +"?d <http://www.semanticweb.org/sa#actor> ?enviroment . "
-                +"?d <http://www.semanticweb.org/sa#description> ?measure . "
-                +"?d <http://www.semanticweb.org/sa#input> ?boost . "
-                +"?d <http://www.semanticweb.org/sa#output> ?boostSource "
+                +"?d <http://www.semanticweb.org/sa#actor> ?actor . "
+                +"?d <http://www.semanticweb.org/sa#enviroment> ?enviroment . "
+                +"?d <http://www.semanticweb.org/sa#measure> ?measure . "
+                +"?d <http://www.semanticweb.org/sa#boost> ?boost . "
+                +"?d <http://www.semanticweb.org/sa#boostSource> ?boostSource "
                 +"}"
             );
             TupleQueryResult result = tq.evaluate();
