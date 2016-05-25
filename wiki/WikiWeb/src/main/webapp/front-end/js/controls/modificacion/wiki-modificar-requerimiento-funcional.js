@@ -28,7 +28,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Requerimiento Funcional"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-9-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Requerimiento Funcional que que va a modificar."))
                             );
@@ -71,7 +71,7 @@
 
             ajaxSelectAll9(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-9-tp").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "9"}));
+                    $("#slc-9-tp").append($("<option>").html("Requerimiento Funcional " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "9"}));
                 });
             });
 
@@ -135,7 +135,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Incerto");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente el requerimiento funcional", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

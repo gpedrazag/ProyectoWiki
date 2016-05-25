@@ -96,6 +96,9 @@ $(document).ready(function () {
         $("<div>").wikiEliminarResponsable(id);
         $("<div>").wikiEliminarRestriccion(id);
         $("<div>").wikiEliminarSolucion(id);
+        $("<div>").wikiEliminarSuposicion(id);
+
+        
 
     }
 

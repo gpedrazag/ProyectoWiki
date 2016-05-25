@@ -845,7 +845,7 @@
                 },
                 method: "POST"
             }).done(function () {
-                alert("Modifico");
+                swal({title: "Modificacion Compeltada!!!", text: "Se modifico correctamente la decision", timer: 2000, showConfirmButton: false, type: "success"});
             }).fail(function (jrxml, errorThrow) {
                 alert("Error");
             });

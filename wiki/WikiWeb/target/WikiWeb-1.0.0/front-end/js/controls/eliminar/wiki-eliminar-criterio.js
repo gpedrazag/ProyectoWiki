@@ -28,6 +28,7 @@
                                             .append($("<thead>")
                                                     .append($("<tr>").addClass("active")
                                                             .append($("<th>").html("Id"))
+                                                            .append($("<th>").html("Palabra clave"))
                                                             .append($("<th>").html("Descripcion"))
                                                             .append($("<th>").html(""))
                                                             )
