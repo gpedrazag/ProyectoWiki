@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creaModificacioncion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Responsable");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -22,6 +22,7 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+            $("#save-relations").removeClass("hidden");
 
             $("#row-content")
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})

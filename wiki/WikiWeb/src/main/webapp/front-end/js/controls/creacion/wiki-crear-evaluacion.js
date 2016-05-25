@@ -22,6 +22,7 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+            $("#save-relations").removeClass("hidden");
             
             $("#left-row")
                     .append($("<div>").addClass("form-group")

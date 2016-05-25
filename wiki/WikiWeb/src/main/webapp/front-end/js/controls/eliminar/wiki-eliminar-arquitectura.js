@@ -19,6 +19,7 @@
             $("#content").removeClass("hidden");
             $(".col-lg-6").removeClass("hidden");
             $("#row-foot").removeClass("hidden");
+             $("#save-relations").removeClass("hidden");
 
             $("#panel-foot")
                     .append($("<div>").addClass("col-lg-12")

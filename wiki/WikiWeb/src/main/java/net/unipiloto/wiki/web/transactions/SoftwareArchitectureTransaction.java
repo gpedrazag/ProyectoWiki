@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.SoftwareArchitecture;
-import net.unipiloto.wiki.web.tools.OntologyTools;
+import net.unipiloto.wiki.web.others.OntologyTools;
 import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;
@@ -138,7 +138,7 @@ public class SoftwareArchitectureTransaction
                 );
                 
                 sa.setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(id, conn));
-                sa.setDecisionsRelated(DecisionTransaction.selectAllDecisionsBySoftwareArchitectureId(id, conn));
+                sa.setRelatedDecisions(DecisionTransaction.selectAllDecisionsBySoftwareArchitectureId(id, conn));
             }
         }
         finally
@@ -177,7 +177,7 @@ public class SoftwareArchitectureTransaction
                     bs.getValue("description").stringValue()
                 ));
                 int i = sas.size() - 1;
-                sas.get(i).setDecisionsRelated(DecisionTransaction.selectAllDecisionsByArtifactId(sas.get(i).getId(),conn));
+                sas.get(i).setRelatedDecisions(DecisionTransaction.selectAllDecisionsByArtifactId(sas.get(i).getId(),conn));
                 sas.get(i).setRelatedArtifacts(ArtifactTransaction.getAllArtifactsBySoftwareArchitectureId(sas.get(i).getId(), conn));
 
             }

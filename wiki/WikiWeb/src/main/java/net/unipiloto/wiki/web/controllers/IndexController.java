@@ -2,8 +2,9 @@ package net.unipiloto.wiki.web.controllers;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import net.unipiloto.wiki.web.tools.OntologyTools;
-import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
+import net.unipiloto.wiki.web.others.OntologyTools;
+import net.unipiloto.wiki.web.transactions.DataBaseTransactions;
+import org.boon.json.JsonFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +25,10 @@ public class IndexController
     
     @RequestMapping(value = "/prueba", method = RequestMethod.GET)
     @ResponseBody
-    public String getArtifact()
+    public String getArtifact() throws Exception
     {
-        return ArtifactTransaction.selectById("artifact_455");
+        DataBaseTransactions db = new DataBaseTransactions();
+        return JsonFactory.toJson(db.getLogin("admin", "admin"));
     }
     
     

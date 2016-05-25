@@ -3,7 +3,9 @@ net\unipiloto\wiki\web\transactions\DecisionTransaction.class
 net\unipiloto\wiki\web\controllers\ConstraintController.class
 net\unipiloto\wiki\web\entities\Concern.class
 net\unipiloto\wiki\web\controllers\ConcernController.class
+net\unipiloto\wiki\web\others\PrivilegeCarrier.class
 net\unipiloto\wiki\web\transactions\CriteriaTransaction$1.class
+net\unipiloto\wiki\web\controllers\SessionController.class
 net\unipiloto\wiki\web\controllers\ArtifactController.class
 net\unipiloto\wiki\web\controllers\SoftwareArchitectureController.class
 net\unipiloto\wiki\web\entities\Evaluation.class
@@ -21,6 +23,8 @@ net\unipiloto\wiki\web\entities\FunctionalRequeriment.class
 net\unipiloto\wiki\web\transactions\AlternativeTransaction$1.class
 net\unipiloto\wiki\web\transactions\QualityAttributeTransaction$1.class
 net\unipiloto\wiki\web\transactions\QualityAttributeTransaction.class
+net\unipiloto\wiki\web\others\GenericException.class
+net\unipiloto\wiki\web\transactions\DataBaseTransactions.class
 net\unipiloto\wiki\web\controllers\DecisionController.class
 net\unipiloto\wiki\web\entities\Alternative.class
 net\unipiloto\wiki\web\entities\Criteria.class
@@ -35,11 +39,12 @@ net\unipiloto\wiki\web\entities\Decision.class
 net\unipiloto\wiki\web\transactions\ResponsibleTransaction$1.class
 net\unipiloto\wiki\web\transactions\EvaluationTransaction.class
 net\unipiloto\wiki\web\transactions\ConstraintTransaction.class
+net\unipiloto\wiki\web\controllers\LoginController.class
 net\unipiloto\wiki\web\transactions\SoftwareArchitectureTransaction$1.class
 net\unipiloto\wiki\web\controllers\SolutionController.class
 net\unipiloto\wiki\web\entities\Artifact.class
-net\unipiloto\wiki\web\tools\OntologyTools.class
 net\unipiloto\wiki\web\transactions\ConcernTransaction$1.class
+net\unipiloto\wiki\web\others\OntologyTools.class
 net\unipiloto\wiki\web\transactions\ResponsibleTransaction.class
 net\unipiloto\wiki\web\transactions\SoftwareArchitectureTransaction.class
 net\unipiloto\wiki\web\transactions\SolutionTransaction$1.class

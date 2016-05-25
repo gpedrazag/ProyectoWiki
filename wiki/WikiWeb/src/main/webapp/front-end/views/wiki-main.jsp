@@ -25,7 +25,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/wiki-main.jsp">Wiki</a>
+                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Wiki</a>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
@@ -421,7 +421,7 @@
                                         <a id="m-11" href="#modificarRestricción"><i class="fa fa-pencil-square-o" aria-hidden="true">&nbsp</i>Modificar</a>
                                     </li>
                                     <li>
-                                        <a id="d-11" href="#eliminarRestricción><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
+                                        <a id="d-11" href="#eliminarRestricción><i class="fa fa-minus-square-o aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
                                         <a href="#relacionesRestricción"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
@@ -474,14 +474,14 @@
                             <h1 class="page-header" id="page-name"></h1>
                         </div>
                     </div>
-                    <div class="row hidden" id="content">
+                    <div class="row" id="content">
                         <div class="col-lg-12">
                             <form role="form">
                                 <div class="row" >
                                     <div class="col-lg-12" id="row-content">
 
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6" id="left-panel">
                                         <div class="panel panel-default">
                                             <div class="panel-heading" id="panel-heading-left">
 
@@ -491,7 +491,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6" id="right-panel">
                                         <div class="panel panel-default">
                                             <div class="panel-heading" id="panel-heading-right">
                                             </div>
@@ -500,7 +500,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12" id="save-relations">
                                         <div class="panel panel-default">
                                             <div class="panel-heading" id="panel-foot-down">
                                                 <h5>Relaciones que se van a guardar</h5>
@@ -517,13 +517,18 @@
             </div>
         </div>
 
+                       
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/metisMenu.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/sweetalert.min.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/sweetalert-dev.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/plugins/sb-admin-2.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/plugins/jquery.i18n.properties.js"></script>
+        
         <script src="${pageContext.request.contextPath}/front-end/js/controls/wiki-main-control.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-inicial.js"></script>
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-clase.js"></script>
 
         <script src="${pageContext.request.contextPath}/front-end/js/controls/creacion/wiki-crear-alternativa.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/creacion/wiki-crear-arquitectura.js"></script>
@@ -568,5 +573,8 @@
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-solucion.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-suposicion.js"></script>
 
+        
+        
+       
     </body>
 </html>

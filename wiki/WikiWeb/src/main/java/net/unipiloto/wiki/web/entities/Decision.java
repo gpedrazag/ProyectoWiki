@@ -5,7 +5,7 @@ import java.util.List;
 public class Decision
 {
     private String id;
-    private String nombre;
+    private String name;
     private String arguments;
     private String state;
     private List<Constraint> mayHaveConstraints;
@@ -19,10 +19,10 @@ public class Decision
     private List<Alternative> haveAlternatives;
     private Solution haveSolution;
 
-    public Decision(String id, String nombre, String arguments, String state)
+    public Decision(String id, String name, String arguments, String state)
     {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
         this.arguments = arguments;
         this.state = state;
     }
@@ -137,14 +137,14 @@ public class Decision
         this.id = id;
     }
 
-    public String getNombre()
+    public String getName()
     {
-        return nombre;
+        return name;
     }
 
-    public void setNombre(String nombre)
+    public void setName(String name)
     {
-        this.nombre = nombre;
+        this.name = name;
     }
 
     public String getArguments()

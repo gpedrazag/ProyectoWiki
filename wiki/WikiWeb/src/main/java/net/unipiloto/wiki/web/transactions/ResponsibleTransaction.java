@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import net.unipiloto.wiki.web.entities.Responsible;
-import net.unipiloto.wiki.web.tools.OntologyTools;
+import net.unipiloto.wiki.web.others.OntologyTools;
 import org.boon.json.JsonFactory;
 import org.openrdf.model.IRI;
 import org.openrdf.model.ValueFactory;

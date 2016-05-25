@@ -8,7 +8,7 @@ public class SoftwareArchitecture
     private String name;
     private String description;
     private List<Artifact> relatedArtifacts;
-    private List<Decision> decisionsRelated;
+    private List<Decision> relatedDecisions;
     
     public SoftwareArchitecture(String id, String name, String description)
     {
@@ -17,14 +17,14 @@ public class SoftwareArchitecture
         this.description = description;
     }
 
-    public List<Decision> getDecisionsRelated()
+    public List<Decision> getRelatedDecisions()
     {
-        return decisionsRelated;
+        return relatedDecisions;
     }
 
-    public void setDecisionsRelated(List<Decision> decisionsRelated)
+    public void setRelatedDecisions(List<Decision> relatedDecisions)
     {
-        this.decisionsRelated = decisionsRelated;
+        this.relatedDecisions = relatedDecisions;
     }
 
     public List<Artifact> getRelatedArtifacts()

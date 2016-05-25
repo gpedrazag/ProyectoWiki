@@ -21,6 +21,7 @@
             $("#panel-heading-right").removeClass("hidden");
             $("#left-row").removeClass("hidden");
             $("#right-row").removeClass("hidden");
+            $("#save-relations").removeClass("hidden");
 
             $("#row-content")
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
