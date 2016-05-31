@@ -22,28 +22,7 @@ public class Generic
     public String state;
     public String valoration;
 
-    public Generic(String id, String description, String name, String actor, String arguments, String boost, String boostSource, String concern, String cons, String enviroment, String input, String keyword, String measure, String output, String pros, String rationale, String source, String state, String valoration)
-    {
-        this.id = id;
-        this.description = description;
-        this.name = name;
-        this.actor = actor;
-        this.arguments = arguments;
-        this.boost = boost;
-        this.boostSource = boostSource;
-        this.concern = concern;
-        this.cons = cons;
-        this.enviroment = enviroment;
-        this.input = input;
-        this.keyword = keyword;
-        this.measure = measure;
-        this.output = output;
-        this.pros = pros;
-        this.rationale = rationale;
-        this.source = source;
-        this.state = state;
-        this.valoration = valoration;
-    }
+    
 
     public String getId()
     {

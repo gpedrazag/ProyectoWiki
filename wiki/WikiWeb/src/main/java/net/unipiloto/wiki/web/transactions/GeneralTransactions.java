@@ -35,9 +35,8 @@ public class GeneralTransactions
                 "SELECT DISTINCT ?id ?description ?name ?actor ?arguments ?boost "+
                 "?boostSource ?concern ?cons ?enviroment ?input ?keyword ?measure "+
                 "?output ?pros ?rationale ?source ?state ?valoration WHERE {\n"+
-                "?x <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Individual> .\n" +
                 "?x <http://www.semanticweb.org/sa#id> ?id . \n"+
-                "?y <http://www.w3.org/2000/01/rdf-schema#domain> ?x .\n"+
+                "?y <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> . \n"+        
                 "?x ?y ?z . \n"+
                 "OPTIONAL { ?x <http://www.semanticweb.org/sa#description> ?description } .\n"+
                 "OPTIONAL { ?x <http://www.semanticweb.org/sa#name> ?name } .\n"+
@@ -64,27 +63,46 @@ public class GeneralTransactions
             while(rs.hasNext())
             {
                 BindingSet bs = rs.next();
-                l.add(new Generic(
-                    bs.getValue("id").stringValue(),
-                    bs.getValue("description").stringValue(),
-                    bs.getValue("name").stringValue(),
-                    bs.getValue("actor").stringValue(),
-                    bs.getValue("arguments").stringValue(),
-                    bs.getValue("boost").stringValue(),
-                    bs.getValue("boostSource").stringValue(),
-                    bs.getValue("concern").stringValue(),
-                    bs.getValue("cons").stringValue(),
-                    bs.getValue("enviroment").stringValue(),
-                    bs.getValue("input").stringValue(),
-                    bs.getValue("keyword").stringValue(),
-                    bs.getValue("measure").stringValue(),
-                    bs.getValue("output").stringValue(),
-                    bs.getValue("pros").stringValue(),
-                    bs.getValue("rationale").stringValue(),
-                    bs.getValue("source").stringValue(),
-                    bs.getValue("state").stringValue(),
-                    bs.getValue("valoration").stringValue()
-                ));
+                Generic g = new Generic();
+                if(bs.getValue("id") != null)
+                    g.setId(bs.getValue("id").stringValue());
+                if(bs.getValue("description") != null)
+                    g.setDescription(bs.getValue("description").stringValue());
+                if(bs.getValue("name") != null)
+                    g.setName(bs.getValue("name").stringValue());
+                if(bs.getValue("actor") != null)
+                    g.setActor(bs.getValue("actor").stringValue());
+                if(bs.getValue("arguments") != null)
+                    g.setArguments(bs.getValue("arguments").stringValue());
+                if(bs.getValue("boost") != null)
+                    g.setBoost(bs.getValue("boost").stringValue());
+                if(bs.getValue("boostSource") != null)
+                    g.setBoostSource(bs.getValue("boostSource").stringValue());
+                if(bs.getValue("concern") != null)
+                    g.setConcern(bs.getValue("concern").stringValue());
+                if(bs.getValue("cons") != null)
+                    g.setCons(bs.getValue("cons").stringValue());
+                if(bs.getValue("enviroment") != null)
+                    g.setEnviroment(bs.getValue("enviroment").stringValue());
+                if(bs.getValue("input") != null)
+                    g.setInput(bs.getValue("input").stringValue());
+                if(bs.getValue("keyword") != null)
+                    g.setKeyword(bs.getValue("keyword").stringValue());
+                if(bs.getValue("measure") != null)
+                    g.setMeasure(bs.getValue("measure").stringValue());
+                if(bs.getValue("output") != null)
+                    g.setOutput(bs.getValue("output").stringValue());
+                if(bs.getValue("pros") != null)
+                    g.setPros(bs.getValue("pros").stringValue());
+                if(bs.getValue("rationale") != null)
+                    g.setRationale(bs.getValue("rationale").stringValue());
+                if(bs.getValue("source") != null)
+                    g.setSource(bs.getValue("source").stringValue());
+                if(bs.getValue("state") != null)
+                    g.setState(bs.getValue("state").stringValue());
+                if(bs.getValue("valoration") != null)
+                    g.setValoration(bs.getValue("valoration").stringValue());
+                l.add(g);
             }
         }   
         finally

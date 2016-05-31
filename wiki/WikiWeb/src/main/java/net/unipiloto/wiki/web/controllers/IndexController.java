@@ -27,7 +27,7 @@ public class IndexController
     public String getArtifact() throws Exception
     {
         
-        return GeneralTransactions.search("sdsd", OntologyTools.getInstance().getConnection());
+        return GeneralTransactions.search("sdf", OntologyTools.getInstance().getConnection());
     }
     
     
