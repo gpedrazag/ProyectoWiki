@@ -13,7 +13,7 @@ import org.openrdf.repository.RepositoryConnection;
 
 public class GeneralTransactions
 {
-    public static String search(String pattern, RepositoryConnection connection)
+    public static String search(String pattern, int limit, int offset, RepositoryConnection connection)
     {
         List<Generic> l = new ArrayList();
         Repository repo = null;
@@ -56,7 +56,8 @@ public class GeneralTransactions
                 "OPTIONAL { ?x <http://www.semanticweb.org/sa#source> ?source } .\n" +
                 "OPTIONAL { ?x <http://www.semanticweb.org/sa#state> ?state } .\n" +
                 "OPTIONAL { ?x <http://www.semanticweb.org/sa#valoration> ?valoration } .\n" +
-                "FILTER regex(?z, \""+pattern+"\", \"i\")}"
+                "FILTER regex(?z, \""+pattern+"\", \"i\")}\n"+
+                "LIMIT "+limit+" OFFSET "+offset
             );
             
             TupleQueryResult rs = tq.evaluate();
@@ -114,5 +115,43 @@ public class GeneralTransactions
         }
         
         return JsonFactory.toJson(l);
+    }
+    
+    public static int searchCount(String pattern, RepositoryConnection connection)
+    {
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        int i = 0;
+        if(connection != null)
+        {
+            conn = connection;
+        }
+        else
+        {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+        try
+        {
+            TupleQuery tq = conn.prepareTupleQuery(
+                "SELECT (COUNT(DISTINCT ?id) AS ?count) WHERE {\n"+
+                "?x <http://www.semanticweb.org/sa#id> ?id . \n"+
+                "?y <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> . \n"+        
+                "?x ?y ?z . \n"+
+                "FILTER regex(?z, \""+pattern+"\", \"i\")}"
+            );
+            
+            TupleQueryResult rs = tq.evaluate();
+            if (rs.hasNext())
+            {
+                i = Integer.parseInt(rs.next().getValue("count").stringValue());
+            }
+        }
+        finally
+        {
+            
+        }
+        return i;
     }
 }

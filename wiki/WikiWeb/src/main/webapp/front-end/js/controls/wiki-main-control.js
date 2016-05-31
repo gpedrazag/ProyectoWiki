@@ -44,6 +44,8 @@ $(document).ready(function () {
     
     //$("<div>").wikiConsultaGeneral();
     $("<div>").wikiMainPage();
+    $("#a-principal").on("click", goToMain);
+    $("#btn-search").on("click", ajaxSearch);
 
     function eventCreate() {
 
@@ -103,9 +105,18 @@ $(document).ready(function () {
 
 });
 
-function search()
+function ajaxSearch()
 {
-    
+    var pattern = document.getElementById("input-search").value;
+    if(pattern !== "")
+    {
+        $("<div>").showSearchResults(pattern);
+    }
+}
+
+function goToMain()
+{
+    window.location.href = "http://"+window.location.host+"/WikiWeb/";
 }
 
 

@@ -25,16 +25,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="${pageContext.request.contextPath}/">Wiki</a>
+                    <a class="navbar-brand" id="a-principal">Wiki</a>
                 </div>
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
                             <li class="sidebar-search">
                                 <div class="input-group custom-search-form">
-                                    <input id = "search" type="text" class="form-control" placeholder="Search...">
+                                    <input id = "input-search" type="text" class="form-control" placeholder="Search...">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
+                                        <button id = "btn-search" class="btn btn-default" type="button">
                                             <i class="fa fa-search"></i>
                                         </button>
                                     </span>
@@ -278,37 +278,39 @@
                             <form role="form">
                                 <div class="row" >
                                     <div class="col-lg-12" id="row-content">
-                                        
+                                        <div class="col-lg-6 cant-remove" id="left-panel">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="panel-heading-left">
 
-                                    </div>
-                                    <div class="col-lg-6" id="left-panel">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="panel-heading-left">
+                                                </div>
+                                                <div class="panel-body" id="left-row">
 
+                                                </div>
                                             </div>
-                                            <div class="panel-body" id="left-row">
+                                        </div>
+                                        <div class="col-lg-6 cant-remove" id="right-panel">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="panel-heading-right">
+                                                </div>
+                                                <div class="panel-body" id="right-row">
 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 cant-remove" id="save-relations">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="panel-foot-down">
+                                                    <h5>Relaciones que se van a guardar</h5>
+                                                </div>
+                                                <div class="panel-body"  id="panel-foot">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6" id="right-panel">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="panel-heading-right">
-                                            </div>
-                                            <div class="panel-body" id="right-row">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12" id="save-relations">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" id="panel-foot-down">
-                                                <h5>Relaciones que se van a guardar</h5>
-                                            </div>
-                                            <div class="panel-body"  id="panel-foot">
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                 </div>
                             </form>
                         </div>
@@ -328,9 +330,10 @@
 
         <script src="${pageContext.request.contextPath}/front-end/js/controls/wiki-main-control.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/wiki-main-page.js"></script>
-       
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-patron.js"></script>
+
 <!--        <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-inicial.js"></script>
-        <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-clase.js"></script>-->
+ <script src="${pageContext.request.contextPath}/front-end/js/controls/consulta/wiki-consulta-clase.js"></script>-->
 
         <script src="${pageContext.request.contextPath}/front-end/js/controls/creacion/wiki-crear-alternativa.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/creacion/wiki-crear-arquitectura.js"></script>
