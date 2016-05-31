@@ -42,7 +42,8 @@ $(document).ready(function () {
     $("#d-12").on("click", eventDelete);
     $("#d-13").on("click", eventDelete);
     
-    $("<div>").wikiConsultaGeneral();
+    //$("<div>").wikiConsultaGeneral();
+    $("<div>").wikiMainPage();
 
     function eventCreate() {
 

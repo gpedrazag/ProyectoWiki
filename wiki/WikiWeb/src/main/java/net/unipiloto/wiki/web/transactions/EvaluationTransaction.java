@@ -152,7 +152,7 @@ public class EvaluationTransaction
     
     public static List<Evaluation> selectByCriteriaId(String id, RepositoryConnection connection)
     {
-        List<Evaluation> evaluations = null;
+        List<Evaluation> evaluations = new ArrayList(0);
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)

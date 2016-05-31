@@ -28,7 +28,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Criterio"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-6-tp"})
-                            .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Criterio que que va a modificar."))
                             );
@@ -203,17 +203,17 @@
                             $("#txt-2-6").val(data.keyword);
 
                             if (data.linkedEvaluations !== undefined) {
-
-                                $("#tbody-8")
-                                        .append($("<tr>").attr({"id": data.linkedEvaluations.id, "value": "8"})
-                                                .append($("<td>").html(data.linkedEvaluations.id).attr({"width": "80%"}))
-                                                .append($("<td>")
-                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                                )
-                                                        )
-                                                );
-
+                                $.each(data.linkedEvaluations, function (index, data) {
+                                    $("#tbody-8")
+                                            .append($("<tr>").attr({"id": data.id, "value": "8"})
+                                                    .append($("<td>").html("Evaluacion " + data.id.split("_")[1]).attr({"width": "80%"}))
+                                                    .append($("<td>")
+                                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                    )
+                                                            )
+                                                    );
+                                });
                                 $("#tbody-8 tr").each(function (index, data) {
 
                                     $("#slc-8 option").each(function (index, data1) {

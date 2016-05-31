@@ -28,7 +28,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Responsable"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-10-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Responsable que que va a modificar."))
                             );
@@ -150,7 +150,7 @@
 
             if (textOptionSelected === '...') {
                 $("#txt-1-7").val("");
-              
+
                 $("#tbody-7 tr").each(function (index, data) {
 
                     $("#slc-7 option").each(function (index, data1) {
@@ -168,19 +168,19 @@
 
                         if (data.id == id) {
                             $("#txt-1-7").val(data.name);
-                           
+
                             if (data.haveDecisions !== undefined) {
-
-                                $("#tbody-7")
-                                        .append($("<tr>").attr({"id": data.linkedEvaluations.id, "value": "8"})
-                                                .append($("<td>").html(data.linkedEvaluations.id).attr({"width": "80%"}))
-                                                .append($("<td>")
-                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                                )
-                                                        )
-                                                );
-
+                                $.each(data.haveDecisions, function (index, data) {
+                                    $("#tbody-7")
+                                            .append($("<tr>").attr({"id": data.id, "value": "8"})
+                                                    .append($("<td>").html("Decisión " + data.id.split("_")[1]).attr({"width": "80%"}))
+                                                    .append($("<td>")
+                                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                    )
+                                                            )
+                                                    );
+                                });
                                 $("#tbody-7 tr").each(function (index, data) {
 
                                     $("#slc-7 option").each(function (index, data1) {
