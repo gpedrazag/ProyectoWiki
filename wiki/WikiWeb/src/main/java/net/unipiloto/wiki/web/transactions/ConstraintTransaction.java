@@ -104,7 +104,7 @@ public class ConstraintTransaction
     
     public static List<Constraint> selectAllConstraintByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Constraint> constraints = new ArrayList<Constraint>();
+        List<Constraint> constraints = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -203,7 +203,7 @@ public class ConstraintTransaction
     
     public static String selectAll()
     {
-        List<Constraint> constraints = new ArrayList<Constraint>();
+        List<Constraint> constraints = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

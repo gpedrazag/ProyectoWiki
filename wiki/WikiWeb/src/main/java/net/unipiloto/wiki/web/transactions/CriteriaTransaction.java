@@ -107,7 +107,7 @@ public class CriteriaTransaction
     
     public static List<Criteria> selectAllCriteriasByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Criteria> criterias = new ArrayList<Criteria>();
+        List<Criteria> criterias = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -201,7 +201,7 @@ public class CriteriaTransaction
     
     public static String selectAll()
     {
-        List<Criteria> criterias = new ArrayList<Criteria>();
+        List<Criteria> criterias = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

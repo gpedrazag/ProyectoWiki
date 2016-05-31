@@ -39,25 +39,25 @@ public class GeneralTransactions
                 "?x <http://www.semanticweb.org/sa#id> ?id . \n"+
                 "?y <http://www.w3.org/2000/01/rdf-schema#domain> ?x .\n"+
                 "?x ?y ?z . \n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#description> ?description} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#name> ?name} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#actor> ?actor} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#arguments> ?arguments} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#boost> ?boost} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#boostSource> ?boostSource} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#concern> ?concern} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#cons> ?cons} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#enviroment> ?enviroment} .\n"+
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#input> ?input} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#keyword> ?keyword} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#measure> ?measure} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#output> ?output} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#pros> ?pros} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#rationale> ?rationale} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#source> ?source} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#state> ?state} .\n" +
-                "OPTIONAL {?x <http://www.semanticweb.org/sa#valoration> ?valoration} .\n" +
-                "FILTER regex(?z \""+pattern+"\", \"i\")}"
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#description> ?description } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#name> ?name } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#actor> ?actor } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#arguments> ?arguments } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#boost> ?boost } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#boostSource> ?boostSource } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#concern> ?concern } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#cons> ?cons } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#enviroment> ?enviroment } .\n"+
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#input> ?input } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#keyword> ?keyword } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#measure> ?measure } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#output> ?output } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#pros> ?pros } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#rationale> ?rationale } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#source> ?source } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#state> ?state } .\n" +
+                "OPTIONAL { ?x <http://www.semanticweb.org/sa#valoration> ?valoration } .\n" +
+                "FILTER regex(?z, \""+pattern+"\", \"i\")}"
             );
             
             TupleQueryResult rs = tq.evaluate();
