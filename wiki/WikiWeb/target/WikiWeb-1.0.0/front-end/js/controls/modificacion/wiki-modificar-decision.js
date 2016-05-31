@@ -664,7 +664,7 @@
                                 $.each(data.haveResponsibles, function (index, data) {
                                     $("#tbody-10")
                                             .append($("<tr>").attr({"id": data.id, "value": "10"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Responsable " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -687,7 +687,7 @@
                                 $.each(data.haveAsTriggerConcerns, function (index, data) {
                                     $("#tbody-4")
                                             .append($("<tr>").attr({"id": data.id, "value": "4"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Asunto " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -710,7 +710,7 @@
                                 $.each(data.haveCriterias, function (index, data) {
                                     $("#tbody-6")
                                             .append($("<tr>").attr({"id": data.id, "value": "6"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Criterio " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -733,7 +733,7 @@
                                 $.each(data.mayHaveAssumptions, function (index, data) {
                                     $("#tbody-13")
                                             .append($("<tr>").attr({"id": data.id, "value": "13"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Suposición " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -756,7 +756,7 @@
                                 $.each(data.mayHaveConstraints, function (index, data) {
                                     $("#tbody-11")
                                             .append($("<tr>").attr({"id": data.id, "value": "11"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Restricción " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -776,17 +776,17 @@
                             }
 
                             if (data.haveSolution !== undefined) {
-                                $.each(data.haveSolution, function (index, data) {
+                                
                                     $("#tbody-12")
-                                            .append($("<tr>").attr({"id": data.id, "value": "12"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                            .append($("<tr>").attr({"id": data.haveSolution.id, "value": "12"})
+                                                    .append($("<td>").html("Solución " + data.haveSolution.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
                                                                     )
                                                             )
                                                     );
-                                });
+                              
                                 $("#tbody-12 tr").each(function (index, data) {
                                     $("#slc-12 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
@@ -802,7 +802,7 @@
                                 $.each(data.haveAlternatives, function (index, data) {
                                     $("#tbody-1")
                                             .append($("<tr>").attr({"id": data.id, "value": "1"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Alternativa " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))

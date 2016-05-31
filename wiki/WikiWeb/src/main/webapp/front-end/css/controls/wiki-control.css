@@ -1,3 +1,13 @@
-.navbar{
-    
+.panel-default>.panel-heading {
+    color: #FFF;
+    background-color: rgba(68, 120, 150, 0.82);
+    border-color: #ddd;
 }
+
+/*a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+a {
+    background-color: rgb(101, 144, 169);
+}*/
