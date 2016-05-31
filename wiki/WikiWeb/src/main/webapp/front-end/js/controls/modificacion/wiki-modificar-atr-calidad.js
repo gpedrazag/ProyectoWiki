@@ -258,7 +258,7 @@
 
                             if (data.triggerArtifacts !== undefined) {
                                 $.each(data.triggerArtifacts, function (index, data) {
-                                    $("#tbody-5")
+                                    $("#tbody-3")
                                             .append($("<tr>").attr({"id": data.id, "value": "5"})
                                                     .append($("<td>").html(data.id).attr({"width": "80%"}))
                                                     .append($("<td>")
@@ -268,9 +268,9 @@
                                                             )
                                                     );
                                 });
-                                $("#tbody-5 tr").each(function (index, data) {
+                                $("#tbody-3 tr").each(function (index, data) {
 
-                                    $("#slc-5 option").each(function (index, data1) {
+                                    $("#slc-3 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
                                         } else {
