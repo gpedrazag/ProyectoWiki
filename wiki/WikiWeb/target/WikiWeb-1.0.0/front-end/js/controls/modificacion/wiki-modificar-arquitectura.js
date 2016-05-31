@@ -417,8 +417,8 @@
                                 });
                             }
 
-                            if (data.decisionsRelated !== undefined) {
-                                $.each(data.decisionsRelated, function (index, data) {
+                            if (data.relatedDecisions !== undefined) {
+                                $.each(data.relatedDecisions, function (index, data) {
                                     $("#tbody-7")
                                             .append($("<tr>").attr({"id": data.id, "value": "7"})
                                                     .append($("<td>").html("Decision " + data.id.split("_")[1]).attr({"width": "80%"}))

@@ -487,7 +487,7 @@
             });
 
             $.each($("#tbody-12 tr"), function (index, data) {
-                list12.push($(data).attr("id"));
+                list12 = ($(data).attr("id"));
 
             });
 
@@ -525,7 +525,7 @@
             if (ok == true) {
 
                 ajaxInsert7(Nombre, Argumento, estado, list11, list6, list13, list4, list10, list1, list12);
-                
+
                 $("#txt-1-7").val("");
                 $("#txt-2-7").val("");
                 $("#txt-3-7").val("");
