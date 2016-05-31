@@ -28,7 +28,7 @@
                     .append($("<div>").addClass("form-group").attr({"id": "frm-3"})
                             .append($("<label>").html("Atributo De Calidad"))
                             .append($("<select>").addClass("form-control").attr({"id": "slc-5-tp"})
-                                    .append($("<option>").html("...").attr({"value":"0"}))
+                                    .append($("<option>").html("...").attr({"value": "0"}))
                                     )
                             .append($("<p>").addClass("help-block").html("Seleccione el Atributo De Calidad que va a modificar."))
                             );
@@ -257,23 +257,23 @@
                             $("#txt-5-5").val(data.boostSource);
 
                             if (data.triggerArtifacts !== undefined) {
-
-                                $("#tbody-5")
-                                        .append($("<tr>").attr({"id": data.triggerArtifacts.id, "value": "5"})
-                                                .append($("<td>").html(data.triggerArtifacts.id).attr({"width": "80%"}))
-                                                .append($("<td>")
-                                                        .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
-                                                                .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
-                                                                )
-                                                        )
-                                                );
-
+                                $.each(data.triggerArtifacts, function (index, data) {
+                                    $("#tbody-5")
+                                            .append($("<tr>").attr({"id": data.id, "value": "5"})
+                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>")
+                                                            .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
+                                                                    .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
+                                                                    )
+                                                            )
+                                                    );
+                                });
                                 $("#tbody-5 tr").each(function (index, data) {
 
                                     $("#slc-5 option").each(function (index, data1) {
                                         if ($(data).attr("id") === $(data1).attr("value")) {
                                             $(data1).addClass("hidden");
-                                        }else{
+                                        } else {
                                             $(data1).removeClass("hidden");
                                         }
                                     });

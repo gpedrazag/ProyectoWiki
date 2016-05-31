@@ -372,7 +372,7 @@
                                 $.each(data.describedByQA, function (index, data) {
                                     $("#tbody-5")
                                             .append($("<tr>").attr({"id": data.id, "value": "5"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Atr Calidad " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))
@@ -399,7 +399,7 @@
                                 $.each(data.describedByFR, function (index, data) {
                                     $("#tbody-9")
                                             .append($("<tr>").attr({"id": data.id, "value": "9"})
-                                                    .append($("<td>").html(data.id).attr({"width": "80%"}))
+                                                    .append($("<td>").html("Req Funcional " + data.id.split("_")[1]).attr({"width": "80%"}))
                                                     .append($("<td>")
                                                             .append($("<button>").addClass("btn btn-danger btn-sm").on("click", eventRemove)
                                                                     .append($("<span>").addClass("glyphicon glyphicon-minus").attr({"aria-hidden": "true"}))

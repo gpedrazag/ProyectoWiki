@@ -10,7 +10,7 @@
             $("#row-foot").empty();
             $("#panel-foot").empty();
             $("#page-name").html("Formulario de creacion");
-            $("#panel-heading-left").html("Alternativa");
+            $("#panel-heading-left").html("Artefacto");
             $("#panel-heading-right").html("Relaciones");
 
             $("#panel-heading-left").removeClass("hidden");
@@ -68,7 +68,7 @@
 
             ajaxSelectAll7(function (data) {
                 $.each(data, function (index, data) {
-                    $("#slc-7").append($("<option>").html(data.id).attr({"value": data.id, "idClass": "7"}));
+                    $("#slc-7").append($("<option>").html("Decision " + data.id.split("_")[1]).attr({"value": data.id, "idClass": "7"}));
                 });
             });
 
