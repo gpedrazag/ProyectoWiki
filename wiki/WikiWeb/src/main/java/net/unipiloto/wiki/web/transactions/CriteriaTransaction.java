@@ -70,10 +70,10 @@ public class CriteriaTransaction
         
     }
     
-    public static void update(String id, String keyword, String description, List<String> linkedEvaluations) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String keyword, String description, List<String> linkedEvaluations) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, keyword, description, linkedEvaluations);
+        delete(oldId);
+        insert(newId, keyword, description, linkedEvaluations);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

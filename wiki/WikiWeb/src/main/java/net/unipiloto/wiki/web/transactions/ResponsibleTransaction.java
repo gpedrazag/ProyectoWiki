@@ -69,10 +69,10 @@ public class ResponsibleTransaction
         
     }
     
-    public static void update(String id, String name, List<String> decisions) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String name, List<String> decisions) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, name, decisions);
+        delete(oldId);
+        insert(newId, name, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

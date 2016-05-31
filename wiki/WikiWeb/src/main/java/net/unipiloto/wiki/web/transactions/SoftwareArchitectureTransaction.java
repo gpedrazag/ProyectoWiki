@@ -76,10 +76,10 @@ public class SoftwareArchitectureTransaction
         
     }
     
-    public static void update(String id, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, name, description, relatedArtifacts, decisionsRelated);
+        delete(oldId);
+        insert(newId, name, description, relatedArtifacts, decisionsRelated);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

@@ -98,10 +98,13 @@ $(document).ready(function () {
         $("<div>").wikiEliminarSolucion(id);
         $("<div>").wikiEliminarSuposicion(id);
 
-        
-
     }
 
 });
+
+function search()
+{
+    
+}
 
 

@@ -64,10 +64,10 @@ public class AssumptionTransaction
         
     }
     
-    public static void update(String id, String description, String source) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String description, String source) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, description, source);
+        delete(oldId);
+        insert(newId, description, source);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

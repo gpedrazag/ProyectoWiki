@@ -67,10 +67,10 @@ public class AlternativeTransaction
         
     }
     
-    public static void update(String id, String name, String description, String evaluationId) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String name, String description, String evaluationId) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, name, description, evaluationId);
+        delete(oldId);
+        insert(newId, name, description, evaluationId);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

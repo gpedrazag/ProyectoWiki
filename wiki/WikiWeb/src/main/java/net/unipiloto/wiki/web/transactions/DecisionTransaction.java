@@ -123,7 +123,7 @@ public class DecisionTransaction
     }
     
     public static void update(
-        String id, 
+        String newId, String oldId,
         String name, 
         String arguments, 
         String state,List<String> mayHaveConstraints,
@@ -134,8 +134,8 @@ public class DecisionTransaction
         List<String> haveAlternatives,
         String haveSolution) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
+        delete(oldId);
+        insert(newId, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

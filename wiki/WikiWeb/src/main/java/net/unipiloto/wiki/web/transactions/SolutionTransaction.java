@@ -58,10 +58,10 @@ public class SolutionTransaction
         
     }
     
-    public static void update(String id, String rationale) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String rationale) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, rationale);
+        delete(oldId);
+        insert(newId, rationale);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

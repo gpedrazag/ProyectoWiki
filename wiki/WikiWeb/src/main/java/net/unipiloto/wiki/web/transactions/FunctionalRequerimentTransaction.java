@@ -66,11 +66,11 @@ public class FunctionalRequerimentTransaction
         
     }
     
-    public static void update(String id, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
     {
         
-        delete(id);
-        insert(id, name, actor, description, input, output);
+        delete(oldId);
+        insert(newId, name, actor, description, input, output);
         
     }
     

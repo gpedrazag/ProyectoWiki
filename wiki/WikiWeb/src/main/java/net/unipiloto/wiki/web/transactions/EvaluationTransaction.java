@@ -64,10 +64,10 @@ public class EvaluationTransaction
         
     }
     
-    public static void update(String id, String pros, String cons, String valoration) throws IOException, URISyntaxException
+    public static void update(String newId, String oldId, String pros, String cons, String valoration) throws IOException, URISyntaxException
     {
-        delete(id);
-        insert(id, pros, cons, valoration);
+        delete(oldId);
+        insert(newId, pros, cons, valoration);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
