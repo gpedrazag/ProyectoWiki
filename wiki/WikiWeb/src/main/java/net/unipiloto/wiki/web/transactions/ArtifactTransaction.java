@@ -128,7 +128,7 @@ public class ArtifactTransaction
     
     public static String selectAll()
     {
-        List<Artifact> artifacts = new ArrayList<Artifact>();
+        List<Artifact> artifacts = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection(); 
@@ -168,7 +168,7 @@ public class ArtifactTransaction
     
     public static List<Artifact> selectByQAId(String id, RepositoryConnection connection)
     {
-        List<Artifact> artifacts = new ArrayList<Artifact>();
+        List<Artifact> artifacts = new ArrayList();
         
         Repository repo = null;
         RepositoryConnection conn = null;
@@ -224,7 +224,7 @@ public class ArtifactTransaction
     
     public static List<Artifact> getAllArtifactsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
-        List<Artifact> artifacts = new ArrayList<Artifact>();
+        List<Artifact> artifacts = new ArrayList();
         
         Repository repo = null;
         RepositoryConnection conn = null;

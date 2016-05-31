@@ -65,11 +65,11 @@ public class ConstraintTransaction
         
     }
     
-    public static void update(String newId, String oldId, String name, String description, String rationale, String keyword) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description, String rationale, String keyword) throws IOException, URISyntaxException
     {
         
-        delete(oldId);
-        insert(newId, name, description, rationale, keyword);
+        delete(id);
+        insert(id, name, description, rationale, keyword);
         
     }
     

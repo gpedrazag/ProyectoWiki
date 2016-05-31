@@ -69,10 +69,10 @@ public class ResponsibleTransaction
         
     }
     
-    public static void update(String newId, String oldId, String name, List<String> decisions) throws IOException, URISyntaxException
+    public static void update(String id, String name, List<String> decisions) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, name, decisions);
+        delete(id);
+        insert(id, name, decisions);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -106,7 +106,7 @@ public class ResponsibleTransaction
     
     public static List<Responsible> selectAllResponsiblesByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Responsible> responsibles = new ArrayList<Responsible>();
+        List<Responsible> responsibles = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -193,7 +193,7 @@ public class ResponsibleTransaction
     
     public static String selectAll()
     {
-        List<Responsible> responsibles = new ArrayList<Responsible>();
+        List<Responsible> responsibles = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

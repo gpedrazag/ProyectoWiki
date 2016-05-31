@@ -58,10 +58,10 @@ public class SolutionTransaction
         
     }
     
-    public static void update(String newId, String oldId, String rationale) throws IOException, URISyntaxException
+    public static void update(String id, String rationale) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, rationale);
+        delete(id);
+        insert(id, rationale);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -180,7 +180,7 @@ public class SolutionTransaction
     
     public static String selectAll()
     {
-        List<Solution> solutions = new ArrayList<Solution>();
+        List<Solution> solutions = new ArrayList();
         Repository repo = null;
         repo = OntologyTools.getInstance();
         repo.initialize();

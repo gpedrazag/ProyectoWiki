@@ -67,10 +67,10 @@ public class AlternativeTransaction
         
     }
     
-    public static void update(String newId, String oldId, String name, String description, String evaluationId) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description, String evaluationId) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, name, description, evaluationId);
+        delete(id);
+        insert(id, name, description, evaluationId);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -104,7 +104,7 @@ public class AlternativeTransaction
     
     public static List<Alternative> selectAllAlternativesByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Alternative> concerns = new ArrayList<Alternative>();
+        List<Alternative> concerns = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -196,7 +196,7 @@ public class AlternativeTransaction
     
     public static String selectAll()
     {
-        List<Alternative> alternatives = new ArrayList<Alternative>();
+        List<Alternative> alternatives = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

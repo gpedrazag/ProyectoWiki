@@ -76,10 +76,10 @@ public class ConcernTransaction
         
     }
     
-    public static void update(String newId, String oldId, String concern, List<String> describedByQA, List<String> describedByFR) throws IOException, URISyntaxException
+    public static void update(String id, String concern, List<String> describedByQA, List<String> describedByFR) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, concern, describedByQA, describedByFR);
+        delete(id);
+        insert(id, concern, describedByQA, describedByFR);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException

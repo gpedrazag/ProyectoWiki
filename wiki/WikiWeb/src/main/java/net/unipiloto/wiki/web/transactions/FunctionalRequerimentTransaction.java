@@ -66,11 +66,11 @@ public class FunctionalRequerimentTransaction
         
     }
     
-    public static void update(String newId, String oldId, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
+    public static void update(String id, String name, String actor, String description, String input, String output) throws IOException, URISyntaxException
     {
         
-        delete(oldId);
-        insert(newId, name, actor, description, input, output);
+        delete(id);
+        insert(id, name, actor, description, input, output);
         
     }
     
@@ -105,7 +105,7 @@ public class FunctionalRequerimentTransaction
     
     public static List<FunctionalRequeriment> selectFRByConcernId(String id, RepositoryConnection connection)
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<FunctionalRequeriment> frs = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -207,7 +207,7 @@ public class FunctionalRequerimentTransaction
     
     public static String selectAll()
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<FunctionalRequeriment> frs = new ArrayList();
         
         Repository repo = null;
         repo = OntologyTools.getInstance();

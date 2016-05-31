@@ -123,7 +123,7 @@ public class DecisionTransaction
     }
     
     public static void update(
-        String newId, String oldId,
+        String id,
         String name, 
         String arguments, 
         String state,List<String> mayHaveConstraints,
@@ -134,8 +134,8 @@ public class DecisionTransaction
         List<String> haveAlternatives,
         String haveSolution) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
+        delete(id);
+        insert(id, name, arguments, state, mayHaveConstraints, haveCriterias, mayHaveAssumptions, haveAsTriggerConcerns, haveResponsibles, haveAlternatives, haveSolution);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -169,7 +169,7 @@ public class DecisionTransaction
     
     public static List<Decision> selectAllDecisionsByArtifactId(String artifactId, RepositoryConnection connection)
     {
-        List<Decision> decisions = new ArrayList<Decision>();
+        List<Decision> decisions = new ArrayList();
         
         Repository repo = null;
         RepositoryConnection conn = null;
@@ -229,7 +229,7 @@ public class DecisionTransaction
     
     public static List<Decision> selectAllDecisionsByResponsibleId(String responsibleId, RepositoryConnection connection)
     {
-        List<Decision> decisions = new ArrayList<Decision>();
+        List<Decision> decisions = new ArrayList();
         
         Repository repo = null;
         RepositoryConnection conn = null;
@@ -290,7 +290,7 @@ public class DecisionTransaction
     
     public static List<Decision> selectAllDecisionsBySoftwareArchitectureId(String id, RepositoryConnection connection)
     {
-        List<Decision> decisions = new ArrayList<Decision>();
+        List<Decision> decisions = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -391,7 +391,7 @@ public class DecisionTransaction
     
     public static String selectAll()
     {
-        List<Decision> decisions = new ArrayList<Decision>();
+        List<Decision> decisions = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

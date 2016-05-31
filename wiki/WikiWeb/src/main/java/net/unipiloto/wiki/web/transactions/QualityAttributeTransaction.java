@@ -56,7 +56,7 @@ public class QualityAttributeTransaction
             {
                 for(String s : triggerArtifacts)
                 {
-                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#triggerAn"), factory.createLiteral("http://www.semanticweb.org/sa#"+id));
+                    conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#triggerAn"), factory.createIRI("http://www.semanticweb.org/sa#"+s));
                 }
             }
             conn.commit();
@@ -73,11 +73,11 @@ public class QualityAttributeTransaction
         
     }
     
-    public static void update(String newId, String oldId, String actor, String enviroment, String measure, String boost, String boostSource, List<String> triggerArtifacts) throws IOException, URISyntaxException
+    public static void update(String id, String actor, String enviroment, String measure, String boost, String boostSource, List<String> triggerArtifacts) throws IOException, URISyntaxException
     {
         
-        delete(oldId);
-        insert(newId, actor, enviroment, measure, boost, boostSource, triggerArtifacts);
+        delete(id);
+        insert(id, actor, enviroment, measure, boost, boostSource, triggerArtifacts);
         
     }
     
@@ -112,7 +112,7 @@ public class QualityAttributeTransaction
     
     public static List<QualityAttribute> selectQAByConcenrId(String id, RepositoryConnection connection) 
     {
-        List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
+        List<QualityAttribute> qas = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -130,7 +130,7 @@ public class QualityAttributeTransaction
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?actor ?enviroment ?measure ?boost ?boostSource WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#determinedBy> ?d . "
-                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttribute> . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#QualityAttributeStage> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#actor> ?actor . "
                 +"?d <http://www.semanticweb.org/sa#enviroment> ?enviroment . "
@@ -217,7 +217,7 @@ public class QualityAttributeTransaction
     
     public static String selectAll()
     {
-        List<QualityAttribute> qas = new ArrayList<QualityAttribute>();
+        List<QualityAttribute> qas = new ArrayList();
         Repository repo = null;
         repo = OntologyTools.getInstance();
         repo.initialize();

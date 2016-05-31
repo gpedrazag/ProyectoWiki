@@ -76,10 +76,10 @@ public class SoftwareArchitectureTransaction
         
     }
     
-    public static void update(String newId, String oldId, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
+    public static void update(String id, String name, String description, List<String> relatedArtifacts, List<String> decisionsRelated) throws IOException, URISyntaxException
     {
-        delete(oldId);
-        insert(newId, name, description, relatedArtifacts, decisionsRelated);
+        delete(id);
+        insert(id, name, description, relatedArtifacts, decisionsRelated);
     }
     
     public static void delete(String id) throws IOException, URISyntaxException
@@ -151,7 +151,7 @@ public class SoftwareArchitectureTransaction
     
     public static String selectAll()
     {
-        List<SoftwareArchitecture> sas = new ArrayList<SoftwareArchitecture>();
+        List<SoftwareArchitecture> sas = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
