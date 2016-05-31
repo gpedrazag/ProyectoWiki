@@ -104,7 +104,7 @@ public class AlternativeTransaction
     
     public static List<Alternative> selectAllAlternativesByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Alternative> concerns = new ArrayList<Alternative>();
+        List<Alternative> concerns = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -196,7 +196,7 @@ public class AlternativeTransaction
     
     public static String selectAll()
     {
-        List<Alternative> alternatives = new ArrayList<Alternative>();
+        List<Alternative> alternatives = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

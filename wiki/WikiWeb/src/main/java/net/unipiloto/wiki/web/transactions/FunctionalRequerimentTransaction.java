@@ -105,7 +105,7 @@ public class FunctionalRequerimentTransaction
     
     public static List<FunctionalRequeriment> selectFRByConcernId(String id, RepositoryConnection connection)
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<FunctionalRequeriment> frs = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -207,7 +207,7 @@ public class FunctionalRequerimentTransaction
     
     public static String selectAll()
     {
-        List<FunctionalRequeriment> frs = new ArrayList<FunctionalRequeriment>();
+        List<FunctionalRequeriment> frs = new ArrayList();
         
         Repository repo = null;
         repo = OntologyTools.getInstance();

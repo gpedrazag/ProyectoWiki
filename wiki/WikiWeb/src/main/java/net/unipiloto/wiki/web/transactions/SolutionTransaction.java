@@ -180,7 +180,7 @@ public class SolutionTransaction
     
     public static String selectAll()
     {
-        List<Solution> solutions = new ArrayList<Solution>();
+        List<Solution> solutions = new ArrayList();
         Repository repo = null;
         repo = OntologyTools.getInstance();
         repo.initialize();

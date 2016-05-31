@@ -3,8 +3,7 @@ package net.unipiloto.wiki.web.controllers;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import net.unipiloto.wiki.web.others.OntologyTools;
-import net.unipiloto.wiki.web.transactions.DataBaseTransactions;
-import org.boon.json.JsonFactory;
+import net.unipiloto.wiki.web.transactions.GeneralTransactions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,8 +26,8 @@ public class IndexController
     @ResponseBody
     public String getArtifact() throws Exception
     {
-        DataBaseTransactions db = new DataBaseTransactions();
-        return JsonFactory.toJson(db.getLogin("admin", "admin"));
+        
+        return GeneralTransactions.search("sdsd", OntologyTools.getInstance().getConnection());
     }
     
     

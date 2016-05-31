@@ -106,7 +106,7 @@ public class ResponsibleTransaction
     
     public static List<Responsible> selectAllResponsiblesByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Responsible> responsibles = new ArrayList<Responsible>();
+        List<Responsible> responsibles = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -193,7 +193,7 @@ public class ResponsibleTransaction
     
     public static String selectAll()
     {
-        List<Responsible> responsibles = new ArrayList<Responsible>();
+        List<Responsible> responsibles = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();

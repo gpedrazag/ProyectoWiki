@@ -101,7 +101,7 @@ public class AssumptionTransaction
     
     public static List<Assumption> selectAllAssumptionsByDecisionId(String id, RepositoryConnection connection)
     {
-        List<Assumption> assumptions = new ArrayList<Assumption>();
+        List<Assumption> assumptions = new ArrayList();
         Repository repo = null;
         RepositoryConnection conn = null;
         if(connection != null)
@@ -192,12 +192,11 @@ public class AssumptionTransaction
     
     public static String selectAll()
     {
-        List<Assumption> assumptions = new ArrayList<Assumption>();
+        List<Assumption> assumptions = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
-        RepositoryConnection conn = repo.getConnection();
         try
-        {
+        (RepositoryConnection conn = repo.getConnection()) {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?description ?source WHERE {\n"
                 + "?assumption <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Assumption> . "
@@ -216,11 +215,6 @@ public class AssumptionTransaction
                     bs.getValue("source").stringValue()
                 ));
             }
-        }
-        finally
-        {
-            conn.close();
-            
         }
         
         return JsonFactory.toJson(assumptions);

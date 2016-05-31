@@ -151,7 +151,7 @@ public class SoftwareArchitectureTransaction
     
     public static String selectAll()
     {
-        List<SoftwareArchitecture> sas = new ArrayList<SoftwareArchitecture>();
+        List<SoftwareArchitecture> sas = new ArrayList();
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
