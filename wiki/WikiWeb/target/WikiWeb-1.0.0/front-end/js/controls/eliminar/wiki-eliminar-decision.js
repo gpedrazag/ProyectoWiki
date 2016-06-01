@@ -49,7 +49,7 @@
                         $("#tbody-7")
                                 .append($("<tr>").attr({"id": data.id, "value": "7"})
                                         .append($("<td>").html("Decision " + data.id.split("_")[1]).attr({"width": "20%"}))
-                                        .append($("<td>").html(data.nombre).attr({"width": "20%"}))
+                                        .append($("<td>").html(data.name).attr({"width": "20%"}))
                                         .append($("<td>").html(data.arguments).attr({"width": "20%"}))
                                         .append($("<td>").html(data.state).attr({"width": "40%"}))
                                         .append($("<td>")

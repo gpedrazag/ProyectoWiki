@@ -189,7 +189,7 @@
                                         <a id="d-9" href="#eliminarRequerimiento><i class="fa fa-minus-square-o" aria-hidden="true">&nbsp</i>Eliminar</a>
                                     </li>
                                     <li>
-                                        <a href="#relacionesRequerimiento"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
+                                        <a id="r-9" href="#relacionesRequerimiento"><i class="fa fa-arrows-h" aria-hidden="true">&nbsp</i>Relaciones</a>
                                     </li>
                                 </ul>
                             </li>
@@ -374,6 +374,9 @@
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-restriccion.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-solucion.js"></script>
         <script src="${pageContext.request.contextPath}/front-end/js/controls/eliminar/wiki-eliminar-suposicion.js"></script>
+        
+        <script src="${pageContext.request.contextPath}/front-end/js/controls/relaciones/wiki-relacion-arquitectura.js"></script>
+       
 
 
 

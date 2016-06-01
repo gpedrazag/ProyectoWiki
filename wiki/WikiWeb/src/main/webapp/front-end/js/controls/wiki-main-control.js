@@ -41,7 +41,9 @@ $(document).ready(function () {
     $("#d-11").on("click", eventDelete);
     $("#d-12").on("click", eventDelete);
     $("#d-13").on("click", eventDelete);
-    
+
+    $("#r-9").on("click", eventRelations);
+
     //$("<div>").wikiConsultaGeneral();
     $("<div>").wikiMainPage();
 
@@ -101,11 +103,16 @@ $(document).ready(function () {
 
     }
 
+    function eventRelations() {
+        var id = $(this).attr("id");
+        $("<div>").wikiRelacionArquitectura(id);
+    }
+
 });
 
 function search()
 {
-    
+
 }
 
 

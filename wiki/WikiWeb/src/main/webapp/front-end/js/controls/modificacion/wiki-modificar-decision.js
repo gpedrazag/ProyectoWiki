@@ -833,7 +833,7 @@
                 data: {
                     id: id,
                     name: name,
-                    argumen: argumen,
+                    argument: argumen,
                     state: state,
                     mayHaveConstraints: JSON.stringify(mayHaveConstraints),
                     haveCriterias: JSON.stringify(haveCriterias),
