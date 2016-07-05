@@ -1,0 +1,481 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY sa "http://www.semanticweb.org/sa#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY sa2 "http://softwarearchitecture.org/sa#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/sa#"
+     xml:base="http://www.semanticweb.org/sa"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:sa2="http://softwarearchitecture.org/sa#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:sa="http://www.semanticweb.org/sa#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/sa"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/sa#alternativeLinkTo -->
+
+    <owl:ObjectProperty rdf:about="&sa;alternativeLinkTo">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&sa;Alternative"/>
+        <rdfs:range rdf:resource="&sa;Evaluation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#alternativeLinkedToDecision -->
+
+    <owl:ObjectProperty rdf:about="&sa;alternativeLinkedToDecision">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <owl:inverseOf rdf:resource="&sa;decisionHave"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#artifactHave -->
+
+    <owl:ObjectProperty rdf:about="&sa;artifactHave">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:domain rdf:resource="&sa;Artifact"/>
+        <rdfs:range rdf:resource="&sa;Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#compatibleCompatibleNot -->
+
+    <owl:ObjectProperty rdf:about="&sa;compatibleCompatibleNot">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+        <rdfs:range rdf:resource="&sa;Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#composeBy -->
+
+    <owl:ObjectProperty rdf:about="&sa;composeBy">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Artifact"/>
+        <rdfs:domain rdf:resource="&sa;SoftwareArchitecture"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#criteriaLinkTo -->
+
+    <owl:ObjectProperty rdf:about="&sa;criteriaLinkTo">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:domain rdf:resource="&sa;Criteria"/>
+        <rdfs:range rdf:resource="&sa;Evaluation"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#decisionHave -->
+
+    <owl:ObjectProperty rdf:about="&sa;decisionHave">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Alternative"/>
+        <rdfs:range rdf:resource="&sa;Criteria"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+        <rdfs:range rdf:resource="&sa;Responsible"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#decisionMayHave -->
+
+    <owl:ObjectProperty rdf:about="&sa;decisionMayHave">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Assumption"/>
+        <rdfs:range rdf:resource="&sa;Constraint"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#decision_alternative -->
+
+    <owl:ObjectProperty rdf:about="&sa;decision_alternative">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <owl:inverseOf rdf:resource="&sa;artifactHave"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#descompose -->
+
+    <owl:ObjectProperty rdf:about="&sa;descompose">
+        <rdf:type rdf:resource="&owl;IrreflexiveProperty"/>
+        <rdfs:range rdf:resource="&sa;Decision"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#determinedBy -->
+
+    <owl:ObjectProperty rdf:about="&sa;determinedBy">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:domain rdf:resource="&sa;Concern"/>
+        <rdfs:range rdf:resource="&sa;FunctionalRequeriment"/>
+        <rdfs:range rdf:resource="&sa;QualityAttributeStage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#havaAsTrigger -->
+
+    <owl:ObjectProperty rdf:about="&sa;havaAsTrigger">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Concern"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#isaSetOf -->
+
+    <owl:ObjectProperty rdf:about="&sa;isaSetOf">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Decision"/>
+        <rdfs:domain rdf:resource="&sa;SoftwareArchitecture"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#triggerAn -->
+
+    <owl:ObjectProperty rdf:about="&sa;triggerAn">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:range rdf:resource="&sa;Artifact"/>
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/sa#actor -->
+
+    <owl:DatatypeProperty rdf:about="&sa;actor">
+        <rdfs:domain rdf:resource="&sa;FunctionalRequeriment"/>
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#arguments -->
+
+    <owl:DatatypeProperty rdf:about="&sa;arguments">
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#boost -->
+
+    <owl:DatatypeProperty rdf:about="&sa;boost">
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#boostSource -->
+
+    <owl:DatatypeProperty rdf:about="&sa;boostSource">
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#concern -->
+
+    <owl:DatatypeProperty rdf:about="&sa;concern">
+        <rdfs:domain rdf:resource="&sa;Concern"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#cons -->
+
+    <owl:DatatypeProperty rdf:about="&sa;cons">
+        <rdfs:domain rdf:resource="&sa;Evaluation"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#description -->
+
+    <owl:DatatypeProperty rdf:about="&sa;description">
+        <rdfs:domain rdf:resource="&sa;Alternative"/>
+        <rdfs:domain rdf:resource="&sa;Artifact"/>
+        <rdfs:domain rdf:resource="&sa;Assumption"/>
+        <rdfs:domain rdf:resource="&sa;Constraint"/>
+        <rdfs:domain rdf:resource="&sa;Criteria"/>
+        <rdfs:domain rdf:resource="&sa;SoftwareArchitecture"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#enviroment -->
+
+    <owl:DatatypeProperty rdf:about="&sa;enviroment">
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#id -->
+
+    <owl:DatatypeProperty rdf:about="&sa;id">
+        <rdf:type rdf:resource="&owl;FunctionalProperty"/>
+        <rdfs:domain rdf:resource="&sa;Artifact"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#input -->
+
+    <owl:DatatypeProperty rdf:about="&sa;input">
+        <rdfs:domain rdf:resource="&sa;FunctionalRequeriment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#keyword -->
+
+    <owl:DatatypeProperty rdf:about="&sa;keyword">
+        <rdfs:domain rdf:resource="&sa;Constraint"/>
+        <rdfs:domain rdf:resource="&sa;Criteria"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#measure -->
+
+    <owl:DatatypeProperty rdf:about="&sa;measure">
+        <rdfs:domain rdf:resource="&sa;QualityAttributeStage"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#name -->
+
+    <owl:DatatypeProperty rdf:about="&sa;name">
+        <rdfs:domain rdf:resource="&sa;Alternative"/>
+        <rdfs:domain rdf:resource="&sa;Constraint"/>
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+        <rdfs:domain rdf:resource="&sa;FunctionalRequeriment"/>
+        <rdfs:domain rdf:resource="&sa;Responsible"/>
+        <rdfs:domain rdf:resource="&sa;SoftwareArchitecture"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#output -->
+
+    <owl:DatatypeProperty rdf:about="&sa;output">
+        <rdfs:domain rdf:resource="&sa;FunctionalRequeriment"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#pros -->
+
+    <owl:DatatypeProperty rdf:about="&sa;pros">
+        <rdfs:domain rdf:resource="&sa;Evaluation"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#rationale -->
+
+    <owl:DatatypeProperty rdf:about="&sa;rationale">
+        <rdfs:domain rdf:resource="&sa;Constraint"/>
+        <rdfs:domain rdf:resource="&sa;Solution"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#source -->
+
+    <owl:DatatypeProperty rdf:about="&sa;source">
+        <rdfs:domain rdf:resource="&sa;Assumption"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#state -->
+
+    <owl:DatatypeProperty rdf:about="&sa;state">
+        <rdfs:domain rdf:resource="&sa;Decision"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#valoration -->
+
+    <owl:DatatypeProperty rdf:about="&sa;valoration">
+        <rdfs:domain rdf:resource="&sa;Evaluation"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Alternative -->
+
+    <owl:Class rdf:about="&sa;Alternative"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Artifact -->
+
+    <owl:Class rdf:about="&sa;Artifact"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Assumption -->
+
+    <owl:Class rdf:about="&sa;Assumption"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Concern -->
+
+    <owl:Class rdf:about="&sa;Concern"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Constraint -->
+
+    <owl:Class rdf:about="&sa;Constraint"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Criteria -->
+
+    <owl:Class rdf:about="&sa;Criteria"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Decision -->
+
+    <owl:Class rdf:about="&sa;Decision"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Evaluation -->
+
+    <owl:Class rdf:about="&sa;Evaluation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#FunctionalRequeriment -->
+
+    <owl:Class rdf:about="&sa;FunctionalRequeriment"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#QualityAttributeStage -->
+
+    <owl:Class rdf:about="&sa;QualityAttributeStage"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Responsible -->
+
+    <owl:Class rdf:about="&sa;Responsible"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#SoftwareArchitecture -->
+
+    <owl:Class rdf:about="&sa;SoftwareArchitecture"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Solution -->
+
+    <owl:Class rdf:about="&sa;Solution"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+   
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.2.0.1502) http://owlapi.sourceforge.net -->
+
