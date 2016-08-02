@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.wiki.architecture</groupId>
-    <artifactId>WikiWeb</artifactId>
+    <artifactId>WikiWebQueries</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <name>WikiWeb</name>
+    <name>WikiWebQueries</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
