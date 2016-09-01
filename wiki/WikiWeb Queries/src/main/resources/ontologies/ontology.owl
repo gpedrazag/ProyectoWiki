@@ -850,6 +850,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-01"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-02"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-03"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Se requiere un sistema de software  que sea eficiente en captura, procesamiento y respuesta de de datos. La elección de un lenguaje de programación eficiente en ejecición y aprensióne es importante para desarrollar un producto final que cumpla con todos los estándares de calidad exigidos.</arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir lenguaje de programación.</name>
@@ -862,6 +865,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-02">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-04"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-05"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-06"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La elección de un correcto estilo de arquitectura que responda a los estándares requeridos ayudará a al cumplimiento de alguno de ellos.</arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-02</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir el estilo de arquitectura del subsistema C3.</name>
@@ -874,6 +880,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-03">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-07"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-08"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-03</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La cantidad de tramas que llegan son 2000 tramas por segundo. Se pueden procesar máximo 1000 tramas en un segundo.</name>
@@ -886,6 +894,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-04">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-09"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-10"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-11"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-04</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Persistencia de datos</name>
@@ -898,6 +909,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-05">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-12"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-13"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-14"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reducir la latencia de la conexión de internet mejorará el tiempo de obtención y respuesta del sistema.</arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-05</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reducir el delay de la conexión a Internet.</name>
@@ -910,6 +924,9 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-06">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-15"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-16"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-17"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Los vehículos se pueden efrentar a cambios de trayectorias no programadas debido a diversas variables no controladas. El sistema debe actuar en función a estos eventos.</arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-06</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cambios no esperados en trayectoria del vehículo.</name>
@@ -922,6 +939,8 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-07">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-18"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-19"/>
         <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Al sistema solo se le es permitido manejar 1000 tramas simultaneamente en situaciones normales, más sin embargo en ocaciones será necesario manejar cantidades superiores. El sistema debe poder efectuar el procesamiento de cada una de ellas.</arguments>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-07</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manejar flujo de tramas cuando supera capacidad de procesamiento en estación en tierra.</name>
