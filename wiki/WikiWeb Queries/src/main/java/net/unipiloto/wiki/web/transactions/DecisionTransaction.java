@@ -40,7 +40,8 @@ public class DecisionTransaction
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
                 + "?d <http://www.semanticweb.org/sa#state> ?state "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -100,7 +101,8 @@ public class DecisionTransaction
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
                 + "?d <http://www.semanticweb.org/sa#state> ?state "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -159,7 +161,8 @@ public class DecisionTransaction
                 + "?d <http://www.semanticweb.org/sa#name> ?name . "
                 + "?d <http://www.semanticweb.org/sa#arguments> ?arguments . "
                 + "?d <http://www.semanticweb.org/sa#state> ?state "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -207,7 +210,8 @@ public class DecisionTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#arguments> ?arguments . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#state> ?state "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -251,7 +255,8 @@ public class DecisionTransaction
                 + "?decision <http://www.semanticweb.org/sa#name> ?name . "
                 + "?decision <http://www.semanticweb.org/sa#arguments> ?arguments . "
                 + "?decision <http://www.semanticweb.org/sa#state> ?state "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
 
             );
             TupleQueryResult result = tq.evaluate();

@@ -37,7 +37,8 @@ public class ResponsibleTransaction
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Responsible> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#name> ?name "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -81,7 +82,8 @@ public class ResponsibleTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Responsible> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -115,7 +117,8 @@ public class ResponsibleTransaction
                 + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Responsible> . "
                 + "?d <http://www.semanticweb.org/sa#id> ?id . "
                 + "?d <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
 
             );
             TupleQueryResult result = tq.evaluate(); //sdsdsdds;

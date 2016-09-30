@@ -38,7 +38,8 @@ public class AssumptionTransaction
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
                 +"?d <http://www.semanticweb.org/sa#source> ?source "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -83,7 +84,8 @@ public class AssumptionTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#source> ?source "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -118,7 +120,8 @@ public class AssumptionTransaction
                 + "?assumption <http://www.semanticweb.org/sa#id> ?id ."
                 + "?assumption <http://www.semanticweb.org/sa#description> ?description . "
                 + "?assumption <http://www.semanticweb.org/sa#source> ?source "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

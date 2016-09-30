@@ -37,7 +37,8 @@ public class ConcernTransaction
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Concern> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#concern> ?concern "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -83,7 +84,8 @@ public class ConcernTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Concern> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#concern> ?concern "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -121,7 +123,8 @@ public class ConcernTransaction
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Concern> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#concern> ?concern "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

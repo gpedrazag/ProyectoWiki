@@ -39,7 +39,8 @@ public class EvaluationTransaction
                 + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
                 + "?d <http://www.semanticweb.org/sa#cons> ?cons . "
                 + "?d <http://www.semanticweb.org/sa#valoration> ?valoration "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -89,7 +90,8 @@ public class EvaluationTransaction
                 + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
                 + "?d <http://www.semanticweb.org/sa#cons> ?cons . "
                 + "?d <http://www.semanticweb.org/sa#valoration> ?valoration "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -129,7 +131,8 @@ public class EvaluationTransaction
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#pros> ?pros . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#cons> ?cons . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#valoration> ?valoration "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -169,7 +172,8 @@ public class EvaluationTransaction
                 +"?d <http://www.semanticweb.org/sa#pros> ?pros . "
                 +"?d <http://www.semanticweb.org/sa#cons> ?cons . "
                 +"?d <http://www.semanticweb.org/sa#valoration> ?valoration "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

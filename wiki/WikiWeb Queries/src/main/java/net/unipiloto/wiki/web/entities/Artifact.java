@@ -5,12 +5,14 @@ import java.util.List;
 public class Artifact
 {
     private String id;
+    private String name;
     private String description;
     private List<Decision> haveDecisions;
 
-    public Artifact(String id, String description)
+    public Artifact(String id, String name, String description)
     {
         this.id = id;
+        this.name = name;
         this.description = description;
     }
 
@@ -43,6 +45,15 @@ public class Artifact
     {
         this.description = description;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     
     
 }

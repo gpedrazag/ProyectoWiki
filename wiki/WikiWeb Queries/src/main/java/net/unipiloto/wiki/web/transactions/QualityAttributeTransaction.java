@@ -41,7 +41,8 @@ public class QualityAttributeTransaction
                 +"?d <http://www.semanticweb.org/sa#measure> ?measure . "
                 +"?d <http://www.semanticweb.org/sa#boost> ?boost . "
                 +"?d <http://www.semanticweb.org/sa#boostSource> ?boostSource "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -94,7 +95,8 @@ public class QualityAttributeTransaction
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#measure> ?measure . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#boost> ?boost . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#boostSource> ?boostSource "
-                + "}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -138,7 +140,8 @@ public class QualityAttributeTransaction
                 +"?d <http://www.semanticweb.org/sa#measure> ?measure . "
                 +"?d <http://www.semanticweb.org/sa#boost> ?boost . "
                 +"?d <http://www.semanticweb.org/sa#boostSource> ?boostSource "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

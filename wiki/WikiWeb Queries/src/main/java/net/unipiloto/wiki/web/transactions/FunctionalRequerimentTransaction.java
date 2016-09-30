@@ -41,7 +41,8 @@ public class FunctionalRequerimentTransaction
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
                 +"?d <http://www.semanticweb.org/sa#input> ?input . "
                 +"?d <http://www.semanticweb.org/sa#output> ?output "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -92,7 +93,8 @@ public class FunctionalRequerimentTransaction
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#input> ?input . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#output> ?output "
-                + "}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -136,7 +138,8 @@ public class FunctionalRequerimentTransaction
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
                 +"?d <http://www.semanticweb.org/sa#input> ?input . "
                 +"?d <http://www.semanticweb.org/sa#output> ?output "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

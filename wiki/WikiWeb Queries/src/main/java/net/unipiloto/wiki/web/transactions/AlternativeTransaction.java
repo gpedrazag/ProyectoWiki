@@ -38,7 +38,8 @@ public class AlternativeTransaction
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
                 +"?d <http://www.semanticweb.org/sa#name> ?name "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -83,7 +84,8 @@ public class AlternativeTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -120,7 +122,8 @@ public class AlternativeTransaction
                 + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
                 + "?alternative <http://www.semanticweb.org/sa#description> ?description . "
                 + "?alternative <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

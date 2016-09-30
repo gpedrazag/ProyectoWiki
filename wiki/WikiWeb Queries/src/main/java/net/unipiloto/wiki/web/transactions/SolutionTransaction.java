@@ -33,11 +33,12 @@ public class SolutionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?rationale WHERE {"
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
-                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale "
-                +"}"
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale . "
+                +"FILTER NOT EXISTS { FILTER  (?rationale = str(\"\") ) } }"
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -74,10 +75,11 @@ public class SolutionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?rationale WHERE {\n"
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                +"<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#rationale> ?rationale "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -111,10 +113,11 @@ public class SolutionTransaction
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
                 "SELECT DISTINCT ?id ?rationale WHERE {"
-                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Solution> . "
+                +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
-                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale "
-                +"}"
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale . "
+                +"FILTER NOT EXISTS { FILTER  (?rationale = str(\"\") ) } }"
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

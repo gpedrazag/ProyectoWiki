@@ -23,11 +23,13 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?description WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name ."        
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -35,6 +37,7 @@ public class ArtifactTransaction
                 BindingSet bs = result.next();
                 artifact = new Artifact(
                     bs.getValue("id").stringValue(),
+                    bs.getValue("name").stringValue(),
                     bs.getValue("description").stringValue()
                 );
                 
@@ -58,11 +61,13 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description WHERE {\n"
+                "SELECT DISTINCT ?id ?name ?description WHERE {\n"
                 + "?artifact <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Artifact> . "
                 + "?artifact <http://www.semanticweb.org/sa#id> ?id . "
+                + "?artifact <http://www.semanticweb.org/sa#name> ?name ."        
                 + "?artifact <http://www.semanticweb.org/sa#description> ?description "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
 
             );
             TupleQueryResult result = tq.evaluate(); //sdsdsdds;
@@ -72,6 +77,7 @@ public class ArtifactTransaction
 
                 artifacts.add(new Artifact(
                     bs.getValue("id").stringValue(),
+                    bs.getValue("name").stringValue(),
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;
@@ -108,11 +114,13 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description WHERE {"
+                "SELECT DISTINCT ?id ?name ?description WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#triggerAn> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name ."        
                 +"?d <http://www.semanticweb.org/sa#description> ?description "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -122,6 +130,7 @@ public class ArtifactTransaction
                 artifacts.add(
                     new Artifact(
                     bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(),
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;
@@ -164,11 +173,13 @@ public class ArtifactTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description WHERE {"
+                "SELECT DISTINCT ?id ?name ?description WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#composeBy> ?d . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
+                +"?d <http://www.semanticweb.org/sa#name> ?name ."  
                 +"?d <http://www.semanticweb.org/sa#description> ?description "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -178,6 +189,7 @@ public class ArtifactTransaction
                 artifacts.add(
                     new Artifact(
                     bs.getValue("id").stringValue(), 
+                    bs.getValue("name").stringValue(),
                     bs.getValue("description").stringValue()
                 ));
                 int i = artifacts.size() - 1;

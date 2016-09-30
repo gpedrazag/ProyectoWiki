@@ -39,7 +39,8 @@ public class ConstraintTransaction
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
                 +"?d <http://www.semanticweb.org/sa#rationale> ?rationale . "
                 +"?d <http://www.semanticweb.org/sa#keyword> ?keyword "
-                +"}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -89,7 +90,8 @@ public class ConstraintTransaction
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#rationale> ?rationale . "
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#keyword> ?keyword "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -129,7 +131,8 @@ public class ConstraintTransaction
                 +"?constraint <http://www.semanticweb.org/sa#description> ?description . "
                 +"?constraint <http://www.semanticweb.org/sa#rationale> ?rationale . "
                 +"?constraint <http://www.semanticweb.org/sa#keyword> ?keyword "
-                + "}"
+                +"} "
+                +"ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())

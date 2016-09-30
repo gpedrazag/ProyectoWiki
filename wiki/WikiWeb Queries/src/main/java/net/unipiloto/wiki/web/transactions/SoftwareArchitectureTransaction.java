@@ -28,7 +28,8 @@ public class SoftwareArchitectureTransaction
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
@@ -66,7 +67,8 @@ public class SoftwareArchitectureTransaction
                 + "?sa <http://www.semanticweb.org/sa#id> ?id . "
                 + "?sa <http://www.semanticweb.org/sa#description> ?description . "
                 + "?sa <http://www.semanticweb.org/sa#name> ?name "
-                + "}"
+                + "} "
+                + "ORDER BY ?id"
 
             );
             TupleQueryResult result = tq.evaluate(); //sdsdsdds;

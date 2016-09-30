@@ -621,7 +621,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Conexión via celular.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-12</id>
-        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NAN</rationale>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
     </owl:NamedIndividual>
     
 
@@ -676,7 +676,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El vehículo automáticamente aborta la misión.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-17</id>
-        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NAN</rationale>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
     </owl:NamedIndividual>
     
 
@@ -687,7 +687,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir un buffer circular para amortizar la diferencia en tasa de llegada y procesamiento.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-18</id>
-        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">NAN</rationale>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
     </owl:NamedIndividual>
     
 
@@ -835,9 +835,121 @@
     
 
 
-    <!-- http://www.semanticweb.org/sa#Agente_de_protocolos -->
+    <!-- http://www.semanticweb.org/sa#ALT-32 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Agente_de_protocolos">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-32">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <alternativeLinkTo rdf:resource="http://www.semanticweb.org/sa#EVT-05"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Minimo componentes:
+- Seguridad
+- Procesamiento
+- Diponibilidad periférica
+- Red eléctrica
+- Comunicación</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-32</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Únicos componentes requeridos.</rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ALT-33 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-33">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Los componentes implementan dos canales: datos y video.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-33</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Única solución posible aparente.</rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ALT-34 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-34">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <alternativeLinkTo rdf:resource="http://www.semanticweb.org/sa#EVT-06"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Internet banda ancha.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-34</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ALT-35 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-35">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <alternativeLinkTo rdf:resource="http://www.semanticweb.org/sa#EVT-07"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Datos sobre tecnología celular.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-35</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Solución que, por ahora, posee una buena relación costo beneficio.</rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ALT-36 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-36">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <alternativeLinkTo rdf:resource="http://www.semanticweb.org/sa#EVT-08"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Conexión satelital.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-36</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ARTF-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-01"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-05"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-06"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-07"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-14"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-15"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-16"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-17"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sistema de Monitoreo y Control remoto de vuelo de vehículo espacial no tripulado.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-01</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sistema</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ARTF-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-02"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-04"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro Comando Control Mision recibe información de la plataforma en tierra y la despliega a operarios y al jefe de misión. Además tiene como responsabilidad difundir datos específicos del desarrollo de la misión y transmitir en vídeo el desarrollo de la misma   a público genera</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-02</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro Comando Control Misión (C3)</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ARTF-04 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-09"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-10"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-11"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-12"/>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-13"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Componente que le concierne aspectos administrativos, de notificación y de monitoreo del vehículo espacial.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-04</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manejador de Agentes</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ARTF-05 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-05">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Componente encargado de la integración de tecnologías heterogéneas de comunicación.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-05</id>
@@ -846,15 +958,58 @@
     
 
 
-    <!-- http://www.semanticweb.org/sa#C3 -->
+    <!-- http://www.semanticweb.org/sa#ARTF-06 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#C3">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-06">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-02"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-04"/>
-        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro Comando Control Mision recibe información de la plataforma en tierra y la despliega a operarios y al jefe de misión. Además tiene como responsabilidad difundir datos específicos del desarrollo de la misión y transmitir en vídeo el desarrollo de la misma   a público genera</description>
-        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-02</id>
-        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro Comando Control Misión (C3)</name>
+        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-08"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Susbistema encargado el control del vehículo espacial</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-06</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vehículo Espacial</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ASMPT-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ASMPT-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Assumption"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Se debe escribir la menor cantidad de código.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASMPT-01</id>
+        <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Demandas de oportunidad</source>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ASMPT-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ASMPT-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Assumption"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Blackboard</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASMPT-02</id>
+        <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ninguna registrada</source>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ASMPT-03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ASMPT-03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Assumption"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema se debe centrar en el manejo de los datos.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASMPT-03</id>
+        <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Múltiples datos trasmitidos desde el vehículo espacial hacia los centros.</source>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ASMPT-04 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ASMPT-04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Assumption"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Existen trabajos relacionados que definen un estilo.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASMPT-04</id>
+        <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ninguna registrada</source>
     </owl:NamedIndividual>
     
 
@@ -1058,11 +1213,52 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#DCS-15 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-15">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-32"/>
+        <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></arguments>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-15</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir arquitectura del vehículo espacial.</name>
+        <state rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Completo</state>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DCS-16 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-16">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-33"/>
+        <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Se requiere recibir datos del vehículo espacial de la misma manera que video captado por las videocámaras incorporadas.</arguments>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-16</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manejo simultáneo de datos y video.</name>
+        <state rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Completo</state>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DCS-17 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-17">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-34"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-35"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-36"/>
+        <arguments rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La comunicación entre los dos subsistemas debe realizarse de manera segura, efizaz y eficiente.</arguments>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-17</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir el canal de comunicación entre plataforma en tierra y el C3.</name>
+        <state rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Completo.</state>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/sa#EFT-01 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EFT-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe registrar la información de sistemas legados en 2 minutos</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFT-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eficiencia</name>
@@ -1074,7 +1270,7 @@
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EFT-02">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe registrar la información que proviene del cohete en 1 minuto
 Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 segundo</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFT-02</id>
@@ -1087,7 +1283,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EFT-03">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 segundo</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFT-03</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eficiencia</name>
@@ -1099,7 +1295,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EFT-04">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe soportar una carga de 100 transacciones simultaneas</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EFT-04</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Eficiencia</name>
@@ -1288,11 +1484,59 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
     
 
 
+    <!-- http://www.semanticweb.org/sa#EVT-05 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EVT-05">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Evaluation"/>
+        <cons rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></cons>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVT-05</id>
+        <pros rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Propuesta hecha por entidades dedicadas como NASA.</pros>
+        <valoration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></valoration>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#EVT-06 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EVT-06">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Evaluation"/>
+        <cons rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dado que los lugares de prueba son aislados y geográficamente lejanos es imposible tener una conexión de este tipo.</cons>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVT-06</id>
+        <pros rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></pros>
+        <valoration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></valoration>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#EVT-07 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EVT-07">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Evaluation"/>
+        <cons rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Es necesario hacer pruebas de campo.</cons>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVT-07</id>
+        <pros rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Es factible.</pros>
+        <valoration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></valoration>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#EVT-08 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#EVT-08">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Evaluation"/>
+        <cons rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El costo del servicio es alto y el desempeño no es el mejor.</cons>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EVT-08</id>
+        <pros rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></pros>
+        <valoration rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></valoration>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/sa#FDD-01 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FDD-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe estar disponible 99,95% del año.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FDD-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Disponibilidad</name>
@@ -1304,7 +1548,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FDF-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0,1% de los ataques afectan el sistema</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FDF-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tolerancia a fallos</name>
@@ -1316,7 +1560,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FDF-02">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0,1% de los ataques efectivos afectan gravemente al sistema</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FDF-02</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tolerancia a fallos</name>
@@ -1328,7 +1572,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FDR-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">95% de los fallos son recuperados</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FDR-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Recurabilidad</name>
@@ -1340,7 +1584,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FDR-02">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">99% de la información es recuperable</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FDR-02</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Recuperabilidad</name>
@@ -1352,7 +1596,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAE-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe soportar una carga de 100 transacciones simultaneas</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAF-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Estabilidad</name>
@@ -1364,7 +1608,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAF-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe adaptarse a los dispositivos electrónicos usados para la transmisión de información del vehículo.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAS-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Flexibilidad</name>
@@ -1376,7 +1620,9 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAFP-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-02"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-06"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema solo permite modificar 2 componentes antes de probar la modificación de algún otro.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAFP-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Facilidad de pruebas</name>
@@ -1388,7 +1634,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAM-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe poder agregar nuevos módulos o servicios en menos de 10 horas</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAM-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Modificación</name>
@@ -1400,7 +1646,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAS-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El sistema debe soportar un crecimiento de 3000000 transacciones/misión.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MAS-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Escalabilidad</name>
@@ -1408,18 +1654,25 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
     
 
 
-    <!-- http://www.semanticweb.org/sa#Manejador_de_agentes -->
+    <!-- http://www.semanticweb.org/sa#RSP-01 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Manejador_de_agentes">
-        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-09"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-10"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-11"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-12"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-13"/>
-        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Componente que le concierne aspectos administrativos, de notificación y de monitoreo del vehículo espacial.</description>
-        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-04</id>
-        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manejador de Agentes</name>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#RSP-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Responsible"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RSP-01</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nombre Inventado 1</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#RSP-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#RSP-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Responsible"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-04"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-05"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-06"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RSP-02</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nombre Inventado 2</name>
     </owl:NamedIndividual>
     
 
@@ -1428,7 +1681,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#SEC-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Se debe mantener la confidencialidad de los grupos que brindan información al proyecto. El 99% de las veces que esta información es consultada manualmente lo hace un único administrador.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEC-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Confidencialidad</name>
@@ -1440,7 +1693,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#SED-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El 99% del tiempo el sistema se asegurara de que se active un sistema alterno si está siendo atacado</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SED-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Disponibilidad</name>
@@ -1452,7 +1705,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#SEI-01">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El 90% de la información es verificada</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEI-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Integridad</name>
@@ -1464,7 +1717,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#SEI-02">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
-        <triggerAn rdf:resource="http://www.semanticweb.org/sa#Sistema"/>
+        <triggerAn rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El 99% de la información en la base de datos es segura y verídica</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SEC-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Integridad</name>
@@ -1472,37 +1725,28 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
     
 
 
-    <!-- http://www.semanticweb.org/sa#Sistema -->
+    <!-- http://www.semanticweb.org/sa#SFTA-01 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Sistema">
-        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-01"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-05"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-06"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-07"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-14"/>
-        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sistema de Monitoreo y Control remoto de vuelo de vehículo espacial no tripulado.</description>
-        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-01</id>
-        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sistema</name>
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#SFTA-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#SoftwareArchitecture"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#ARTF-01"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#ARTF-02"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#ARTF-04"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#ARTF-05"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#ARTF-06"/>
+        <composeBy rdf:resource="http://www.semanticweb.org/sa#Recepción/ARTF-03"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Se propone la construcción de un sistema de software para un Sistema de Monitoreo y Control remoto de vuelo de vehículo espacial no tripulado (e.g., un cohete). La figura 1 muestra el diagrama de contexto de la arquitectura, los principales subsistemas son:\n
+Vehículo espacial maneja los instrumentos y computadores a bordo de los vehículos de misión. Entre los instrumentos están los sensores que recolectan información del ambiente como velocidad del viento, temperatura, localización, altura y cantidad de combustible.\n
+Plataforma en Tierra es una estación intermedia entre Vehículo espacial y Centro Comando Control Mision (C3) y tiene  como responsabilidades monitorear, compactar, procesar y emitir información (en forma de tramas) desde el Vehículo espacial al C3. Recibe la información por medio de antenas receptoras de información telemétrica desde Vehículo espacial.\n
+Centro Comando Control Mision (C3) recibe información de la plataforma en tierra y la despliega a operarios y al jefe de misión. Además tiene como responsabilidad difundir datos específicos del desarrollo de la misión y transmitir en vídeo el desarrollo de la misma  a público general.</description>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro de Comando y Control de Misiones</name>
     </owl:NamedIndividual>
     
 
 
-    <!-- http://www.semanticweb.org/sa#Vehiculo_Espacial -->
+    <!-- http://www.semanticweb.org/sa#Recepción/ARTF-03 -->
 
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Vehiculo_Espacial">
-        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
-        <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-08"/>
-        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Susbistema encargado el control del vehículo espacial</description>
-        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ARTF-06</id>
-        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vehículo Espacial</name>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.semanticweb.org/sa#Recepción/Envío -->
-
-    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Recepción/Envío">
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#Recepción/ARTF-03">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Artifact"/>
         <artifactHave rdf:resource="http://www.semanticweb.org/sa#DCS-03"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El componente de recepción y envío se encarda de recibir tramas enviadas por vehículo espacia y, gestionar el procesamiento de las mismas según ciertas limitaciones.</description>

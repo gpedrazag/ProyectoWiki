@@ -1,0 +1,87 @@
+.dark.title-bar {
+    box-shadow: 0px 5px 10px #232323;
+    border-bottom: none;
+}
+.dark.title-bar input {
+    margin: 0px;
+    height: 100%;
+    transition: box-shadow ease-in 0.25s;
+}
+.dark.title-bar input:hover,
+.dark.title-bar input.selected
+{
+    box-shadow: 0px 0px 10px aqua;
+}
+.dark.title-bar .right {
+    padding-left: 10%;
+}
+.tittle-bar-right-elem {
+    padding-left: 2%;
+}
+#actions-button {
+    background-image:url("../../../resources/img/menu.png");
+    display:block;
+    height:64px;
+    width:64px;
+    background-size: contain;
+}
+.action-sheet.is-active ul li:hover,
+.action-sheet.is-active ul li.selected{
+    background-color: rgba(204,204,204,0.25);
+    cursor: pointer;
+}
+.action-sheet.is-active ul li a {
+    margin-top:5px;
+    transition: text-shadow ease-in 0.25s;
+}
+.action-sheet.is-active ul li a.selected,
+.action-sheet.is-active ul li a:hover{
+    text-shadow:2px 2px 5px aqua;
+    background-color: transparent;
+}
+.action-sheet.is-active div div span {
+    margin: 8px 0px 0px 15px;
+}
+#drilldown {
+    background-image:url("../../../resources/img/business/png/cube.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
+#searching {
+    background-image:url("../../../resources/img/business/png/loupe.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
+#resources {
+    background-image:url("../../../resources/img/business/png/eye.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
+
+@media(max-width:745px) and (min-width:641px) {
+    .action-sheet {
+        -ms-transform: translate(-75%, 110%);
+        -webkit-transform: translate(-75%, 110%);
+        transform: translate(-76%, 110%);
+    }
+    .action-sheet.is-active {
+        -ms-transform: translate(-75%, 110%);
+        -webkit-transform: translate(-75%, 110%);
+        transform: translate(-76%, 110%);
+    }
+}
+@media(max-width: 1156px) and (min-width:746px){
+    .action-sheet {
+        -ms-transform: translate(-70%, 110%);
+        -webkit-transform: translate(-70%, 110%);
+        transform: translate(-70%, 110%);
+    }
+    .action-sheet.is-active {
+        -ms-transform: translate(-75%, 110%);
+        -webkit-transform: translate(-75%, 110%);
+        transform: translate(-75%, 110%);
+    }
+}
