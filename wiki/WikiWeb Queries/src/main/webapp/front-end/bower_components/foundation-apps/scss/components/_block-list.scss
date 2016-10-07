@@ -28,7 +28,7 @@ $blocklist-item-border: 1px solid smartscale($blocklist-background, 18.5%) !defa
 $blocklist-item-label-color: scale-color($blocklist-item-color, $lightness: 60%) !default;
 $blocklist-item-icon-size: 0.8 !default;
 
-$blocklist-header-fontsize: 0.8em !default;
+$blocklist-header-fontsize: 1em !default;
 $blocklist-header-color: smartscale($blocklist-item-color, 40%) !default;
 $blocklist-header-uppercase: true;
 

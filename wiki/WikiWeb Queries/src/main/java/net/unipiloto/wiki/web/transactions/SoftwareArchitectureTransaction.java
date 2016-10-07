@@ -71,7 +71,7 @@ public class SoftwareArchitectureTransaction
                 + "ORDER BY ?id"
 
             );
-            TupleQueryResult result = tq.evaluate(); //sdsdsdds;
+            TupleQueryResult result = tq.evaluate();
             while(result.hasNext())
             {
                 BindingSet bs = result.next();

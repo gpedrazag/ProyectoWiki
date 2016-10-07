@@ -3,14 +3,14 @@ package net.unipiloto.wiki.web.entities;
 public class Alternative
 {
     private String id;
-    private String name;
+    private String rationale;
     private String description;
     private Evaluation haveEvaluation;
 
-    public Alternative(String id, String name, String description)
+    public Alternative(String id, String rationale, String description)
     {
         this.id = id;
-        this.name = name;
+        this.rationale = rationale;
         this.description = description;
     }
 
@@ -34,14 +34,14 @@ public class Alternative
         this.haveEvaluation = haveEvaluation;
     }
 
-    public String getName()
+    public String getRationale()
     {
-        return name;
+        return rationale;
     }
 
-    public void setName(String name)
+    public void setRationale(String rationale)
     {
-        this.name = name;
+        this.rationale = rationale;
     }
 
     public String getDescription()

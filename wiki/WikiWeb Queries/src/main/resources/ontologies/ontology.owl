@@ -1739,6 +1739,7 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
 Vehículo espacial maneja los instrumentos y computadores a bordo de los vehículos de misión. Entre los instrumentos están los sensores que recolectan información del ambiente como velocidad del viento, temperatura, localización, altura y cantidad de combustible.\n
 Plataforma en Tierra es una estación intermedia entre Vehículo espacial y Centro Comando Control Mision (C3) y tiene  como responsabilidades monitorear, compactar, procesar y emitir información (en forma de tramas) desde el Vehículo espacial al C3. Recibe la información por medio de antenas receptoras de información telemétrica desde Vehículo espacial.\n
 Centro Comando Control Mision (C3) recibe información de la plataforma en tierra y la despliega a operarios y al jefe de misión. Además tiene como responsabilidad difundir datos específicos del desarrollo de la misión y transmitir en vídeo el desarrollo de la misma  a público general.</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SFTA-01</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Centro de Comando y Control de Misiones</name>
     </owl:NamedIndividual>
     

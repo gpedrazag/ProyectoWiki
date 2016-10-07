@@ -10,6 +10,7 @@
   "homepage": "https://github.com/nfolstag/ProyectoWiki",
   "dependencies": {
     "foundation-apps": "^1.2.0",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "motion-ui": "^1.2.2"
   }
 }

@@ -3531,7 +3531,8 @@
     'ngAnimate',
     'foundation',
     'foundation.dynamicRouting',
-    'foundation.dynamicRouting.animations'
+    'foundation.dynamicRouting.animations',
+    'pmod-wiki-main'
   ]);
 
       

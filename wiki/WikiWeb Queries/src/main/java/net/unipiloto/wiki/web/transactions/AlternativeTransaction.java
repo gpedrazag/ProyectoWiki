@@ -32,12 +32,12 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description ?name WHERE {"
+                "SELECT DISTINCT ?id ?description ?rationale WHERE {"
                 +"<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#decisionHave> ?d . "
                 +"?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 +"?d <http://www.semanticweb.org/sa#id> ?id . "
                 +"?d <http://www.semanticweb.org/sa#description> ?description . "
-                +"?d <http://www.semanticweb.org/sa#name> ?name "
+                +"?d <http://www.semanticweb.org/sa#rationale> ?rationale "
                 +"} "
                 +"ORDER BY ?id"
             );
@@ -48,7 +48,7 @@ public class AlternativeTransaction
                 concerns.add(
                     new Alternative(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(), 
+                    bs.getValue("rationale").stringValue(), 
                     bs.getValue("description").stringValue()
                 ));
             }
@@ -79,11 +79,11 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?rationale WHERE {\n"
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#id> ?id ."
                 + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#description> ?description . "
-                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#name> ?name "
+                + "<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#rationale> ?rationale "
                 + "} "
                 + "ORDER BY ?id"
             );
@@ -93,7 +93,7 @@ public class AlternativeTransaction
                 BindingSet bs = result.next();
                 alternative = new Alternative(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(),
+                    bs.getValue("rationale").stringValue(),
                     bs.getValue("description").stringValue() 
                 );
             }
@@ -117,11 +117,11 @@ public class AlternativeTransaction
         try
         {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL, 
-                "SELECT DISTINCT ?id ?description ?name WHERE {\n"
+                "SELECT DISTINCT ?id ?description ?rationale WHERE {\n"
                 + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                 + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
                 + "?alternative <http://www.semanticweb.org/sa#description> ?description . "
-                + "?alternative <http://www.semanticweb.org/sa#name> ?name "
+                + "?alternative <http://www.semanticweb.org/sa#rationale> ?rationale "
                 + "} "
                 + "ORDER BY ?id"
             );
@@ -131,7 +131,7 @@ public class AlternativeTransaction
                 BindingSet bs = result.next();
                 alternatives.add(new Alternative(
                     bs.getValue("id").stringValue(), 
-                    bs.getValue("name").stringValue(), 
+                    bs.getValue("rationale").stringValue(), 
                     bs.getValue("description").stringValue()
                 ));
                 int i = alternatives.size() - 1;
