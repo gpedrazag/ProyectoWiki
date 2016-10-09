@@ -1,7 +1,10 @@
 (function (angular) {
     var module = angular.module("pmod-drilldown", []);
-    module.controller("pctrl-drilldown", ["$scope", "$filter", function ($scope, $filter) {
+    module.controller("pctrl-drilldown", ["$scope", "$filter", "$rootScope", function ($scope, $filter, $rootScope) {
             url = "";
+            $rootScope.elemData = [];
+            $rootScope.relatedElems = [];
+
             $scope.list = [
                 "Alternativas", "Arquitecturas de Software", "Artefactos",
                 "Atributos de Calidad", "Criterios", "Decisiones",
@@ -35,11 +38,12 @@
                 }).done(function (data) {
                     if (typeof data !== "undefined") {
                         if (data.length === 0) {
-                            data = [data];
+                            if (Object.keys(data).length !== 0) {
+                                data = [data];
+                            }
                         }
                         $scope.data = $filter("orderBy")(data, "id");
                     }
-                    url = window.location.pathname;
                 });
             };
 
@@ -58,8 +62,31 @@
                 }
                 return arr;
             };
-            $scope.showElemData = function(id) {
-                
+            $scope.showElemData = function (id) {
+                var obj = {};
+                try
+                {
+                    $scope.data.forEach(function (elem) {
+                        if (elem.id === id) {
+                            Object.keys(elem).forEach(function (key) {
+                                if (key !== "id") {
+                                    if (typeof elem[key] !== "object") {
+                                        $rootScope.elemData.push({key: key, content: elem[key]});
+                                    } else {
+                                        $rootScope.relatedElems.push({key: key, content: elem[key]});
+                                    }
+                                }
+                            });
+                            animate(
+                                {in:$("#main-content-ontology-element"), out:$("#main-content-drilldown")},
+                                {in:"slide-in-left", out:"slide-out-right"},
+                                true
+                            );
+                            throw obj;
+                        }
+                    });
+                } catch (obj) {}
+
             };
         }]).directive("pdirecDrilldown", function () {
         return {

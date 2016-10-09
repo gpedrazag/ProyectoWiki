@@ -1,27 +1,43 @@
 (function (angular) {
-    var module = angular.module("pmod-wiki-main", ["pmod-drilldown"]);
+    var module = angular.module("pmod-wiki-main", ["pmod-drilldown","pmod-ontology-element"]);
     module.controller("pctrl-views", ["$scope", function ($scope) {
-            $scope.drilldownSelected = "";
+            $scope.drilldownSelected = "selected";
             $scope.searchingSelected = "";
             $scope.resourcesSelected = "";
-            
+                                 
             $scope.onDrilldown = function () {
                 $scope.drilldownSelected = "selected";
                 $scope.searchingSelected = "";
                 $scope.resourcesSelected = "";
-                document.dispatchEvent(evtDrilldownSlideIn);
+                animate(
+                    {in:$("#main-content-drilldown"), out:$scope.si},
+                    {in:"slide-in-left", out:"slide-out-right"},
+                    true
+                );
+                $scope.si = $("#main-content-drilldown");
+                
             };
             $scope.onSearching = function () {
                 $scope.drilldownSelected = "";
                 $scope.searchingSelected = "selected";
                 $scope.resourcesSelected = "";
-                document.dispatchEvent(evtSearchingSlideIn);
+                animate(
+                    {in:$("#main-content-searching"), out:$scope.si},
+                    {in:"slide-in-left", out:"slide-out-right"},
+                    true
+                );
+                $scope.si = $("#main-content-searching");
             };
             $scope.onResources = function () {
                 $scope.drilldownSelected = "";
                 $scope.searchingSelected = "";
                 $scope.resourcesSelected = "selected";
-                document.dispatchEvent(evtResourcesSlideIn);
+                animate(
+                    {in:$("#main-content-resources"), out:$scope.si},
+                    {in:"slide-in-left", out:"slide-out-right"},
+                    true
+                );
+                $scope.si = $("#main-content-resources");
             };
 
             $scope.outHoverMenuOption = function () {
@@ -56,7 +72,10 @@
         return {
             templateUrl: window.location.pathname + "/front-end/views/templates/content.html",
             restrict: "E",
-            replace: "true"
+            replace: "true",
+            link:function(s,e,a) {
+                s.si = $(e).find("#main-content-drilldown");
+            }
         };
     });
     module.directive("pdirecNav", function () {

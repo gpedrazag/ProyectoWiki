@@ -13,6 +13,7 @@
         <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/foundation.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/foundation-apps-templates.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/drilldown.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-element.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/wiki-main.js" type="text/javascript"></script>
 
     </head>

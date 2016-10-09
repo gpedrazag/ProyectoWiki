@@ -1,0 +1,25 @@
+<div class="grid-block vertical">
+    <div ng-repeat="data in elemData track by $index" class="ontology-elem-title-content">
+        <div class="ontology-elem-tittle grid-block">
+            {{data.key}}
+        </div>
+        <div class="ontology-elem-content grid-block">
+            {{data.content}}
+        </div>
+    </div>
+    <div ng-repeat="data in relatedElems track by $index" class="ontology-elem-title-content">
+        <div class="ontology-elem-tittle grid-block">
+            {{data.key}}
+        </div>
+        <div class="ontology-elem-content">
+            <div ng-repeat="row in getN(data.content, n) track by $index" class="grid-block">
+                <div ng-repeat="col in [1, 2] track by $index" class="grid-block small-5 medium-3 large-3">
+                    <div ng-repeat="d in getNElem($parent.$index + 1, col, 2)">
+                        <a class="drilldown-item-link">{{d.id}}</a>
+                    </div>
+                </div>
+                <div class="grid-block small-2 medium-6 large-6"></div>
+            </div>
+        </div>
+    </div>    
+</div>
