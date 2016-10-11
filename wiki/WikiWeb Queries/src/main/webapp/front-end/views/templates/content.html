@@ -1,18 +1,18 @@
 <div class="grid-block" id="content">
     <div class="grid-block small-1 medium-1 large-1"></div>
-    <div id="main-content" class="grid-block small-9 medium-9 large-9" ng-controller="pctrl-drilldown">
-        <div id="main-content-drilldown">                    
+    <div id="main-content" class="grid-block small-9 medium-9 large-9">
+        <div id="main-content-drilldown" ng-controller="pctrl-drilldown" class="all-available-width">                    
             <pdirec:drilldown></pdirec:drilldown>
         </div>
-        <div id="main-content-searching" hidden="">
+        <div id="main-content-searching" class="all-available-width" hidden="">
             sdsdsd
         </div>
-        <div id="main-content-resources" hidden="">
+        <div id="main-content-resources" class="all-available-width" hidden="">
             sdsdsdsdsdsd
         </div>
-        <div id="main-content-ontology-element" hidden="">
-            <pdirec-ontology-element></pdirec-ontology-element>
+        <div id="main-content-ontology-element" ng-controller="pctrl-ontology-element" class="all-available-width">
+            <pdirec:ontoelem></pdirec:ontoelem>
         </div>
     </div>
-    <div class="grid-block small-1 medium-1 large-1"></div>
+    <div class="grid-block small-1 medium-1 large-1" class="all-available-width"></div>
 </div>

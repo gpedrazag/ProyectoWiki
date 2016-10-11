@@ -43,6 +43,7 @@
                             }
                         }
                         $scope.data = $filter("orderBy")(data, "id");
+                        $scope.$apply();
                     }
                 });
             };
@@ -73,7 +74,7 @@
                                     if (typeof elem[key] !== "object") {
                                         $rootScope.elemData.push({key: key, content: elem[key]});
                                     } else {
-                                        $rootScope.relatedElems.push({key: key, content: elem[key]});
+                                        $rootScope.relatedElems.push({key: key, content: (typeof elem[key].length === "undefined" ? [elem[key]] : elem[key])});
                                     }
                                 }
                             });

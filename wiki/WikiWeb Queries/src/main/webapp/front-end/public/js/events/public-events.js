@@ -1,5 +1,11 @@
 function animate(elems, animations, all) {
-    if (elems.in !== elems.out || all) {
+    if(typeof elems.in[0] === "undefined") {
+        elems.in = [elems.in];
+    }
+    if(typeof elems.out[0] === "undefined") {
+        elems.out = [elems.out];
+    }
+    if (elems.in[0].id !== elems.out[0].id) {
         animateOut(elems.out, animations.out, all, function () {
             animateIn(elems.in, animations.in, all);
         });

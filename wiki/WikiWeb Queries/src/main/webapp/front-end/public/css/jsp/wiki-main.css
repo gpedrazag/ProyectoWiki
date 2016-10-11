@@ -85,6 +85,39 @@
 pdirec-drilldown {
     width: 100%;   
 }
+.ontology-elem-title-content {
+    margin-top: 10px;
+}
+.ontology-elem-title-content .ontology-elem-tittle {
+    color: #000;
+    font-weight: 600;
+    font-size:larger;
+    text-transform: capitalize;
+    padding: 10px;
+    height:50px;
+    border-bottom: #232323 dashed medium;
+    text-align:right;
+}
+.ontology-elem-title-content .ontology-elem-content {
+    font-weight: normal;
+    padding: 10px 30px 10px 30px;
+}
+.ontology-elem-title-content label{
+    color: #FFF;
+    font-weight: normal;    
+}
+.all-available-width {
+    width: 100%;
+}
+.add-img-content-editable {
+    background-image: url(../../../resources/img/upload_image.png);
+    background-size: 32px, 32px;
+    width: 32px;
+    height: 32px;
+}
+.add-img-content-editable:hover {
+    cursor: pointer;
+}
 
 @media(max-width:745px) and (min-width:641px) {
     .action-sheet {

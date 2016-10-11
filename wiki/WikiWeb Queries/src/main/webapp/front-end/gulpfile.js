@@ -9,11 +9,12 @@ var paths = {
     "foundation_services":"./bower_components/foundation-apps/js/angular/services/",
     "foundation_components":"./bower_components/foundation-apps/js/angular/components/",
     "foundation_apps":"./bower_components/foundation-apps/js/angular/",
-    "foundation_js":"./public/js/plugins/"
+    "foundation_js":"./public/js/plugins/",
+    "motion_ui":"./bower_components/motion-ui/src/"
 };
 
-gulp.task("styles", function(){
-    gulp.src(paths.foundation_scss+"foundation.scss")
+gulp.task("styles-foundation", function(){
+    return gulp.src(paths.foundation_scss+"foundation.scss")
         .pipe(sass({
             includePaths: [paths.foundation_scss]
         }))
@@ -22,7 +23,7 @@ gulp.task("styles", function(){
     ;    
 });
 
-gulp.task("scripts", function(){
+gulp.task("scripts-foundation", function(){
     return gulp.src([
         paths.foundation_services+"*.js",
         paths.foundation_components+"**/*.js",
@@ -32,18 +33,26 @@ gulp.task("scripts", function(){
     .pipe(gulp.dest(paths.foundation_js));
 });
 
-gulp.task("clean-styles", function(){
+gulp.task("clean-styles-foundation", function(){
     return gulp.src("foundation.css")
             .pipe(clean())
             .pipe(gulp.dest(paths.foundation_css))
     ;
 });
 
-gulp.task("clean-scripts", function(){
+gulp.task("clean-scripts-foundation", function(){
     return gulp.src("foundation.js")
             .pipe(clean())
             .pipe(gulp.dest(paths.foundation_js))
     ;
 });
+
+gulp.task("clean-styles", ["clean-styles-foundation"]);
+
+gulp.task("clean-scripts",["clean-scripts-foundation"]);
+
+gulp.task("styles",["styles-foundation"]);
+
+gulp.task("scripts",["scripts-foundation"]);
 
 gulp.task("default", ["clean-styles","clean-scripts","styles", "scripts"]);
