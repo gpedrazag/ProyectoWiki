@@ -1,0 +1,25 @@
+<div class="grid-block overflow-visible" id="content" style="position:relative;">
+    <div class="grid-block small-1 medium-1 large-1" style="position: relative;"></div>
+    <div id="main-content" class="grid-block small-9 medium-9 large-9 overflow-visible" style="position: relative;">
+        <div 
+            id="main-content-drilldown" 
+            ng-controller="pctrl-drilldown" 
+            class="all-available-width">                    
+            <pdirec:drilldown></pdirec:drilldown>
+        </div>
+        <div 
+            id="main-content-resources" 
+            class="all-available-width" 
+            ng-controller="pctrlResources" 
+            style="position: relative;" hidden="">
+            <pdirec:resources></pdirec:resources>
+        </div>
+        <div 
+            id="main-content-ontology-element" 
+            class="all-available-width overflow-visible" hidden="">
+            <pdirec:ontoelem></pdirec:ontoelem>
+        </div>
+    </div>
+    <div class="grid-block small-1 medium-1 large-1 all-available-width" style="position: relative;"></div>
+    
+</div>

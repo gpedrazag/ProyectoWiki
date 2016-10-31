@@ -1,0 +1,166 @@
+<div class="grid-block vertical overflow-visible" style="display: none;">
+    <div ng-controller="pctrlOntologyElement">
+        <div ng-repeat="data in elemData track by $index" class="ontology-elem-title-content overflow-visible" ng-if="data.key !== 'reference'">
+            <div ng-if="data.key !== 'reference' && data.key !== 'did'">
+                <div class="ontology-elem-tittle grid-block">
+                    <div class="grid-block small-8 medium-8 large-8 with-border">
+                        {{translate(data.key)}}
+                    </div>
+                    <div class="small-4 medium-4 large-4">
+                        <div class="switch">
+                            <input type="checkbox" id="edit-content1-{{$index}}" ng-model="chkList[$index]" />
+                            <label for="edit-content1-{{$index}}"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="ontology-elem-content grid-block" id="neContent-{{$index}}" name="{{data.key}}">
+                    {{returnOrNotContent(data.content, 'neContent-' + $index)}}
+                </div>
+            </div>
+            <div class="ontology-elem-content grid-block overflow-visible" id="eContent-{{$index}}" style="display: none; position: relative;">
+                <div class="grid-block vertical overflow-visible">
+                    <div class="grid-block overflow-visible">
+                        <div class="overflow-visible" style="width:100%;">
+                            <div class="overflow-visible">
+                                <div style="position: relative">
+                                    <img zf-hard-toggle="actionsheet-{{$index}}" class="add-img-content-editable" style="position: absolute; right: 35px; top:calc(100% - 35px); z-index:999;">
+                                    <div style="position: absolute; right: 50px; top:calc(100% - 40px);">
+                                        <zf-action-sheet id="actionsheet-{{$index}}">
+                                            <zf-as-content position="top">
+                                                <ul class="menu">
+                                                    <li><a zf-open="all-purspose-modal" ng-click="uploadLocalImage('editor_content_' + $index)">Cargar archivo de disco local</a></li>
+                                                    <li><a zf-open="all-purspose-modal" ng-click="uploadURLImage('editor_content_' + $index)">Cargar de URL</a></li>
+                                                    <li><a zf-open="all-purspose-modal" ng-click="uploadExistentImage('editor_content_' + $index)">Cargar archivo existente</a></li>
+                                                </ul>
+                                            </zf-as-content>
+                                        </zf-action-sheet>
+                                    </div>
+                                    <textarea id="editor_content_{{$index}}" style="overflow: visible;">                                    
+                                    </textarea>                                
+                                </div>
+                            </div>                       
+                        </div>         
+                    </div>                
+                    <a class="button" ng-click="saveEdit('editor_content_' + $index, data.key)" style="background-color: #232323; margin-top: 15px; width: 100%">Guardar</a>
+                </div>            
+            </div>        
+        </div>
+        <div ng-repeat="data in relatedElems track by $index" class="ontology-elem-title-content">
+            <div class="ontology-elem-tittle grid-block with-border">            
+                {{translate(data.key)}}            
+            </div>
+            <div class="ontology-elem-content">
+                <div ng-show ="data.content.length >= 1">
+                    <div ng-repeat="row in getN(data.content, 10) track by $index" class="grid-block">
+                        <div ng-repeat="col in [1, 2]" class="grid-block small-5 medium-3 large-3">
+                            <div class="grid-block vertical">
+                                <div 
+                                    ng-repeat="d in getNElem($parent.$index + 1, col, 2, $parent.data) track by $index" 
+                                    class="grid-block"
+                                    ng-init="haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index] = isADcsAndWhtoutSol(d, ((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index, $parent.data.key)">
+                                    <a 
+                                        class="drilldown-item-link" 
+                                        name="{{$parent.data.key}}"
+                                        ng-click="goTo(d.id, d.reference, $parent.data)"
+                                        zf-open="sub-element-modal"
+                                        ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index].value}">{{d.id}}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid-block small-2 medium-6 large-6"></div>
+                    </div>
+                </div>
+                <div ng-show ="data.content.length === 0">
+                    "No hay ningún elemento relacionado"
+                </div>
+            </div>
+        </div> 
+        <div zf-modal="" id="all-purspose-modal" ng-class="['collapse', {'large':showExistentImage}]">
+            <div class="grid-block vertical">
+                <div class="dark title-bar">
+                    <div class="center title">Carga de Imágenes</div>
+                    <span zf-close="" class="left"><a>Cerrar</a></span>
+                    <span class="right" ng-click="uploadImage()"><a>Hecho</a></span>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div id="local-image-content" ng-show="showLocalImage">
+                        <div class="grid-content grid-block">
+                            <div class="grid-block children-display-inline">
+                                <h3>Nombre</h3>
+                            </div>
+                            <div class="grid-block children-display-inline">
+                                <input type="text" id="input-local-image-name" style="display: inline-table"/>
+                            </div>
+                        </div>
+                        <div class="grid-content">
+                            <div class="children-display-inline">
+                                <h3>Subir imagen</h3>
+                                <input type="file" id="input-local-image"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="url-image-content" ng-show="showURLImage">
+                        <div class="grid-content grid-block">
+                            <div class="grid-block">
+                                <h3>Nombre</h3>
+                            </div>
+                            <div class="grid-block children-display-inline">
+                                <input type="text" id="input-url-image-name" style="display: inline-table"/>
+                            </div>
+                        </div>
+                        <div class="grid-content">
+                            <div class="children-display-inline grid-block">
+                                <div class="grid-block"><h3>Url de la imagen</h3></div>
+                                <div class="grid-block">
+                                    <span class="inline-label">
+                                        <input type="text" id="input-url-image">
+                                    </span>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+                    <div id="existent-image-content" ng-show="showExistentImage">
+                        <div>
+                            <ul class="dark menu-bar condense medium-expand">
+                                <li id="ontoelem-li-local"><a ng-click="showLocalImages()">Imágenes locales</a></li>
+                                <li id="ontoelem-li-url"><a ng-click="showURLImages()">Imágenes por URL</a></li>
+                            </ul>
+                        </div>
+                        <div style="max-height: 400px; min-height: 400px; overflow: auto;" ng-if="type !== null">
+                            <div ng-repeat="row in getViewerRows() track by $index" style=" min-height: 200px;">
+                                <div class="grid-block" style=" height:200px">
+                                    <div class="grid-block" ng-repeat="col in [1, 2, 3] track by $index" style=" height:100%">
+                                        <div id="div-{{getNImages($parent.$index + 1, col, 3).name}}" style="width:100%; height: 100%; position: relative;" hidden="">
+                                            <img name="{{getNImages($parent.$index + 1, col, 3).name}}" 
+                                                 style="border: none; height:100%; width:100%; background: url({{getNImages($parent.$index + 1, col, 3).base64}}); background-repeat: no-repeat; background-size:cover; background-position: center;"
+                                                 exist=true
+                                                 ng-click="selectedImage('cover-' + getNImages($parent.$index + 1, col, 3).name)"
+                                                 />
+                                            <div ng-show="getNImages($parent.$index + 1, col, 3) !== null" 
+                                                 id="data-{{getNImages($parent.$index + 1, col, 3).name}}" 
+                                                 style="width: 100%; height: 30%; background-color: rgba(255,255,255,0.7); position:absolute; bottom:0; left:0;"
+                                                 ng-click="selectedImage('cover-' + getNImages($parent.$index + 1, col, 3).name)">
+                                                <div class="grid-block vertical">
+                                                    <div class="grid-block" style="color: #000">
+                                                        {{getNImages($parent.$index + 1, col, 3).name}}
+                                                    </div>
+                                                    <div class="grid-block" style="text-align: center; color: #000;">
+                                                        {{getNImages($parent.$index + 1, col, 3).resolution}}
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                        </div>
+                                        <div id="cover-{{getNImages($parent.$index + 1, col, 3).name}}" style="position: absolute; background-color: rgba(89, 244, 66, 0.5); display: none; top:0; left: 0; width: 100%; height: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <zf-notification-set id="main-notifications" position="top-left"></zf-notification-set>
+    </div>
+    <pdirec-onto-sub-elem></pdirec-onto-sub-elem>
+</div>

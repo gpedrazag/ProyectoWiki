@@ -1,0 +1,63 @@
+<div style="position: relative;">
+    <div>
+        <ul class="dark menu-bar condense medium-expand">
+            <li id="resources-li-local"><a ng-click="showLocalImages(1, 6)">Imágenes locales</a></li>
+            <li id="resources-li-url"><a ng-click="showURLImages(1, 6)">Imágenes por URL</a></li>
+        </ul>
+    </div>
+    <div style="margin: 20px 0px 20px 0px;" ng-if="type !== null && images.length > 0">
+        <div style="display: inline-table; margin-right: 5px; cursor: pointer;">
+            <span style="cursor: pointer;" class="dark label" ng-if="existPrevious()" ng-click="showPrevious(6)">Anterior</span>
+        </div>
+        <div ng-repeat="page in getPages(6) track by $index" style="display: inline-table; margin: 0px 5px 0px 5px;">
+            <span name="page-{{$index + 1}}" style="cursor: pointer;" class="dark badge" ng-click="showImagesForPage($index + 1, 6)">{{$index + 1}}</span>
+        </div>
+        <div style="display: inline-table; margin-left 5px;">
+            <span style="cursor: pointer;" class="dark label" ng-if="existNext()" ng-click="showNext(6)">Siguiente</span>
+        </div>
+    </div>
+    <div style="max-height: calc(100% - 100px); overflow-y: auto; position: relative;" ng-if="type !== null">
+        <div class ="grid-block" ng-repeat="row in [1, 2] track by $index" style="height:300px; position: relative;" ng-if="images.length > 0">
+            <div class ="grid-block" ng-repeat="col in [1, 2, 3] track by $index" style="height: 100%; position: relative;">
+                <div id="r-div-{{getImageInPos($parent.row, col, 3).name}}" style="position: relative; height: 100%; width: 100%;" hidden="">
+                    <img id="r-{{getImageInPos($parent.row, col, 3).name}}" 
+                         style="border: none; height:100%; width:100%; background: url({{getImageInPos($parent.row, col, 3).base64}}); background-repeat: no-repeat; background-size:cover; background-position: center;"
+                         exist=true
+                         ng-click="selectedImage('r-cover-' + getImageInPos($parent.row, col, 3).name)"                         
+                         />
+                    <div ng-if="getImageInPos($parent.row, col, 3) !== null" 
+                         id="r-data-{{getImageInPos($parent.row, col, 3).name}}" 
+                         style="width: 100%; height: 30%; background-color: rgba(255,255,255,0.7); position:absolute; bottom:0; left:0;"
+                         ng-click="selectedImage('r-cover-' + getImageInPos($parent.row, col, 3).name)"
+                         pdirec:context:menu>
+                        <div class="grid-block vertical">
+                            <div class="grid-block" style="color: #000">
+                                {{getImageInPos($parent.row, col, 3).name}}
+                            </div>
+                            <div class="grid-block" style="text-align: center; color: #000;">
+                                {{getImageInPos($parent.row, col, 3).resolution}}
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+                <div id="r-cover-{{getImageInPos($parent.row, col, 3).name}}" style="position: absolute; background-color: rgba(89, 244, 66, 0.5); display: none; top:0; left: 0; width: 100%; height: 100%;" hidden="">
+                </div>
+            </div>
+        </div>
+    </div>   
+    <div style="margin-top: 20px; align-content: center;" ng-if="type !== null && images.length > 0">
+        <a class="alert button" ng-click="deleteImage(6)">Eliminar</a>
+        <a class="warning button" zf-open="update-name-modal">Cambiar nombre</a>
+    </div>
+    <div zf-modal="" id="update-name-modal" class="collapse">
+        <div class="dark title-bar">
+            <span class="title center">Nombre nuevo deseado</span>
+            <span class="left"><a zf-close="">Cerrar</a></span>
+            <span class="right" ng-click="updateImage(6, $event)"><a ng-click="updateImage(6, $event)">Hecho</a></span>
+        </div>
+        <div style="margin-top: 30px;">
+            <input class = "large" id="input-new-name" type="text" ng-model="nName" ng-model-options="{ getterSetter: true }"/>
+        </div>
+    </div>
+    <zf-notification-set id="main-rename-notifications" position="top-left"></zf-notification-set>
+</div>

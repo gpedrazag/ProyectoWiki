@@ -1,0 +1,63 @@
+<div ng-controller="pctrlOntologySubElement">
+    <div zf-modal="" id="sub-element-modal" class="large collapse" style="min-width: calc(100% - 80px);">
+        <div class="dark title-bar">
+            <div class="center title" ng-class="">{{getModalTitle()}}</div>
+            <span zf-close="" class="left"><a>Cerrar</a></span>
+        </div>
+        <div class="primary title-bar">
+            <div class="center title editor-mode" ng-click="enterEditMode()"> Modo Edición</div>
+            <span class="left" ng-if="existPrevious()" ng-click="showPrevious()"><a ng-click="showPrevious()">Anterior</a></span>
+            <span class="right" ng-if="existNext()" ng-click="showNext()"><a ng-click="showNext()">Siguiente</a></span>
+        </div>
+        <div class="grid-block" style="max-height: 400px; overflow-y: auto;">
+            <div class="grid-block small-1, medium-1 large-1"></div>
+            <div class="grid-block small-10, medium-10 large-10">
+                <div class="grid-block vertical">
+                    <div ng-repeat="data in subElemData track by $index" class="ontology-elem-title-content overflow-visible" ng-if="data.key !== 'reference'">
+                        <div ng-if="data.key !== 'reference' && data.key !== 'did'">
+                            <div class="ontology-elem-tittle grid-block">
+                                <div class="grid-block small-12 medium-12 large-12 with-border">
+                                    {{translate(data.key)}}
+                                </div>
+                            </div>
+                            <div class="ontology-elem-content grid-block" id="subContent-{{$index}}" name="{{data.key}}">
+                                {{returnOrNotContent(data.content, 'subContent-' + $index)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-repeat="data in subRelatedElems track by $index" class="ontology-elem-title-content">
+                        <div class="ontology-elem-tittle grid-block with-border">            
+                            {{translate(data.key)}}            
+                        </div>
+                        <div class="ontology-elem-content">
+                            <div ng-show ="data.content.length >= 1">
+                                <div ng-repeat="row in getN(data.content, 10) track by $index" class="grid-block">
+                                    <div ng-repeat="col in [1, 2] track by $index" class="grid-block small-5 medium-3 large-3">
+                                        <div class="grid-block vertical">
+                                            <div 
+                                                ng-repeat="d in getNElem($parent.$index + 1, col, 2, $parent.data) track by $index" 
+                                                class="grid-block"
+                                                ng-init="haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index] = isADcsAndWhtoutSol(d, ((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index, $parent.data.key)">
+                                                <a 
+                                                    class="drilldown-item-link" 
+                                                    name="{{$parent.data.key}}" 
+                                                    ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index].value}"
+                                                    ng-click="goTo(d.id, d.reference)">{{d.id}}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="grid-block small-2 medium-6 large-6"></div>
+                                </div>
+                            </div>
+                            <div ng-show ="data.content.length === 0">
+                                "No hay ningún elemento relacionado"
+                            </div>
+                        </div>
+                    </div>         
+                </div>
+            </div>
+            <div class="grid-block small-1, medium-1 large-1"></div>
+        </div>
+    </div>
+</div>

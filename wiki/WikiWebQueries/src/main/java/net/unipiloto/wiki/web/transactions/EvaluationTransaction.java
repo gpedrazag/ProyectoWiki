@@ -1,0 +1,292 @@
+package net.unipiloto.wiki.web.transactions;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import net.unipiloto.wiki.web.entities.Evaluation;
+import net.unipiloto.wiki.web.others.OntologyTools;
+import org.boon.json.JsonFactory;
+import org.openrdf.model.IRI;
+import org.openrdf.model.ValueFactory;
+import org.openrdf.model.vocabulary.OWL;
+import org.openrdf.model.vocabulary.RDF;
+import org.openrdf.query.BindingSet;
+import org.openrdf.query.QueryLanguage;
+import org.openrdf.query.TupleQuery;
+import org.openrdf.query.TupleQueryResult;
+import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryConnection;
+
+public class EvaluationTransaction {
+
+    private static void insert(String id, String pros, String cons, String valoration) throws IOException, URISyntaxException {
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try {
+            ValueFactory factory = repo.getValueFactory();
+            IRI subject = factory.createIRI("http://www.semanticweb.org/sa#" + id);
+            IRI object = factory.createIRI("http://www.semanticweb.org/sa#Evaluation");
+            conn.begin();
+            conn.add(subject, RDF.TYPE, OWL.INDIVIDUAL);
+            conn.add(subject, RDF.TYPE, object);
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#id"), factory.createLiteral(id));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#pros"), factory.createLiteral(pros));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#cons"), factory.createLiteral(cons));
+            conn.add(subject, factory.createIRI("http://www.semanticweb.org/sa#valoration"), factory.createLiteral(valoration));
+            conn.commit();
+        } catch (Exception ex) {
+            conn.rollback();
+        } finally {
+            conn.close();
+
+        }
+
+    }
+
+    public static void update(String id, String pros, String cons, String valoration) throws IOException, URISyntaxException {
+        Evaluation evaluation = JsonFactory.fromJson(selectById(id), Evaluation.class);
+        delete(id);
+        insert(
+                id, 
+                pros.equals("-_-")?evaluation.getPros():pros, 
+                cons.equals("-_-")?evaluation.getCons():cons, 
+                valoration.equals("-_-")?evaluation.getValoration():valoration);
+    }
+
+    private static void delete(String id) throws IOException, URISyntaxException {
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try {
+            conn.prepareUpdate(
+                    "DELETE { <http://www.semanticweb.org/sa#" + id + "> ?p ?d2 }\n"
+                    + "WHERE { <http://www.semanticweb.org/sa#" + id + "> ?p ?d2 }"
+            ).execute();
+        } catch (Exception ex) {
+            conn.rollback();
+        } finally {
+            conn.close();
+
+        }
+    }
+
+    public static Evaluation selectByAlternativeId(String alternativeId, RepositoryConnection connection) {
+        Evaluation evaluation = null;
+
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if (connection != null) {
+            conn = connection;
+        } else {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+        try {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
+                    + "<http://www.semanticweb.org/sa#" + alternativeId + "> <http://www.semanticweb.org/sa#alternativeLinkTo> ?d . "
+                    + "?d <http://www.semanticweb.org/sa#id> ?id . "
+                    + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
+                    + "?d <http://www.semanticweb.org/sa#cons> ?cons . "
+                    + "?d <http://www.semanticweb.org/sa#valoration> ?valoration "
+                    + "} "
+                    + "ORDER BY ?id"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                evaluation = new Evaluation(
+                        bs.getValue("id").stringValue(),
+                        bs.getValue("pros").stringValue(),
+                        bs.getValue("cons").stringValue(),
+                        bs.getValue("valoration").stringValue()
+                );
+            }
+
+        } finally {
+            if (connection == null) {
+                conn.close();
+            }
+        }
+
+        return evaluation;
+    }
+
+    public static List<Evaluation> selectByCriteriaId(String id, RepositoryConnection connection) {
+        List<Evaluation> evaluations = new ArrayList(0);
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if (connection != null) {
+            conn = connection;
+        } else {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+        try {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#criteriaLinkTo> ?d . "
+                    + "?d <http://www.semanticweb.org/sa#id> ?id . "
+                    + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
+                    + "?d <http://www.semanticweb.org/sa#cons> ?cons . "
+                    + "?d <http://www.semanticweb.org/sa#valoration> ?valoration "
+                    + "} "
+                    + "ORDER BY ?id"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                evaluations.add(new Evaluation(
+                        bs.getValue("id").stringValue(),
+                        bs.getValue("pros").stringValue(),
+                        bs.getValue("cons").stringValue(),
+                        bs.getValue("valoration").stringValue()
+                ));
+            }
+        } finally {
+            if (connection == null) {
+                conn.close();
+            }
+        }
+
+        return evaluations;
+    }
+
+    public static String selectById(String id) {
+        Evaluation evaluation = null;
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {\n"
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Evaluation> . "
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#id> ?id . "
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#pros> ?pros . "
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#cons> ?cons . "
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#valoration> ?valoration "
+                    + "} "
+                    + "ORDER BY ?id"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                evaluation = new Evaluation(
+                        bs.getValue("id").stringValue(),
+                        bs.getValue("pros").stringValue(),
+                        bs.getValue("cons").stringValue(),
+                        bs.getValue("valoration").stringValue()
+                );
+                evaluation.setLinkAlternative(AlternativeTransaction.selectAllAlternativesByEvalationId(id, conn));
+            }
+        } finally {
+            conn.close();
+        }
+
+        return JsonFactory.toJson(evaluation);
+    }
+
+    public static String selectAll() {
+        List<Evaluation> qas = new ArrayList<Evaluation>();
+
+        Repository repo = null;
+        repo = OntologyTools.getInstance();
+        repo.initialize();
+
+        RepositoryConnection conn = repo.getConnection();
+        try {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?id ?pros ?cons ?valoration WHERE {"
+                    + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Evaluation> . "
+                    + "?d <http://www.semanticweb.org/sa#id> ?id . "
+                    + "?d <http://www.semanticweb.org/sa#pros> ?pros . "
+                    + "?d <http://www.semanticweb.org/sa#cons> ?cons . "
+                    + "?d <http://www.semanticweb.org/sa#valoration> ?valoration "
+                    + "} "
+                    + "ORDER BY ?id"
+            );
+            TupleQueryResult result = tq.evaluate();
+            int i = 0;
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                qas.add(new Evaluation(
+                        bs.getValue("id").stringValue(),
+                        bs.getValue("pros").stringValue(),
+                        bs.getValue("cons").stringValue(),
+                        bs.getValue("valoration").stringValue()
+                ));
+                qas.get(i).setLinkAlternative(AlternativeTransaction.selectAllAlternativesByEvalationId(qas.get(i).getId(), conn));
+                i++;
+
+            }
+
+            if (qas.isEmpty()) {
+                qas = null;
+            }
+        } finally {
+            conn.close();
+
+        }
+
+        return JsonFactory.toJson(qas);
+    }
+    
+    public static void deleteContent(String content) {
+        List<Evaluation> l = JsonFactory.fromJsonArray(selectAll(), Evaluation.class);
+        l.stream().forEach((a) -> {
+            try {
+                int i = 0;
+                if (a.getCons().contains(content)) {
+                    a.setCons(a.getCons().replace(content, ""));
+                    i++;
+                }
+                if (a.getPros().contains(content)) {
+                    a.setPros(a.getPros().replace(content, ""));
+                    i++;
+                }
+                if (a.getValoration().contains(content)) {
+                    a.setValoration(a.getValoration().replace(content, ""));
+                    i++;
+                }
+                
+                if (i > 0) {
+                    update(a.getId(), a.getPros(), a.getCons(), a.getValoration());
+                }
+            } catch (IOException | URISyntaxException ex) {
+
+            }
+        });
+    }
+
+    public static void updateContent(String oc, String nc) {
+        List<Evaluation> l = JsonFactory.fromJsonArray(selectAll(), Evaluation.class);
+        l.stream().forEach((a) -> {
+            try {
+                int i = 0;
+                if (a.getCons().contains(oc)) {
+                    a.setCons(a.getCons().replace(oc, nc));
+                    i++;
+                }
+                if (a.getPros().contains(oc)) {
+                    a.setPros(a.getPros().replace(oc, nc));
+                    i++;
+                }
+                if (a.getValoration().contains(oc)) {
+                    a.setValoration(a.getValoration().replace(oc, nc));
+                    i++;
+                }
+                
+                if (i > 0) {
+                    update(a.getId(), a.getPros(), a.getCons(), a.getValoration());
+                }
+            } catch (IOException | URISyntaxException ex) {
+
+            }
+        });
+    }
+
+}

@@ -1,0 +1,30 @@
+<div class="dark title-bar">
+    <div class="center">
+        <input type="text" placeholder="Busque algo aquí" id="input-search" ng-model="inputSearchString"/>
+    </div>
+    <div class="right">
+        <div class="tittle-bar-right-elem float-left">
+            <zf-action-sheet id="action-menu">
+                <zf-as-button>
+                    <a id="actions-button" ></a>
+                </zf-as-button>
+                <zf-as-content position="bottom">
+                    <ul class="menu">
+                        <li id="li-drilldown" name="link-drilldown" ng-click="onDrilldown()" ng-class="drilldownSelected" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)">
+                            <div class="grid-block">
+                                <div class="grid-block"><span id="drilldown" name="link-drilldown" ng-click="onDrilldown()" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)"></span></div>
+                                <div class="grid-block"><a id="a-drilldown" name="link-drilldown" ng-click="onDrilldown()" ng-class="drilldownSelected">Ontology Drilldown</a></div>
+                            </div>
+                        </li>
+                        <li id="li-resources" name="link-resources" ng-click="onResources()" ng-class="resourcesSelected" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)">
+                            <div class="grid-block">
+                                <div class="grid-block"><span id="resources" name="link-resources" ng-click="onResources($event)" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)"></span></div>
+                                <div class="grid-block"><a id="a-resources" name="link-resources" ng-click="onResources($event)" ng-class="resourcesSelected">Resources</a></div>
+                            </div>
+                        </li>
+                    </ul>
+                </zf-as-content>
+            </zf-action-sheet>
+        </div>
+    </div>
+</div>

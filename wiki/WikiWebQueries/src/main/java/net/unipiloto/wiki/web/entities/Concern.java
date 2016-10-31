@@ -1,0 +1,68 @@
+package net.unipiloto.wiki.web.entities;
+
+import java.util.List;
+
+public class Concern
+{
+    private String id;
+    private String concern;
+    private List<QualityAttribute> describedByQA;
+    private List<FunctionalRequeriment> describedByFR;
+    private String reference = "/Concern/";
+
+    public Concern(String id, String concern)
+    {
+        this.id = id;
+        this.concern = concern;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String getConcern()
+    {
+        return concern;
+    }
+
+    public void setConcern(String concern)
+    {
+        this.concern = concern;
+    }
+
+    public List<QualityAttribute> getDescribedByQA()
+    {
+        return describedByQA;
+    }
+
+    public void setDescribedByQA(List<QualityAttribute> describedByQA)
+    {
+        this.describedByQA = describedByQA;
+    }
+
+    public List<FunctionalRequeriment> getDescribedByFR()
+    {
+        return describedByFR;
+    }
+
+    public void setDescribedByFR(List<FunctionalRequeriment> describedByFR)
+    {
+        this.describedByFR = describedByFR;
+    }
+    
+    
+}

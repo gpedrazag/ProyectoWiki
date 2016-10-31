@@ -1,0 +1,33 @@
+<div class="grid-block">
+    <div class="grid-block small-4 medium-4 large-4">
+        <section class="block-list">
+            <header>Lista de elementos</header>
+            <ul>
+                <li ng-repeat="l in list track by $index" ng-click="do($index, $event);">
+                    <span>{{l}}</span>
+                </li>                            
+            </ul>
+        </section>
+    </div>
+    <div id="drilldown-content" class="grid-block small-8 medium-8 large-8" style="text-align: center">
+        <div class="grid-block vertical">
+            <div class="grid-block" style="margin-top: 8px;" ng-repeat="row in getN(10) track by $index">
+                <div class="grid-block small-1 medium-3 large-3"></div>
+                <div class="grid-block small-5 medium-3 large-3" ng-repeat="col in [1, 2] track by $index">
+                    <div class="grid-block vertical">
+                        <div 
+                            class="grid-block" 
+                            ng-repeat="d in getNElem($parent.$index + 1, col, 2) track by $index"
+                            ng-init="haveSolutions[d.id] = isADcsAndWhtoutSol(d, d.id)">
+                            <a 
+                                class="drilldown-item-link" 
+                                ng-click="showElemData(d.id)"
+                                ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[d.id]}">{{d.id}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-block small-1 medium-3 large-3"></div>
+            </div>
+        </div>
+    </div> 
+</div>
