@@ -54,7 +54,7 @@ function translate(key) {
     return typeof content !== "undefined" ? content : null;
 }
 
-function animate(elems, animations, all) {
+function animate(elems, animations, all, visibleChildrens = true) {
     if (elems.in !== null && typeof elems.in[0] === "undefined") {
         elems.in = [elems.in];
     }
@@ -63,20 +63,22 @@ function animate(elems, animations, all) {
     }
     if (elems.out !== null || elems.in !== null) {
         if (elems.out === null) {
-            animateIn(elems.in, animations.in, all);
+            animateIn(elems.in, animations.in, all, visibleChildrens);
         } else if (elems.in === null) {
             animateOut(elems.out, animations.out, all);
         } else if (elems.in[0].id !== elems.out[0].id) {
             animateOut(elems.out, animations.out, all, function () {
-                animateIn(elems.in, animations.in, all);
+                animateIn(elems.in, animations.in, all, visibleChildrens);
             });
         }
     }
 }
 
-function animateIn(elem, animation, all) {
-    $(elem).show();
-    $(elem).children().show();
+function animateIn(elem, animation, all, visibleChildrens = true) {
+    $(elem).show();   
+    if(visibleChildrens) {
+        $(elem).children().show();
+    }
     MotionUI.animateIn(all ? document.getElementById("content") : elem, animation);
 }
 

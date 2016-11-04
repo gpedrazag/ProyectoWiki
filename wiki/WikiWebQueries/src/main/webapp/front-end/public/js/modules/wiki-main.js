@@ -1,19 +1,22 @@
 (function (angular) {
-    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources"]);
+    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap"]);
     module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService) {
             $scope.inputSearchString = "";
             $scope.drilldownSelected = "selected";
-            $scope.searchingSelected = "";
             $scope.resourcesSelected = "";
+            $rootScope.dcsAltMapSelected = "";
             $scope.coincidences = [];
             $rootScope.actions = [];
             $rootScope.rImagesDoCount = 0;
             $rootScope.selectedContext = null;
 
-            $scope.onDrilldown = function () {
+            $scope.onDrilldown = function (event) {
+                if (event) {
+                    event.stopPropagation();
+                }
                 $scope.drilldownSelected = "selected";
-                $scope.searchingSelected = "";
                 $scope.resourcesSelected = "";
+                $rootScope.dcsAltMapSelected = "";
                 $rootScope.rImages = [];
                 animate(
                         {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
@@ -22,14 +25,31 @@
                         );
                 $rootScope.selectedContext = $("#main-content-drilldown");
             };
+            $scope.onDcsAltMap = function (event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                $scope.drilldownSelected = "";
+                $scope.resourcesSelected = "";
+                $rootScope.dcsAltMapSelected = "selected";
+                $rootScope.rImages = [];                
+                if($rootScope.selectedContext === null) {
+                    $rootScope.selectedContext = $("#main-content-drilldown");
+                }
+                animate(
+                        {in: $("#main-content-dcsAltMap"), out: $rootScope.selectedContext},
+                        {in: "slide-in-left", out: "slide-out-right"},
+                        true
+                        );
+                $rootScope.selectedContext = $("#main-content-dcsAltMap");
+            };
             $scope.onResources = function (event) {
                 if (event) {
                     event.stopPropagation();
-                    event.preventDefault();
                 }
                 $rootScope.rImagesDoCount = 0;
                 $scope.drilldownSelected = "";
-                $scope.searchingSelected = "";
+                $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "selected";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
@@ -110,30 +130,28 @@
                 });
             };
             $scope.$watch("inputSearchString", function (nv, ov) {
-                if (nv !== "") {
-                    setTimeout(function () {
-                        $.ajax({
-                            url: window.location.pathname + "/search/patternSearch",
-                            method: "POST",
-                            data: {pattern: $scope.inputSearchString, limit: -1, offset: 0},
-                            dataType: "json"
-                        }).done(function (response) {
-                            $scope.coincidences = [];
-                            $scope.$apply();
-                            if (response && response !== null && response.length > 0) {
-                                response.forEach(function (data) {
-                                    $scope.coincidences.push({
-                                        id: data.id,
-                                        classType: translate(data.classType),
-                                        reference: data.classType,
-                                        matches: getDomElemFromMatches(data.matches, $scope.inputSearchString)
-                                    });
+                if ($scope.inputSearchString !== "") {
+                    $.ajax({
+                        url: window.location.pathname + "/search/patternSearch",
+                        method: "POST",
+                        data: {pattern: $scope.inputSearchString, limit: -1, offset: 0},
+                        dataType: "json"
+                    }).done(function (response) {
+                        $scope.coincidences = [];
+                        $scope.$apply();
+                        if (response && response !== null && response.length > 0) {
+                            response.forEach(function (data) {
+                                $scope.coincidences.push({
+                                    id: data.id,
+                                    classType: translate(data.classType),
+                                    reference: data.classType,
+                                    matches: getDomElemFromMatches(data.matches, $scope.inputSearchString)
                                 });
-                                FoundationPanel.activate("search-panel");
-                                $scope.$apply();
-                            }
-                        });
-                    }, 500);
+                            });
+                            FoundationPanel.activate("search-panel");
+                            $scope.$apply();
+                        }
+                    });
                 } else {
                     setTimeout(function () {
                         FoundationPanel.deactivate("search-panel");

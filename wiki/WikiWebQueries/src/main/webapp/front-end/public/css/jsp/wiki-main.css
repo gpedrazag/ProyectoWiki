@@ -192,6 +192,48 @@ i.insert-image {
 .link-item-hover:hover {
     cursor: pointer;
 }
+.dcs-alt-tbl-td-red {
+    background-color: red;
+}
+.dcs-alt-tbl-td-green {
+    background-color: greenyellow;
+}
+.dcs-alt-tbl-td-hover {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 99; 
+    width: 100%;
+    height: 100%;
+}
+.dcs-alt-tbl-td-tooltip {
+    border-style: solid;
+    border-width: medium;
+    box-shadow: 5px 5px 10px #323232; 
+    height: 50%;
+    width: 70%;
+    top: 25%;
+    left: 15%;
+    z-index:999; 
+    position: absolute;
+    background-color: #FFF;
+}
+.dcs-alt-tbl-cover {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    z-index: 109; 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.link-item-hover-animate {
+    transition: text-shadow ease-in 0.25s;
+}
+.link-item-hover-animate:hover {
+    cursor: pointer;
+    text-shadow:2px 2px 5px aqua;
+}
 
 @media(max-width:745px) and (min-width:641px) {
     .action-sheet {

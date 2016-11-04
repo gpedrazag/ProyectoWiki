@@ -16,6 +16,7 @@
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-sub-element.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-element.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/resources.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/dcsAltMap.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/wiki-main.js" type="text/javascript"></script>
 
     </head>
@@ -51,11 +52,11 @@
                                 <div class="grid-block">
                                     <span style="display: inline-table;">{{match.property}} : </span>
                                     <span style="display: inline-table;" ng-bind-html="match.content | trustHTML"></span>
-                                </div>
-                                <div class="grid-block" style="padding: 15px 0px 15px 15px;">
-                                    <a class="dark button large" ng-click="enterEditModeMain($parent.coincidence.id, $parent.coincidence.reference)">Modo edición</a>
-                                </div>
+                                </div>                                
                             </div>
+                        </div>
+                        <div class="grid-block" style="padding: 15px 0px 15px 15px;">
+                            <a class="dark button large" ng-click="enterEditModeMain(coincidence.id, coincidence.reference)">Modo edición</a>
                         </div>
                     </div>
                 </zf-accordion-item>

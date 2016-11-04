@@ -1,0 +1,36 @@
+<div>
+    <div ng-init="getMatrix()" ng-if="dcsAltMapSelected === 'selected'">
+        <div ng-repeat="table in dcsAltMatrix track by $index" style="margin-top: 10px; position: relative;">
+            <div id="tbl-{{$index}}" style="overflow: auto;">
+                <table style="border: 1px solid black; overflow: visible; ">
+                    <tr ng-repeat="row in table track by $index" ng-init="tblI = $parent.$index">
+                        <td 
+                            style="padding: 5px; border: 1px solid black; position: relative; overflow: visible;" 
+                            ng-repeat="col in row track by $index"
+                            ng-class="{'dcs-alt-tbl-td-red': (col.content === 'true'), 'dcs-alt-tbl-td-green': (col.content === 'sol')}">
+                            <div ng-if="col.content === ''" style="height: 100%; width: 100%;"></div>
+                            <div ng-if="col.content !== '' && col.content !== 'true' && col.content !== 'sol'">{{col.id}}</div> 
+                            <div 
+                                ng-click="showContent(tblI, col.id, col.content, col.reference)" 
+                                ng-if="col.content !== '' && col.content !== 'true' && col.content !== 'sol'" 
+                                class="link-item-hover dcs-alt-tbl-td-hover">
+                            </div>
+                        </td>
+                    </tr>                
+                </table>            
+            </div>
+            <div id ="tbl-cover-{{$index}}" class="dcs-alt-tbl-cover" style="display: none;">
+                <div id="tbl-tooltip-{{$index}}" class="grid-block vertical dcs-alt-tbl-td-tooltip" style="display: none;">
+                    <div class="dark title-bar">
+                        <div class="left link-item-hover-animate" ng-click="hideContent('tbl-cover-' + $index)">Cerrar</div>
+                        <div id="tbl-tooltip-{{$index}}-id" class="center"></div>
+                        <div class="right link-item-hover-animate" ng-click="goTo()">Modo edición</div>
+                    </div>
+                    <div style="margin-top: 10px; padding: 15px; overflow-y: auto;">
+                        <span id="tbl-tooltip-{{$index}}-content"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

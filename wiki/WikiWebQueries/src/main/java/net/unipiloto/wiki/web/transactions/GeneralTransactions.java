@@ -48,7 +48,7 @@ public class GeneralTransactions {
             List<Match> matches = new ArrayList();
             while (rs.hasNext()) {
                 BindingSet bs = rs.next();
-                if (!classType.equals("") && !bs.getValue("individual").stringValue().equals(classType)) {
+                if (!id.equals("") && !bs.getValue("id").stringValue().equals(id)) {
                     data.add(new Generic(
                             id,
                             classType,

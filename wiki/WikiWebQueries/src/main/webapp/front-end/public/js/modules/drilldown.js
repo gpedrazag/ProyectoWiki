@@ -95,7 +95,7 @@
                     $rootScope.elemTypeId = "";
                 }
                 var nurl = url.split("/");
-                nurl = "/" + nurl[1] + "/" + nurl[2] + "/selectById"
+                nurl = "/" + nurl[1] + "/" + nurl[2] + "/selectById";
                 $.ajax({
                     url: nurl,
                     method: "POST",
