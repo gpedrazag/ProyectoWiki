@@ -92,7 +92,7 @@
             };
             $scope.deleteImage = function (limit) {
                 $.ajax({
-                    url: window.location.pathname + "/fileManager/deleteFile",
+                    url: "/" + window.location.pathname.split("/")[1] + "/fileManager/deleteFile",
                     method: "POST",
                     data: {name: name, type: $scope.type}
                 }).done(function (response) {
@@ -119,7 +119,7 @@
                         autoclose: "3000"});
                 } else {
                     $.ajax({
-                        url: window.location.pathname + "/fileManager/updateFile",
+                        url: "/" + window.location.pathname.split("/")[1] + "/fileManager/updateFile",
                         method: "POST",
                         data: {name: name, nName: elem.value, type: $scope.type}
                     }).done(function (response) {
@@ -158,7 +158,7 @@
                         var images = $rootScope.rImages;
                         if (typeof images[i] !== "undefined") {
                             $.ajax({
-                                url: window.location.pathname + "/downloader/getImage",
+                                url: "/" + window.location.pathname.split("/")[1] + "/downloader/getImage",
                                 data: {name: images[i].name},
                                 method: "POST",
                                 dataType: "json"
@@ -181,7 +181,7 @@
             }
             function getViewerImages(i, limit, cb) {
                 $.ajax({
-                    url: window.location.href + "/downloader/getAllImagesNames",
+                    url: "/" + window.location.pathname.split("/")[1] + "/downloader/getAllImagesNames",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response) {
@@ -204,7 +204,7 @@
             }
             function getViewerURLImages(i, limit, cb) {
                 $.ajax({
-                    url: window.location.href + "/downloader/getAllURLImages",
+                    url: "/" + window.location.pathname.split("/")[1] + "/downloader/getAllURLImages",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response) {
@@ -270,7 +270,7 @@
     module.directive("pdirecResources", function () {
         return {
             replace: "true",
-            templateUrl: window.location.pathname + "/front-end/views/templates/resources.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/resources.html",
             restrict: "E"
         };
     });

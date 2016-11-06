@@ -3534,6 +3534,14 @@
     'foundation.dynamicRouting.animations',
     'pmod-wiki-main'
   ]);
+  
+  angular.module('applicationForLogin', [
+    'ngAnimate',
+    'foundation',
+    'foundation.dynamicRouting',
+    'foundation.dynamicRouting.animations',
+    'pmodLogin'
+  ]);
 
       
 })();

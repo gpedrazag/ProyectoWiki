@@ -19,31 +19,31 @@
                     $rootScope.selectedContext = $("#main-content-drilldown");
                 }
                 if (i === 0) {
-                    url = window.location.pathname + "/Alternative/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Alternative/selectAll";
                     $rootScope.elemType = "alternative";
                 } else if (i === 1) {
-                    url = window.location.pathname + "/SoftwareArchitecture/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/SoftwareArchitecture/selectAll";
                     $rootScope.elemType = "softwarearchitecture";
                 } else if (i === 2) {
-                    url = window.location.pathname + "/Artifact/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Artifact/selectAll";
                     $rootScope.elemType = "artifact";
                 } else if (i === 3) {
-                    url = window.location.pathname + "/QualityAttributeStage/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/QualityAttributeStage/selectAll";
                     $rootScope.elemType = "qualityattributestage";
                 } else if (i === 4) {
-                    url = window.location.pathname + "/Criteria/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Criteria/selectAll";
                     $rootScope.elemType = "criteria";
                 } else if (i === 5) {
-                    url = window.location.pathname + "/Decision/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Decision/selectAll";
                     $rootScope.elemType = "decision";
                 } else if (i === 6) {
-                    url = window.location.pathname + "/Evaluation/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Evaluation/selectAll";
                     $rootScope.elemType = "evaluation";
                 } else if (i === 7) {
-                    url = window.location.pathname + "/FunctionalRequeriment/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/FunctionalRequeriment/selectAll";
                     $rootScope.elemType = "functionalrequeriment";
                 } else if (i === 8) {
-                    url = window.location.pathname + "/Responsible/selectAll";
+                    url = "/" + window.location.pathname.split("/")[1] + "/Responsible/selectAll";
                     $rootScope.elemType = "responsible";
                 }
 
@@ -131,7 +131,7 @@
                                 );
                         QuickActionListService.addAction(
                                 "action:" + $rootScope.elemTypeId,
-                                window.location.pathname + reference + "selectById",
+                                "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                                 translate(reference) + " " + $rootScope.elemTypeId,
                                 $rootScope.elemType);
                     }
@@ -148,7 +148,7 @@
             $scope.isADcsAndWhtoutSol = function (d, key) {
                 if (typeof d !== "undefined" && d.reference === "/Decision/") {
                     $.ajax({
-                        url: window.location.pathname + d.reference + "haveSolution",
+                        url: "/" + window.location.pathname.split("/")[1] + d.reference + "haveSolution",
                         method: "POST",
                         data: {id: d.id},
                         dataType: "json"
@@ -171,7 +171,7 @@
             }
         }]).directive("pdirecDrilldown", function () {
         return {
-            templateUrl: window.location.pathname + "/front-end/views/templates/drilldown.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/drilldown.html",
             restrict: "E",
             replace: "true"
         };

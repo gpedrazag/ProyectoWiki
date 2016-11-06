@@ -25,7 +25,7 @@
             $scope.isADcsAndWhtoutSol = function (d, i, key) {
                 if (typeof d !== "undefined" && d.reference === "/Decision/") {
                     $.ajax({
-                        url: window.location.pathname + d.reference + "haveSolution",
+                        url: "/" + window.location.pathname.split("/")[1] + d.reference + "haveSolution",
                         method: "POST",
                         data: {id: d.id},
                         dataType: "json"
@@ -307,7 +307,7 @@
             });
             $scope.goTo = function (id, reference, elems) {
                 $.ajax({
-                    url: window.location.pathname + reference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
                     method: "POST",
                     dataType: "json"
@@ -389,7 +389,7 @@
             function saveImageRegisters(registers) {
                 var json = JSON.stringify(registers);
                 $.ajax({
-                    url: window.location.pathname + "/fileManager/saveData",
+                    url: "/" + window.location.pathname.split("/")[1] + "/fileManager/saveData",
                     method: "POST",
                     data: {json: json}
                 }).done(function (saved) {
@@ -425,7 +425,7 @@
                     url = "/Responsible/update";
                 }
                 $.ajax({
-                    url: window.location.pathname + url,
+                    url: "/" + window.location.pathname.split("/")[1] + url,
                     method: "POST",
                     data: obj
                 }).done(function () {
@@ -446,7 +446,7 @@
             }
             function getViewerImages() {
                 $.ajax({
-                    url: window.location.href + "/downloader/getAllImagesNames",
+                    url: "/" + window.location.pathname.split("/")[1] + "/downloader/getAllImagesNames",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response) {
@@ -462,7 +462,7 @@
             }
             function getViewerURLImages() {
                 $.ajax({
-                    url: window.location.href + "/downloader/getAllURLImages",
+                    url: "/" + window.location.pathname.split("/")[1] + "/downloader/getAllURLImages",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response) {
@@ -515,7 +515,7 @@
             function setImagesInViewer(images, i) {
                 if (typeof images[i] !== "undefined") {
                     $.ajax({
-                        url: window.location.pathname + "/downloader/getImage",
+                        url: "/" + window.location.pathname.split("/")[1] + "/downloader/getImage",
                         data: {name: images[i].name},
                         method: "POST",
                         dataType: "json"
@@ -558,7 +558,7 @@
 
                 if (props.url === null) {
                     $.ajax({
-                        url: window.location.pathname + "/downloader/getImage",
+                        url: "/" + window.location.pathname.split("/")[1] + "/downloader/getImage",
                         data: {name: props.name},
                         method: "POST",
                         dataType: "json"
@@ -606,7 +606,7 @@
                         frmData.append("file", files[i]);
 
                         $.ajax({
-                            url: window.location.pathname + "/uploader/uploadFile",
+                            url: "/" + window.location.pathname.split("/")[1] + "/uploader/uploadFile",
                             contentType: false,
                             data: frmData,
                             dataType: "json",
@@ -641,7 +641,7 @@
         }]);
     module.directive("pdirecOntoelem", function () {
         return {
-            templateUrl: window.location.pathname + "/front-end/views/templates/ontology-element.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/ontology-element.html",
             restrict: "E",
             replace: "true"
         };

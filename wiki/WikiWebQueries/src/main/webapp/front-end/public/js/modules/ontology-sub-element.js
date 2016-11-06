@@ -8,16 +8,16 @@
 
             $scope.isAnAltAndSol = function (d) {
                 if (typeof d !== "undefined") {
-                    if (d.reference === "/alternative/" && d.rationale.trim() !== "") {
+                    if (d.reference === "/Alternative/" && d.rationale.trim() !== "") {
                         return true;
                     }
                 }
                 return false;
             };
             $scope.isADcsAndWhtoutSol = function (d, i, key) {
-                if (typeof d !== "undefined" && d.reference === "/decision/") {
+                if (typeof d !== "undefined" && d.reference === "/Decision/") {
                     $.ajax({
-                        url: window.location.pathname + d.reference + "haveSolution",
+                        url: "/" + window.location.pathname.split("/")[1] + d.reference + "haveSolution",
                         method: "POST",
                         data: {id: d.id},
                         dataType: "json"
@@ -110,14 +110,14 @@
                 findElemInEditor(content.id, content.reference);
                 QuickActionListService.addAction(
                         "action:" + content.id,
-                        window.location.pathname + content.reference + "selectById",
+                        "/" + window.location.pathname.split("/")[1] + content.reference + "selectById",
                         translate(content.reference) + " " + content.id,
                         content.reference.replace("/","").replace("/","").toLowerCase());
                 FoundationApi.closeActiveElements();
             };
             $scope.goTo = function (id, reference) {
                 $.ajax({
-                    url: window.location.pathname + reference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
                     method: "POST",
                     dataType: "json"
@@ -155,7 +155,7 @@
                                 );
                         QuickActionListService.addAction(
                                 "action:" + $rootScope.elemTypeId,
-                                window.location.pathname + reference + "selectById",
+                                "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                                 translate(reference) + " " + $rootScope.elemTypeId,
                                 reference.replace("/","").replace("/","").toLowerCase());
                         FoundationApi.closeActiveElements();
@@ -173,7 +173,7 @@
             }
             function findElem(id, reference) {
                 $.ajax({
-                    url: window.location.pathname + reference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
                     method: "POST",
                     dataType: "json"
@@ -202,7 +202,7 @@
             }
             function findElemInEditor(id, reference) {
                 $.ajax({
-                    url: window.location.pathname + reference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
                     method: "POST",
                     dataType: "json"
@@ -272,7 +272,7 @@
 
                 if (props.url === null) {
                     $.ajax({
-                        url: window.location.pathname + "/downloader/getImage",
+                        url: "/" + window.location.pathname.split("/")[1] + "/downloader/getImage",
                         data: {name: props.name},
                         method: "POST",
                         dataType: "json"
@@ -325,7 +325,7 @@
         }]);
     module.directive("pdirecOntoSubElem", function () {
         return {
-            templateUrl: window.location.pathname + "/front-end/views/templates/ontology-sub-element.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/ontology-sub-element.html",
             restrict: "E",
             replace: "true",
             require: "ngModel"

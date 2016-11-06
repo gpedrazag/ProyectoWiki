@@ -85,7 +85,7 @@
             };
             $scope.enterEditModeMain = function (id, reference) {
                 $.ajax({
-                    url: window.location.pathname + reference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     method: "POST",
                     dataType: "json",
                     data: {id: id}
@@ -123,7 +123,7 @@
                     $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
                     QuickActionListService.addAction(
                             "action:" + $rootScope.elemTypeId,
-                            window.location.pathname + reference + "selectById",
+                            "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                             translate(reference) + " " + $rootScope.elemTypeId,
                             reference.replace("/", "").replace("/", "").toLowerCase());
                     FoundationApi.closeActiveElements();
@@ -132,7 +132,7 @@
             $scope.$watch("inputSearchString", function (nv, ov) {
                 if ($scope.inputSearchString !== "") {
                     $.ajax({
-                        url: window.location.pathname + "/search/patternSearch",
+                        url: "/" + window.location.pathname.split("/")[1] + "/search/patternSearch",
                         method: "POST",
                         data: {pattern: $scope.inputSearchString, limit: -1, offset: 0},
                         dataType: "json"
@@ -200,7 +200,7 @@
             }
             function getViewerImages() {
                 $.ajax({
-                    url: window.location.href + "/downloader/getAllImagesNames",
+                    url: "/" + window.location.pathname.split("/")[1] + "/downloader/getAllImagesNames",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response) {
@@ -235,7 +235,7 @@
         }]);
     module.directive("pdirecContent", function () {
         return {
-            templateUrl: window.location.pathname + "/front-end/views/templates/content.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/content.html",
             restrict: "E",
             replace: "true",
             link: function (s, e, a) {
@@ -245,7 +245,7 @@
     });
     module.directive("pdirecNav", function () {
         return {
-            templateUrl: window.location.pathname + "/front-end/views/templates/nav.html",
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/nav.html",
             restrict: "E",
             replace: "true"
         };

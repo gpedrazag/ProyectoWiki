@@ -7,14 +7,14 @@
             var selectedReference = "";
             $scope.getMatrix = function () {
                 $.ajax({
-                    url: window.location.pathname + "/Decision/selectAll",
+                    url: "/" + window.location.pathname.split("/")[1] + "/Decision/selectAll",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response1) {
                     if (response1 && response1.length > 0) {
                         var decisions = response1;
                         $.ajax({
-                            url: window.location.pathname + "/Alternative/selectAll",
+                            url: "/" + window.location.pathname.split("/")[1] + "/Alternative/selectAll",
                             method: "POST",
                             dataType: "json"
                         }).done(function (response2) {
@@ -33,7 +33,7 @@
             };
             $scope.goTo = function () {
                 $.ajax({
-                    url: window.location.pathname + selectedReference + "selectById",
+                    url: "/" + window.location.pathname.split("/")[1] + selectedReference + "selectById",
                     method: "POST",
                     dataType: "json",
                     data: {id: selectedId}
@@ -68,7 +68,7 @@
                                 );
                         QuickActionListService.addAction(
                                 "action:" + $rootScope.elemTypeId,
-                                window.location.pathname + selectedReference + "selectById",
+                                "/" + window.location.pathname.split("/")[1] + selectedReference + "selectById",
                                 translate(selectedReference) + " " + $rootScope.elemTypeId,
                                 $rootScope.elemType);
                     }
@@ -167,7 +167,7 @@
         return {
             replace: "true",
             restrict: "E",
-            templateUrl: window.location.pathname + "/front-end/views/templates/dcsAltMap.html"
+            templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/dcsAltMap.html"
         };
     });
 })(window.angular);
