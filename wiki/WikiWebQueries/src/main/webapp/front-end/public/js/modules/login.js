@@ -9,16 +9,14 @@
                 if ($scope.login.trim() === "") {
                     go = false;
                     showNotification("Atencion!!!", "El campo del login no puede estar vacio");
-                    $("#login").css({"background-color":"#f4425c", "border-color":"red"});
-                } else {
-                    $("#login").css({"background-color":"#fff", "border":"1px solid #bbb"});
+                    $("#login").css({"background-color": "#F04124", "border-color": "red"});
                 }
                 if ($scope.password.trim() === "") {
                     go = false;
                     showNotification("Atencion!!!", "El campo de password no puede estar vacio");
-                    $("#password").css({"background-color":"#f4425c", "border-color":"red"});
+                    $("#password").css({"background-color": "#F04124", "border-color": "red"});
                 } else {
-                    $("#password").css({"background-color":"#fff", "border":"1px solid #bbb"});
+                    $("#password").css({"background-color": "#FFF", "border": "1px solid #bbb"});
                 }
                 if (go) {
                     $.ajax({
@@ -30,18 +28,34 @@
                         if (response.error) {
                             showNotification("Atencion!!!", "El login o el password son icorrectos");
                         } else {
+                            var user = JSON.stringify(response);
+                            $.ajax({
+                                url: window.location.pathname + "/session/saveUser",
+                                method: "POST",
+                                data: {user: user}
+                            });
                             window.location.href = window.location.pathname + "/main";
                         }
                     });
                 }
             };
+            $scope.$watch("login", function (nv) {
+                if ($scope.login.trim() !== "") {
+                    $("#login").css({"background-color": "#FFF", "border": "1px solid #bbb"});
+                }
+            });
+            $scope.$watch("password", function (nv) {
+                if ($scope.password.trim() !== "") {
+                    $("#password").css({"background-color": "#FFF", "border": "1px solid #bbb"});
+                }
+            });
 
             function showNotification(title, content) {
                 FoundationApi.publish("main-notifications", {
                     title: title,
                     content: content,
                     color: "alert",
-                    autoclose: "5000"
+                    autoclose: "3500"
                 });
             }
         }]);

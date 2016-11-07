@@ -1,9 +1,10 @@
 (function (angular) {
-    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap"]);
+    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap", "pmodGraph"]);
     module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService) {
             $scope.inputSearchString = "";
             $scope.drilldownSelected = "selected";
             $scope.resourcesSelected = "";
+            $scope.graphSelected = "";
             $rootScope.dcsAltMapSelected = "";
             $scope.coincidences = [];
             $rootScope.actions = [];
@@ -17,9 +18,29 @@
                 $scope.drilldownSelected = "selected";
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "";
+                $scope.graphSelected = "";
                 $rootScope.rImages = [];
                 animate(
                         {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
+                        {in: "slide-in-left", out: "slide-out-right"},
+                        true
+                        );
+                $rootScope.selectedContext = $("#main-content-drilldown");
+            };
+            $scope.onGraph = function (event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                $scope.drilldownSelected = "";
+                $scope.resourcesSelected = "";
+                $rootScope.dcsAltMapSelected = "";
+                $scope.graphSelected = "selected";
+                $rootScope.rImages = [];
+                if($rootScope.selectedContext === null) {
+                    $rootScope.selectedContext = $("#main-content-drilldown");
+                }
+                animate(
+                        {in: $("#main-content-graph"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
@@ -32,6 +53,7 @@
                 $scope.drilldownSelected = "";
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "selected";
+                $scope.graphSelected = "";
                 $rootScope.rImages = [];                
                 if($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
@@ -51,6 +73,7 @@
                 $scope.drilldownSelected = "";
                 $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "selected";
+                $scope.graphSelected = "";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
                 }

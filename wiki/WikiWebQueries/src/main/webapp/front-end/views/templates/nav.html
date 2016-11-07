@@ -10,6 +10,16 @@
                 </zf-as-button>
                 <zf-as-content position="bottom">
                     <ul class="menu">
+                        <li id="li-graph" name="link-graph" ng-click="onGraph($event)" ng-class="graphSelected" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)">
+                            <div class="grid-block">
+                                <div class="grid-block">
+                                    <span id="drilldown" name="link-graph" ng-click="onGraph($event)" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)"></span>
+                                </div>
+                                <div class="grid-block">
+                                    <a id="a-drilldown" name="link-graph" ng-click="onGraph($event)" ng-class="graphSelected">Ontology Graphdown</a>
+                                </div>
+                            </div>
+                        </li>
                         <li id="li-drilldown" name="link-drilldown" ng-click="onDrilldown($event)" ng-class="drilldownSelected" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)">
                             <div class="grid-block">
                                 <div class="grid-block">
@@ -26,7 +36,7 @@
                                     <span id="resources" name="link-resources" ng-click="onResources($event)" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)"></span>
                                 </div>
                                 <div class="grid-block">
-                                    <a id="a-resources" name="link-resources" ng-click="onResources($event)" ng-class="resourcesSelected">Resources</a>
+                                    <a id="a-resources" name="link-resources" ng-click="onResources($event)" ng-class="resourcesSelected">Recursos</a>
                                 </div>
                             </div>
                         </li>
@@ -36,7 +46,7 @@
                                     <span id="dcs-alt-map" name="link-dcs-alt-map" ng-click="onDcsAltMap($event)" ng-mouseover="hoverMenuOption($event)" ng-mouseleave="outHoverMenuOption($event)"></span>
                                 </div>
                                 <div class="grid-block">
-                                    <a id="a-dcs-alt-map" name="link-dcs-alt-map" ng-click="onDcsAltMap($event)" ng-class="dcsAltMapSelected">Resources</a>
+                                    <a id="a-dcs-alt-map" name="link-dcs-alt-map" ng-click="onDcsAltMap($event)" ng-class="dcsAltMapSelected">Mapa Decisión/Alternativa</a>
                                 </div>
                             </div>
                         </li>
