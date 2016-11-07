@@ -1,55 +1,44 @@
 (function (angular) {
     var module = angular.module("pmodGraph", []);
 
-    module.controller('pctrlGraph', ["$scope", function ($scope) {
-            var nodes = null;
-            var edges = null;
-            var network = null;
+    module.controller('pctrlGraph', ["$scope", "$rootScope", function ($scope, $rootScope) {
             $scope.init = function () {
-                nodes = [];
-                edges = [];
-                nodes = [
-                    {id: "des1", label: "Decision 1", child: ["soul1", "eval1", "artf1"]},
-                    {id: "alter1", label: "Solucion 1", child: []},
-                    {id: "sol1", label: "Evaluacion 1", child: ["artf2", "artf3", "artf4"]},
-                    {id: "const1", label: "Artefacto 1", child: []},
-                    {id: "assum1", label: "Artefacto 2", child: []},
-                    {id: "artf3", label: "Artefacto 3", child: []},
-                    {id: "artf4", label: "Artefacto 4", child: []}
-                ];
+                var nodes = new vis.DataSet([
+                    {id: 1, label: 'Node 1'},
+                    {id: 2, label: 'Node 2'},
+                    {id: 3, label: 'Node 3'},
+                    {id: 4, label: 'Node 4'},
+                    {id: 5, label: 'Node 5'}
+                ]);
 
-                var nodeAux;
+                var edges = new vis.DataSet([
+                    {from: 1, to: 3},
+                    {from: 1, to: 2},
+                    {from: 2, to: 4},
+                    {from: 2, to: 5}
+                ]);
 
-                $.each(nodes, function (index, node) {
-                    nodeAux = node.id;
-                    $.each(node.child, function (index, child) {
-                        edges.push({from: nodeAux, to: child, arrows: 'to'});
-                    });
+                var container = document.getElementById('graphContainer');
+                $(container).ready(function () {
+
                 });
-
-                var container = document.getElementById('mynetwork');
-
                 var data = {
                     nodes: nodes,
                     edges: edges
                 };
-
                 var options = {
-                    edges: {
-                        smooth: {
-                            type: 'cubicBezier',
-                            forceDirection: "horizontal",
-                            roundness: 0.4
-                        }
-                    },
-                    layout: {
-                        hierarchical: {
-                            direction: "UD"
-                        }
-                    },
-                    physics: false
+                    height: "600px",
+                    width: "100%"
                 };
-                network = new vis.Network(container, data, options);
+                setTimeout(function () {
+                    var network = new vis.Network(container, data, options);
+                    network.moveTo({
+                        position: {
+                            x: 600, y: 600
+                        }
+                    });
+                    network.fit();
+                }, 1000);
             };
 
         }]);
