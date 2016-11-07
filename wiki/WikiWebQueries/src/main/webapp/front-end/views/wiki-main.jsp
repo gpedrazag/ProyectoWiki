@@ -17,8 +17,8 @@
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-element.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/resources.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/dcsAltMap.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/g.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/wiki-main.js" type="text/javascript"></script>
-
     </head>
     <body ng-controller="pctrlViews">
         <pdirec:nav></pdirec:nav>
