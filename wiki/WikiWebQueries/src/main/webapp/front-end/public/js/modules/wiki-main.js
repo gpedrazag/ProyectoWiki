@@ -4,7 +4,7 @@
             $scope.inputSearchString = "";
             $scope.drilldownSelected = "selected";
             $scope.resourcesSelected = "";
-            $scope.graphSelected = "";
+            $rootScope.graphSelected = "";
             $rootScope.dcsAltMapSelected = "";
             $scope.coincidences = [];
             $rootScope.actions = [];
@@ -18,7 +18,7 @@
                 $scope.drilldownSelected = "selected";
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "";
-                $scope.graphSelected = "";
+                $rootScope.graphSelected = "";
                 $rootScope.rImages = [];
                 animate(
                         {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
@@ -34,7 +34,7 @@
                 $scope.drilldownSelected = "";
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "";
-                $scope.graphSelected = "selected";
+                $rootScope.graphSelected = "selected";
                 $rootScope.rImages = [];
                 if($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
@@ -53,7 +53,7 @@
                 $scope.drilldownSelected = "";
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "selected";
-                $scope.graphSelected = "";
+                $rootScope.graphSelected = "";
                 $rootScope.rImages = [];                
                 if($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
@@ -73,7 +73,7 @@
                 $scope.drilldownSelected = "";
                 $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "selected";
-                $scope.graphSelected = "";
+                $rootScope.graphSelected = "";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-drilldown");
                 }
