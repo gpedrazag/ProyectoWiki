@@ -33,8 +33,9 @@
                                 url: window.location.pathname + "/session/saveUser",
                                 method: "POST",
                                 data: {user: user}
+                            }).done(function (response) {
+                                window.location.href = window.location.pathname + "/main";
                             });
-                            window.location.href = window.location.pathname + "/main";
                         }
                     });
                 }

@@ -22,7 +22,6 @@ public class IndexController
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String mainPage() throws IOException, URISyntaxException
     {
-
         return "wiki-main";
     }   
 }

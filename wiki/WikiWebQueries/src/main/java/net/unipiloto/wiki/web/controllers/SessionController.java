@@ -39,9 +39,9 @@ public class SessionController {
     }
 
     @RequestMapping(value = "/saveUser")
-    public void saveUser(HttpServletRequest request, @RequestParam(value = "user") String user) {
+    public boolean saveUser(HttpServletRequest request, @RequestParam(value = "user") String user) {
         session = request.getSession(true);
-        User u = JsonFactory.fromJson(user, User.class);
-        session.setAttribute("user", u);
+        session.setAttribute("user", user);
+        return true;
     }
 }
