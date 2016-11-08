@@ -182,6 +182,14 @@
                     }, 600);
                 }
             });
+            $scope.exitSession = function() {
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + "/session/closeSession",
+                    method: "POST",
+                    dataType: "json"
+                });
+                window.location.href =  "/" + window.location.pathname.split("/")[1];
+            };
 
             function getDomElemFromMatches(matches, find) {
                 if (matches && matches.length > 0) {

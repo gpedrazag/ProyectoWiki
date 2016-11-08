@@ -2,7 +2,7 @@
     <div class="center">
         <input type="text" placeholder="Busque algo aquí" id="input-search" ng-model="inputSearchString"/>
     </div>
-    <div class="right">
+    <div class="right" style="position: relative;">
         <div class="tittle-bar-right-elem float-left">
             <zf-action-sheet id="action-menu">
                 <zf-as-button>
@@ -54,5 +54,6 @@
                 </zf-as-content>
             </zf-action-sheet>
         </div>
+        <div id="exit-session" style="margin-left: 10px;" ng-click="exitSession()"></div>
     </div>
 </div>

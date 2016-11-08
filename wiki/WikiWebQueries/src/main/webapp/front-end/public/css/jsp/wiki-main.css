@@ -25,7 +25,9 @@
     padding-left: 10%;
 }
 .tittle-bar-right-elem {
-    padding-left: 2%;
+    position: absolute;
+    right: 50px;
+    top: -16px;
 }
 #actions-button {
     background-image:url("../../../resources/img/menu.png");
@@ -70,6 +72,18 @@
 }
 .action-sheet.is-active div div span {
     margin: 8px 0px 0px 15px;
+}
+#exit-session {
+    position: absolute;
+    right: 0;
+    top:-16px;
+    background-image:url("../../../resources/img/exit.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
+#exit-session:hover {
+    cursor: pointer;
 }
 #ontograph {
     background-image:url("../../../resources/img/graph.png");
@@ -253,25 +267,37 @@ i.insert-image {
 
 @media(max-width:745px) and (min-width:641px) {
     .action-sheet {
-        -ms-transform: translate(-75%, 110%);
-        -webkit-transform: translate(-75%, 110%);
-        transform: translate(-76%, 110%);
+        -ms-transform: translate(-80%, 110%);
+        -webkit-transform: translate(-80%, 110%);
+        transform: translate(-80%, 110%);
     }
     .action-sheet.is-active {
-        -ms-transform: translate(-75%, 110%);
-        -webkit-transform: translate(-75%, 110%);
-        transform: translate(-76%, 110%);
+        -ms-transform: translate(-80%, 110%);
+        -webkit-transform: translate(-80%, 110%);
+        transform: translate(-80%, 110%);
     }
 }
 @media(max-width: 1156px) and (min-width:746px){
     .action-sheet {
-        -ms-transform: translate(-70%, 110%);
-        -webkit-transform: translate(-70%, 110%);
-        transform: translate(-70%, 110%);
-    }
-    .action-sheet.is-active {
         -ms-transform: translate(-75%, 110%);
         -webkit-transform: translate(-75%, 110%);
         transform: translate(-75%, 110%);
+    }
+    .action-sheet.is-active {
+        -ms-transform: translate(-80%, 110%);
+        -webkit-transform: translate(-80%, 110%);
+        transform: translate(-80%, 110%);
+    }
+}
+@media (min-width:1157px){
+    .action-sheet {
+        -ms-transform: translate(-75%, 110%);
+        -webkit-transform: translate(-75%, 110%);
+        transform: translate(-75%, 110%);
+    }
+    .action-sheet.is-active {
+        -ms-transform: translate(-80%, 110%);
+        -webkit-transform: translate(-80%, 110%);
+        transform: translate(-80%, 110%);
     }
 }

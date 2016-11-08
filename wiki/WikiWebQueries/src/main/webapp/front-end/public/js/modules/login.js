@@ -59,12 +59,6 @@
                     autoclose: "3500"
                 });
             }
-            (function () {
-                $.ajax({
-                    url: window.location.pathname + "/session/closeSession",
-                    method: "POST"
-                });
-            })();
         }]);
 })(window.angular);
 
