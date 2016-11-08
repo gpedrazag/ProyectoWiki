@@ -1924,6 +1924,20 @@ Centro Comando Control Mision (C3) recibe información de la plataforma en tierr
         <login rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gmejia</login>
         <password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gmejia</password>
     </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#USR-03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#USR-03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#User"/>
+        <email rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gpedraza@gmail.com</email>
+        <first_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gilberto</first_name>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">USER-03</id>
+        <last_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pedraza</last_name>
+        <login rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gpedraza</login>
+        <password rdf:datatype="http://www.w3.org/2001/XMLSchema#string">gpedraza</password>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 

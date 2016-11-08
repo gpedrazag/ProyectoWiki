@@ -14,6 +14,21 @@
             $scope.haveSolutions = {};
             $rootScope.subElems = [];
 
+            $scope.haveEditPrivilege = function () {
+                var haveIt = false;
+                var obj = {};
+                try {
+                    $rootScope.user.havePrivileges.forEach(function (privilege) {
+                       if(privilege.privilegeType === "edit" || privilege.privilegeType === "admin") {
+                           haveIt = true;
+                           throw obj;
+                       }
+                    });
+                } catch(obj) {                    
+                }
+
+                return haveIt;
+            };
             $scope.isAnAltAndSol = function (d) {
                 if (typeof d !== "undefined") {
                     if (d.reference === "/Alternative/" && d.rationale.trim() !== "") {
