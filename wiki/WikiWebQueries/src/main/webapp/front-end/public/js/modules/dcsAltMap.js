@@ -2,19 +2,26 @@
     var module = angular.module("pmodDcsAltMap", []);
     module.controller("pctrlDcsAltMap", ["$scope", "$rootScope", "QuickActionListService", function ($scope, $rootScope, QuickActionListService) {
             $scope.dcsAltMatrix = [];
+            $scope.data = {
+                selectedAlternative: null
+            };
             var i = 0;
             var selectedId = "";
             var selectedReference = "";
+
             $scope.getMatrix = function () {
+                var references = $scope.data.selectedAlternative.split("-");
+                var firstReference = references[0];
+                var secondReference = references[1];
                 $.ajax({
-                    url: "/" + window.location.pathname.split("/")[1] + "/Decision/selectAll",
+                    url: "/" + window.location.pathname.split("/")[1] + firstReference + "selectAll",
                     method: "POST",
                     dataType: "json"
                 }).done(function (response1) {
                     if (response1 && response1.length > 0) {
-                        var decisions = response1;
+                        var firstResponse = response1;
                         $.ajax({
-                            url: "/" + window.location.pathname.split("/")[1] + "/Alternative/selectAll",
+                            url: "/" + window.location.pathname.split("/")[1] + secondReference + "selectAll",
                             method: "POST",
                             dataType: "json"
                         }).done(function (response2) {
@@ -22,8 +29,8 @@
                                 $scope.dcsAltMatrix = [];
                                 i = 0;
                                 $scope.$apply();
-                                var alternatives = response2;
-                                fillMatrix(decisions, alternatives);
+                                var secondResponse = response2;
+                                fillMatrix(firstResponse, secondResponse);
                                 divideMatrix();
                                 $scope.$apply();
                             }
@@ -91,37 +98,64 @@
                 }
             };
 
-            function fillMatrix(decisions, alternatives) {
+            function fillMatrix(firstResponse, secondResponse) {
                 var obj = {};
                 $scope.dcsAltMatrix.push([]);
                 $scope.dcsAltMatrix[i].push("");
-                decisions.forEach(function (decision) {
+                secondResponse.forEach(function (response) {
                     $scope.dcsAltMatrix[i].push({
-                        id: decision.id,
-                        content: decision.name,
-                        reference: decision.reference
+                        id: response.id,
+                        content: response.name,
+                        reference: response.reference
                     });
                 });
                 i++;
-                alternatives.forEach(function (alternative) {
+                firstResponse.forEach(function (response) {
                     $scope.dcsAltMatrix.push([]);
                     $scope.dcsAltMatrix[i].push({
-                        id: alternative.id,
-                        content: alternative.description,
-                        reference: alternative.reference
+                        id: response.id,
+                        content: response.description,
+                        reference: response.reference
                     });
-                    decisions.forEach(function (decision) {
+
+                    secondResponse.forEach(function (sResponse) {
                         try {
-                            decision.haveAlternatives.forEach(function (dcsAlt) {
-                                if (dcsAlt.id === alternative.id) {
-                                    if (alternative.rationale.trim() !== "") {
-                                        $scope.dcsAltMatrix[i].push({content: "sol"});
-                                    } else {
-                                        $scope.dcsAltMatrix[i].push({content: "true"});
+                            var responseObjects = getObjectKeys(response);
+                            var j = 0;
+                            var isResponse = false; 
+                            var obj2 = {};
+                            try {
+                                responseObjects.forEach(function (object) {
+                                    if (object[0].reference === sResponse.reference) {
+                                        throw obj2;
                                     }
+                                    j++;
+                                });
+                                responseObjects = getObjectKeys(sResponse);
+                                j = 0;
+                                responseObjects.forEach(function (object) {
+                                    if (object[0].reference === response.reference) {
+                                        isResponse = true;
+                                        throw obj2;
+                                    }
+                                    j++;
+                                });
+                            } catch (obj2) {
+                            }
+                            responseObjects[j].forEach(function (actualObj) {
+                                var comp = isResponse ? response : sResponse;
+                                if (actualObj.id === comp.id) {
+                                    if (actualObj.reference === "/Alternative/") {
+                                        if (comp.rationale.trim() !== "") {
+                                            $scope.dcsAltMatrix[i].push({content: "sol"});
+                                            throw obj;
+                                        }
+                                    }
+                                    $scope.dcsAltMatrix[i].push({content: "true"});
                                     throw obj;
                                 }
                             });
+
                         } catch (obj) {
                             return;
                         }
@@ -129,6 +163,21 @@
                     });
                     i++;
                 });
+
+            }
+            function getObjectKeys(object) {
+                var keys = Object.keys(object);
+                var arr = [];
+                keys.forEach(function (key) {
+                    if (typeof object[key] === "object") {
+                        if (object[key].length > 0) {
+                            arr.push(object[key]);
+                        } else {
+                            arr.push([object[key]]);
+                        }
+                    }
+                });
+                return arr;
             }
             function divideMatrix() {
                 var i = 0;

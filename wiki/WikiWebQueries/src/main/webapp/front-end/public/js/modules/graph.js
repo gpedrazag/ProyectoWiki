@@ -1,7 +1,7 @@
 (function (angular) {
     var module = angular.module("pmodGraph", []);
 
-    module.controller('pctrlGraph', ["$scope", "$rootScope", function ($scope, $rootScope) {
+    module.controller('pctrlGraph', ["$scope", "$rootScope", "$timeout", function ($scope, $rootScope, $timeout) {
             $scope.init = function () {
                 var nodes = new vis.DataSet([
                     {id: 1, label: 'Node 1'},
@@ -30,10 +30,10 @@
                     height: "600px",
                     width: "100%"
                 };
-                setTimeout(function () {
+                $timeout(function () {
                     var network = new vis.Network(container, data, options);
                     network.fit();
-                }, 300);
+                }, 1200, false);
             };
 
         }]);

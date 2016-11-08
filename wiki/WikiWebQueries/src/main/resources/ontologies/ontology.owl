@@ -897,7 +897,7 @@
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-28">
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Separar responsabilidades contando con agentes para garantizar baja latencia, creando agentes especializados.</description>
-        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-29</id>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-28</id>
         <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Para no perder información que se envía al C3 es necesario garantizar la mínima latencia en procesar cada bloque de lecturas enviadas desde la plataforma.</rationale>
     </owl:NamedIndividual>
     

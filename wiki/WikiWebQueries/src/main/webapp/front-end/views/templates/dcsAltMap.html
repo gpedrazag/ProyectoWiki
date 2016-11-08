@@ -1,8 +1,18 @@
-<div>
-    <div ng-init="getMatrix()" ng-if="dcsAltMapSelected === 'selected'">
+<div ng-if="dcsAltMapSelected === 'selected'">
+    <div style="margin-top: 10px;">
+        <select id="map-selector" ng-model="data.selectedAlternative" ng-change="getMatrix()">
+            <option value="/Alternative/-/Decision/">Alternativas/Decisiones</option>
+            <option value="/Alternative/-/Evaluation/">Alternativas/Evaluaciones</option>
+            <option value="/Responsible/-/Decision/">Responsables/Decisiones</option>
+            <option value="/Artifact/-/Decision/">Artefactos/Decisiones</option>
+            <option value="/SoftwareArchitecture/-/Artifact/">Arquitecturas de Software/Artefactos</option>
+            <option value="/QualityAttributeStage/-/Artifact/">Atributos de Calidad/Artefactos</option>
+        </select>
+    </div>
+    <div style="margin-top: 10px;">
         <div ng-repeat="table in dcsAltMatrix track by $index" style="margin-top: 10px; position: relative;">
             <div id="tbl-{{$index}}" style="overflow: auto;">
-                <table style="border: 1px solid black; overflow: visible; ">
+                <table style="border: 1px solid black; overflow: visible; width: 100%; min-height: 474px;">
                     <tr ng-repeat="row in table track by $index" ng-init="tblI = $parent.$index">
                         <td 
                             style="padding: 5px; border: 1px solid black; position: relative; overflow: visible;" 

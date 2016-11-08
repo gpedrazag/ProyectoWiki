@@ -6,7 +6,6 @@ public class Alternative
     private String id;
     private String rationale;
     private String description;
-    private String did;
     private Evaluation haveEvaluation;
 
     public Alternative(String id, String rationale, String description)
@@ -16,21 +15,6 @@ public class Alternative
         this.description = description;
     }
 
-    public Alternative(String id, String rationale, String description, String did) {
-        this.id = id;
-        this.rationale = rationale;
-        this.description = description;
-        this.did = did;
-    }
-    
-    public String getDid() {
-        return did;
-    }
-
-    public void setDid(String did) {
-        this.did = did;
-    }
-    
     public String getReference() {
         return reference;
     }

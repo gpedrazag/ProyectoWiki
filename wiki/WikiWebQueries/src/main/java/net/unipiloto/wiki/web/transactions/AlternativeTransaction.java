@@ -175,14 +175,11 @@ public class AlternativeTransaction {
         RepositoryConnection conn = repo.getConnection();
         try {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
-                    "SELECT DISTINCT ?id ?description ?rationale ?did WHERE {\n"
+                    "SELECT DISTINCT ?id ?description ?rationale WHERE {\n"
                     + "<http://www.semanticweb.org/sa#" + id + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                     + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#id> ?id ."
                     + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#description> ?description . "
-                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#rationale> ?rationale . "
-                    + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
-                    + "?d <http://www.semanticweb.org/sa#decisionHave> <http://www.semanticweb.org/sa#" + id + "> . "
-                    + "?d <http://www.semanticweb.org/sa#id> ?did "
+                    + "<http://www.semanticweb.org/sa#" + id + "> <http://www.semanticweb.org/sa#rationale> ?rationale "
                     + "} "
                     + "ORDER BY ?id"
             );
@@ -192,8 +189,7 @@ public class AlternativeTransaction {
                 alternative = new Alternative(
                         bs.getValue("id").stringValue(),
                         bs.getValue("rationale").stringValue(),
-                        bs.getValue("description").stringValue(),
-                        bs.getValue("did").stringValue()
+                        bs.getValue("description").stringValue()
                 );
                 alternative.setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(id, conn));
             }
@@ -212,14 +208,11 @@ public class AlternativeTransaction {
         RepositoryConnection conn = repo.getConnection();
         try {
             TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
-                    "SELECT DISTINCT ?id ?description ?rationale ?did WHERE {\n"
+                    "SELECT DISTINCT ?id ?description ?rationale WHERE {\n"
                     + "?alternative <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Alternative> . "
                     + "?alternative <http://www.semanticweb.org/sa#id> ?id ."
                     + "?alternative <http://www.semanticweb.org/sa#description> ?description . "
-                    + "?alternative <http://www.semanticweb.org/sa#rationale> ?rationale . "
-                    + "?d <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.semanticweb.org/sa#Decision> . "
-                    + "?d <http://www.semanticweb.org/sa#decisionHave> ?alternative . "
-                    + "?d <http://www.semanticweb.org/sa#id> ?did "
+                    + "?alternative <http://www.semanticweb.org/sa#rationale> ?rationale "
                     + "} "
                     + "ORDER BY ?id"
             );
@@ -229,8 +222,7 @@ public class AlternativeTransaction {
                 alternatives.add(new Alternative(
                         bs.getValue("id").stringValue(),
                         bs.getValue("rationale").stringValue(),
-                        bs.getValue("description").stringValue(),
-                        bs.getValue("did").stringValue()
+                        bs.getValue("description").stringValue()
                 ));
                 int i = alternatives.size() - 1;
                 alternatives.get(i).setHaveEvaluation(EvaluationTransaction.selectByAlternativeId(alternatives.get(i).getId(), conn));
