@@ -71,6 +71,18 @@
 .action-sheet.is-active div div span {
     margin: 8px 0px 0px 15px;
 }
+#ontograph {
+    background-image:url("../../../resources/img/graph.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
+#dcs-alt-map {
+    background-image:url("../../../resources/img/table.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+}
 #drilldown {
     background-image:url("../../../resources/img/business/png/cube.png");
     height:32px;

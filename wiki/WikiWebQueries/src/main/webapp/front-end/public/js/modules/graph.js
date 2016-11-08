@@ -32,13 +32,8 @@
                 };
                 setTimeout(function () {
                     var network = new vis.Network(container, data, options);
-                    network.moveTo({
-                        position: {
-                            x: 600, y: 600
-                        }
-                    });
                     network.fit();
-                }, 1000);
+                }, 300);
             };
 
         }]);

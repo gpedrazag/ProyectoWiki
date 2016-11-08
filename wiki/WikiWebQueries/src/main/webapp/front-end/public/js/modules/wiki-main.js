@@ -2,14 +2,15 @@
     var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap", "pmodGraph"]);
     module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService) {
             $scope.inputSearchString = "";
-            $scope.drilldownSelected = "selected";
+            $scope.drilldownSelected = "";
             $scope.resourcesSelected = "";
-            $rootScope.graphSelected = "";
-            $rootScope.dcsAltMapSelected = "";
             $scope.coincidences = [];
             $rootScope.actions = [];
             $rootScope.rImagesDoCount = 0;
             $rootScope.selectedContext = null;
+            $rootScope.graphSelected = "selected";
+            $rootScope.dcsAltMapSelected = "";
+            $rootScope.user = null;
 
             $scope.onDrilldown = function (event) {
                 if (event) {
@@ -20,6 +21,9 @@
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "";
                 $rootScope.rImages = [];
+                if ($rootScope.selectedContext === null) {
+                    $rootScope.selectedContext = $("#main-content-graph");
+                }
                 animate(
                         {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
@@ -36,15 +40,12 @@
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "selected";
                 $rootScope.rImages = [];
-                if($rootScope.selectedContext === null) {
-                    $rootScope.selectedContext = $("#main-content-drilldown");
-                }
                 animate(
                         {in: $("#main-content-graph"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
-                $rootScope.selectedContext = $("#main-content-drilldown");
+                $rootScope.selectedContext = $("#main-content-graph");
             };
             $scope.onDcsAltMap = function (event) {
                 if (event) {
@@ -54,9 +55,9 @@
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "selected";
                 $rootScope.graphSelected = "";
-                $rootScope.rImages = [];                
-                if($rootScope.selectedContext === null) {
-                    $rootScope.selectedContext = $("#main-content-drilldown");
+                $rootScope.rImages = [];
+                if ($rootScope.selectedContext === null) {
+                    $rootScope.selectedContext = $("#main-content-graph");
                 }
                 animate(
                         {in: $("#main-content-dcsAltMap"), out: $rootScope.selectedContext},
@@ -75,7 +76,7 @@
                 $scope.resourcesSelected = "selected";
                 $rootScope.graphSelected = "";
                 if ($rootScope.selectedContext === null) {
-                    $rootScope.selectedContext = $("#main-content-drilldown");
+                    $rootScope.selectedContext = $("#main-content-graph");
                 }
                 animate(
                         {in: $("#main-content-resources"), out: $rootScope.selectedContext},
@@ -255,6 +256,20 @@
                     $($(document).find(".action-sheet.is-active .selected")).removeClass("selected");
                 }
             }
+            (function () {
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + "/session/getPrivilegies",
+                    method: "POST",
+                    dataType: "json"
+                }).done(function (response) {
+                    if (response.error) {
+                        window.location.href = "/" + window.location.pathname.split("/")[1];
+                    } else {
+                        $rootScope.user = response;
+                        $rootScope.$apply();
+                    }
+                });
+            })();
         }]);
     module.directive("pdirecContent", function () {
         return {

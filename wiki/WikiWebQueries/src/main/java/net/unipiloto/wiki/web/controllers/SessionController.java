@@ -2,8 +2,6 @@ package net.unipiloto.wiki.web.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import net.unipiloto.wiki.web.entities.User;
-import org.boon.json.JsonFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,20 +19,26 @@ public class SessionController {
     @RequestMapping(value = "/getPrivilegies")
     public String getPrivilegies() {
         String json = "";
-        if (session != null) {
-            User user = (User) session.getAttribute("user");
-            if (user != null) {
-                json = JsonFactory.toJson(user);
+        try {
+            if (session != null) {
+                json = String.valueOf(session.getAttribute("user"));
             }
+        } catch (Exception ex) {
         }
-
+        if (json.equals("null") || json.equals("")) {
+            json = "{\"error\":true}";
+        }
         return json;
     }
 
     @RequestMapping(value = "/closeSession")
     public void closeSession() {
         if (session != null) {
-            session.invalidate();
+            try {
+                session.invalidate();
+            } catch(Exception ex) {
+                
+            }
         }
     }
 
