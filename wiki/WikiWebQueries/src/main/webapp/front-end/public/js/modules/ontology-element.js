@@ -296,9 +296,9 @@
                     if (go) {
                         saveImageRegisters(imageRegisters);
                     }
+                    loadHTML(document.getElementById("neContent-" + index), html[0].outerHTML, false);
                 });
                 var index = new Number(editorId.split("_")[2]);
-                loadHTML(document.getElementById("neContent-" + index), html[0].outerHTML, false);
                 indexForEdit = index;
             };
             $scope.getViewerRows = function () {
@@ -524,7 +524,7 @@
                                     indvID: $rootScope.elemTypeId,
                                     dp: key
                                 }
-                            }).done(function(error){
+                            }).done(function (error) {
                                 cover.hide();
                             });
                         }
@@ -744,26 +744,27 @@
                 }
             }
             function saveArrayOfImages(names, files, cb) {
-                for (var i = 0; i < files.length; i++) {
-                    if (files[i] !== null) {
-                        var frmData = new FormData();
-                        frmData.append("name", names[i]);
-                        frmData.append("file", files[i]);
+                if (files.length === 0) {
+                    cb();
+                } else {
+                    for (var i = 0; i < files.length; i++) {
+                        if (files[i] !== null) {
+                            var frmData = new FormData();
+                            frmData.append("name", names[i]);
+                            frmData.append("file", files[i]);
 
-                        $.ajax({
-                            url: "/" + window.location.pathname.split("/")[1] + "/uploader/uploadFile",
-                            contentType: false,
-                            data: frmData,
-                            dataType: "json",
-                            method: "POST",
-                            processData: false
-                        }).done(function (data) {
-                            cb(data);
-                        });
-                    } else {
-                        cb();
+                            $.ajax({
+                                url: "/" + window.location.pathname.split("/")[1] + "/uploader/uploadFile",
+                                contentType: false,
+                                data: frmData,
+                                dataType: "json",
+                                method: "POST",
+                                processData: false
+                            }).done(function (data) {
+                                cb(data);
+                            });
+                        }
                     }
-
                 }
             }
             function dataURIToBlob(data) {
