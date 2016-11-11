@@ -468,6 +468,7 @@
                 return arr;
             }
             function saveChanges(key, content) {
+                var cover = $("#cover-dont-do-anything");
                 var pastContent = selectedKeys[key].content;
                 var html1 = $(
                         pastContent.indexOf("<div") >= 0
@@ -500,6 +501,7 @@
                     }
                 }
                 if (go) {
+                    cover.show();
                     var date = new Date();
                     $.ajax({
                         url: "/" + window.location.pathname.split("/")[1] + "/change/insert",
@@ -522,6 +524,8 @@
                                     indvID: $rootScope.elemTypeId,
                                     dp: key
                                 }
+                            }).done(function(error){
+                                cover.hide();
                             });
                         }
                     });

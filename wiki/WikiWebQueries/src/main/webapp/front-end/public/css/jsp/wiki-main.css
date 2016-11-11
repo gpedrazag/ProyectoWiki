@@ -279,6 +279,15 @@ i.insert-image {
 .neContent * {
     width: 100%;
 }
+#cover-dont-do-anything {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(50,50,50,0.5);
+    z-index: 999;
+}
 
 @media(max-width:745px) and (min-width:641px) {
     .action-sheet {
@@ -317,17 +326,17 @@ i.insert-image {
     }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .hidden-small {
-    display: none !important;
-  }
+    .hidden-small {
+        display: none !important;
+    }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  .hidden-medium {
-    display: none !important;
-  }
+    .hidden-medium {
+        display: none !important;
+    }
 }
 @media (min-width: 1200px) {
-  .hidden-large {
-    display: none !important;
-  }
+    .hidden-large {
+        display: none !important;
+    }
 }

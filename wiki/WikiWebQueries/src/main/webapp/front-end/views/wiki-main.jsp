@@ -66,6 +66,7 @@
                 </zf-accordion-item>
         </div>
     </zf-panel>
+    <div id="cover-dont-do-anything" hidden=""></div>
 
 </body>
 <link href="${pageContext.request.contextPath}/front-end/public/css/jsp/wiki-main.css" rel="stylesheet" type="text/css">
