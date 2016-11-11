@@ -9,6 +9,7 @@ import net.unipiloto.wiki.web.others.Reader;
 import net.unipiloto.wiki.web.transactions.AlternativeTransaction;
 import net.unipiloto.wiki.web.transactions.ArtifactTransaction;
 import net.unipiloto.wiki.web.transactions.AssumptionTransaction;
+import net.unipiloto.wiki.web.transactions.ChangesTransaction;
 import net.unipiloto.wiki.web.transactions.ConcernTransaction;
 import net.unipiloto.wiki.web.transactions.ConstraintTransaction;
 import net.unipiloto.wiki.web.transactions.CriteriaTransaction;
@@ -231,6 +232,11 @@ public class FileManagerController {
                     SoftwareArchitectureTransaction.updateContent(oc, nc);
                 }
                 break;
+        }
+        if (action == 0) {
+            ChangesTransaction.deleteContent(oc);
+        } else {
+            ChangesTransaction.updateContent(oc, nc);
         }
     }
 

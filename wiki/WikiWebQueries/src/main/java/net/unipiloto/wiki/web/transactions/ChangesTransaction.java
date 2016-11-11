@@ -169,6 +169,36 @@ public class ChangesTransaction {
         }
     }
 
+    private static void updateOneChange(String id, String newContent, String pastConent) throws Exception {
+        Change change = JsonFactory.fromJson(selectById(id), Change.class);
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        try {
+            delete(id, conn);
+            try {
+                insert(
+                        change.getId(),
+                        pastConent,
+                        newContent,
+                        change.getIndividualID(),
+                        change.getUserID(),
+                        change.getDate(),
+                        change.getDpChanged(),
+                        change.isIsActive(),
+                        conn
+                );
+            } catch (IOException | URISyntaxException ex) {
+                Logger.getLogger(ChangesTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        } finally {
+            conn.close();
+        }
+    }
+
     public static String selectActualChange(String id, String dp) {
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
@@ -476,5 +506,49 @@ public class ChangesTransaction {
 
         }
         return id;
+    }
+
+    public static void deleteContent(String content) {
+        List<Change> l = JsonFactory.fromJsonArray(selectAll(), Change.class);
+        l.stream().forEach((a) -> {
+            try {
+                int i = 0;
+                if (a.getNewContent().contains(content)) {
+                    a.setNewContent(a.getNewContent().replace(content, ""));
+                    i++;
+                }
+                if (a.getPastContent().contains(content)) {
+                    a.setPastContent(a.getPastContent().replace(content, ""));
+                    i++;
+                }
+                if (i > 0) {
+                    updateOneChange(a.getId(), a.getNewContent(), a.getPastContent());
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(ChangesTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+    
+    public static void updateContent(String oc, String nc) {
+        List<Change> l = JsonFactory.fromJsonArray(selectAll(), Change.class);
+        l.stream().forEach((a) -> {
+            try {
+                int i = 0;
+                if (a.getNewContent().contains(oc)) {
+                    a.setNewContent(a.getNewContent().replace(oc, nc));
+                    i++;
+                }
+                if (a.getPastContent().contains(oc)) {
+                    a.setPastContent(a.getPastContent().replace(oc, nc));
+                    i++;
+                }
+                if (i > 0) {
+                    updateOneChange(a.getId(), a.getNewContent(), a.getPastContent());
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(ChangesTransaction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 }

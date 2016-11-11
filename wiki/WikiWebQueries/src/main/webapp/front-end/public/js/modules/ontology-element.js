@@ -714,7 +714,7 @@
                                     $scope.chkList[indexForEdit] = false;
                                     $scope.setSelectedKey(null, indexForEdit, null);
                                     indexForEdit = -1;
-                                }, false, 500);
+                                }, false, 2000);
                             }
                         }
                     });
@@ -738,33 +738,35 @@
                                 $scope.chkList[indexForEdit] = false;
                                 $scope.setSelectedKey(null, indexForEdit, null);
                                 indexForEdit = -1;
-                            }, false, 500);
+                            }, false, 2000);
                         }
                     }
                 }
             }
             function saveArrayOfImages(names, files, cb) {
-                if (files.length === 0) {
-                    cb();
-                } else {
-                    for (var i = 0; i < files.length; i++) {
-                        if (files[i] !== null) {
-                            var frmData = new FormData();
-                            frmData.append("name", names[i]);
-                            frmData.append("file", files[i]);
+                var j = 0;
+                for (var i = 0; i < files.length; i++) {
+                    if (files[i] !== null) {
+                        var frmData = new FormData();
+                        frmData.append("name", names[i]);
+                        frmData.append("file", files[i]);
 
-                            $.ajax({
-                                url: "/" + window.location.pathname.split("/")[1] + "/uploader/uploadFile",
-                                contentType: false,
-                                data: frmData,
-                                dataType: "json",
-                                method: "POST",
-                                processData: false
-                            }).done(function (data) {
-                                cb(data);
-                            });
-                        }
+                        $.ajax({
+                            url: "/" + window.location.pathname.split("/")[1] + "/uploader/uploadFile",
+                            contentType: false,
+                            data: frmData,
+                            dataType: "json",
+                            method: "POST",
+                            processData: false
+                        }).done(function (data) {
+                            cb(data);
+                        });
+                    } else {
+                        j++;
                     }
+                }
+                if (j === files.length) {
+                    cb();
                 }
             }
             function dataURIToBlob(data) {

@@ -38,20 +38,22 @@
                     $rootScope.$apply();
                     $rootScope.changes = response;
                     $rootScope.initTimeline();
-                    $.ajax({
-                        url: "/" + window.location.pathname.split("/")[1] + "/search/getDPForClass",
-                        data: {classType: $rootScope.selectAdmin.adminClass},
-                        dataType: "json",
-                        method: "POST"
-                    }).done(function (data) {
-                        if (data) {
-                            $scope.dps = [];
-                            $rootScope.$apply();
-                            $scope.dps = data;
-                            $rootScope.$apply();
-                            animateIn($("#select-admin-dp").parent().parent(), "fade-in", false);
-                        }
-                    });
+                    if ($rootScope.selectAdmin.adminClass !== "") {
+                        $.ajax({
+                            url: "/" + window.location.pathname.split("/")[1] + "/search/getDPForClass",
+                            data: {classType: $rootScope.selectAdmin.adminClass},
+                            dataType: "json",
+                            method: "POST"
+                        }).done(function (data) {
+                            if (data) {
+                                $scope.dps = [];
+                                $rootScope.$apply();
+                                $scope.dps = data;
+                                $rootScope.$apply();
+                                animateIn($("#select-admin-dp").parent().parent(), "fade-in", false);
+                            }
+                        });
+                    }
                 });
 
             };

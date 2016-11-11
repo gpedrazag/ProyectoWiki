@@ -1,30 +1,32 @@
 <div ng-controller="pctrlChangeRecovery" ng-if="change !== null" ng-init="init()">
-    <div zf-modal="" id="change-recovery-modal" class="large collapse" style="min-width: calc(100% - 80px);">
-        <div class="dark title-bar">
-            <div class="center title">{{change.id}}-{{translate(change.dpChanged)}}</div>
-            <span zf-close="" class="left"><a>Cerrar</a></span>
-            <span zf-close="" class="right" ng-click="enterEditMode()"><a>Modo Edición</a></span>
-        </div>
-        <div class="primary title-bar">
-            <div class="center title editor-mode" ng-click="turnTheChangeEffective(change.id, change.individualID, change.dpChanged, $event)">Volver un Cambio Efectivo</div>
-            <span class="left" ng-click="showBefore($event)" ng-if="changePos > 0"><a>Anterior</a></span>
-            <span class="right" ng-click="showAfter($event)" ng-if="changePos < (changes.length -1)"><a>Siguiente</a></span>
-        </div>
-        <div class="grid-block small-12 medium-12 large-12 vertical" style="max-height: 600px; overflow-y: auto;">
-            <div class="grid-block">
-                <div class="grid-block vertical">
-                    <div class="grid-block" style="padding: 5px; border-bottom: #6d6d6d solid 2px; width: 100%;">
-                        <h4 style="text-align: center; width: 100%;">Cambio</h4>
-                    </div>                
-                    <div class="grid-block" style="margin-top: 10px; padding: 10px;" id="before-div"></div>
-                </div>
+    <div zf-modal="" id="change-recovery-modal" class="large collapse" style="min-width: calc(100% - 80px); height:100%;">
+        <div style="max-height: 600px; overflow-y: auto;">
+            <div class="dark title-bar">
+                <div class="center title">{{change.id}}-{{translate(change.dpChanged)}}</div>
+                <span zf-close="" class="left"><a>Cerrar</a></span>
+                <span zf-close="" class="right" ng-click="enterEditMode()"><a>Modo Edición</a></span>
             </div>
-            <div class="grid-block">
-                <div class="grid-block vertical">
-                    <div class="grid-block" style="padding: 5px; border-bottom: #6d6d6d solid 2px; width: 100%;">
-                        <h4 style="text-align: center; width: 100%;">Actual</h4>
-                    </div> 
-                    <div class="grid-block" style="margin-top: 10px; padding: 10px;" id="after-div"></div>
+            <div class="primary title-bar">
+                <div class="center title editor-mode" ng-click="turnTheChangeEffective(change.id, change.individualID, change.dpChanged, $event)">Volver un Cambio Efectivo</div>
+                <span class="left" ng-click="showBefore($event)" ng-if="changePos > 0"><a>Anterior</a></span>
+                <span class="right" ng-click="showAfter($event)" ng-if="changePos < (changes.length - 1)"><a>Siguiente</a></span>
+            </div>
+            <div class="grid-block small-12 medium-12 large-12 vertical">
+                <div class="grid-block">
+                    <div class="grid-block vertical">
+                        <div class="grid-block" style="padding: 5px; border-bottom: #6d6d6d solid 2px; width: 100%;">
+                            <h4 style="text-align: center; width: 100%;">Cambio</h4>
+                        </div>                
+                        <div class="grid-block" style="margin-top: 10px; padding: 10px;" id="before-div"></div>
+                    </div>
+                </div>
+                <div class="grid-block">
+                    <div class="grid-block vertical">
+                        <div class="grid-block" style="padding: 5px; border-bottom: #6d6d6d solid 2px; width: 100%;">
+                            <h4 style="text-align: center; width: 100%;">Actual</h4>
+                        </div> 
+                        <div class="grid-block" style="margin-top: 10px; padding: 10px;" id="after-div"></div>
+                    </div>
                 </div>
             </div>
         </div>
