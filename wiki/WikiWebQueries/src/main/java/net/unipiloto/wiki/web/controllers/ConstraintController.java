@@ -15,17 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConstraintController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "description") String description,
-            @RequestParam(value = "rationale") String rationale,
-            @RequestParam(value = "keyword") String keyword) {
+            @RequestParam(value = "name", defaultValue = "-_-") String name,
+            @RequestParam(value = "description", defaultValue = "-_-") String description,
+            @RequestParam(value = "rationale", defaultValue = "-_-") String rationale,
+            @RequestParam(value = "keyword", defaultValue = "-_-") String keyword) {
+        boolean error = false;
         try {
             ConstraintTransaction.update(id, name, description, rationale, keyword);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

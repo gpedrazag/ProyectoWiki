@@ -8,13 +8,12 @@
                     </div>
                     <div class="small-4 medium-4 large-4">
                         <div class="switch" ng-if="haveEditPrivilege()">
-                            <input type="checkbox" id="edit-content1-{{$index}}" ng-model="chkList[$index]" />
+                            <input type="checkbox" id="edit-content1-{{$index}}" ng-model="chkList[$index]" ng-change="setSelectedKey(data.key, $index, data.content)"/>
                             <label for="edit-content1-{{$index}}"></label>
                         </div>
                     </div>
                 </div>
-                <div class="ontology-elem-content grid-block" id="neContent-{{$index}}" name="{{data.key}}">
-                    {{returnOrNotContent(data.content, 'neContent-' + $index)}}
+                <div class="ontology-elem-content grid-block neContent" id="neContent-{{$index}}" name="{{data.key}}" ng-init="returnOrNotContent(data.content, 'neContent-' + $index)">
                 </div>
             </div>
             <div class="ontology-elem-content grid-block overflow-visible" id="eContent-{{$index}}" style="display: none; position: relative;">
@@ -41,7 +40,7 @@
                             </div>                       
                         </div>         
                     </div>                
-                    <a class="button" ng-click="saveEdit('editor_content_' + $index, data.key)" style="background-color: #232323; margin-top: 15px; width: 100%">Guardar</a>
+                    <a class="button" ng-click="saveEdit('editor_content_' + $index, data.key, $event)" style="background-color: #232323; margin-top: 15px; width: 100%">Guardar</a>
                 </div>            
             </div>        
         </div>

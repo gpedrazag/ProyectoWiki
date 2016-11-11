@@ -1,9 +1,12 @@
 (function (angular) {
     var module = angular.module("pmod-ontology-element", ["pmod-ontology-sub-element"]);
-    module.controller("pctrlOntologyElement", ["$rootScope", "$scope", "$compile", "FoundationApi", function ($rootScope, $scope, $compile, FoundationApi) {
+    module.controller("pctrlOntologyElement", ["$rootScope", "$scope", "$compile", "FoundationApi", "$timeout", function ($rootScope, $scope, $compile, FoundationApi, $timeout) {
             var imageCount = 0;
             var selectedImage = null;
             var urlImages = [];
+            var selectedKeys = {};
+            var indexForEdit = -1;
+            var imagesForSearching = 0;
             $scope.showLocalImage = false;
             $scope.showURLImage = false;
             $scope.showExistentImage = false;
@@ -19,12 +22,12 @@
                 var obj = {};
                 try {
                     $rootScope.user.havePrivileges.forEach(function (privilege) {
-                       if(privilege.privilegeType === "edit" || privilege.privilegeType === "admin") {
-                           haveIt = true;
-                           throw obj;
-                       }
+                        if (privilege.privilegeType === "edit" || privilege.privilegeType === "admin") {
+                            haveIt = true;
+                            throw obj;
+                        }
                     });
-                } catch(obj) {                    
+                } catch (obj) {
                 }
 
                 return haveIt;
@@ -52,18 +55,18 @@
                 return {value: false, id: d.id};
             };
             $scope.returnOrNotContent = function (data, containerId) {
-                var container = document.getElementById(containerId);
-                if (container.innerHTML.indexOf("div") < 0 && container.innerHTML.indexOf("<p") < 0) {
-                    if (typeof data !== "undefined" && data.trim() !== "") {
-                        if (data.indexOf("div") === 1) {
-                            loadHTML(container, data, false);
-                        } else {
+                $timeout(function () {
+                    var container = document.getElementById(containerId);
+                    if (typeof data !== "undefined" && data.trim().indexOf("</div>") < 0) {
+                        if (data.trim() !== "") {
                             $(container).html($("<div>").html(data));
+                        } else {
+                            $(container).html($("<div>").html("No existe contenido"));
                         }
                     } else {
-                        $(container).html($("<div>").html("No existe contenido"));
+                        loadHTML(container, data, false);
                     }
-                }
+                }, false, 500);
             };
             $scope.getN = function (elemData, n) {
                 var array = new Array(Math.ceil(elemData.length / n));
@@ -178,7 +181,7 @@
                                 title: 'Atención!!!',
                                 content: 'El enlace suministrado está roto',
                                 position: "bottom-right",
-                                color: "dark",
+                                color: "alert",
                                 autoclose: "3000"});
                         });
                         imgHTML.load(function () {
@@ -191,35 +194,48 @@
                         fileName.placeholder = "Debe agregar un nombre al archivo";
                     }
                 } else {
-                    var name = selectedImage.split("-")[1];
-                    var image = null;
-                    var obj = {};
-                    try {
-                        $scope.images.forEach(function (img) {
-                            if (img.name === name) {
-                                image = img;
-                                throw obj;
-                            }
-                        });
-                    } catch (obj) {
-                    }
-                    var img = null;
-                    if ($scope.type === "url") {
-                        img = ""
-                                + "<img name=\"" + image.name + "|url\" src=\"" + image.base64 + "\"  />";
+                    if (selectedImage && selectedImage !== "") {
+                        var name = selectedImage.split("-")[1];
+                        var image = null;
+                        var obj = {};
+                        try {
+                            $scope.images.forEach(function (img) {
+                                if (img.name === name) {
+                                    image = img;
+                                    throw obj;
+                                }
+                            });
+                        } catch (obj) {
+                        }
+                        var img = null;
+                        if ($scope.type === "url") {
+                            img = ""
+                                    + "<img name=\"" + image.name + "|url\" src=\"" + image.base64 + "\"  />";
+                        } else {
+                            img = ""
+                                    + "<img name=\"" + image.name + "|exists\" src=\"" + image.base64 + "\"  />";
+                        }
+                        tinymce.get($scope.selected.editor).insertContent(img);
+                        FoundationApi.closeActiveElements();
                     } else {
-                        img = ""
-                                + "<img name=\"" + image.name + "|exists\" src=\"" + image.base64 + "\"  />";
+                        FoundationApi.publish("main-notifications", {
+                            title: 'Atención!!!',
+                            content: 'No ha seleccionado una imagen',
+                            position: "bottom-right",
+                            color: "alert",
+                            autoclose: "3000"});
                     }
-                    tinymce.get($scope.selected.editor).insertContent(img);
-                    FoundationApi.closeActiveElements();
                 }
             };
             $scope.translate = function (key) {
                 return translate(key);
             };
-            $scope.saveEdit = function (editorId, key) {
-                var html = $("<div style='width:100%'>" + tinymce.get(editorId).getContent() + "</div>");
+            $scope.saveEdit = function (editorId, key, event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                var editorContent = tinymce.get(editorId).getContent();
+                var html = $(editorContent);
                 var names = [];
                 var files = [];
                 var imageRegisters = [];
@@ -261,7 +277,15 @@
                         files.push(null);
                     }
                 });
-                saveConfiguration(key, $(html)[0].outerHTML);
+                if (html.length > 1) {
+                    var newHtml = $("<div>");
+                    $.each(html, function (i, elem) {
+                        newHtml.append(elem);
+                    });
+                    html = newHtml;
+                }
+                saveChanges(key, html[0].outerHTML);
+                saveConfiguration(key, html[0].innerHTML, reference);
                 saveArrayOfImages(names, files, function (data) {
                     var go = false;
                     if (typeof data === "undefined") {
@@ -270,12 +294,12 @@
                         go = true;
                     }
                     if (go) {
-                        var index = new Number(editorId.split("_")[2]);
-                        loadHTML(document.getElementById("neContent-" + index), html, false);
-                        $scope.chkList[index] = false;
                         saveImageRegisters(imageRegisters);
                     }
                 });
+                var index = new Number(editorId.split("_")[2]);
+                loadHTML(document.getElementById("neContent-" + index), html[0].outerHTML, false);
+                indexForEdit = index;
             };
             $scope.getViewerRows = function () {
                 return new Array(Math.ceil($scope.images.length / 3));
@@ -286,40 +310,6 @@
             $scope.showURLImages = function () {
                 getViewerURLImages();
             };
-            $scope.$watchCollection("chkList", function (nl, ol) {
-                var i = 0;
-                var obj = {};
-                var elemIn = null;
-                var elemOut = null;
-                var isEditorIn = false;
-                try
-                {
-                    nl.forEach(function (bool) {
-                        if (bool !== ol[i]) {
-                            if (bool) {
-                                elemIn = document.getElementById("eContent-" + i);
-                                elemOut = document.getElementById("neContent-" + i);
-                                isEditorIn = true;
-                            } else {
-                                elemIn = document.getElementById("neContent-" + i);
-                                elemOut = document.getElementById("eContent-" + i);
-                            }
-                            animate(
-                                    {in: elemIn, out: elemOut},
-                                    {in: "fade-in", out: "fade-out"},
-                                    false
-                                    );
-                            if (isEditorIn) {
-                                showContentInEditor(elemOut.innerHTML, "editor_content_" + i);
-                            }
-                            throw obj;
-                        }
-                        i++;
-                    });
-                } catch (obj) {
-                }
-
-            });
             $scope.goTo = function (id, reference, elems) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
@@ -349,6 +339,35 @@
                         $rootScope.$apply();
                     }
                 });
+            };
+            $scope.setSelectedKey = function (key, i, content) {
+                if (key !== null && content !== null) {
+                    selectedKeys[key] = {
+                        "selected": $scope.chkList[i],
+                        "content": (selectedKeys[key]) ? selectedKeys[key].content : content
+                    };
+                }
+                var elemIn = null;
+                var elemOut = null;
+                var isEditorIn = false;
+
+                if ($scope.chkList[i]) {
+                    elemIn = document.getElementById("eContent-" + i);
+                    elemOut = document.getElementById("neContent-" + i);
+                    isEditorIn = true;
+                } else {
+                    elemIn = document.getElementById("neContent-" + i);
+                    elemOut = document.getElementById("eContent-" + i);
+                }
+                animate(
+                        {in: elemIn, out: elemOut},
+                        {in: "fade-in", out: "fade-out"},
+                        false
+                        );
+                if (isEditorIn) {
+                    showContentInEditor(elemOut.innerHTML, "editor_content_" + i);
+
+                }
             };
 
             function getElemReference() {
@@ -392,13 +411,17 @@
                 var container = document.getElementById(containerId);
                 initTinyMCE(containerId);
                 if (typeof data !== "undefined" && data.trim() !== "") {
-                    if (data.indexOf("div") < 0 || data.indexOf("<p") < 0) {
+                    if (data.trim().indexOf("</div>") < 0) {
                         loadHTML(container, data, true);
                     } else {
-                        tinymce.get(containerId).setContent("<div>" + data + "</div>");
+                        $timeout(function () {
+                            tinymce.get(containerId).setContent("<div>" + data + "</div>")
+                        }, false, 2000);
                     }
                 } else {
-                    tinymce.get(containerId).setContent("<div>No existe contenido</div>");
+                    $timeout(function () {
+                        tinymce.get(containerId).setContent("<div>No existe contenido</div>")
+                    }, false, 2000);
                 }
             }
             function saveImageRegisters(registers) {
@@ -411,45 +434,126 @@
                 });
 
             }
-            function saveConfiguration(key, content) {
+            function getImagesAndPos(html) {
+                var divs = html.find("div");
+                var arr = [];
+                var i = 0;
+                var pos = 0;
+                while (divs[i]) {
+                    var spans = $(divs[i]).find("span");
+                    var j = 0;
+                    if (spans[j]) {
+                        while (spans[j]) {
+                            var span = $(spans[j]);
+                            if (span.attr("img")) {
+                                var trace = "";
+                                while (!span.parent().is("div")) {
+                                    span = span.parent();
+                                    trace += span.prop("nodeName") + " ";
+                                }
+                                arr.push({
+                                    pos: pos,
+                                    name: $(spans[j]).attr("img"),
+                                    trace: trace
+                                });
+                            }
+                            j++;
+                        }
+                    } else {
+                        pos--;
+                    }
+                    i++;
+                    pos++;
+                }
+                return arr;
+            }
+            function saveChanges(key, content) {
+                var pastContent = selectedKeys[key].content;
+                var html1 = $(
+                        pastContent.indexOf("<div") >= 0
+                        ? pastContent
+                        : "<div>" + pastContent + "</div>"
+                        );
+                var html2 = $(content);
+                var go = true;
+
+                if (html1[0].innerText.trim() === html2[0].innerText.trim()) {
+                    var imagesPos1 = getImagesAndPos(html1);
+                    var imagesPos2 = getImagesAndPos(html2);
+                    if (imagesPos1.length === imagesPos2.length && imagesPos1.length === 0) {
+                        go = false;
+                    } else if (imagesPos1.length === imagesPos2.length) {
+                        var i = 0;
+                        while (imagesPos1[i]) {
+                            if (
+                                    imagesPos1[i].pos !== imagesPos2[i].pos ||
+                                    imagesPos1[i].name !== imagesPos2[i].name ||
+                                    imagesPos1[i].trace !== imagesPos2[i].trace
+                                    ) {
+                                break;
+                            }
+                            i++;
+                        }
+                        if (i === imagesPos1.length) {
+                            go = false;
+                        }
+                    }
+                }
+                if (go) {
+                    var date = new Date();
+                    $.ajax({
+                        url: "/" + window.location.pathname.split("/")[1] + "/change/insert",
+                        method: "POST",
+                        data: {
+                            pastContent: selectedKeys[key].content,
+                            newContent: content,
+                            indvId: $rootScope.elemTypeId,
+                            userID: $rootScope.user.id,
+                            date: "" + date.getTime(),
+                            dpChanged: key
+                        }
+                    }).done(function (id) {
+                        if (typeof id !== "undefined" && id !== "") {
+                            $.ajax({
+                                url: "/" + window.location.pathname.split("/")[1] + "/change/updateChange",
+                                method: "POST",
+                                data: {
+                                    id: id,
+                                    indvID: $rootScope.elemTypeId,
+                                    dp: key
+                                }
+                            });
+                        }
+                    });
+
+                }
+                selectedKeys[key].content = content;
+            }
+            function saveConfiguration(key, content, reference) {
                 var obj = {};
-                var url = "";
                 obj["id"] = $rootScope.elemTypeId;
                 $rootScope.elemData.forEach(function (elem) {
                     if (elem.key !== "reference") {
                         obj[elem.key] = elem.key === key ? content : "-_-";
                     }
                 });
-                if ($rootScope.elemType === "alternative") {
-                    url = "/Alternative/update";
-                } else if ($rootScope.elemType === "softwarearchitecture") {
-                    url = "/SoftwareArchitecture/update";
-                } else if ($rootScope.elemType === "artifact") {
-                    url = "/Artifact/update";
-                } else if ($rootScope.elemType === "qualityattributestage") {
-                    url = "/QualityAttributeStage/update";
-                } else if ($rootScope.elemType === "criteria") {
-                    url = "/Criteria/update";
-                } else if ($rootScope.elemType === "decision") {
-                    url = "/Decision/update";
-                } else if ($rootScope.elemType === "evaluation") {
-                    url = "/Evaluation/update";
-                } else if ($rootScope.elemType === "functionalrequeriment") {
-                    url = "/FunctionalRequeriment/update";
-                } else if ($rootScope.elemType === "responsible") {
-                    url = "/Responsible/update";
-                }
                 $.ajax({
-                    url: "/" + window.location.pathname.split("/")[1] + url,
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "update",
                     method: "POST",
                     data: obj
-                }).done(function () {
-
                 });
             }
             function loadHTML(container, html, isEditor) {
-                var images = getImages(html);
                 html = $(html);
+                if (html.length > 1) {
+                    var newHtml = $("<div>");
+                    $.each(html, function (i, elem) {
+                        newHtml.append(elem);
+                    });
+                    html = newHtml;
+                }
+                var images = getImages(html);
+                imagesForSearching = images.length;
                 images.forEach(function (img) {
                     searchImage(html, img, container, isEditor);
                 });
@@ -457,6 +561,13 @@
                     $(container).html(html.prop("outerHTML"));
                 } else {
                     tinymce.get(container.id).setContent(html.prop("outerHTML"));
+                }
+                if (imagesForSearching === 0) {
+                    $timeout(function () {
+                        $scope.chkList[indexForEdit] = false;
+                        $scope.setSelectedKey(null, indexForEdit, null);
+                        indexForEdit = -1;
+                    }, false, 500);
                 }
             }
             function getViewerImages() {
@@ -549,9 +660,8 @@
                 }
             }
             function getImages(html) {
-                var c = $("<div style='width:100%'>" + $(html)[0].outerHTML + "</div>");
                 var images = [];
-                c.find("span").each(function (i, span) {
+                html.find("span").each(function (i, span) {
                     if (span.attributes[0].localName === "img") {
                         images.push(span);
                     }
@@ -594,6 +704,14 @@
                                 i++;
                             });
                             $(container).html(html);
+                            imagesForSearching--;
+                            if (imagesForSearching === 0) {
+                                $timeout(function () {
+                                    $scope.chkList[indexForEdit] = false;
+                                    $scope.setSelectedKey(null, indexForEdit, null);
+                                    indexForEdit = -1;
+                                }, false, 500);
+                            }
                         }
                     });
                 } else {
@@ -610,6 +728,14 @@
                             i++;
                         });
                         $(container).html(html);
+                        imagesForSearching--;
+                        if (imagesForSearching === 0) {
+                            $timeout(function () {
+                                $scope.chkList[indexForEdit] = false;
+                                $scope.setSelectedKey(null, indexForEdit, null);
+                                indexForEdit = -1;
+                            }, false, 500);
+                        }
                     }
                 }
             }

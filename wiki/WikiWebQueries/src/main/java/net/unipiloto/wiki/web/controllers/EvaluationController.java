@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class EvaluationController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id,
-            @RequestParam(value = "pros") String pros,
-            @RequestParam(value = "cons") String cons,
-            @RequestParam(value = "valoration") String valoration) {
+    public boolean update(@RequestParam(value = "id") String id,
+            @RequestParam(value = "pros", defaultValue = "-_-") String pros,
+            @RequestParam(value = "cons", defaultValue = "-_-") String cons,
+            @RequestParam(value = "valoration", defaultValue = "-_-") String valoration) {
+        boolean error = false;
         try {
             EvaluationTransaction.update(id, pros, cons, valoration);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

@@ -1,0 +1,37 @@
+<div>
+    <div ng-if="adminOpts === 'selected'" ng-init="init()" class="grid-block vertical">
+        <div class="grid-block">
+            <label for="select-admin-class" style="width: 100%;">
+                Clases
+                <select id="select-admin-class" ng-model="selectAdmin.adminClass" ng-change="selectAdminClass()">
+                    <option value=""></option>
+                    <option value="Alternative">Alternativas</option>
+                    <option value="Artifact">Artefactos</option>
+                    <option value="Assumption">Supuestos</option>
+                    <option value="Concern">Preocupaciones</option>
+                    <option value="Constraint">Restricciones</option>
+                    <option value="Criteria">Criterios</option>
+                    <option value="Decision">Decisiones</option>
+                    <option value="Evaluation">Evaluaciones</option>
+                    <option value="FunctionalRequeriment">Requerimientos Funcionales</option>
+                    <option value="QualityAttributeStage">Atributos de Calidad</option>
+                    <option value="Responsible">Responsables</option>
+                    <option value="SoftwareArchitecture">Arquitecturas de Software</option>
+                </select>
+            </label>
+        </div>
+        <div class="grid-block" style="display: none;">
+            <label for="select-admin-dp" style="width: 100%;">
+                Propiedades
+                <select id="select-admin-dp" ng-model="selectAdmin.adminDP" ng-change="selectAdminDP()">
+                    <option value=""></option>
+                    <option ng-repeat="dp in dps track by $index" value="{{dp}}" ng-if="dp !== 'id' && translate(dp) !== null">{{translate(dp)}}</option>
+                </select>
+            </label>
+        </div>
+        <div class="grid-block">
+            <div style="margin-top: 10px; min-height: 600px; width: 100%;" id="general-time-line"></div>
+        </div>
+    </div>
+    <pdirec:change:recovery></pdirec:change:recovery>
+</div>

@@ -15,18 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class CriteriaController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "keyword") String keyword,
-            @RequestParam(value = "description") String description) {
+            @RequestParam(value = "keyword", defaultValue = "-_-") String keyword,
+            @RequestParam(value = "description", defaultValue = "-_-") String description) {
+        boolean error = false;
         try {
             CriteriaTransaction.update(
                     id,
                     keyword,
                     description);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

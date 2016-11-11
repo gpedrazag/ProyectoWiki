@@ -15,14 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ResponsibleController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "name") String name) {
+            @RequestParam(value = "name", defaultValue = "-_-") String name) {
+        boolean error = false;
         try {
             ResponsibleTransaction.update(id, name);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

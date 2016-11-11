@@ -1,6 +1,6 @@
 (function (angular) {
-    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap", "pmodGraph"]);
-    module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService) {
+    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap", "pmodGraph", "pmodAdmin"]);
+    module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", "$timeout", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService, $timeout) {
             $scope.inputSearchString = "";
             $scope.drilldownSelected = "";
             $scope.resourcesSelected = "";
@@ -9,9 +9,25 @@
             $rootScope.rImagesDoCount = 0;
             $rootScope.selectedContext = null;
             $rootScope.graphSelected = "selected";
+            $rootScope.adminOpts = "";
             $rootScope.dcsAltMapSelected = "";
             $rootScope.user = null;
 
+            $scope.haveEditPrivilege = function () {
+                var haveIt = false;
+                var obj = {};
+                try {
+                    $rootScope.user.havePrivileges.forEach(function (privilege) {
+                        if (privilege.privilegeType === "edit" || privilege.privilegeType === "admin") {
+                            haveIt = true;
+                            throw obj;
+                        }
+                    });
+                } catch (obj) {
+                }
+
+                return haveIt;
+            };
             $scope.onDrilldown = function (event) {
                 if (event) {
                     event.stopPropagation();
@@ -20,6 +36,7 @@
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "";
+                $rootScope.adminOpts = "";
                 $rootScope.rImages = [];
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
@@ -30,6 +47,9 @@
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-drilldown");
+                $timeout(function(){
+                    $rootScope.$apply();
+                },false, 500);
             };
             $scope.onGraph = function (event) {
                 if (event) {
@@ -39,6 +59,7 @@
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "selected";
+                $rootScope.adminOpts = "";
                 $rootScope.rImages = [];
                 animate(
                         {in: $("#main-content-graph"), out: $rootScope.selectedContext},
@@ -46,6 +67,9 @@
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-graph");
+                $timeout(function(){
+                    $rootScope.$apply();
+                },false, 500);
             };
             $scope.onDcsAltMap = function (event) {
                 if (event) {
@@ -55,6 +79,7 @@
                 $scope.resourcesSelected = "";
                 $rootScope.dcsAltMapSelected = "selected";
                 $rootScope.graphSelected = "";
+                $rootScope.adminOpts = "";
                 $rootScope.rImages = [];
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
@@ -65,6 +90,9 @@
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-dcsAltMap");
+                $timeout(function(){
+                    $rootScope.$apply();
+                },false, 500);
             };
             $scope.onResources = function (event) {
                 if (event) {
@@ -75,6 +103,7 @@
                 $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "selected";
                 $rootScope.graphSelected = "";
+                $rootScope.adminOpts = "";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
@@ -84,7 +113,33 @@
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-resources");
+                $timeout(function(){
+                    $rootScope.$apply();
+                },false, 500);
                 getViewerImages();
+            };
+            $scope.onAdminOpts = function (event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                $rootScope.rImagesDoCount = 0;
+                $scope.drilldownSelected = "";
+                $rootScope.dcsAltMapSelected = "";
+                $scope.resourcesSelected = "";
+                $rootScope.adminOpts = "selected";
+                $rootScope.graphSelected = "";
+                if ($rootScope.selectedContext === null) {
+                    $rootScope.selectedContext = $("#main-content-graph");
+                }
+                animate(
+                        {in: $("#main-content-admin"), out: $rootScope.selectedContext},
+                        {in: "slide-in-left", out: "slide-out-right"},
+                        true
+                        );
+                $rootScope.selectedContext = $("#main-content-admin");
+                $timeout(function(){
+                    $rootScope.$apply();
+                },false, 500);
             };
             $scope.outHoverMenuOption = function (event) {
                 if (event) {
@@ -182,13 +237,13 @@
                     }, 600);
                 }
             });
-            $scope.exitSession = function() {
+            $scope.exitSession = function () {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + "/session/closeSession",
                     method: "POST",
                     dataType: "json"
                 });
-                window.location.href =  "/" + window.location.pathname.split("/")[1];
+                window.location.href = "/" + window.location.pathname.split("/")[1];
             };
 
             function getDomElemFromMatches(matches, find) {

@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class DecisionController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "arguments") String arguments,
-            @RequestParam(value = "state") String state
+            @RequestParam(value = "name", defaultValue = "-_-") String name,
+            @RequestParam(value = "arguments", defaultValue = "-_-") String arguments,
+            @RequestParam(value = "state", defaultValue = "-_-") String state
     ) {
+        boolean error = false;
         try {
             DecisionTransaction.update(
                     id,
@@ -29,8 +30,10 @@ public class DecisionController {
                     state
             );
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

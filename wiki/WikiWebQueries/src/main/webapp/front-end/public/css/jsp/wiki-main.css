@@ -85,35 +85,47 @@
 #exit-session:hover {
     cursor: pointer;
 }
+#admin-opts {
+    background-image:url("../../../resources/img/admin.png");
+    height:32px;
+    width:32px;
+    background-size: contain;
+    background-repeat: no-repeat;    
+}
 #ontograph {
     background-image:url("../../../resources/img/graph.png");
     height:32px;
     width:32px;
     background-size: contain;
+    background-repeat: no-repeat; 
 }
 #dcs-alt-map {
     background-image:url("../../../resources/img/table.png");
     height:32px;
     width:32px;
     background-size: contain;
+    background-repeat: no-repeat; 
 }
 #drilldown {
     background-image:url("../../../resources/img/business/png/cube.png");
     height:32px;
     width:32px;
     background-size: contain;
+    background-repeat: no-repeat; 
 }
 #searching {
     background-image:url("../../../resources/img/business/png/loupe.png");
     height:32px;
     width:32px;
     background-size: contain;
+    background-repeat: no-repeat; 
 }
 #resources {
     background-image:url("../../../resources/img/business/png/eye.png");
     height:32px;
     width:32px;
     background-size: contain;
+    background-repeat: no-repeat; 
 }
 #content {
     margin-top: 30px;
@@ -264,6 +276,9 @@ i.insert-image {
     width: 100%;
     height: 600px;
 }
+.neContent * {
+    width: 100%;
+}
 
 @media(max-width:745px) and (min-width:641px) {
     .action-sheet {
@@ -300,4 +315,19 @@ i.insert-image {
         -webkit-transform: translate(-80%, 110%);
         transform: translate(-80%, 110%);
     }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .hidden-small {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .hidden-medium {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .hidden-large {
+    display: none !important;
+  }
 }

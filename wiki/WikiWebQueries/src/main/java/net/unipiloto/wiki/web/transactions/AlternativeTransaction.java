@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.unipiloto.wiki.web.entities.Alternative;
 import net.unipiloto.wiki.web.others.OntologyTools;
 import org.boon.json.JsonFactory;

@@ -15,18 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class QualityAttributeController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "description") String description) {
+            @RequestParam(value = "name", defaultValue = "-_-") String name,
+            @RequestParam(value = "description", defaultValue = "-_-") String description) {
+        boolean error = false;
         try {
             QualityAttributeTransaction.update(
                     id,
                     name,
                     description);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

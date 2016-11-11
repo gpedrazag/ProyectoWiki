@@ -7,10 +7,14 @@ import net.unipiloto.wiki.web.others.Match;
 import net.unipiloto.wiki.web.others.OntologyTools;
 import org.boon.json.JsonFactory;
 import org.openrdf.query.BindingSet;
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
+import org.openrdf.query.QueryLanguage;
 import org.openrdf.query.TupleQuery;
 import org.openrdf.query.TupleQueryResult;
 import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
+import org.openrdf.repository.RepositoryException;
 
 public class GeneralTransactions {
 
@@ -78,6 +82,63 @@ public class GeneralTransactions {
         }
 
         return json;
+    }
+
+    public static String getClassByIndvID(String id) {
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        String classType = "";
+        try {
+            TupleQuery tq = null;
+            tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?classType WHERE { \n"
+                    + " <http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?classType .\n"
+                    + " ?classType <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class>\n"
+                    + "}"
+            );
+
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                classType = bs.getValue("classType").stringValue().split("#")[1];
+            }
+        } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | NumberFormatException ex) {
+            conn.rollback();
+        } finally {
+            conn.close();
+        }
+
+        return classType;
+    }
+
+    public static String getDPForClass(String classType) {
+        Repository repo = OntologyTools.getInstance();
+        repo.initialize();
+        RepositoryConnection conn = repo.getConnection();
+        List<String> dps = new ArrayList();
+        try {
+            TupleQuery tq = null;
+            tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT DISTINCT ?dp\n"
+                    + "WHERE { \n"
+                    + "?dp <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .\n"
+                    + "?dp <http://www.w3.org/2000/01/rdf-schema#domain>  <http://www.semanticweb.org/sa#" + classType + "> \n"
+                    + "} ORDER BY ?dp"
+            );
+
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+                BindingSet bs = result.next();
+                dps.add(bs.getValue("dp").stringValue().split("#")[1]);
+            }
+        } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | NumberFormatException ex) {
+            conn.rollback();
+        } finally {
+            conn.close();
+        }
+
+        return JsonFactory.toJson(dps);
     }
 
     public static int searchCount(String pattern, RepositoryConnection connection) {

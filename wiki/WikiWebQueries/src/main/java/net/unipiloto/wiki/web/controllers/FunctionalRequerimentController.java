@@ -15,18 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class FunctionalRequerimentController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(
+    public boolean update(
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "name") String name,
-            @RequestParam(value = "actor") String actor,
-            @RequestParam(value = "description") String description,
-            @RequestParam(value = "input") String input,
-            @RequestParam(value = "output") String output,
-            @RequestParam(value = "state") String state,
-            @RequestParam(value = "utility") String utility,
-            @RequestParam(value = "expectative") String expectative,
-            @RequestParam(value = "response") String response,
-            @RequestParam(value = "context") String context) {
+            @RequestParam(value = "name", defaultValue = "-_-") String name,
+            @RequestParam(value = "actor", defaultValue = "-_-") String actor,
+            @RequestParam(value = "description", defaultValue = "-_-") String description,
+            @RequestParam(value = "input", defaultValue = "-_-") String input,
+            @RequestParam(value = "output", defaultValue = "-_-") String output,
+            @RequestParam(value = "state", defaultValue = "-_-") String state,
+            @RequestParam(value = "utility", defaultValue = "-_-") String utility,
+            @RequestParam(value = "expectative", defaultValue = "-_-") String expectative,
+            @RequestParam(value = "response", defaultValue = "-_-") String response,
+            @RequestParam(value = "context", defaultValue = "-_-") String context) {
+        boolean error = false;
         try {
             FunctionalRequerimentTransaction.update(
                     id, 
@@ -41,8 +42,10 @@ public class FunctionalRequerimentController {
                     response, 
                     context);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)

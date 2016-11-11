@@ -25,4 +25,16 @@ public class SearchController
     {
         return GeneralTransactions.searchCount(pattern, OntologyTools.getInstance().getConnection());
     }
+    
+    @RequestMapping(value = "getDPForClass", method = RequestMethod.POST)
+    public String getDPForClass(@RequestParam(value = "classType") String classType)
+    {
+        return GeneralTransactions.getDPForClass(classType);
+    }
+    
+    @RequestMapping(value = "getClassByIndvID", method = RequestMethod.POST)
+    public String getClassByIndvID(@RequestParam(value = "id") String id)
+    {
+        return GeneralTransactions.getClassByIndvID(id);
+    }
 }

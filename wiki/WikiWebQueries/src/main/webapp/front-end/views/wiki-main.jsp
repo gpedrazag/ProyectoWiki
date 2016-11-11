@@ -20,6 +20,8 @@
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/resources.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/dcsAltMap.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/graph.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/adminChangeRecovery.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/adminTools.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/modules/wiki-main.js" type="text/javascript"></script>
     </head>
     <body ng-controller="pctrlViews">

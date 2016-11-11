@@ -15,12 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class AssumptionController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void update(@RequestParam(value = "id") String id, @RequestParam(value = "description") String description, @RequestParam(value = "source") String source) {
+    public boolean update(
+            @RequestParam(value = "id") String id, 
+            @RequestParam(value = "description", defaultValue = "-_-") String description, 
+            @RequestParam(value = "source", defaultValue = "-_-") String source) {
+        boolean error = false;
         try {
             AssumptionTransaction.update(id, description, source);
         } catch (IOException | URISyntaxException ex) {
+            error = true;
             Logger.getLogger(ArtifactController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return error;
     }
     
     @RequestMapping(value = "/selectById", method = RequestMethod.POST)
