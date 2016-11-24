@@ -1,6 +1,8 @@
 (function (angular) {
     var module = angular.module("pmodAdmin", ["pmodChangeRecovery"]);
-    module.controller("pctrlAdmin", ["$scope", "$rootScope", "FoundationModal", "$timeout", function ($scope, $rootScope, FoundationModal, $timeout) {
+    module.controller("pctrlAdmin", [
+        "$scope", "$rootScope", "FoundationModal", "$timeout", "AnimationService", "TranslatorService",
+        function ($scope, $rootScope, FoundationModal, $timeout, AnimationService, TranslatorService) {
             $rootScope.changes = [];
             $rootScope.change = null;
             $rootScope.changePos = -1;
@@ -25,7 +27,7 @@
             };
             $rootScope.selectAdminClass = function () {
                 if ($rootScope.selectAdmin.adminClass === "") {
-                    animateOut($("#select-admin-dp").parent().parent(), "fade-out", false);
+                    AnimationService.animateOut($("#select-admin-dp").parent().parent(), "fade-out", false);
                     $rootScope.selectAdmin.adminDP = "";
                 }
                 $.ajax({
@@ -50,7 +52,7 @@
                                 $rootScope.$apply();
                                 $scope.dps = data;
                                 $rootScope.$apply();
-                                animateIn($("#select-admin-dp").parent().parent(), "fade-in", false);
+                                AnimationService.animateIn($("#select-admin-dp").parent().parent(), "fade-in", false);
                             }
                         });
                     }
@@ -76,7 +78,7 @@
                 }
             };
             $scope.translate = function (key) {
-                return translate(key);
+                return TranslatorService.translate(key);
             };
             $rootScope.initTimeline = function () {
                 var items = [];

@@ -1,6 +1,11 @@
 (function (angular) {
     var module = angular.module("pmodDcsAltMap", []);
-    module.controller("pctrlDcsAltMap", ["$scope", "$rootScope", "QuickActionListService", function ($scope, $rootScope, QuickActionListService) {
+    module.controller("pctrlDcsAltMap", [
+        "$scope",
+        "$rootScope",
+        "AnimationService",
+        "ConsultCarouselService",
+        function ($scope, $rootScope, AnimationService, ConsultCarouselService) {
             $scope.dcsAltMatrix = [];
             $scope.data = {
                 selectedAlternative: null
@@ -39,54 +44,20 @@
                 });
             };
             $scope.goTo = function () {
-                $.ajax({
-                    url: "/" + window.location.pathname.split("/")[1] + selectedReference + "selectById",
-                    method: "POST",
-                    dataType: "json",
-                    data: {id: selectedId}
-                }).done(function (elem) {
-                    if (elem !== null) {
-                        $rootScope.elemData = [];
-                        $rootScope.relatedElems = [];
-                        $rootScope.elemTypeId = "";
-                        $rootScope.dcsAltMapSelected = "";
-                        $rootScope.$apply();
-                        Object.keys(elem).forEach(function (key) {
-                            if (key !== "id") {
-                                if (typeof elem[key] !== "object") {
-                                    if (key !== "did") {
-                                        $rootScope.elemData.push({key: key, content: elem[key]});
-                                    }
-                                } else {
-                                    $rootScope.relatedElems.push({key: key, content: (typeof elem[key].length === "undefined" ? [elem[key]] : elem[key])});
-                                }
-                            } else {
-                                $rootScope.elemTypeId = elem[key];
-                            }
+                ConsultCarouselService.goTo(
+                        selectedId,
+                        selectedReference,
+                        $("#main-content-dcsAltMap"),
+                        function () {
+                            $rootScope.dcsAltMapSelected = "";
                         });
-                        $rootScope.chkList = [];
-                        $rootScope.chkList = getCheckedStructure();
-                        $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
-                        $rootScope.$apply();
-                        animate(
-                                {in: $rootScope.selectedContext, out: $("#main-content-dcsAltMap")},
-                                {in: "fade-in", out: "fade-out"},
-                                false
-                                );
-                        QuickActionListService.addAction(
-                                "action:" + $rootScope.elemTypeId,
-                                "/" + window.location.pathname.split("/")[1] + selectedReference + "selectById",
-                                translate(selectedReference) + " " + $rootScope.elemTypeId,
-                                $rootScope.elemType);
-                    }
-                });
             };
             $scope.showContent = function (i, id, content, reference) {
                 var cover = document.getElementById("tbl-cover-" + i);
                 if (cover) {
                     selectedId = id;
                     selectedReference = reference;
-                    animateIn(cover, "fade-in", false);
+                    AnimationService.animateIn(cover, "fade-in", false);
                     document.getElementById("tbl-tooltip-" + i + "-id").innerHTML = id;
                     document.getElementById("tbl-tooltip-" + i + "-content").innerHTML = content;
                 }
@@ -94,7 +65,7 @@
             $scope.hideContent = function (id) {
                 var cover = document.getElementById(id);
                 if (cover) {
-                    animateOut(cover, "fade-out", false);
+                    AnimationService.animateOut(cover, "fade-out", false);
                 }
             };
 
@@ -122,7 +93,7 @@
                         try {
                             var responseObjects = getObjectKeys(response);
                             var j = 0;
-                            var isResponse = false; 
+                            var isResponse = false;
                             var obj2 = {};
                             try {
                                 responseObjects.forEach(function (object) {
@@ -201,15 +172,6 @@
                     }
                     $scope.dcsAltMatrix = subMatrices;
                 }
-            }
-            function getCheckedStructure() {
-                var arr = [];
-                $rootScope.elemData.forEach(function (data) {
-                    if (data.key !== "reference" && data.key !== "did") {
-                        arr.push(false);
-                    }
-                });
-                return arr;
             }
         }]);
     module.directive("pdirecDcsAltMap", function () {

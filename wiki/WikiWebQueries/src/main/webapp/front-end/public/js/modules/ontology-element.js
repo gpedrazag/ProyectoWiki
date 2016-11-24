@@ -1,22 +1,75 @@
 (function (angular) {
     var module = angular.module("pmod-ontology-element", ["pmod-ontology-sub-element"]);
-    module.controller("pctrlOntologyElement", ["$rootScope", "$scope", "$compile", "FoundationApi", "$timeout", function ($rootScope, $scope, $compile, FoundationApi, $timeout) {
+    module.controller("pctrlOntologyElement", [
+        "$rootScope",
+        "$scope",
+        "$compile",
+        "FoundationApi",
+        "$timeout",
+        "$filter",
+        "AnimationService",
+        "TranslatorService",
+        "GeneralService",
+        "ImageService",
+        "ConsultCarouselService",
+        function ($rootScope, $scope, $compile, FoundationApi, $timeout, $filter, AnimationService, TranslatorService, GeneralService, ImageService, ConsultCarouselService) {
             var imageCount = 0;
             var selectedImage = null;
             var urlImages = [];
             var selectedKeys = {};
             var indexForEdit = -1;
             var imagesForSearching = 0;
+            var reference = "";
             $scope.showLocalImage = false;
             $scope.showURLImage = false;
             $scope.showExistentImage = false;
             $scope.type = null;
             $scope.images = [];
             $scope.tinyMCE = [];
+            $scope.pos = 0;
             $scope.selected = {editor: "", type: "", file: null};
             $scope.haveSolutions = {};
             $rootScope.subElems = [];
 
+            $scope.init = function () {
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + $rootScope.actualReference + "selectAll",
+                    method: "POST",
+                    dataType: "json"
+                }).done(function (data) {
+                    if (typeof data !== "undefined") {
+                        if (data.length === 0) {
+                            if (Object.keys(data).length !== 0) {
+                                data = [data];
+                            }
+                        }
+                        $rootScope.drilldownIndvs = [];
+                        $rootScope.$apply();
+                        $rootScope.drilldownIndvs = $filter("orderBy")(data, "id");
+                        $rootScope.$apply();
+                        var obj = {};
+                        $scope.pos = 0;
+                        try {
+                            $rootScope.drilldownIndvs.forEach(function (elem) {
+                                if (elem["id"] === $rootScope.elemTypeId) {
+                                    reference = elem["reference"];
+                                    throw obj;
+                                }
+                                $scope.pos = $scope.pos + 1;
+                            });
+                        } catch (obj) {
+                        }
+                    }
+                });
+            };
+            $scope.showPrevious = function () {
+                $scope.pos = $scope.pos - 1;
+                showElemData($rootScope.drilldownIndvs[$scope.pos]["id"]);
+            };
+            $scope.showNext = function () {
+                $scope.pos = $scope.pos + 1;
+                showElemData($rootScope.drilldownIndvs[$scope.pos]["id"]);
+            };
             $scope.haveEditPrivilege = function () {
                 var haveIt = false;
                 var obj = {};
@@ -228,7 +281,7 @@
                 }
             };
             $scope.translate = function (key) {
-                return translate(key);
+                return TranslatorService.translate(key);
             };
             $scope.saveEdit = function (editorId, key, event) {
                 if (event) {
@@ -359,7 +412,7 @@
                     elemIn = document.getElementById("neContent-" + i);
                     elemOut = document.getElementById("eContent-" + i);
                 }
-                animate(
+                AnimationService.animate(
                         {in: elemIn, out: elemOut},
                         {in: "fade-in", out: "fade-out"},
                         false
@@ -369,7 +422,56 @@
 
                 }
             };
+            $scope.enterConsultMode = function (id, reference, event) {
+                if (event) {
+                    event.stopPropagation();
+                }
+                ConsultCarouselService.goTo(id, reference, null);
+            };
 
+            function showElemData(id) {
+                if ($scope.drilldownIndvs.length > 0) {
+                    $rootScope.elemData = [];
+                    $rootScope.relatedElems = [];
+                    $rootScope.elemTypeId = "";
+                }
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
+                    method: "POST",
+                    dataType: "json",
+                    data: {id: id}
+                }).done(function (elem) {
+                    var reference = "";
+                    if (elem !== null) {
+                        Object.keys(elem).forEach(function (key) {
+                            if (key !== "id") {
+                                if (typeof elem[key] !== "object") {
+                                    if (key === "reference") {
+                                        reference = elem[key];
+                                    }
+                                    if (key !== "did") {
+                                        $rootScope.elemData.push({key: key, content: elem[key]});
+                                    }
+                                } else {
+                                    $rootScope.relatedElems.push({key: key, content: (typeof elem[key].length === "undefined" ? [elem[key]] : elem[key])});
+                                }
+                            } else {
+                                $rootScope.elemTypeId = elem[key];
+                            }
+                        });
+                        $rootScope.chkList = [];
+                        $rootScope.chkList = GeneralService.getCheckedStructure();
+                        $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
+                        $rootScope.ontologyElementSelected = true;
+                        $rootScope.$apply();
+                        AnimationService.animate(
+                                {in: $rootScope.selectedContext, out: $("#main-content-drilldown")},
+                                {in: "slide-in-left", out: "slide-out-right"},
+                                false
+                                );
+                    }
+                });
+            }
             function getElemReference() {
                 var reference = "";
                 var obj = {};
@@ -556,10 +658,10 @@
                     });
                     html = newHtml;
                 }
-                var images = getImages(html);
+                var images = ImageService.getImages(html);
                 imagesForSearching = images.length;
                 images.forEach(function (img) {
-                    searchImage(html, img, container, isEditor);
+                    searchImage(html, container, img, isEditor);
                 });
                 if (!isEditor) {
                     $(container).html(html.prop("outerHTML"));
@@ -635,7 +737,7 @@
                         resolution: image[0].width + "x" + image[0].height
                     });
                     $scope.$apply();
-                    animateIn(
+                    AnimationService.animateIn(
                             document.getElementById("div-" + image.attr("name")),
                             "fade-in",
                             false
@@ -652,7 +754,7 @@
                     }).done(function (image) {
                         $scope.images.push(image);
                         $scope.$apply();
-                        animateIn(
+                        AnimationService.animateIn(
                                 document.getElementById("div-" + image.name),
                                 "fade-in",
                                 false
@@ -672,7 +774,7 @@
                 });
                 return images;
             }
-            function searchImage(html, img, container, isEditor) {
+            function searchImage(html, container, img, isEditor) {
                 var props = function () {
                     this.name = "";
                     this.height = "";

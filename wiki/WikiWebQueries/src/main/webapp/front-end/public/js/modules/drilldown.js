@@ -1,6 +1,8 @@
 (function (angular) {
     var module = angular.module("pmod-drilldown", []);
-    module.controller("pctrl-drilldown", ["$scope", "$filter", "$rootScope", "QuickActionListService", function ($scope, $filter, $rootScope, QuickActionListService) {
+    module.controller("pctrl-drilldown", [
+        "$scope", "$filter", "$rootScope", "QuickActionListService", "AnimationService", "TranslatorService", "GeneralService", 
+        function ($scope, $filter, $rootScope, QuickActionListService, AnimationService, TranslatorService, GeneralService) {
             var url = "";
             $scope.haveSolutions = {};
             $rootScope.elemData = [];
@@ -10,7 +12,6 @@
                 "Atributos de Calidad", "Criterios", "Decisiones",
                 "Evaluaciones", "Requerimientos Funcionales", "Responsables"
             ];
-            $scope.data = [];
             $scope.do = function (i, event) {
                 if(event) {
                     event.stopPropagation();
@@ -59,16 +60,16 @@
                             }
                         }
                         $scope.haveSolutions = {};
-                        $scope.data = [];
+                        $rootScope.drilldownIndvs = [];
                         $rootScope.$apply();
-                        $scope.data = $filter("orderBy")(data, "id");
+                        $rootScope.drilldownIndvs = $filter("orderBy")(data, "id");
                         $rootScope.$apply();
                     }
                 });
             };
 
             $scope.getN = function (n) {
-                var arr = new Array(Math.ceil($scope.data.length / n));
+                var arr = new Array(Math.ceil($rootScope.drilldownIndvs.length / n));
                 var i = 0;
                 while(i < arr.length) {
                     arr[i] = i;
@@ -80,8 +81,8 @@
                 var pos = (row * n - (n - col)) * 5 - 5;
                 var arr = [];
                 for (i = pos; i <= pos + 4; i++) {
-                    if (typeof $scope.data[i] !== "undefined") {
-                        arr.push($scope.data[i]);
+                    if (typeof $rootScope.drilldownIndvs[i] !== "undefined") {
+                        arr.push($rootScope.drilldownIndvs[i]);
                     } else {
                         break;
                     }
@@ -89,7 +90,7 @@
                 return arr;
             };
             $scope.showElemData = function (id) {
-                if ($scope.data.length > 0) {
+                if ($rootScope.drilldownIndvs.length > 0) {
                     $rootScope.elemData = [];
                     $rootScope.relatedElems = [];
                     $rootScope.elemTypeId = "";
@@ -109,6 +110,7 @@
                                 if (typeof elem[key] !== "object") {
                                     if (key === "reference") {
                                         reference = elem[key];
+                                        $rootScope.actualReference = elem[key];
                                     }
                                     if (key !== "did") {
                                         $rootScope.elemData.push({key: key, content: elem[key]});
@@ -121,10 +123,11 @@
                             }
                         });
                         $rootScope.chkList = [];
-                        $rootScope.chkList = getCheckedStructure();
+                        $rootScope.chkList = GeneralService.getCheckedStructure();
                         $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
+                        $rootScope.ontologyElementSelected = true;
                         $rootScope.$apply();
-                        animate(
+                        AnimationService.animate(
                                 {in: $rootScope.selectedContext, out: $("#main-content-drilldown")},
                                 {in: "slide-in-left", out: "slide-out-right"},
                                 false
@@ -132,7 +135,7 @@
                         QuickActionListService.addAction(
                                 "action:" + $rootScope.elemTypeId,
                                 "/" + window.location.pathname.split("/")[1] + reference + "selectById",
-                                translate(reference) + " " + $rootScope.elemTypeId,
+                                TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
                                 $rootScope.elemType);
                     }
                 });
@@ -159,16 +162,6 @@
                 }
                 return false;
             };
-
-            function getCheckedStructure() {
-                var arr = [];
-                $rootScope.elemData.forEach(function (data) {
-                    if (data.key !== "reference" && data.key !== "did") {
-                        arr.push(false);
-                    }
-                });
-                return arr;
-            }
         }]).directive("pdirecDrilldown", function () {
         return {
             templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/drilldown.html",

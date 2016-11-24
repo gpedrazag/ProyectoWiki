@@ -1,6 +1,14 @@
 (function (angular) {
     var module = angular.module("pmodChangeRecovery", []);
-    module.controller("pctrlChangeRecovery", ["$scope", "$compile", "$rootScope", "$timeout", "QuickActionListService", "FoundationApi", function ($scope, $compile, $rootScope, $timeout, QuickActionListService, FoundationApi) {
+    module.controller("pctrlChangeRecovery", [
+        "$scope",
+        "$rootScope",
+        "$timeout",
+        "FoundationApi",
+        "TranslatorService",
+        "ImageService",
+        "ConsultCarouselService",
+        function ($scope, $rootScope, $timeout, FoundationApi, TranslatorService, ImageService, ConsultCarouselService) {
             $scope.actualStateText = "Contenido Cambiado";
             var classType = "";
             $scope.init = function () {
@@ -21,8 +29,8 @@
                             });
                             html = newHtml;
                         }
-                        loadHTML(document.getElementById("after-div"), html);
-                        loadHTML(document.getElementById("before-div"), $rootScope.change.newContent);
+                        ImageService.loadHTML(document.getElementById("after-div"), html, $scope);
+                        ImageService.loadHTML(document.getElementById("before-div"), $rootScope.change.newContent, $scope);
                         $.ajax({
                             url: "/" + window.location.pathname.split("/")[1] + "/search/getClassByIndvID",
                             data: {id: $rootScope.change.individualID},
@@ -36,7 +44,7 @@
                 });
             };
             $scope.translate = function (key) {
-                return translate(key);
+                return TranslatorService.translate(key);
             };
             $scope.showBefore = function (event) {
                 if (event) {
@@ -47,7 +55,7 @@
                 $timeout(function () {
                     $rootScope.$apply();
                 }, false, 200);
-                loadHTML(document.getElementById("before-div"), $rootScope.change.newContent);
+                ImageService.loadHTML(document.getElementById("before-div"), $rootScope.change.newContent, $scope);
                 $timeout(function () {
                     $rootScope.$apply();
                 }, false, 200);
@@ -61,7 +69,7 @@
                 $timeout(function () {
                     $rootScope.$apply();
                 }, false, 200);
-                loadHTML(document.getElementById("before-div"), $rootScope.change.newContent);
+                ImageService.loadHTML(document.getElementById("before-div"), $rootScope.change.newContent, $scope);
                 $timeout(function () {
                     $rootScope.$apply();
                 }, false, 200);
@@ -109,135 +117,15 @@
             };
             $scope.enterEditMode = function () {
                 if (classType !== "") {
-                    $.ajax({
-                        url: "/" + window.location.pathname.split("/")[1] + "/" + classType + "/selectById",
-                        data: {id: $rootScope.change.individualID},
-                        method: "POST",
-                        dataType: "json"
-                    }).done(function (reponse) {
-                        $rootScope.elemData = [];
-                        $rootScope.relatedElems = [];
-                        $rootScope.elemTypeId = "";
-                        $rootScope.$apply();
-                        if (reponse !== null && reponse.id === $rootScope.change.individualID) {
-                            var reference = "";
-                            Object.keys(reponse).forEach(function (key) {
-                                if (key !== "id") {
-                                    if (key === "reference") {
-                                        reference = reponse[key];
-                                    }
-                                    if (typeof reponse[key] !== "object") {
-                                        $rootScope.elemData.push({key: key, content: reponse[key]});
-                                    } else {
-                                        $rootScope.relatedElems.push({
-                                            key: key,
-                                            content: (typeof reponse[key].length === "undefined" ? [reponse[key]] : reponse[key])
-                                        });
-                                    }
-                                } else {
-                                    $rootScope.elemTypeId = reponse[key];
-                                }
+                    ConsultCarouselService.goTo(
+                            $rootScope.change.individualID,
+                            "/" + classType + "/",
+                            $("#main-content-admin"),
+                            function () {
+                                FoundationApi.closeActiveElements();
                             });
-                            $rootScope.chkList = getCheckedStructure();
-                            $rootScope.$apply();
-                            var ain = document.getElementById("main-content-ontology-element");
-                            animate(
-                                    {in: ain, out: $rootScope.selectedContext},
-                                    {in: "fade-in", out: "fade-out"},
-                                    false
-                                    );
-                            QuickActionListService.addAction(
-                                    "action:" + $rootScope.elemTypeId,
-                                    "/" + window.location.pathname.split("/")[1] + reference + "selectById",
-                                    translate(reference) + " " + $rootScope.elemTypeId,
-                                    reference.replace("/", "").replace("/", "").toLowerCase());
-                            FoundationApi.closeActiveElements();
-                            $rootScope.selectedContext = ain;
-                        }
-                    });
                 }
             };
-
-            function getCheckedStructure() {
-                var arr = [];
-                $rootScope.elemData.forEach(function (data) {
-                    arr.push(false);
-                });
-                return arr;
-            }
-
-            function loadHTML(container, html) {
-                var images = getImages(html);
-                html = $(html);
-                images.forEach(function (img) {
-                    searchImage(html, img, container);
-                });
-                $(container).html(html.prop("outerHTML"));
-            }
-            function getImages(html) {
-                var c = $("<div style='width:100%'>" + $(html)[0].outerHTML + "</div>");
-                var images = [];
-                c.find("span").each(function (i, span) {
-                    if (span.attributes[0].localName === "img") {
-                        images.push(span);
-                    }
-                });
-                return images;
-            }
-            function searchImage(html, img, container) {
-                var props = function () {
-                    this.name = "";
-                    this.height = "";
-                    this.width = "";
-                    this.url = "";
-                };
-                props = new props();
-                props.name = img.attributes[0].value;
-                props.height = img.attributes[1].value;
-                props.width = img.attributes[2].value;
-                props.url = typeof img.attributes[3] !== "undefined" ? img.attributes[3].value : null;
-
-                if (props.url === null) {
-                    $.ajax({
-                        url: "/" + window.location.pathname.split("/")[1] + "/downloader/getImage",
-                        data: {name: props.name},
-                        method: "POST",
-                        dataType: "json"
-                    }).done(function (response) {
-                        var ext = props.name.split(".")[1];
-                        var img = ""
-                                + "<img "
-                                + "name=\"" + props.name + "\" "
-                                + "src=\"" + response.base64 + "\" style='width:" + props.width + "; height:" + props.height + ";'/>";
-
-                        var i = 0;
-                        $(html).find("span").each(function (i, span) {
-                            if (span.attributes[0].localName === "img" && span.attributes[0].value === props.name) {
-                                $(html).find("span:eq(" + i + ")").replaceWith(img);
-                                $compile($(img))($scope);
-                                $scope.$apply();
-                            }
-                            i++;
-                        });
-                        $(container).html(html);
-
-                    });
-                } else {
-                    var img = ""
-                            + "<img "
-                            + "name=\"" + props.name + "|url\" "
-                            + "src=\"" + props.url + "\" style='width:" + props.width + "; height:" + props.height + ";'/>";
-                    var i = 0;
-                    $(html).find("span").each(function (i, span) {
-                        if (span.attributes[0].localName === "img" && span.attributes[0].value === props.name && span.attributes[3].value === props.url) {
-                            $(html).find("span:eq(" + i + ")").replaceWith(img);
-                        }
-                        i++;
-                    });
-                    $(container).html(html);
-
-                }
-            }
         }]);
     module.directive("pdirecChangeRecovery", function () {
         return {

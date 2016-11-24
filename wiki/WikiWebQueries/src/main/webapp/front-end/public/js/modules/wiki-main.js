@@ -1,6 +1,21 @@
 (function (angular) {
-    var module = angular.module("pmod-wiki-main", ["pmod-drilldown", "pmod-ontology-element", "pmodResources", "pmodDcsAltMap", "pmodGraph", "pmodAdmin"]);
-    module.controller("pctrlViews", ["$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", "$timeout", function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService, $timeout) {
+    var module = angular.module("pmod-wiki-main", [
+        "pmod-drilldown",
+        "pmod-ontology-element",
+        "pmodResources",
+        "pmodDcsAltMap",
+        "pmodGraph",
+        "pmodAdmin",
+        "pmodAnimationServices",
+        "pmodTranslatorServices",
+        "pmodGeneralService",
+        "pmodActionListService",
+        "pmodImageService",
+        "pmodConsultCarouselService"
+    ]);
+    module.controller("pctrlViews", [
+        "$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", "$timeout", "AnimationService", "TranslatorService", "GeneralService",
+        function ($scope, $rootScope, FoundationPanel, FoundationApi, QuickActionListService, $timeout, AnimationService, TranslatorService, GeneralService) {
             $scope.inputSearchString = "";
             $scope.drilldownSelected = "";
             $scope.resourcesSelected = "";
@@ -11,6 +26,9 @@
             $rootScope.graphSelected = "selected";
             $rootScope.adminOpts = "";
             $rootScope.dcsAltMapSelected = "";
+            $rootScope.ontologyElementSelected = false;
+            $rootScope.actualReference = "";
+            $rootScope.drilldownIndvs = [];
             $rootScope.user = null;
 
             $scope.haveEditPrivilege = function () {
@@ -37,19 +55,20 @@
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "";
                 $rootScope.adminOpts = "";
+                $rootScope.ontologyElementSelected = false;
                 $rootScope.rImages = [];
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                animate(
+                AnimationService.animate(
                         {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-drilldown");
-                $timeout(function(){
+                $timeout(function () {
                     $rootScope.$apply();
-                },false, 500);
+                }, false, 500);
             };
             $scope.onGraph = function (event) {
                 if (event) {
@@ -60,16 +79,17 @@
                 $rootScope.dcsAltMapSelected = "";
                 $rootScope.graphSelected = "selected";
                 $rootScope.adminOpts = "";
+                $rootScope.ontologyElementSelected = false;
                 $rootScope.rImages = [];
-                animate(
+                AnimationService.animate(
                         {in: $("#main-content-graph"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-graph");
-                $timeout(function(){
+                $timeout(function () {
                     $rootScope.$apply();
-                },false, 500);
+                }, false, 500);
             };
             $scope.onDcsAltMap = function (event) {
                 if (event) {
@@ -80,19 +100,20 @@
                 $rootScope.dcsAltMapSelected = "selected";
                 $rootScope.graphSelected = "";
                 $rootScope.adminOpts = "";
+                $rootScope.ontologyElementSelected = false;
                 $rootScope.rImages = [];
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                animate(
+                AnimationService.animate(
                         {in: $("#main-content-dcsAltMap"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-dcsAltMap");
-                $timeout(function(){
+                $timeout(function () {
                     $rootScope.$apply();
-                },false, 500);
+                }, false, 500);
             };
             $scope.onResources = function (event) {
                 if (event) {
@@ -103,19 +124,20 @@
                 $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "selected";
                 $rootScope.graphSelected = "";
+                $rootScope.ontologyElementSelected = false;
                 $rootScope.adminOpts = "";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                animate(
+                AnimationService.animate(
                         {in: $("#main-content-resources"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-resources");
-                $timeout(function(){
+                $timeout(function () {
                     $rootScope.$apply();
-                },false, 500);
+                }, false, 500);
                 getViewerImages();
             };
             $scope.onAdminOpts = function (event) {
@@ -127,19 +149,20 @@
                 $rootScope.dcsAltMapSelected = "";
                 $scope.resourcesSelected = "";
                 $rootScope.adminOpts = "selected";
+                $rootScope.ontologyElementSelected = false;
                 $rootScope.graphSelected = "";
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                animate(
+                AnimationService.animate(
                         {in: $("#main-content-admin"), out: $rootScope.selectedContext},
                         {in: "slide-in-left", out: "slide-out-right"},
                         true
                         );
                 $rootScope.selectedContext = $("#main-content-admin");
-                $timeout(function(){
+                $timeout(function () {
                     $rootScope.$apply();
-                },false, 500);
+                }, false, 500);
             };
             $scope.outHoverMenuOption = function (event) {
                 if (event) {
@@ -174,6 +197,7 @@
                     $rootScope.subElemData = [];
                     $rootScope.subRelatedElems = [];
                     $rootScope.elemTypeId = "";
+                    $rootScope.actualReference = reference;
                     $rootScope.$apply();
                     Object.keys(response).forEach(function (key) {
                         if (key !== "id") {
@@ -190,11 +214,11 @@
                             $rootScope.elemTypeId = response[key];
                         }
                     });
-                    $rootScope.chkList = getCheckedStructure();
+                    $rootScope.chkList = GeneralService.getCheckedStructure();
                     $rootScope.elemType = reference.replace("/", "").replace("/", "").toLowerCase();
                     $rootScope.$apply();
 
-                    animate(
+                    AnimationService.animate(
                             {in: $("#main-content-ontology-element"), out: $rootScope.selectedContext === null ? $("#main-content-drilldown") : $rootScope.selectedContext},
                             {in: "fade-in", out: "fade-out"},
                             true
@@ -203,7 +227,7 @@
                     QuickActionListService.addAction(
                             "action:" + $rootScope.elemTypeId,
                             "/" + window.location.pathname.split("/")[1] + reference + "selectById",
-                            translate(reference) + " " + $rootScope.elemTypeId,
+                            TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
                             reference.replace("/", "").replace("/", "").toLowerCase());
                     FoundationApi.closeActiveElements();
                 });
@@ -222,7 +246,7 @@
                             response.forEach(function (data) {
                                 $scope.coincidences.push({
                                     id: data.id,
-                                    classType: translate(data.classType),
+                                    classType: TranslatorService.translate(data.classType),
                                     reference: data.classType,
                                     matches: getDomElemFromMatches(data.matches, $scope.inputSearchString)
                                 });
@@ -278,7 +302,7 @@
                             }
                         });
                         content.html(append);
-                        matches[i].property = translate(matches[i].property);
+                        matches[i].property = TranslatorService.translate(matches[i].property);
                         matches[i].content = $(content).html();
                         i++;
                     });
@@ -296,14 +320,6 @@
                         $rootScope.$apply();
                     }
                 });
-            }
-
-            function getCheckedStructure() {
-                var arr = [];
-                $rootScope.elemData.forEach(function (data) {
-                    arr.push(false);
-                });
-                return arr;
             }
 
             function deselectMenuOption(bool) {
@@ -351,70 +367,6 @@
             replace: "true"
         };
     });
-    module.service("QuickActionListService", ["$rootScope", "FoundationApi", function ($rootScope, FoundationApi) {
-            this.addAction = function (id, url, description, elementType) {
-                var go = true;
-                $rootScope.actions.forEach(function (action) {
-                    if (action.id === id) {
-                        go = false;
-                    }
-                });
-                if (go) {
-                    $rootScope.actions.push({
-                        id: id,
-                        description: description,
-                        do: function () {
-                            $.ajax({
-                                url: url,
-                                method: "POST",
-                                dataType: "json",
-                                data: {id: id.split(":")[1]}
-                            }).done(function (response) {
-                                $rootScope.elemData = [];
-                                $rootScope.relatedElems = [];
-                                $rootScope.subElemData = [];
-                                $rootScope.subRelatedElems = [];
-                                $rootScope.elemTypeId = "";
-                                $rootScope.$apply();
-                                Object.keys(response).forEach(function (key) {
-                                    if (key !== "id") {
-                                        if (typeof response[key] !== "object") {
-                                            $rootScope.elemData.push({
-                                                key: key,
-                                                content: response[key]});
-                                        } else {
-                                            $rootScope.relatedElems.push({
-                                                key: key,
-                                                content: (typeof response[key].length === "undefined" ? [response[key]] : response[key])});
-                                        }
-                                    } else {
-                                        $rootScope.elemTypeId = response[key];
-                                    }
-                                });
-                                $rootScope.chkList = getCheckedStructure();
-                                $rootScope.elemType = elementType;
-                                $rootScope.$apply();
-                                animate(
-                                        {in: $("#main-content-ontology-element"), out: $rootScope.selectedContext},
-                                        {in: "fade-in", out: "fade-out"},
-                                        true
-                                        );
-                                $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
-                                FoundationApi.closeActiveElements();
-                            });
-                        }
-                    });
-                }
-            };
-
-            function getCheckedStructure() {
-                var arr = [];
-                $rootScope.elemData.forEach(function (data) {
-                    arr.push(false);
-                });
-                return arr;
-            }
-        }]);
     module.filter('trustHTML', ['$sce', function ($sce) {
             return function (text) {
                 return $sce.trustAsHtml(text);

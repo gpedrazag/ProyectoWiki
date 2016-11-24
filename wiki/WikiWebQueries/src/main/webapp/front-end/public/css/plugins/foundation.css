@@ -848,7 +848,7 @@ a, [ui-sref], [zf-open], [zf-close], [zf-toggle] {
     font-weight: bold;
     margin-bottom: 0.5em;
     margin-left: 1rem;
-    font-size: 0.8em;
+    font-size: 1em;
     cursor: default;
     text-transform: uppercase; }
   .block-list li {

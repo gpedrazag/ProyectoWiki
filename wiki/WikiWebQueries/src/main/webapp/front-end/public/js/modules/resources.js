@@ -1,6 +1,8 @@
 (function (angular) {
     var module = angular.module("pmodResources", []);
-    module.controller("pctrlResources", ["$scope", "$rootScope", "FoundationApi", function ($scope, $rootScope, FoundationApi) {
+    module.controller("pctrlResources", [
+        "$scope", "$rootScope", "FoundationApi", "AnimationService",
+        function ($scope, $rootScope, FoundationApi, AnimationService) {
             var selectedImage = null;
             var page = 1;
             var nPages = 0;
@@ -166,7 +168,7 @@
                                 $scope.images.push(image);
                                 $rootScope.$apply();
                                 i++;
-                                animateIn(
+                                AnimationService.animateIn(
                                         document.getElementById("r-div-" + image.name),
                                         "fade-in",
                                         false
@@ -258,7 +260,7 @@
                     });
                     $rootScope.$apply();
                     setTimeout(function () {
-                        animateIn(
+                        AnimationService.animateIn(
                                 document.getElementById("r-div-" + image.attr("name")),
                                 "fade-in",
                                 false

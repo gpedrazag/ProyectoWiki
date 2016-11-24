@@ -14,15 +14,8 @@
         <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/foundation.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/foundation-apps-templates.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/vis.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/drilldown.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-sub-element.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/ontology-element.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/resources.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/dcsAltMap.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/graph.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/adminChangeRecovery.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/adminTools.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/front-end/public/js/modules/wiki-main.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/assets/services.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/front-end/public/js/assets/modules.js" type="text/javascript"></script>
     </head>
     <body ng-controller="pctrlViews">
         <pdirec:nav></pdirec:nav>
@@ -38,8 +31,8 @@
             <div style="margin-top: 30px;">
                 <section class="block-list">
                     <ul>
-                        <li ng-click="action.do()" ng-repeat="action in actions track by $index">
-                            <a style="padding-left: 30px;" ng-click="action.do()">{{action.description}}</a>
+                        <li ng-click="action.do($event)" ng-repeat="action in actions track by $index">
+                            <a style="padding-left: 30px;" ng-click="action.do($event)">{{action.description}}</a>
                         </li>                            
                     </ul>
                 </section>
@@ -73,6 +66,4 @@
 <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/tinymce/tinymce.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/front-end/public/js/plugins/motion-ui.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/front-end/public/js/plugins/sweetalert.min.js" type="text/javascript"></script>        
-<script src="${pageContext.request.contextPath}/front-end/public/js/events/public-events.js" type="text/javascript"></script>
 </html>

@@ -1,5 +1,10 @@
-<div class="grid-block vertical overflow-visible" style="display: none;">
-    <div ng-controller="pctrlOntologyElement">
+<div class="grid-block vertical overflow-visible" style="display: none;" ng-if="ontologyElementSelected">
+    <div ng-controller="pctrlOntologyElement" ng-init="init()">
+        <div class="title-bar" ng-if="drilldownIndvs.length > 1" style="background: none;">
+            <div class="center"><a zf-open="explore-everithing-modal">Explorar todo</a></div>
+            <div class="left" ng-if="pos > 0"><a ng-click="showPrevious()">Anterior</a></div>
+            <div class="right" ng-if="pos < drilldownIndvs.length - 1"><a ng-click="showNext()">Siguiente</a></div>
+        </div>
         <div ng-repeat="data in elemData track by $index" class="ontology-elem-title-content overflow-visible" ng-if="data.key !== 'reference'">
             <div ng-if="data.key !== 'reference' && data.key !== 'did'">
                 <div class="ontology-elem-tittle grid-block">
@@ -157,6 +162,21 @@
                         </div> 
                     </div>
                 </div>
+            </div>
+        </div>
+        <div zf-modal="" id="explore-everithing-modal" class="collapse large">
+            <div class="dark title-bar">
+                <div class="left" zf-close=""><a>Cerrar</a></div>                
+            </div>
+            <div style="margin-top: 30px; max-height: 400px; overflow-y: auto;">
+                <section class="block-list">
+                    <ul>
+                        <li ng-click="enterConsultMode()" ng-repeat="indv in drilldownIndvs track by $index">
+                            <a style="padding-left: 30px;" ng-click="enterConsultMode(indv.id, indv.reference, $event)" ng-class="{'is-solution':(elemTypeId === indv.id)}">{{indv.id}}</a>
+                        </li>                            
+                    </ul>
+                </section>
+
             </div>
         </div>
         <zf-notification-set id="main-notifications" position="top-left"></zf-notification-set>
