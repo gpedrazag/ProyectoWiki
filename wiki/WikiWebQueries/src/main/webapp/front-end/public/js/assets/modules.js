@@ -661,39 +661,116 @@
 (function (angular) {
     var module = angular.module("pmodGraph", []);
 
-    module.controller('pctrlGraph', ["$scope", "$rootScope", "$timeout", function ($scope, $rootScope, $timeout) {
+    module.controller('pctrlGraph', [
+        "$scope",
+        "$rootScope",
+        "$timeout",
+        "TranslatorService",
+        function ($scope, $rootScope, $timeout, TranslatorService) {
             $scope.init = function () {
-                var nodes = new vis.DataSet([
-                    {id: 1, label: 'Node 1'},
-                    {id: 2, label: 'Node 2'},
-                    {id: 3, label: 'Node 3'},
-                    {id: 4, label: 'Node 4'},
-                    {id: 5, label: 'Node 5'}
-                ]);
 
-                var edges = new vis.DataSet([
-                    {from: 1, to: 3},
-                    {from: 1, to: 2},
-                    {from: 2, to: 4},
-                    {from: 2, to: 5}
-                ]);
+                var filtro = ["/QualityAttributeStage/", "/Decision/", "/Artifact/"];
+                var nodes = [];
+                var edges = [];
 
-                var container = document.getElementById('graphContainer');
-                $(container).ready(function () {
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + "/search/getAllClass",
+                    data: {
+                        filtro: JSON.stringify(filtro)
+                    },
+                    method: "POST",
+                    dataType: "json"
+                }).done(function (data) {
+                    var nodesData = [];
+                    var edgesData = [];
+                    var obj = {};
+                    data.forEach(function (data) {
+                        data.forEach(function (data) {
+                            nodesData.push(
+                                    {id: data.id, label: TranslatorService.translate(data.reference) + " " + data.id, shape: 'dot'}
+                            );
+                            Object.keys(data).forEach(function (key) {
+                                if (typeof data[key] === "object") {
+                                    var list = [];
+                                    if (data[key].length > 0) {
+                                        list = data[key];
+                                    } else {
+                                        list = [data[key]];
+                                    }
+                                    list.forEach(function (elem) {
+                                        var i = 0;
+                                        while (filtro[i]) {
+                                            if (filtro[i] === elem.reference) {
+                                                try {
+                                                    edgesData.forEach(function (edge) {
+                                                        if (edge.from === elem.id && edge.to === data.id) {
+                                                            throw obj;
+                                                        }
+                                                    });
+                                                    edgesData.push({from: data.id, to: elem.id});
+                                                } catch (obj) {
+                                                }
+                                            }
+                                            i++;
+                                        }
+                                    });
+
+                                }
+                            });
+                        });
+                    });
+                    nodes = new vis.DataSet(nodesData);
+                    edges = new vis.DataSet(edgesData);
+
+
+
+
+                    var container = document.getElementById('graphContainer');
+                    $(container).ready(function () {
+
+                    });
+
+                    var data = {
+                        nodes: nodes,
+                        edges: edges
+
+                    };
+                    var options = {
+                        height: "600px",
+                        width: "100%",
+                        //                        layout:{
+//                            randomSeed : Math.round(Math.random()*10000)
+//                        }
+                    };
+                    $timeout(function () {
+                        var network = new vis.Network(container, data, options);
+                        network.on("selectNode", function (params) {
+                            alert('<h2>showPopup event: </h2>' + JSON.stringify(params, null, 4));
+                        });
+                        network.fit();
+                    }, 1200, false);
+
+
 
                 });
-                var data = {
-                    nodes: nodes,
-                    edges: edges
-                };
-                var options = {
-                    height: "600px",
-                    width: "100%"
-                };
-                $timeout(function () {
-                    var network = new vis.Network(container, data, options);
-                    network.fit();
-                }, 1200, false);
+
+
+//                var nodes = new vis.DataSet([
+//                    {id: 1, label: 'Clase ID',childs },
+//                    {id: 2, label: 'Node 2'},
+//                    {id: 3, label: 'Node 3'},
+//                    {id: 4, label: 'Node 4'},
+//                    {id: 5, label: 'Node 5'}
+//                ]);
+
+//                var edges = new vis.DataSet([
+//                    {from: 1, to: 3},
+//                    {from: 1, to: 2},
+//                    {from: 2, to: 4},
+//                    {from: 2, to: 5}
+//                ]);
+
+
             };
 
         }]);
@@ -705,6 +782,7 @@
             replace: "true"
         };
     });
+
 
 })(window.angular);
 (function (angular) {

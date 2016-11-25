@@ -2,6 +2,19 @@ package net.unipiloto.wiki.web.transactions;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.unipiloto.wiki.web.entities.Alternative;
+import net.unipiloto.wiki.web.entities.Artifact;
+import net.unipiloto.wiki.web.entities.Assumption;
+import net.unipiloto.wiki.web.entities.Concern;
+import net.unipiloto.wiki.web.entities.Constraint;
+import net.unipiloto.wiki.web.entities.Criteria;
+import net.unipiloto.wiki.web.entities.Decision;
+import net.unipiloto.wiki.web.entities.Evaluation;
+import net.unipiloto.wiki.web.entities.FunctionalRequeriment;
+import net.unipiloto.wiki.web.entities.QualityAttribute;
+import net.unipiloto.wiki.web.entities.Responsible;
+import net.unipiloto.wiki.web.entities.SoftwareArchitecture;
+import net.unipiloto.wiki.web.entities.Solution;
 import net.unipiloto.wiki.web.others.Generic;
 import net.unipiloto.wiki.web.others.Match;
 import net.unipiloto.wiki.web.others.OntologyTools;
@@ -93,7 +106,7 @@ public class GeneralTransactions {
             TupleQuery tq = null;
             tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
                     "SELECT DISTINCT ?classType WHERE { \n"
-                    + " <http://www.semanticweb.org/sa#"+id+"> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?classType .\n"
+                    + " <http://www.semanticweb.org/sa#" + id + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?classType .\n"
                     + " ?classType <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class>\n"
                     + "}"
             );
@@ -172,4 +185,53 @@ public class GeneralTransactions {
         }
         return i;
     }
+
+    public static List<Object> getAllClass(List<String> filtro) {
+
+        List<Object> nodos = new ArrayList<>();
+
+        for (String string : filtro) {
+            switch (string) {
+                case "/Alternative/":
+                    nodos.add(JsonFactory.fromJsonArray(AlternativeTransaction.selectAll(), Alternative.class));
+                    break;
+                case "/Artifact/":
+                    nodos.add(JsonFactory.fromJsonArray(ArtifactTransaction.selectAll(), Artifact.class));
+                    break;
+                case "/Assumption/":
+                    nodos.add(JsonFactory.fromJsonArray(AssumptionTransaction.selectAll(), Assumption.class));
+                    break;
+                case "/Concern/":
+                    nodos.add(JsonFactory.fromJsonArray(ConcernTransaction.selectAll(), Concern.class));
+                    break;
+                case "/Constraint/":
+                    nodos.add(JsonFactory.fromJsonArray(ConstraintTransaction.selectAll(), Constraint.class));
+                    break;
+                case "/Criteria/":
+                    nodos.add(JsonFactory.fromJsonArray(CriteriaTransaction.selectAll(), Criteria.class));
+                    break;
+                case "/Decision/":
+                    nodos.add(JsonFactory.fromJsonArray(DecisionTransaction.selectAll(), Decision.class));
+                    break;
+                case "/Evaluation/":
+                    nodos.add(JsonFactory.fromJsonArray(EvaluationTransaction.selectAll(), Evaluation.class));
+                    break;
+                case "/FunctionalRequeriment/":
+                    nodos.add(JsonFactory.fromJsonArray(FunctionalRequerimentTransaction.selectAll(), FunctionalRequeriment.class));
+                    break;
+                case "/QualityAttributeStage/":
+                    nodos.add(JsonFactory.fromJsonArray(QualityAttributeTransaction.selectAll(), QualityAttribute.class));
+                    break;
+                case "/Responsible/":
+                    nodos.add(JsonFactory.fromJsonArray(ResponsibleTransaction.selectAll(), Responsible.class));
+                    break;
+                case "/SoftwareArchitecture/":
+                    nodos.add(JsonFactory.fromJsonArray(SoftwareArchitectureTransaction.selectAll(), SoftwareArchitecture.class));
+                    break;
+            }
+        }
+
+        return nodos;
+    }
+
 }
