@@ -27,7 +27,8 @@
                     data.forEach(function (data) {
                         data.forEach(function (data) {
                             nodesData.push(
-                                    {id: data.id, label: TranslatorService.translate(data.reference) + " " + data.id, shape: 'dot'}
+                                    //TranslatorService.translate(data.reference) + " " +
+                                    {id: data.id, label: data.id, shape: 'circle'}
                             );
                             Object.keys(data).forEach(function (key) {
                                 if (typeof data[key] === "object") {
@@ -78,14 +79,22 @@
                     var options = {
                         height: "600px",
                         width: "100%",
-                        //                        layout:{
-//                            randomSeed : Math.round(Math.random()*10000)
-//                        }
+                        layout: {
+                            randomSeed: 754,
+                            improvedLayout: true
+                        },
+                        stabilization: {
+                            enabled: true,
+                            iterations: 1000,
+                            updateInterval: 100,
+                            onlyDynamicEdges: false,
+                            fit: true
+                        }
                     };
                     $timeout(function () {
                         var network = new vis.Network(container, data, options);
                         network.on("selectNode", function (params) {
-                            alert('<h2>showPopup event: </h2>' + JSON.stringify(params, null, 4));
+                            alert(params.nodes);
                         });
                         network.fit();
                     }, 1200, false);
