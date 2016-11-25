@@ -186,52 +186,49 @@ public class GeneralTransactions {
         return i;
     }
 
-    public static List<Object> getAllClass(List<String> filtro) {
-
-        List<Object> nodos = new ArrayList<>();
-
+    public static List<Object> getAllClassIndividuals(List<String> filtro) {
+        List<Object> nodes = new ArrayList<>();
         for (String string : filtro) {
             switch (string) {
                 case "/Alternative/":
-                    nodos.add(JsonFactory.fromJsonArray(AlternativeTransaction.selectAll(), Alternative.class));
+                    nodes.add(JsonFactory.fromJsonArray(AlternativeTransaction.selectAll(), Alternative.class));
                     break;
                 case "/Artifact/":
-                    nodos.add(JsonFactory.fromJsonArray(ArtifactTransaction.selectAll(), Artifact.class));
+                    nodes.add(JsonFactory.fromJsonArray(ArtifactTransaction.selectAll(), Artifact.class));
                     break;
                 case "/Assumption/":
-                    nodos.add(JsonFactory.fromJsonArray(AssumptionTransaction.selectAll(), Assumption.class));
+                    nodes.add(JsonFactory.fromJsonArray(AssumptionTransaction.selectAll(), Assumption.class));
                     break;
                 case "/Concern/":
-                    nodos.add(JsonFactory.fromJsonArray(ConcernTransaction.selectAll(), Concern.class));
+                    nodes.add(JsonFactory.fromJsonArray(ConcernTransaction.selectAll(), Concern.class));
                     break;
                 case "/Constraint/":
-                    nodos.add(JsonFactory.fromJsonArray(ConstraintTransaction.selectAll(), Constraint.class));
+                    nodes.add(JsonFactory.fromJsonArray(ConstraintTransaction.selectAll(), Constraint.class));
                     break;
                 case "/Criteria/":
-                    nodos.add(JsonFactory.fromJsonArray(CriteriaTransaction.selectAll(), Criteria.class));
+                    nodes.add(JsonFactory.fromJsonArray(CriteriaTransaction.selectAll(), Criteria.class));
                     break;
                 case "/Decision/":
-                    nodos.add(JsonFactory.fromJsonArray(DecisionTransaction.selectAll(), Decision.class));
+                    nodes.add(JsonFactory.fromJsonArray(DecisionTransaction.selectAll(), Decision.class));
                     break;
                 case "/Evaluation/":
-                    nodos.add(JsonFactory.fromJsonArray(EvaluationTransaction.selectAll(), Evaluation.class));
+                    nodes.add(JsonFactory.fromJsonArray(EvaluationTransaction.selectAll(), Evaluation.class));
                     break;
                 case "/FunctionalRequeriment/":
-                    nodos.add(JsonFactory.fromJsonArray(FunctionalRequerimentTransaction.selectAll(), FunctionalRequeriment.class));
+                    nodes.add(JsonFactory.fromJsonArray(FunctionalRequerimentTransaction.selectAll(), FunctionalRequeriment.class));
                     break;
                 case "/QualityAttributeStage/":
-                    nodos.add(JsonFactory.fromJsonArray(QualityAttributeTransaction.selectAll(), QualityAttribute.class));
+                    nodes.add(JsonFactory.fromJsonArray(QualityAttributeTransaction.selectAll(), QualityAttribute.class));
                     break;
                 case "/Responsible/":
-                    nodos.add(JsonFactory.fromJsonArray(ResponsibleTransaction.selectAll(), Responsible.class));
+                    nodes.add(JsonFactory.fromJsonArray(ResponsibleTransaction.selectAll(), Responsible.class));
                     break;
                 case "/SoftwareArchitecture/":
-                    nodos.add(JsonFactory.fromJsonArray(SoftwareArchitectureTransaction.selectAll(), SoftwareArchitecture.class));
+                    nodes.add(JsonFactory.fromJsonArray(SoftwareArchitectureTransaction.selectAll(), SoftwareArchitecture.class));
                     break;
             }
         }
-
-        return nodos;
+        return nodes;
     }
 
 }

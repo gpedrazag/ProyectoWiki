@@ -37,8 +37,8 @@ public class SearchController {
     }
 
     @RequestMapping(value = "getAllClass", method = RequestMethod.POST)
-    public String getAllClass(@RequestParam(value = "filtro") String filtro) {
-        return JsonFactory.toJson(GeneralTransactions.getAllClass(JsonFactory.fromJsonArray(filtro, String.class)));
+    public String getAllClass(@RequestParam(value = "filter") String filter) {
+        return JsonFactory.toJson(GeneralTransactions.getAllClassIndividuals(JsonFactory.fromJsonArray(filter, String.class)));
     }
 
 }

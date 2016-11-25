@@ -663,21 +663,16 @@
 
     module.controller('pctrlGraph', [
         "$scope",
-        "$rootScope",
         "$timeout",
         "TranslatorService",
-        function ($scope, $rootScope, $timeout, TranslatorService) {
-            $scope.init = function () {
-
-                var filtro = ["/QualityAttributeStage/", "/Decision/", "/Artifact/"];
+        function ($scope, $timeout, TranslatorService) {
+            $scope.printGraph = function (classes) {
+                var filter = typeof classes === "undefined" ? ["/QualityAttributeStage/", "/Decision/", "/Artifact/"] : classes;
                 var nodes = [];
                 var edges = [];
-
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + "/search/getAllClass",
-                    data: {
-                        filtro: JSON.stringify(filtro)
-                    },
+                    data: {filter: JSON.stringify(filter)},
                     method: "POST",
                     dataType: "json"
                 }).done(function (data) {
@@ -687,8 +682,7 @@
                     data.forEach(function (data) {
                         data.forEach(function (data) {
                             nodesData.push(
-                                    //TranslatorService.translate(data.reference) + " " +
-                                    {id: data.id, label: data.id, shape: 'circle'}
+                                    {id: data.reference + "_" + data.id, label: TranslatorService.translate(data.reference) + " " + data.id, shape: 'dot'}
                             );
                             Object.keys(data).forEach(function (key) {
                                 if (typeof data[key] === "object") {
@@ -700,15 +694,15 @@
                                     }
                                     list.forEach(function (elem) {
                                         var i = 0;
-                                        while (filtro[i]) {
-                                            if (filtro[i] === elem.reference) {
+                                        while (filter[i]) {
+                                            if (filter[i] === elem.reference) {
                                                 try {
                                                     edgesData.forEach(function (edge) {
-                                                        if (edge.from === elem.id && edge.to === data.id) {
+                                                        if (edge.from === elem.reference + "_" + elem.id && edge.to === data.reference + "_" + data.id) {
                                                             throw obj;
                                                         }
                                                     });
-                                                    edgesData.push({from: data.id, to: elem.id});
+                                                    edgesData.push({from: data.reference + "_" + data.id, to: elem.reference + "_" + elem.id});
                                                 } catch (obj) {
                                                 }
                                             }
@@ -722,19 +716,11 @@
                     });
                     nodes = new vis.DataSet(nodesData);
                     edges = new vis.DataSet(edgesData);
-
-
-
-
                     var container = document.getElementById('graphContainer');
-                    $(container).ready(function () {
-
-                    });
-
+                    $(container).empty();
                     var data = {
                         nodes: nodes,
                         edges: edges
-
                     };
                     var options = {
                         height: "600px",
@@ -754,32 +740,12 @@
                     $timeout(function () {
                         var network = new vis.Network(container, data, options);
                         network.on("selectNode", function (params) {
-                            alert('<h2>showPopup event: </h2>' + JSON.stringify(params, null, 4));
+                            var data = params.nodes[0].split("_");
+                            alert("reference:" + data[0] + "\n id:" + data[1]);
                         });
                         network.fit();
                     }, 1200, false);
-
-
-
                 });
-
-
-//                var nodes = new vis.DataSet([
-//                    {id: 1, label: 'Clase ID',childs },
-//                    {id: 2, label: 'Node 2'},
-//                    {id: 3, label: 'Node 3'},
-//                    {id: 4, label: 'Node 4'},
-//                    {id: 5, label: 'Node 5'}
-//                ]);
-
-//                var edges = new vis.DataSet([
-//                    {from: 1, to: 3},
-//                    {from: 1, to: 2},
-//                    {from: 2, to: 4},
-//                    {from: 2, to: 5}
-//                ]);
-
-
             };
 
         }]);
