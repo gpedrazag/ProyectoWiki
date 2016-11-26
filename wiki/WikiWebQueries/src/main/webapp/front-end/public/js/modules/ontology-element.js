@@ -364,34 +364,7 @@
                 getViewerURLImages();
             };
             $scope.goTo = function (id, reference, elems) {
-                $.ajax({
-                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
-                    data: {id: id},
-                    method: "POST",
-                    dataType: "json"
-                }).done(function (reponse) {
-                    $rootScope.subElemData = [];
-                    $rootScope.subRelatedElems = [];
-                    $rootScope.subElems = elems;
-                    $rootScope.$apply();
-                    if (reponse !== null && reponse.id === id) {
-                        Object.keys(reponse).forEach(function (key) {
-                            if (key !== "id") {
-                                if (typeof reponse[key] !== "object") {
-                                    $rootScope.subElemData.push({key: key, content: reponse[key]});
-                                } else {
-                                    $rootScope.subRelatedElems.push({
-                                        key: key,
-                                        content: (typeof reponse[key].length === "undefined" ? [reponse[key]] : reponse[key])
-                                    });
-                                }
-                            } else {
-                                $rootScope.elemSubTypeId = reponse[key];
-                            }
-                        });
-                        $rootScope.$apply();
-                    }
-                });
+                ConsultCarouselService.openModal(id, reference, elems);                
             };
             $scope.setSelectedKey = function (key, i, content) {
                 if (key !== null && content !== null) {

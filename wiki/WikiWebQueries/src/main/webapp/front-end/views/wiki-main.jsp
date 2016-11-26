@@ -19,7 +19,14 @@
     </head>
     <body ng-controller="pctrlViews">
         <pdirec:nav></pdirec:nav>
-        <pdirec:content></pdirec:content>
+        <pdirec:content ng-if="graphSelected === ''"></pdirec:content>
+        <div 
+            id="main-content-graph" 
+            ng-controller="pctrlGraph" 
+            class="all-available-width overflow-visible"
+            ng-if="graphSelected === 'selected'">
+            <pdirec:graph></pdirec:graph>
+        </div>
             <img id="img-quick-list" 
                  zf-open="quick-list-modal"
                  src="${pageContext.request.contextPath}/front-end/resources/img/quick-list.png"/>

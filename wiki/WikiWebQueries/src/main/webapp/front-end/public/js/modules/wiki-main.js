@@ -1,17 +1,17 @@
 (function (angular) {
     var module = angular.module("pmod-wiki-main", [
-        "pmod-drilldown",
-        "pmod-ontology-element",
-        "pmodResources",
-        "pmodDcsAltMap",
-        "pmodGraph",
-        "pmodAdmin",
         "pmodAnimationServices",
         "pmodTranslatorServices",
         "pmodGeneralService",
         "pmodActionListService",
         "pmodImageService",
-        "pmodConsultCarouselService"
+        "pmodConsultCarouselService",
+        "pmod-drilldown",
+        "pmod-ontology-element",
+        "pmodResources",
+        "pmodDcsAltMap",
+        "pmodGraph",
+        "pmodAdmin"
     ]);
     module.controller("pctrlViews", [
         "$scope", "$rootScope", "FoundationPanel", "FoundationApi", "QuickActionListService", "$timeout", "AnimationService", "TranslatorService", "GeneralService",
@@ -60,14 +60,14 @@
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                AnimationService.animate(
-                        {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
-                        {in: "slide-in-left", out: "slide-out-right"},
-                        true
-                        );
-                $rootScope.selectedContext = $("#main-content-drilldown");
                 $timeout(function () {
                     $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $("#main-content-drilldown"), out: $rootScope.selectedContext},
+                            {in: "fade-in", out: "fade-out"},
+                            true
+                            );
+                    $rootScope.selectedContext = $("#main-content-drilldown");
                 }, false, 500);
             };
             $scope.onGraph = function (event) {
@@ -81,14 +81,14 @@
                 $rootScope.adminOpts = "";
                 $rootScope.ontologyElementSelected = false;
                 $rootScope.rImages = [];
-                AnimationService.animate(
-                        {in: $("#main-content-graph"), out: $rootScope.selectedContext},
-                        {in: "slide-in-left", out: "slide-out-right"},
-                        true
-                        );
-                $rootScope.selectedContext = $("#main-content-graph");
                 $timeout(function () {
                     $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $("#main-content-graph"), out: $rootScope.selectedContext},
+                            {in: "fade-in", out: "fade-out"},
+                            true
+                            );
+                    $rootScope.selectedContext = $("#main-content-graph");
                 }, false, 500);
             };
             $scope.onDcsAltMap = function (event) {
@@ -105,14 +105,14 @@
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                AnimationService.animate(
-                        {in: $("#main-content-dcsAltMap"), out: $rootScope.selectedContext},
-                        {in: "slide-in-left", out: "slide-out-right"},
-                        true
-                        );
-                $rootScope.selectedContext = $("#main-content-dcsAltMap");
                 $timeout(function () {
                     $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $("#main-content-dcsAltMap"), out: $rootScope.selectedContext},
+                            {in: "fade-in", out: "fade-out"},
+                            true
+                            );
+                    $rootScope.selectedContext = $("#main-content-dcsAltMap");
                 }, false, 500);
             };
             $scope.onResources = function (event) {
@@ -129,14 +129,14 @@
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                AnimationService.animate(
-                        {in: $("#main-content-resources"), out: $rootScope.selectedContext},
-                        {in: "slide-in-left", out: "slide-out-right"},
-                        true
-                        );
-                $rootScope.selectedContext = $("#main-content-resources");
                 $timeout(function () {
                     $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $("#main-content-resources"), out: $rootScope.selectedContext},
+                            {in: "fade-in", out: "fade-out"},
+                            true
+                            );
+                    $rootScope.selectedContext = $("#main-content-resources");
                 }, false, 500);
                 getViewerImages();
             };
@@ -154,14 +154,14 @@
                 if ($rootScope.selectedContext === null) {
                     $rootScope.selectedContext = $("#main-content-graph");
                 }
-                AnimationService.animate(
-                        {in: $("#main-content-admin"), out: $rootScope.selectedContext},
-                        {in: "slide-in-left", out: "slide-out-right"},
-                        true
-                        );
-                $rootScope.selectedContext = $("#main-content-admin");
                 $timeout(function () {
                     $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $("#main-content-admin"), out: $rootScope.selectedContext},
+                            {in: "fade-in", out: "fade-out"},
+                            true
+                            );
+                    $rootScope.selectedContext = $("#main-content-admin");
                 }, false, 500);
             };
             $scope.outHoverMenuOption = function (event) {

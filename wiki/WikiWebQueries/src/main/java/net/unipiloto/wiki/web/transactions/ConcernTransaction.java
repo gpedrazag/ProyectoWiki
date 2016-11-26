@@ -190,10 +190,7 @@ public class ConcernTransaction {
                 concerns.get(i).setDescribedByFR(FunctionalRequerimentTransaction.selectFRByConcernId(concerns.get(i).getId(), conn));
                 concerns.get(i).setDescribedByQA(QualityAttributeTransaction.selectQAByConcenrId(concerns.get(i).getId(), conn));
             }
-
-            if (concerns.isEmpty()) {
-                concerns = null;
-            }
+          
         } finally {
             conn.close();
         }

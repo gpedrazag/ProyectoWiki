@@ -7,7 +7,7 @@
         "TranslatorService",
         "GeneralService",
         function ($rootScope, AnimationService, QuickActionListService, TranslatorService, GeneralService) {
-            this.goTo = function (id, reference, elemOut, cb) {
+            this.goTo = function (id, reference, elemOut, cb, before) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     method: "POST",
@@ -15,6 +15,10 @@
                     data: {id: id}
                 }).done(function (elem) {
                     if (elem !== null) {
+                        if (before) {
+                            cb();
+                            $rootScope.$apply();
+                        }
                         $rootScope.elemData = [];
                         $rootScope.relatedElems = [];
                         $rootScope.elemTypeId = "";
@@ -49,10 +53,44 @@
                                 TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
                                 reference.replace("/", "").replace("/", "").toLowerCase());
 
-                        if (cb) {
+                        if (!before && cb) {
                             cb();
                             $rootScope.$apply();
                         }
+                    }
+                });
+            };
+            this.openModal = function (id, reference, elems, cb) {
+                $.ajax({
+                    url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
+                    data: {id: id},
+                    method: "POST",
+                    dataType: "json"
+                }).done(function (reponse) {
+                    $rootScope.subElemData = [];
+                    $rootScope.subRelatedElems = [];
+                    $rootScope.subElems = elems;
+                    $rootScope.$apply();
+                    if (reponse !== null && reponse.id === id) {
+                        Object.keys(reponse).forEach(function (key) {
+                            if (key !== "id") {
+                                if (typeof reponse[key] !== "object") {
+                                    $rootScope.subElemData.push({key: key, content: reponse[key]});
+                                } else {
+                                    $rootScope.subRelatedElems.push({
+                                        key: key,
+                                        content: (typeof reponse[key].length === "undefined" ? [reponse[key]] : reponse[key])
+                                    });
+                                }
+                            } else {
+                                $rootScope.elemSubTypeId = reponse[key];
+                            }
+                        });
+                        $rootScope.$apply();
+                    }
+                    if (cb) {
+                        cb();
+                        $rootScope.$apply();
                     }
                 });
             };
