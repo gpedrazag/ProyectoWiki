@@ -95,7 +95,7 @@
             };
             $scope.existNext = function () {
                 var pos = findSubElemPos();
-                if (typeof $rootScope.subElems.content !== "undefined") {
+                if ($rootScope.subElems && typeof $rootScope.subElems.content !== "undefined") {
                     return  pos < $rootScope.subElems.content.length - 1;
                 }
                 return  false;
@@ -113,9 +113,15 @@
             $scope.enterEditMode = function () {
                 var i = findSubElemPos();
                 var content = $rootScope.subElems.content[i];
-                ConsultCarouselService.goTo(content.id, content.reference, null, function () {
-                    FoundationApi.closeActiveElements();
-                });
+                ConsultCarouselService.goTo(
+                        content.id,
+                        content.reference,
+                        typeof content.elemOut === "undefined" ? null : content.elemOut,
+                        function () {
+                            $rootScope.graphSelected = "";
+                            $rootScope.$apply();
+                            FoundationApi.closeActiveElements();
+                        });
             };
             $scope.goTo = function (id, reference) {
                 ConsultCarouselService.goTo(id, reference, null, function () {
@@ -156,7 +162,7 @@
                 var obj = {};
                 pos = 0;
                 try {
-                    if (typeof $rootScope.subElems.content !== "undefined") {
+                    if ($rootScope.subElems && typeof $rootScope.subElems.content !== "undefined") {
                         $rootScope.subElems.content.forEach(function (elem) {
                             if (elem.id === $rootScope.elemSubTypeId) {
                                 throw obj;
