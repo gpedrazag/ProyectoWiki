@@ -49,38 +49,37 @@
                         data.forEach(function (data) {
 
                             nodesData.push(
-                                    //TranslatorService.translate(data.reference) + " " + 
-                                            {id: data.reference + "_" + data.id, label: data.id, shape: 'circle', color: getColorbyReference(data.reference)}
-                                    );
-                                    Object.keys(data).forEach(function (key) {
-                                        if (typeof data[key] === "object") {
-                                            var list = [];
-                                            if (data[key].length > 0) {
-                                                list = data[key];
-                                            } else {
-                                                list = [data[key]];
-                                            }
-                                            list.forEach(function (elem) {
-                                                var i = 0;
-                                                while (filter[i]) {
-                                                    if (filter[i] === elem.reference) {
-                                                        try {
-                                                            edgesData.forEach(function (edge) {
-                                                                if (edge.from === elem.reference + "_" + elem.id && edge.to === data.reference + "_" + data.id) {
-                                                                    throw obj;
-                                                                }
-                                                            });
-                                                            edgesData.push({from: data.reference + "_" + data.id, to: elem.reference + "_" + elem.id});
-                                                        } catch (obj) {
+                                    {id: data.reference + "_" + data.id, label: data.id, shape: 'circle', color: getColorbyReference(data.reference)}
+                            );
+                            Object.keys(data).forEach(function (key) {
+                                if (typeof data[key] === "object") {
+                                    var list = [];
+                                    if (data[key].length > 0) {
+                                        list = data[key];
+                                    } else {
+                                        list = [data[key]];
+                                    }
+                                    list.forEach(function (elem) {
+                                        var i = 0;
+                                        while (filter[i]) {
+                                            if (filter[i] === elem.reference) {
+                                                try {
+                                                    edgesData.forEach(function (edge) {
+                                                        if (edge.from === elem.reference + "_" + elem.id && edge.to === data.reference + "_" + data.id) {
+                                                            throw obj;
                                                         }
-                                                    }
-                                                    i++;
+                                                    });
+                                                    edgesData.push({from: data.reference + "_" + data.id, to: elem.reference + "_" + elem.id});
+                                                } catch (obj) {
                                                 }
-                                            });
-
+                                            }
+                                            i++;
                                         }
                                     });
-                                });
+
+                                }
+                            });
+                        });
                     });
                     nodes = new vis.DataSet(nodesData);
                     edges = new vis.DataSet(edgesData);
@@ -111,17 +110,10 @@
                                     data[1],
                                     data[0],
                                     {content: [{id: data[1], reference: data[0], elemOut: $("#main-content-graph")}]},
-                                    {
-                                        firstOnEnter: function () {
-                                            $rootScope.graphSelected = "";
-                                        },
-                                        lastOnEnter: function() {
-                                             FoundationApi.closeActiveElements();
-                                        },
-                                        cb: function () {
-                                            FoundationModal.activate("sub-element-modal")
-                                        }
+                                    function () {
+                                        FoundationModal.activate("sub-element-modal")
                                     }
+
                             );
                         });
                         network.fit();

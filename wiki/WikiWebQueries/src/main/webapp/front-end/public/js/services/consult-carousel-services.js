@@ -7,7 +7,6 @@
         "TranslatorService",
         "GeneralService",
         function ($rootScope, AnimationService, QuickActionListService, TranslatorService, GeneralService) {
-            var firstOnEnter, lastOnEnter;
             this.goTo = function (id, reference, elemOut, cb) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
@@ -16,14 +15,11 @@
                     data: {id: id}
                 }).done(function (elem) {
                     if (elem !== null) {
-                        if (firstOnEnter) {
-                            firstOnEnter();
-                            $rootScope.$apply();
-                        }
                         $rootScope.elemData = [];
                         $rootScope.relatedElems = [];
                         $rootScope.elemTypeId = "";
                         $rootScope.ontologyElementSelected = false;
+                        $rootScope.graphSelected = "";
                         $rootScope.$apply();
                         Object.keys(elem).forEach(function (key) {
                             if (key !== "id") {
@@ -54,18 +50,14 @@
                                 TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
                                 reference.replace("/", "").replace("/", "").toLowerCase());
 
-                        if (cb) {
+                        if (typeof cb !== "undefined") {
                             cb();
                             $rootScope.$apply();
-                        }
-                        if (lastOnEnter) {
-                            lastOnEnter();
-                            $rootScope.$apply();
-                        }
+                        }                        
                     }
                 });
             };
-            this.openModal = function (id, reference, elems, funcs) {
+            this.openModal = function (id, reference, elems, cb) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
@@ -76,10 +68,6 @@
                     $rootScope.subRelatedElems = [];
                     $rootScope.subElems = elems;
                     $rootScope.$apply();
-                    if (funcs) {
-                        firstOnEnter = funcs.firstOnEnter;
-                        lastOnEnter = funcs.lastOnEnter;
-                    }
                     if (reponse !== null && reponse.id === id) {
                         Object.keys(reponse).forEach(function (key) {
                             if (key !== "id") {
@@ -97,8 +85,8 @@
                         });
                         $rootScope.$apply();
                     }
-                    if (funcs.cb) {
-                        funcs.cb();
+                    if (typeof cb !== "undefined") {
+                        cb();
                         $rootScope.$apply();
                     }
                 });
