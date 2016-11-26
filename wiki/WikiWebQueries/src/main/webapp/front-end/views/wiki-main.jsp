@@ -19,7 +19,7 @@
     </head>
     <body ng-controller="pctrlViews">
         <pdirec:nav></pdirec:nav>
-        <pdirec:content ng-if="graphSelected === ''"></pdirec:content>
+        <pdirec:content></pdirec:content>
         <div 
             id="main-content-graph" 
             ng-controller="pctrlGraph" 

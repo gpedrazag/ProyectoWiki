@@ -7,7 +7,8 @@
         "TranslatorService",
         "GeneralService",
         function ($rootScope, AnimationService, QuickActionListService, TranslatorService, GeneralService) {
-            this.goTo = function (id, reference, elemOut, cb, before) {
+            var firstOnEnter, lastOnEnter;
+            this.goTo = function (id, reference, elemOut, cb) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     method: "POST",
@@ -15,8 +16,8 @@
                     data: {id: id}
                 }).done(function (elem) {
                     if (elem !== null) {
-                        if (before) {
-                            cb();
+                        if (firstOnEnter) {
+                            firstOnEnter();
                             $rootScope.$apply();
                         }
                         $rootScope.elemData = [];
@@ -45,7 +46,7 @@
                         AnimationService.animate(
                                 {in: $rootScope.selectedContext, out: elemOut},
                                 {in: "fade-in", out: "fade-out"},
-                                false
+                                true
                                 );
                         QuickActionListService.addAction(
                                 "action:" + $rootScope.elemTypeId,
@@ -53,14 +54,18 @@
                                 TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
                                 reference.replace("/", "").replace("/", "").toLowerCase());
 
-                        if (!before && cb) {
+                        if (cb) {
                             cb();
+                            $rootScope.$apply();
+                        }
+                        if (lastOnEnter) {
+                            lastOnEnter();
                             $rootScope.$apply();
                         }
                     }
                 });
             };
-            this.openModal = function (id, reference, elems, cb) {
+            this.openModal = function (id, reference, elems, funcs) {
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                     data: {id: id},
@@ -71,6 +76,10 @@
                     $rootScope.subRelatedElems = [];
                     $rootScope.subElems = elems;
                     $rootScope.$apply();
+                    if (funcs) {
+                        firstOnEnter = funcs.firstOnEnter;
+                        lastOnEnter = funcs.lastOnEnter;
+                    }
                     if (reponse !== null && reponse.id === id) {
                         Object.keys(reponse).forEach(function (key) {
                             if (key !== "id") {
@@ -88,8 +97,8 @@
                         });
                         $rootScope.$apply();
                     }
-                    if (cb) {
-                        cb();
+                    if (funcs.cb) {
+                        funcs.cb();
                         $rootScope.$apply();
                     }
                 });

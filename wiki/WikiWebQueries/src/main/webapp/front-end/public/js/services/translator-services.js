@@ -1,9 +1,9 @@
 (function (angular) {
     var module = angular.module("pmodTranslatorServices", []);
-        
+
     module.service("TranslatorService", function () {
         var dictionary = {
-            relatedDecisions: "Decisiones relacionadas", 
+            relatedDecisions: "Decisiones relacionadas",
             haveEvaluation: "Evaluaciones realizadas",
             haveDecisions: "Decisiones tomadas",
             describedByQA: "Atributos de calidad que influenciaron",

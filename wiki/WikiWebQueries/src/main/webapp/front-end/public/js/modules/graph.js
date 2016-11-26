@@ -7,7 +7,9 @@
         "TranslatorService",
         "FoundationModal",
         "ConsultCarouselService",
-        function ($scope, $timeout, TranslatorService, FoundationModal, ConsultCarouselService) {
+        "$rootScope",
+        "FoundationApi",
+        function ($scope, $timeout, TranslatorService, FoundationModal, ConsultCarouselService, $rootScope, FoundationApi) {
             $scope.checkList = [];
             $scope.checkList.push({reference: "/Alternative/", color: "#DA2323", checked: false});
             $scope.checkList.push({reference: "/Assumption/", color: "#D7DA23", checked: false});
@@ -108,11 +110,19 @@
                             ConsultCarouselService.openModal(
                                     data[1],
                                     data[0],
-                                    {content: [{id: data[1], reference: data[0], elemOut:$("#main-content-graph")}]},
-                                    function () {
-                                        FoundationModal.activate("sub-element-modal");
-                                    },
-                                    true);
+                                    {content: [{id: data[1], reference: data[0], elemOut: $("#main-content-graph")}]},
+                                    {
+                                        firstOnEnter: function () {
+                                            $rootScope.graphSelected = "";
+                                        },
+                                        lastOnEnter: function() {
+                                             FoundationApi.closeActiveElements();
+                                        },
+                                        cb: function () {
+                                            FoundationModal.activate("sub-element-modal")
+                                        }
+                                    }
+                            );
                         });
                         network.fit();
                     }, 1200, false);

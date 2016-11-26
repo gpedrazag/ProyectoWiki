@@ -118,8 +118,6 @@
                         content.reference,
                         typeof content.elemOut === "undefined" ? null : content.elemOut,
                         function () {
-                            $rootScope.graphSelected = "";
-                            $rootScope.$apply();
                             FoundationApi.closeActiveElements();
                         });
             };
