@@ -10,7 +10,7 @@
         </section>
     </div>
     <div id="drilldown-content" class="grid-block small-8 medium-8 large-8" style="text-align: center">
-        <div class="grid-block vertical">
+        <div class="grid-block vertical" ng-if="elemType === 'views'">
             <div class="grid-block" style="margin-top: 8px;" ng-repeat="row in getN(10) track by $index">
                 <div class="grid-block small-1 medium-3 large-3"></div>
                 <div class="grid-block small-5 medium-3 large-3" ng-repeat="col in [1, 2] track by $index">
@@ -28,6 +28,19 @@
                 </div>
                 <div class="grid-block small-1 medium-3 large-3"></div>
             </div>
+        </div>
+        <div class="grid-block vertical" ng-if="elemType === 'views'">
+            <zf-accordion>
+                <zf-accordion-item title="{{indv}}" ng-repeat="indv in drilldownIndvs $track by $index">
+                    <section class="block-list">
+                        <ul>
+                            <li ng-repeat="l in list track by $index" ng-click="do($index, $event);">
+                                <span>{{l}}</span>
+                            </li>                            
+                        </ul>
+                    </section>
+                </zf-accordion-item>
+            </zf-accordion>
         </div>
     </div> 
 </div>

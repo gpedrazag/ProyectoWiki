@@ -175,6 +175,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#haveSubView -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sa#haveSubView">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/sa#isaChangeOf -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sa#isaChangeOf">
@@ -203,6 +212,16 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sa#isaSetOf">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#SoftwareArchitecture"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#relatedDecisions -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/sa#relatedDecisions">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ContextView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/sa#Decision"/>
     </owl:ObjectProperty>
     
@@ -295,7 +314,14 @@
 
     <!-- http://www.semanticweb.org/sa#content -->
 
-    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#content"/>
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#content">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ConcurrenceView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ContextView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#InformationView"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
     
 
 
@@ -359,6 +385,15 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#establishedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#establishedBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.semanticweb.org/sa#expectative -->
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#expectative">
@@ -386,11 +421,16 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Assumption"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Change"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Concern"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ConcurrenceView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ContextView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Criteria"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Evaluation"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalRequeriment"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#InformationView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Privilege"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#RelationName"/>
@@ -461,9 +501,14 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#name">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ConcurrenceView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#ContextView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalRequeriment"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#InformationView"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#QualityAttributeStage"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#RelationName"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Responsible"/>
@@ -477,6 +522,15 @@
 
     <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#new_content">
         <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Change"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#observations -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/sa#observations">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -621,9 +675,25 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#ConcurrenceView -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#ConcurrenceView">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sa#Views"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/sa#Constraint -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sa#Constraint"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ContextView -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#ContextView">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sa#Views"/>
+    </owl:Class>
     
 
 
@@ -639,6 +709,14 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#DeploymentView -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#DeploymentView">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sa#Views"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.semanticweb.org/sa#Evaluation -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sa#Evaluation"/>
@@ -648,6 +726,22 @@
     <!-- http://www.semanticweb.org/sa#FunctionalRequeriment -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sa#FunctionalRequeriment"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#FunctionalView -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#FunctionalView">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sa#Views"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#InformationView -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#InformationView">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sa#Views"/>
+    </owl:Class>
     
 
 
@@ -684,6 +778,12 @@
     <!-- http://www.semanticweb.org/sa#User -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sa#User"/>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#Views -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sa#Views"/>
     
 
 
@@ -1107,6 +1207,28 @@
     
 
 
+    <!-- http://www.semanticweb.org/sa#ALT-37 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-37">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El jefe de la misión envía un comando de cancelación desde el Centro de Comando y Control</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-37</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rationale>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#ALT-38 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ALT-38">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Alternative"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El vehículo automáticamente aborta la misión</description>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ALT-38</id>
+        <rationale rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La latencia entre vehículo y C3 es muy alta para lanzar comando de abortar misión</rationale>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/sa#ARTF-01 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#ARTF-01">
@@ -1230,6 +1352,36 @@
         <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Existen trabajos relacionados que definen un estilo.</description>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ASMPT-04</id>
         <source rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ninguna registrada</source>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#CCCEVW-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#CCCEVW-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#ConcurrenceView"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El anterior diagrama muestra los diferentes threads y procesos que debe contar el centro de comando y control. Un pool de threads se encarga de la recepción de la información de los sensores y el almacenamiento en un buffer compartido. Luego de esto, un thread creador extrae desde el buffer la información y va armando en memoria secundaria toda la información relevante. Por otro lado, un thread observador revisa los cambios realizados y va notificando a los agentes competentes de estos cambios, también se encarga de todas las solicitudes que los agentes envían y la resolución de estas.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CCCEVW-01</id>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#CNTXVW-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#CNTXVW-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#ContextView"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-01"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-05"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-14"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-18"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">En la definición de la arquitectura general se han tenido en cuenta aspectos tales como: priorización del manejo de datos con un prototipo funcional para el manejo de los mismos, restando importancia a la usabilidad del sistema, también se busca desarrollar lo menos posible utilizando la mayor cantidad posible de librerías posibles El diagrama muestra el contexto principal del centro de comando y control. El C3 va a tener conexión a la plataforma en tierra y también se recibirá información de fuentes de externas. La información enviada desde el sitio de lanzamiento debe ser discriminada en información telemétrica del vehículo, información audiovisual e información de control.
+
+Por el canal de control son enviadas todas las instrucciones de verificación de estado o de ejecución, que puede ser desde la plataforma en tierra o desde el Centro de Control.
+
+Además la transmisión de video a usuarios externos, que están interesados en observar la misión, la difundirá el C3.
+
+Todos los anteriores se manejaran por medio de conexión en Internet. El punto de control se comunica con el vehículo gracias a una antena. Se muestran los principales actores y las relaciones entre ellos para el proyecto, todos estos son importantes para poder conseguir el objetivo del proyecto.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CNTXVW-01</id>
     </owl:NamedIndividual>
     
 
@@ -1491,6 +1643,84 @@
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-17</id>
         <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Definir el canal de comunicación entre plataforma en tierra y el C3.</name>
         <state rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Completo.</state>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DCS-18 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DCS-18">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Decision"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-37"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#ALT-38"/>
+        <decisionHave rdf:resource="http://www.semanticweb.org/sa#RSP-01"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DCS-18</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Cancelar misión.</name>
+        <state rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Completo</state>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DPLVW-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DPLVW-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <haveSubView rdf:resource="http://www.semanticweb.org/sa#DPLVW-02"/>
+        <haveSubView rdf:resource="http://www.semanticweb.org/sa#DPLVW-03"/>
+        <haveSubView rdf:resource="http://www.semanticweb.org/sa#DPLVW-04"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El diagrama muestra el despliegue del centro de control y comando. En este diagrama no se muestra el número total de máquinas que el C3 debe tener, ya que depende de cada una de las misiones. Se puede diferenciar las maquinas que presenta el C3 en cuatro categorías:
+
+Máquinas de alto procesamiento y gran cantidad de memoria principal: Máquina(s) de manejo del mundo (kernel), máquina(s) de procesamiento de visualización, maquina(s) de simulaciones. Procesan gran cantidad de información y deben responder eficientemente a cualquier petición que se les asigne
+
+Máquinas de alta capacidad de memoria secundaria: Sistema de auditoría y monitoreo, Máquina donde se corre el agente de persistencia.
+
+Máquinas normales: Procesan información, tienen su propia memoria secundaria necesaria y ejecutan tareas a una velocidad normal
+
+Buses: Reciben y envían información a la mayor velocidad posible.
+
+También se muestra el tipo de conexión que debería tener entre cada uno de las máquinas. Los requerimientos de funcionamiento óptimo en hardware que se espera para una máquina de cliente son: Procesador: 2.93Ghz Intel Core i3 (Dual Core) Memoria RAM: 4GB DDR3 Disco Duro: 500GB SATA II Tarjeta Gráfica: 512MB GDDR5 ATI HD5670
+
+Estos requerimientos son basados en computadores utilizados para el monitoreo personalizado de indicadores de bolsa. Las demás maquinas dependerán para la funcionalidad que se les asigne.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DPLVW-01</id>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DPLVW-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DPLVW-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El diagrama muestra el despliegue del Core del C3, se tienen dos máquinas y dos dispositivos donde se están ejecutando los componentes principales.
+
+La maquina más potente es la del mundo o kernel ya que debe garantizar la mayor capacidad y eficiencia en hardware por los grandes cálculos y cantidad de memoria que debe utilizar.
+
+Los agentes pueden estar ejecutándose en una misma máquina o cada uno en diferente maquina, esto da la flexibilidad suficiente para poder realizar estas acciones. El bus de agentes es una maquina de media a gran capacidad para poder soportar las conexiones de los agentes. El bus del mundo debe estar en una maquina que garantice la recepción y envió de datos de manera eficiente y rápida.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DPLVW-02</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Deployment Diagram Core C3</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DPLVW-03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DPLVW-03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El diagrama muestra el despliegue de los componentes en el vehículo considerando que todas las misiones son telemétricas, de tele presencia o autónomas. Esto debemos manejarlo con varios caminos de acceso a los distintos componentes que en su mayoría son físicos, además se debe aislar cada componente para evitar los errores en cascada. Esto se puede evidenciar dentro del diagrama. Todo esto es basado en información de la NASA y de la agencia aeroespacial europea, que además recomiendan redundancia, factores de seguridad y distintos caminos de activación.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DPLVW-03</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vehicle Deployment Diagram</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#DPLVW-04 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#DPLVW-04">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#DeploymentView"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">En el diagrama se puede apreciar cómo es el despliegue físico en el sitio de lanzamiento, en el que se deben usar múltiples dispositivos para recibir señales y poderlas transmitir al C3.
+
+Hay que tener en cuenta que en el componente Plataforma en tierra está el software diseñado que debe ser lo suficientemente ligero para ser ejecutado en un computador portátil con buenas especificaciones. Los computadores de soporte son usados para ejecutar el componente de recepción del vehículo, en el que se entienden las tramas recibidas por cada antena, y luego de procesarlas eliminando el “ruido” se las envía al componente de la plataforma en tierra para su publicación. Finalmente, las cámaras también capturan video con un software que luego lo envía al C3.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">DPLVW-04</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Earth Platform Deployment diagram.</name>
     </owl:NamedIndividual>
     
 
@@ -1833,6 +2063,94 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
     
 
 
+    <!-- http://www.semanticweb.org/sa#FNCVW-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FNCVW-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-04"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-07"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-09"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-10"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-18"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Debido a que es necesario un componente flexible para la integración con los equipos electrónicos de comunicación con el vehículo fue necesario desacoplar el sistema de la Plataforma en Tierra en dos módulos: Plataforma en Tierra y Nodo de Control.
+
+La configuración de la integración con los dispositivos electrónicos de comunicación (Antenas) varía significativamente con el tiempo, o incluso entre prototipos. Es por esto que dicha funcionalidad fue delegada a un componente a parte: el Nodo de Control. Su principal función es la recepción de la información recibida por la antena receptora y transmitírsela a la Plataforma en Tierra. También se delegó la posibilidad de realizar filtros y discriminar la información relevante del ruido de la transmisión.
+
+Por otra parte, la función de la Plataforma en Tierra es la de la propagación del estado telemétrico del vehículo al C3, a la vez que debe ser autosuficiente para tomar decisiones rápidas. Es de esta manera que hay un componente de recepción y otro de emisión, y también un componente de procesamiento que se encarga de las tramas llegadas y el componente de reglas ECA (Evento, condición, acción) que validará ciertos estados específicos bajo los cuales se deben dar comandos automáticos al vehículo. Se toma en consideración que el número de tramas de recibidas son 2000 por segundo y la capacidad de procesamiento es de aproximadamente la mitad de la capacidad.
+
+Cada uno de los componentes funciona en hilos independientes, que son controlados por los módulos de control. Estos módulos funcionan como motores ECA (Evento, Condición, Acción) que ante instrucciones del usuario pueden controlar el funcionamiento propio del módulo.
+
+No hay que olvidar que dado que uno de los motivadores de negocio es la recuperación de los datos, el sistema es redundante y almacena en cada uno de los Nodos de Control y en la Plataforma en Tierra la información recibida del vehículo.
+
+Finalmente para la publicación de video, la Plataforma en Tierra funciona solo como un puente debido a que por restricciones tecnológicas es el único componente que dispondrá con conexión a internet.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FNCVW-01</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Platform Component Model</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#FNCVW-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FNCVW-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-05"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-10"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-15"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-18"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">La arquitectura del vehículo estándar sigue un modelo general propuesto por la NASA en sus diferentes misiones. El diagrama muestra los componentes principales que realizan diferentes acciones del vehículo de la siguiente manera:
+
+Un sistema de seguridad encargado de monitorear los demás componentes, Un conjunto de dispositivos de comunicación entratnte y saliente, la red de instrumentación, los dispositivos periféricos y la red de potencia El sistema de red eléctrica puede activar o desactivar elementos de todos los sistemas del vehículo (iniciar/apagar componentes), pero solo el sistema de seguridad tiene acceso a él.
+
+El sistema de procesamiento se encarga de organizar los datos y en con ayuda de un lazo cerrado de control es posible el ajuste de ciertos periféricos. El sistema de comunicaciones recibe directamente del sistema de procesamiento la información saliente de manera ordenada, la cifra y la envía por los canales de salida, las señales entrantes son dirigidas al sistema de seguridad para su validación.
+
+Los dispositivos periféricos incluyen amplificador de señal, filtro, acondicionadores y convertidor A/D para aumentar su velocidad de respuesta y envió de información.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FNCVW-02</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Standard Vehicle Component Model</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#FNCVW-03 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#FNCVW-03">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#FunctionalView"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-04"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-05"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-10"/>
+        <relatedDecisions rdf:resource="http://www.semanticweb.org/sa#DCS-18"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Para el diseño del C3 se prioriza el manejo de datos con dos interfaces: datos y video, se recurre a Python porque ofrece librerías para graficar datos. El diagrama muestra los principales componentes, agentes y buses que debe tener el centro de control y comando. El mundo o kernel se va autoconstruyendo constantemente dependiendo de la información que esté llegando desde la plataforma y del vehículo, también se construye dependiendo de las misiones que se están presentando y de las direcciones que se les presenten.
+
+Los agentes son observadores del kernel, con cada pequeño cambio van tomando decisiones al respecto y realizan una acción dependiendo de la acción realizada. Los agentes son autónomos, adaptables, y comunicativos con el sistema de visualización. Se pueden configurar nuevos agentes o también modificar los que ya se tienen.
+
+Esto permite que el sistema pueda ser modificado dependiendo de los requerimientos que se tengan para cada misión. Los agentes van informando al sistema de visualización con respecto a las decisiones tomadas y las acciones registradas.
+
+Los buses se tuvieron en cuenta para que la comunicación fuera efectiva entre los agentes, el mundo y la recepción desde la plataforma. También se usan sistemas comunes de autenticación, visualización y comunicación de usuarios.
+
+
+Core Model Component C3
+
+El diagrama muestra los principales componentes del core o núcleo principal del C3.
+
+El bus de agentes tendrá todas las conexiones a los agentes y al manejador de agentes, que se encargara de toda la configuración de los agentes. El mundo se construirá constantemente desde el buffer y éste se auto regulará, ya que el bus de recepción y transmisión también se mantiene incluyendo información de forma constante a éste buffer a una velocidad diferente a la de lectura.
+
+Los agentes recibirán los cambios y tomaran decisiones dependiendo de lo que se requiera. El bus de agentes regulara y mantendrá la información de los agentes para que ningún otro a menos que sea autorizado se conecte a él. Esto puede cambiar, realizando un manejador de agentes que controle esta información si es necesario.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">FNCVW-03</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Component Model C3</name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#INFOVW-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#INFOVW-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#InformationView"/>
+        <content rdf:datatype="http://www.w3.org/2001/XMLSchema#string">El diagrama muestra que la información que se recibe de los sensores del cohete es enviada a la plataforma/vehículo y este lo transforma y lo envía al centro de control y comando. En el centro de comando y control, esta información es procesada, se persiste y se visualiza a los usuarios. En el caso de envío de órdenes, las ordenes se generan directamente en el centro de comando y control, se cifra, se envía, la plataforma se asegura de que la información proviene del C3 descifra los comandos y los vuelve a cifrar para poder enviarse al cohete, el cohete recibe, descifra y ejecuta los comandos. Es necesaria la encriptación de las órdenes ya que nos aseguramos de que el cohete ejecute órdenes provenientes solamente del C3. Es un diagrama de alto nivel entre los principales actores que manejan información de las misiones.</content>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">INFOVW-01</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Information Flow Model</name>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.semanticweb.org/sa#MAE-01 -->
 
     <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#MAE-01">
@@ -1911,6 +2229,32 @@ Las instrucciones de aborto de las misiones deben ser procesadas en menos de 1 s
         <rdf:type rdf:resource="http://www.semanticweb.org/sa#Privilege"/>
         <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PRV-02</id>
         <privilege_type rdf:datatype="http://www.w3.org/2001/XMLSchema#string">admin</privilege_type>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#RA-01 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#RA-01">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Los periféricos de instrumentación y sensores están en constante cambio debido al avance de la tecnología, por esta razón la mayoría de las empresas de desarrollo en instrumentación construyen sus controladores e instrumentos de manera cerrada, convirtiendo a estos en cajas negras heterogéneas de adquisición de datos. El sistema debe ser capaz de adaptarse a cualquiera de dichos dispositivos.</description>
+        <establishedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Universidad de los Andes y grupo PUA.</establishedBy>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RA-01</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Instrumentación electrónica periférica tipo caja negra</name>
+        <observations rdf:datatype="http://www.w3.org/2001/XMLSchema#string">En esta ocasión el quipo PUA-Saturn es el encargado de desarrollar los dispositivos electrónicos a bordo del vehículo.</observations>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/sa#RA-02 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/sa#RA-02">
+        <rdf:type rdf:resource="http://www.semanticweb.org/sa#Constraint"/>
+        <description rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Las instituciones gubernamentales como la Aerocivil, la fuerza Aérea, el IDEAM y similares proveen de servicios en internet que le permiten a los usuarios (naturales o privados) acceder a cierta información relevante tales como: planes de vuelo, mapas geográficos, variables climáticas, etc.</description>
+        <establishedBy rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Aerocivil, FAC e instituciones gubernamentales.</establishedBy>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RA-02</id>
+        <name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Protocolo de comunicación con organizaciones externas.</name>
+        <observations rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Los portales web de las distintas agencias proveen de servicios de información tanto en tiempo real como registros históricos.</observations>
     </owl:NamedIndividual>
     
 
@@ -2081,5 +2425,5 @@ Centro Comando Control Mision (C3) recibe información de la plataforma en tierr
 
 
 
-<!-- Generated by the OWL API (version 4.2.6.20160910-2108) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
 

@@ -3,6 +3,7 @@
         
     module.service("TranslatorService", function () {
         var dictionary = {
+            relatedDecisions: "Decisiones relacionadas", 
             haveEvaluation: "Evaluaciones realizadas",
             haveDecisions: "Decisiones tomadas",
             describedByQA: "Atributos de calidad que influenciaron",
@@ -19,9 +20,9 @@
             triggerArtifacts: "Artefactos que se crearon para satisfacer el atributo de calidad",
             decisions: "Decisiones tomadas por el responsable",
             relatedArtifacts: "Artefactos que componen la arquitectura",
-            relatedDecisions: "Decisiones relacionadas a la arquitectura",
             linkAlternative: "Alternativas evaluadas",
             rationale: "Razón o justificación",
+            information: "Información relacionada",
             description: "Descripción",
             name: "Nombre",
             source: "Fuento u origen",
@@ -54,7 +55,12 @@
             "/QualityAttributeStage/": "Atributo de Calidad",
             "/Responsible/": "Responsable",
             "/SoftwareArchitecture/": "Arquitectura de Software",
-            "/Artifact/": "Artefacto"
+            "/Artifact/": "Artefacto",
+            "InformationView": "Vistas de Información",
+            "FunctionalView": "Vistas Funcionales",
+            "ContextView": "Vistas de Contexto",
+            "DeploymentView": "Vistas de Despliegue",
+            "ConcurrenceView": "Vistas de Concurrencia"
         };
 
         this.translate = function (key) {

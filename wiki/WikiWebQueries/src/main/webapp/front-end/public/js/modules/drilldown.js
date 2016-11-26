@@ -10,7 +10,7 @@
             $scope.list = [
                 "Alternativas", "Arquitecturas de Software", "Artefactos",
                 "Atributos de Calidad", "Criterios", "Decisiones",
-                "Evaluaciones", "Requerimientos Funcionales", "Responsables"
+                "Evaluaciones", "Requerimientos Funcionales", "Responsables", "Vistas"
             ];
             $scope.do = function (i, event) {
                 if(event) {
@@ -46,8 +46,10 @@
                 } else if (i === 8) {
                     url = "/" + window.location.pathname.split("/")[1] + "/Responsible/selectAll";
                     $rootScope.elemType = "responsible";
+                } else if (i === 9) {
+                    url = "/" + window.location.pathname.split("/")[1] + "/Views/selectAll";
+                    $rootScope.elemType = "views";
                 }
-
                 $.ajax({
                     url: url,
                     method: "POST",
@@ -161,6 +163,9 @@
                     });
                 }
                 return false;
+            };
+            $scope.translate = function(key) {
+                
             };
         }]).directive("pdirecDrilldown", function () {
         return {
