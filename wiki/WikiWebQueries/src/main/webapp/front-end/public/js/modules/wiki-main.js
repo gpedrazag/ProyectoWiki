@@ -28,7 +28,7 @@
             $rootScope.dcsAltMapSelected = "";
             $rootScope.ontologyElementSelected = false;
             $rootScope.actualReference = "";
-            $rootScope.drilldownIndvs = [];
+            $rootScope.rDrilldownIndvs = [];
             $rootScope.user = null;
 
             $scope.haveEditPrivilege = function () {

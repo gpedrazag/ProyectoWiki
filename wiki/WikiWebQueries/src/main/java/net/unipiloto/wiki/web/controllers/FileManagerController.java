@@ -19,6 +19,7 @@ import net.unipiloto.wiki.web.transactions.FunctionalRequerimentTransaction;
 import net.unipiloto.wiki.web.transactions.QualityAttributeTransaction;
 import net.unipiloto.wiki.web.transactions.ResponsibleTransaction;
 import net.unipiloto.wiki.web.transactions.SoftwareArchitectureTransaction;
+import net.unipiloto.wiki.web.transactions.ViewTransaction;
 import org.apache.sling.commons.json.JSONException;
 import org.boon.json.JsonFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -230,6 +231,13 @@ public class FileManagerController {
                     SoftwareArchitectureTransaction.deleteContent(oc);
                 } else {
                     SoftwareArchitectureTransaction.updateContent(oc, nc);
+                }
+                break;
+            case "/Views/":
+                if (action == 0) {
+                    ViewTransaction.deleteContent(oc);
+                } else {
+                    ViewTransaction.updateContent(oc, nc);
                 }
                 break;
         }

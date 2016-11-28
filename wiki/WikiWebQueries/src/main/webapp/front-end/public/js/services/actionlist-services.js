@@ -33,6 +33,7 @@
                                 $rootScope.subRelatedElems = [];
                                 $rootScope.elemTypeId = "";
                                 $rootScope.ontologyElementSelected = false;
+                                $rootScope.rDrilldownIndvs = [];
                                 $rootScope.$apply();
                                 Object.keys(response).forEach(function (key) {
                                     if (key !== "id") {

@@ -8,7 +8,8 @@
         "TranslatorService",
         "ImageService",
         "ConsultCarouselService",
-        function ($scope, $rootScope, FoundationApi, TranslatorService, ImageService, ConsultCarouselService) {
+        "GeneralService",
+        function ($scope, $rootScope, FoundationApi, TranslatorService, ImageService, ConsultCarouselService, GeneralService) {
             var pos = 0;
             $scope.haveSolutions = {};
             $scope.dcsWithOutsol = false;
@@ -125,6 +126,15 @@
                 ConsultCarouselService.goTo(id, reference, null, function () {
                     FoundationApi.closeActiveElements();
                 });
+            };            
+            $scope.haveNameButNotDescription = function (data) {
+                return GeneralService.haveNameButNotDescription(data);
+            };
+            $scope.getRelatedElemsVisibleContent = function(content) {
+                if(content.trim().indexOf("</div>") >= 0) {
+                    content = $(content)[0].innerText;
+                }
+                return content;
             };
 
             function findElem(id, reference) {

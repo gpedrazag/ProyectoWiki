@@ -22,13 +22,14 @@
             relatedArtifacts: "Artefactos que componen la arquitectura",
             linkAlternative: "Alternativas evaluadas",
             rationale: "Razón o justificación",
-            information: "Información relacionada",
+            content: "Información relacionada",
             description: "Descripción",
             name: "Nombre",
             source: "Fuento u origen",
             concern: "Preocupación o interés",
             keyword: "Palabras clave",
             "arguments": "Argumentos",
+            type:"Tipo",
             state: "Estado",
             pros: "Pros",
             cons: "Contras",
@@ -56,11 +57,12 @@
             "/Responsible/": "Responsable",
             "/SoftwareArchitecture/": "Arquitectura de Software",
             "/Artifact/": "Artefacto",
+            "/Views/": "Vista",
             "InformationView": "Vistas de Información",
             "FunctionalView": "Vistas Funcionales",
             "ContextView": "Vistas de Contexto",
             "DeploymentView": "Vistas de Despliegue",
-            "ConcurrenceView": "Vistas de Concurrencia"
+            "ConcurrenceView": "Vistas de Concurrencia"            
         };
 
         this.translate = function (key) {

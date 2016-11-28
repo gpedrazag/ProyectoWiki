@@ -99,15 +99,15 @@ public class DecisionTransaction {
         Decision decision = JsonFactory.fromJson(selectById(id), Decision.class);
         delete(id);
         insert(
-                id, 
-                name.equals("-_-")?decision.getName():name, 
-                arguments.equals("-_-")?decision.getArguments():arguments, 
-                state.equals("-_-")?decision.getState():state, 
-                decision.getMayHaveConstraints(), 
-                decision.getHaveCriterias(), 
-                decision.getMayHaveAssumptions(), 
-                decision.getHaveAsTriggerConcerns(), 
-                decision.getHaveResponsibles(), 
+                id,
+                name.equals("-_-") ? decision.getName() : name,
+                arguments.equals("-_-") ? decision.getArguments() : arguments,
+                state.equals("-_-") ? decision.getState() : state,
+                decision.getMayHaveConstraints(),
+                decision.getHaveCriterias(),
+                decision.getMayHaveAssumptions(),
+                decision.getHaveAsTriggerConcerns(),
+                decision.getHaveResponsibles(),
                 decision.getHaveAlternatives()
         );
     }
@@ -152,6 +152,59 @@ public class DecisionTransaction {
                     + "?d <http://www.semanticweb.org/sa#state> ?state "
                     + "} "
                     + "ORDER BY ?id"
+            );
+            TupleQueryResult result = tq.evaluate();
+            while (result.hasNext()) {
+
+                BindingSet bs = result.next();
+                decisions.add(
+                        new Decision(
+                                bs.getValue("id").stringValue(),
+                                bs.getValue("name").stringValue(),
+                                bs.getValue("arguments").stringValue(),
+                                bs.getValue("state").stringValue()
+                        ));
+
+            }
+
+            if (decisions.isEmpty()) {
+                decisions = null;
+            }
+        } finally {
+            if (connection == null) {
+                conn.close();
+
+            }
+        }
+
+        return decisions;
+    }
+
+    public static List<Decision> selectAllDecisionsByViewID(String id, RepositoryConnection connection) {
+        List<Decision> decisions = new ArrayList();
+
+        Repository repo = null;
+        RepositoryConnection conn = null;
+        if (connection != null) {
+            conn = connection;
+        } else {
+            repo = OntologyTools.getInstance();
+            repo.initialize();
+            conn = repo.getConnection();
+        }
+
+        try {
+            TupleQuery tq = conn.prepareTupleQuery(QueryLanguage.SPARQL,
+                    "SELECT ?id ?name ?content ?arguments ?state \n"
+                    + "WHERE { \n"
+                    + "	?type <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.semanticweb.org/sa#Views> .\n"
+                    + "	<http://www.semanticweb.org/sa#"+id+"> a ?type .\n"
+                    + "	<http://www.semanticweb.org/sa#"+id+"> <http://www.semanticweb.org/sa#relatedDecisions> ?decision.\n"
+                    + " ?decision <http://www.semanticweb.org/sa#id> ?id . \n"
+                    + " ?decision <http://www.semanticweb.org/sa#name> ?name . \n"
+                    + " ?decision <http://www.semanticweb.org/sa#arguments> ?arguments . \n"
+                    + " ?decision <http://www.semanticweb.org/sa#state> ?state \n"
+                    + "} ORDER BY ?id"
             );
             TupleQueryResult result = tq.evaluate();
             while (result.hasNext()) {
@@ -278,20 +331,20 @@ public class DecisionTransaction {
 
         return decisions;
     }
-    
+
     public static String haveSolution(String id) {
         boolean haveSolution = false;
         Repository repo = OntologyTools.getInstance();
         repo.initialize();
         RepositoryConnection conn = repo.getConnection();
         List<Alternative> l = AlternativeTransaction.selectAllAlternativesByDecisionId(id, conn);
-        for(Alternative a : l) {
-            if(!a.getRationale().trim().equals("")) {
+        for (Alternative a : l) {
+            if (!a.getRationale().trim().equals("")) {
                 haveSolution = true;
                 break;
             }
         }
-        return "{\"value\":"+haveSolution+", \"id\":\""+id+"\"}";
+        return "{\"value\":" + haveSolution + ", \"id\":\"" + id + "\"}";
     }
 
     public static String selectById(String id) {
@@ -364,7 +417,7 @@ public class DecisionTransaction {
                 decisions.get(i).setHaveAsTriggerConcerns(ConcernTransaction.selectAllConcernsByDecisionId(decisions.get(i).getId(), conn));
                 decisions.get(i).setHaveCriterias(CriteriaTransaction.selectAllCriteriasByDecisionId(decisions.get(i).getId(), conn));
                 decisions.get(i).setHaveResponsibles(ResponsibleTransaction.selectAllResponsiblesByDecisionId(decisions.get(i).getId(), conn));
-                decisions.get(i).setMayHaveAssumptions(AssumptionTransaction.selectAllAssumptionsByDecisionId(decisions.get(i).getId(), conn));                
+                decisions.get(i).setMayHaveAssumptions(AssumptionTransaction.selectAllAssumptionsByDecisionId(decisions.get(i).getId(), conn));
             }
         } finally {
             conn.close();
@@ -373,7 +426,7 @@ public class DecisionTransaction {
 
         return JsonFactory.toJson(decisions);
     }
-    
+
     public static void deleteContent(String content) {
         List<Decision> l = JsonFactory.fromJsonArray(selectAll(), Decision.class);
         l.stream().forEach((a) -> {
@@ -391,7 +444,7 @@ public class DecisionTransaction {
                     a.setState(a.getState().replace(content, ""));
                     i++;
                 }
-                
+
                 if (i > 0) {
                     update(a.getId(), a.getName(), a.getArguments(), a.getState());
                 }
@@ -418,7 +471,7 @@ public class DecisionTransaction {
                     a.setState(a.getState().replace(oc, nc));
                     i++;
                 }
-                
+
                 if (i > 0) {
                     update(a.getId(), a.getName(), a.getArguments(), a.getState());
                 }

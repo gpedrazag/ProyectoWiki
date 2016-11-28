@@ -35,6 +35,8 @@
                                 $rootScope.elemTypeId = elem[key];
                             }
                         });
+                        $rootScope.elemType = reference.replace("/", "").replace("/", "").toLowerCase();
+                        $rootScope.viewDataType = typeof elem.type !== "undefined" ? elem.type : "";
                         $rootScope.ontologyElementSelected = true;
                         $rootScope.chkList = GeneralService.getCheckedStructure();
                         $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
@@ -48,7 +50,7 @@
                                 "action:" + $rootScope.elemTypeId,
                                 "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                                 TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
-                                reference.replace("/", "").replace("/", "").toLowerCase());
+                                $rootScope.elemType);
 
                         if (typeof cb !== "undefined") {
                             cb();

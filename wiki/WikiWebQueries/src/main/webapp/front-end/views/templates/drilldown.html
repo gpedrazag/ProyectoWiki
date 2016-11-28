@@ -11,31 +11,39 @@
     </div>
     <div id="drilldown-content" class="grid-block small-8 medium-8 large-8" style="text-align: center">
         <div class="grid-block vertical" ng-if="elemType !== 'views'">
-            <div class="grid-block" style="margin-top: 8px;" ng-repeat="row in getN(10) track by $index">
-                <div class="grid-block small-1 medium-3 large-3"></div>
-                <div class="grid-block small-5 medium-3 large-3" ng-repeat="col in [1, 2] track by $index">
-                    <div class="grid-block vertical">
-                        <div 
-                            class="grid-block" 
-                            ng-repeat="d in getNElem($parent.$index + 1, col, 2) track by $index"
-                            ng-init="haveSolutions[d.id] = isADcsAndWhtoutSol(d, d.id)">
+            <div 
+                class="grid-block" 
+                ng-repeat="d in drilldownIndvs track by $index"
+                ng-init="haveSolutions[d.id] = isADcsAndWhtoutSol(d, d.id)">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="text-align: left; padding: 8px; width: 120px;">
                             <a 
                                 class="drilldown-item-link" 
                                 ng-click="showElemData(d.id)"
                                 ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[d.id]}">{{d.id}}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid-block small-1 medium-3 large-3"></div>
+                        </td>
+                        <td style="text-align: left; padding: 8px;">{{getElemName(d)}}</td>
+                    </tr>
+                </table>
+                <a 
+                    class="drilldown-item-link" 
+                    ng-click="showElemData(d.id)"
+                    ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[d.id]}">{{d.id}}</a>
             </div>
         </div>
         <div class="grid-block vertical" ng-if="elemType === 'views'">
             <zf-accordion>
-                <zf-accordion-item title="{{indv}}" ng-repeat="indv in drilldownIndvs $track by $index">
+                <zf-accordion-item title="{{translate(indv)}}" ng-repeat="indv in drilldownIndvs track by $index" ng-init="pos = $index">
                     <section class="block-list">
                         <ul>
-                            <li ng-repeat="l in list track by $index" ng-click="do($index, $event);">
-                                <span>{{l}}</span>
+                            <li ng-if="viewsData[pos].length > 0" ng-repeat="view in viewsData[pos] track by $index">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="text-align: left; padding-left: 10px; width: 120px;"><a ng-click="showElemData(view.id, view, pos)">{{view.id}}</a></td>
+                                        <td style="text-align: left; padding-left: 10px;">{{getViewName(view.name)}}</td>
+                                    </tr>
+                                </table>
                             </li>                            
                         </ul>
                     </section>

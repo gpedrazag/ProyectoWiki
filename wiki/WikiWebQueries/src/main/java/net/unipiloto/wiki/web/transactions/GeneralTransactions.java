@@ -15,6 +15,7 @@ import net.unipiloto.wiki.web.entities.QualityAttribute;
 import net.unipiloto.wiki.web.entities.Responsible;
 import net.unipiloto.wiki.web.entities.SoftwareArchitecture;
 import net.unipiloto.wiki.web.entities.Solution;
+import net.unipiloto.wiki.web.entities.View;
 import net.unipiloto.wiki.web.others.Generic;
 import net.unipiloto.wiki.web.others.Match;
 import net.unipiloto.wiki.web.others.OntologyTools;
@@ -115,6 +116,9 @@ public class GeneralTransactions {
             while (result.hasNext()) {
                 BindingSet bs = result.next();
                 classType = bs.getValue("classType").stringValue().split("#")[1];
+                if(classType.contains("View")) {
+                    classType = "Views";
+                }
             }
         } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | NumberFormatException ex) {
             conn.rollback();
@@ -225,6 +229,9 @@ public class GeneralTransactions {
                     break;
                 case "/SoftwareArchitecture/":
                     nodes.add(JsonFactory.fromJsonArray(SoftwareArchitectureTransaction.selectAll(), SoftwareArchitecture.class));
+                    break;
+                case "/Views/":
+                    nodes.add(JsonFactory.fromJsonArray(ViewTransaction.selectAllViews(), View.class));
                     break;
             }
         }

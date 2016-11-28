@@ -23,6 +23,7 @@
             $scope.checkList.push({reference: "/Responsible/", color: "#711278", checked: false});
             $scope.checkList.push({reference: "/SoftwareArchitecture/", color: "#00A39C", checked: false});
             $scope.checkList.push({reference: "/Artifact/", color: "#00EBE0", checked: false});
+            $scope.checkList.push({reference: "/Views/", color: "#323232", checked: false});
 
             $scope.printGraph = function (classes) {
                 var filter = [];
@@ -47,7 +48,6 @@
                     var obj = {};
                     data.forEach(function (data) {
                         data.forEach(function (data) {
-
                             nodesData.push(
                                     {id: data.reference + "_" + data.id, label: data.id, shape: 'circle', color: getColorbyReference(data.reference)}
                             );
@@ -162,6 +162,9 @@
                         break;
                     case "/Artifact/":
                         color = "#00EBE0";
+                        break;
+                    case "/Views/":
+                        color = "#323232";
                         break;
                 }
                 return color;

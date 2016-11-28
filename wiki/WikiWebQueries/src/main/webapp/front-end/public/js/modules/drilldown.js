@@ -1,10 +1,18 @@
 (function (angular) {
     var module = angular.module("pmod-drilldown", []);
     module.controller("pctrl-drilldown", [
-        "$scope", "$filter", "$rootScope", "QuickActionListService", "AnimationService", "TranslatorService", "GeneralService", 
-        function ($scope, $filter, $rootScope, QuickActionListService, AnimationService, TranslatorService, GeneralService) {
+        "$scope",
+        "$filter",
+        "$rootScope",
+        "QuickActionListService",
+        "AnimationService",
+        "TranslatorService",
+        "GeneralService",
+        "$timeout",
+        function ($scope, $filter, $rootScope, QuickActionListService, AnimationService, TranslatorService, GeneralService, $timeout) {
             var url = "";
             $scope.haveSolutions = {};
+            $scope.drilldownIndvs = [];
             $rootScope.elemData = [];
             $rootScope.relatedElems = [];
             $scope.list = [
@@ -12,8 +20,10 @@
                 "Atributos de Calidad", "Criterios", "Decisiones",
                 "Evaluaciones", "Requerimientos Funcionales", "Responsables", "Vistas"
             ];
+            $scope.viewsData = [];
+
             $scope.do = function (i, event) {
-                if(event) {
+                if (event) {
                     event.stopPropagation();
                 }
                 if ($rootScope.selectedContext === null) {
@@ -62,85 +72,46 @@
                             }
                         }
                         $scope.haveSolutions = {};
-                        $rootScope.drilldownIndvs = [];
+                        $scope.drilldownIndvs = [];
+                        $scope.viewsData = [];
                         $rootScope.$apply();
-                        $rootScope.drilldownIndvs = $filter("orderBy")(data, "id");
-                        $rootScope.$apply();
+                        $scope.drilldownIndvs = $filter("orderBy")(data, "id");
+                        i = $scope.drilldownIndvs.length;
+                        if ($rootScope.elemType === "views") {
+                            setViewData(0);
+                        } else {
+                            $rootScope.$apply();
+                        }
+
                     }
                 });
             };
 
-            $scope.getN = function (n) {
-                var arr = new Array(Math.ceil($rootScope.drilldownIndvs.length / n));
-                var i = 0;
-                while(i < arr.length) {
-                    arr[i] = i;
-                    i++;
-                }
-                return arr;
-            };
-            $scope.getNElem = function (row, col, n) {
-                var pos = (row * n - (n - col)) * 5 - 5;
-                var arr = [];
-                for (i = pos; i <= pos + 4; i++) {
-                    if (typeof $rootScope.drilldownIndvs[i] !== "undefined") {
-                        arr.push($rootScope.drilldownIndvs[i]);
-                    } else {
-                        break;
-                    }
-                }
-                return arr;
-            };
-            $scope.showElemData = function (id) {
-                if ($rootScope.drilldownIndvs.length > 0) {
+            $scope.showElemData = function (id, elem, pos) {
+                if ($scope.drilldownIndvs.length > 0) {
                     $rootScope.elemData = [];
                     $rootScope.relatedElems = [];
                     $rootScope.elemTypeId = "";
                 }
-                var nurl = url.split("/");
-                nurl = "/" + nurl[1] + "/" + nurl[2] + "/selectById";
-                $.ajax({
-                    url: nurl,
-                    method: "POST",
-                    dataType: "json",
-                    data: {id: id}
-                }).done(function (elem) {
-                    var reference = "";
-                    if (elem !== null) {
-                        Object.keys(elem).forEach(function (key) {
-                            if (key !== "id") {
-                                if (typeof elem[key] !== "object") {
-                                    if (key === "reference") {
-                                        reference = elem[key];
-                                        $rootScope.actualReference = elem[key];
-                                    }
-                                    if (key !== "did") {
-                                        $rootScope.elemData.push({key: key, content: elem[key]});
-                                    }
-                                } else {
-                                    $rootScope.relatedElems.push({key: key, content: (typeof elem[key].length === "undefined" ? [elem[key]] : elem[key])});
-                                }
-                            } else {
-                                $rootScope.elemTypeId = elem[key];
-                            }
-                        });
-                        $rootScope.chkList = [];
-                        $rootScope.chkList = GeneralService.getCheckedStructure();
-                        $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
-                        $rootScope.ontologyElementSelected = true;
-                        $rootScope.$apply();
-                        AnimationService.animate(
-                                {in: $rootScope.selectedContext, out: $("#main-content-drilldown")},
-                                {in: "slide-in-left", out: "slide-out-right"},
-                                false
-                                );
-                        QuickActionListService.addAction(
-                                "action:" + $rootScope.elemTypeId,
-                                "/" + window.location.pathname.split("/")[1] + reference + "selectById",
-                                TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
-                                $rootScope.elemType);
-                    }
-                });
+                if (elem) {
+                    $timeout(function () {
+                       $rootScope.rDrilldownIndvs = $scope.viewsData[pos];
+                       $rootScope.viewDataType = $scope.viewsData[pos][0].type;
+                       setElemsData(elem);
+                    }, false, 500);
+                } else {
+                    var nurl = url.split("/");
+                    nurl = "/" + nurl[1] + "/" + nurl[2] + "/selectById";
+                    $.ajax({
+                        url: nurl,
+                        method: "POST",
+                        dataType: "json",
+                        data: {id: id}
+                    }).done(function (response) {
+                        $rootScope.rDrilldownIndvs = $scope.drilldownIndvs;
+                        setElemsData(response);
+                    });
+                }
             };
             $scope.isAnAltAndSol = function (d) {
                 if (typeof d !== "undefined") {
@@ -164,9 +135,89 @@
                 }
                 return false;
             };
-            $scope.translate = function(key) {
-                
+            $scope.translate = function (key) {
+                return TranslatorService.translate(key);
             };
+            $scope.getViewName = function (name) {
+                return (name.trim() === "") ? "Nombre no asignado" : getRelatedElemsVisibleContent(name);
+            };
+            $scope.getElemName = function(elem) {
+                var content = "";
+                var def = "No tiene nombre o descripción asignada";
+                if(elem) {
+                    if(elem.name) {
+                        content = (elem.name.trim() === "") ? def : getRelatedElemsVisibleContent(elem.name);
+                    } else if(elem.description) {
+                        content = (elem.description.trim() === "") ? def : getRelatedElemsVisibleContent(elem.description);
+                    }
+                }
+                return content;
+            };
+            
+            function getRelatedElemsVisibleContent(content) {
+                if(content.trim().indexOf("</div>") >= 0) {
+                    content = $(content)[0].innerText;
+                }
+                return content;
+            };
+
+            function setViewData(i) {
+                if (i < $scope.drilldownIndvs.length) {
+                    $.ajax({
+                        url: "/" + window.location.pathname.split("/")[1] + "/Views/selectByType",
+                        method: "POST",
+                        data: {type: $scope.drilldownIndvs[i]},
+                        dataType: "json"
+                    }).done(function (data) {
+                        $scope.viewsData.push(data);
+                        i = i + 1;
+                        setViewData(i)
+                    });
+                } else {
+                    $timeout(function () {
+                        $scope.$apply();
+                    }, false, 500);
+                }
+            }
+
+            function setElemsData(elem) {
+                var reference = "";
+                if (elem !== null) {
+                    Object.keys(elem).forEach(function (key) {
+                        if (key !== "id") {
+                            if (typeof elem[key] !== "object") {
+                                if (key === "reference") {
+                                    reference = elem[key];
+                                    $rootScope.actualReference = elem[key];
+                                }
+                                if (key !== "did") {
+                                    $rootScope.elemData.push({key: key, content: elem[key]});
+                                }
+                            } else {
+                                $rootScope.relatedElems.push({key: key, content: (typeof elem[key].length === "undefined" ? [elem[key]] : elem[key])});
+                            }
+                        } else {
+                            $rootScope.elemTypeId = elem[key];
+                        }
+                    });
+                    $rootScope.chkList = [];
+                    $rootScope.chkList = GeneralService.getCheckedStructure();
+                    $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
+                    $rootScope.ontologyElementSelected = true;
+                    $rootScope.$apply();
+                    AnimationService.animate(
+                            {in: $rootScope.selectedContext, out: $("#main-content-drilldown")},
+                            {in: "slide-in-left", out: "slide-out-right"},
+                            true
+                            );
+                    QuickActionListService.addAction(
+                            "action:" + $rootScope.elemTypeId,
+                            "/" + window.location.pathname.split("/")[1] + reference + "selectById",
+                            TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
+                            $rootScope.elemType);
+                }
+            }
+
         }]).directive("pdirecDrilldown", function () {
         return {
             templateUrl: "/" + window.location.pathname.split("/")[1] + "/front-end/views/templates/drilldown.html",

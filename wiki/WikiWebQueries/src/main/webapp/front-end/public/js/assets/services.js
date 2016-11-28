@@ -33,6 +33,7 @@
                                 $rootScope.subRelatedElems = [];
                                 $rootScope.elemTypeId = "";
                                 $rootScope.ontologyElementSelected = false;
+                                $rootScope.rDrilldownIndvs = [];
                                 $rootScope.$apply();
                                 Object.keys(response).forEach(function (key) {
                                     if (key !== "id") {
@@ -158,6 +159,8 @@
                                 $rootScope.elemTypeId = elem[key];
                             }
                         });
+                        $rootScope.elemType = reference.replace("/", "").replace("/", "").toLowerCase();
+                        $rootScope.viewDataType = typeof elem.type !== "undefined" ? elem.type : "";
                         $rootScope.ontologyElementSelected = true;
                         $rootScope.chkList = GeneralService.getCheckedStructure();
                         $rootScope.selectedContext = document.getElementById("main-content-ontology-element");
@@ -171,7 +174,7 @@
                                 "action:" + $rootScope.elemTypeId,
                                 "/" + window.location.pathname.split("/")[1] + reference + "selectById",
                                 TranslatorService.translate(reference) + " " + $rootScope.elemTypeId,
-                                reference.replace("/", "").replace("/", "").toLowerCase());
+                                $rootScope.elemType);
 
                         if (typeof cb !== "undefined") {
                             cb();
@@ -224,15 +227,28 @@
     var module = angular.module("pmodGeneralService", []);
     module.service("GeneralService", [
         "$rootScope",
-        "AnimationService",
-        "TranslatorService",
-        function ($rootScope, AnimationService, QuickActionListService, TranslatorService) {
+        function ($rootScope) {
             this.getCheckedStructure = function () {
                 var arr = [];
                 $rootScope.elemData.forEach(function (data) {
                     arr.push(false);
                 });
                 return arr;
+            };
+            
+            this.haveNameButNotDescription = function (data) {
+                var obj = {
+                    haveName: false,
+                    haveDescription: false
+                };
+                if (data) {
+                    if (data.name) {
+                        obj.haveName = true;
+                    } else if (data.description) {
+                        obj.haveDescription = true;
+                    }
+                }
+                return obj;
             };
 
             
@@ -347,13 +363,14 @@
             relatedArtifacts: "Artefactos que componen la arquitectura",
             linkAlternative: "Alternativas evaluadas",
             rationale: "Razón o justificación",
-            information: "Información relacionada",
+            content: "Información relacionada",
             description: "Descripción",
             name: "Nombre",
             source: "Fuento u origen",
             concern: "Preocupación o interés",
             keyword: "Palabras clave",
             "arguments": "Argumentos",
+            type:"Tipo",
             state: "Estado",
             pros: "Pros",
             cons: "Contras",
@@ -381,11 +398,12 @@
             "/Responsible/": "Responsable",
             "/SoftwareArchitecture/": "Arquitectura de Software",
             "/Artifact/": "Artefacto",
+            "/Views/": "Vista",
             "InformationView": "Vistas de Información",
             "FunctionalView": "Vistas Funcionales",
             "ContextView": "Vistas de Contexto",
             "DeploymentView": "Vistas de Despliegue",
-            "ConcurrenceView": "Vistas de Concurrencia"
+            "ConcurrenceView": "Vistas de Concurrencia"            
         };
 
         this.translate = function (key) {

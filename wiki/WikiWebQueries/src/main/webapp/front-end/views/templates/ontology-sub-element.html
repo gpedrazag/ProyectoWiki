@@ -30,30 +30,36 @@
                             {{translate(data.key)}}            
                         </div>
                         <div class="ontology-elem-content">
-                            <div ng-show ="data.content.length >= 1">
-                                <div ng-repeat="row in getN(data.content, 10) track by $index" class="grid-block">
-                                    <div ng-repeat="col in [1, 2] track by $index" class="grid-block small-5 medium-3 large-3">
-                                        <div class="grid-block vertical">
-                                            <div 
-                                                ng-repeat="d in getNElem($parent.$index + 1, col, 2, $parent.data) track by $index" 
-                                                class="grid-block"
-                                                ng-init="haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index] = isADcsAndWhtoutSol(d, ((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index, $parent.data.key)">
-                                                <a 
-                                                    class="drilldown-item-link" 
-                                                    name="{{$parent.data.key}}" 
-                                                    ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[$parent.data.key][((($parent.row + 1) * 2 - (2 - col)) * 5 - 5) + $index].value}"
-                                                    ng-click="goTo(d.id, d.reference)">{{d.id}}</a>
-                                            </div>
-                                        </div>
-
+                            <div ng-if ="data.content.length >= 1">               
+                                <div class="grid-block vertical">
+                                    <div 
+                                        ng-repeat="d in data.content track by $index" 
+                                        class="grid-block"
+                                        ng-init="haveSolutions[$parent.data.key][$index] = isADcsAndWhtoutSol(d, $index, $parent.data.key)">
+                                        <table style="width: 100%;" ng-init="control = haveNameButNotDescription(d)">
+                                            <tr>
+                                                <td style="text-align: left; padding-left: 10px; width: 120px;">
+                                                    <a 
+                                                        class="drilldown-item-link" 
+                                                        name="{{$parent.data.key}}"
+                                                        ng-click="goTo(d.id, d.reference, $parent.data)"
+                                                        zf-open="sub-element-modal"
+                                                        ng-class="{'is-solution':isAnAltAndSol(d), 'without-solution':haveSolutions[$parent.data.key][$index].value}">{{d.id}}</a>
+                                                </td>
+                                                <td ng-if="control.haveName" style="text-align: left; padding-left: 10px;">{{getRelatedElemsVisibleContent(d.name)}}</td>
+                                                <td ng-if="!control.haveName && control.haveDescription" style="text-align: left; padding-left: 10px;">{{getRelatedElemsVisibleContent(d.description)}}</td>
+                                                <td ng-if="!control.haveName && !control.haveDescription" style="text-align: left; padding-left: 10px;">No hay nombre o descrición asignada</td>
+                                            </tr>
+                                        </table>                                    
                                     </div>
-                                    <div class="grid-block small-2 medium-6 large-6"></div>
                                 </div>
+                                <div class="grid-block small-2 medium-6 large-6"></div>
+
                             </div>
                             <div ng-show ="data.content.length === 0">
                                 "No hay ningún elemento relacionado"
                             </div>
-                        </div>
+                        </div>                        
                     </div>         
                 </div>
             </div>

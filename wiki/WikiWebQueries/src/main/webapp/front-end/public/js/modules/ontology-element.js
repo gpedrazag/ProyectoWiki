@@ -32,25 +32,32 @@
             $rootScope.subElems = [];
 
             $scope.init = function () {
-                $.ajax({
-                    url: "/" + window.location.pathname.split("/")[1] + $rootScope.actualReference + "selectAll",
-                    method: "POST",
-                    dataType: "json"
-                }).done(function (data) {
+                var url = "/" + window.location.pathname.split("/")[1] + $rootScope.actualReference;
+                var ajaxObj = {};
+                if ($rootScope.elemType === "views") {
+                    url += "selectByType";
+                    ajaxObj["data"] = {type: $rootScope.viewDataType};
+                } else {
+                    url += "selectAll";
+                }
+                ajaxObj["url"] = url;
+                ajaxObj["method"] = "POST";
+                ajaxObj["dataType"] = "json";
+                $.ajax(ajaxObj).done(function (data) {
                     if (typeof data !== "undefined") {
                         if (data.length === 0) {
                             if (Object.keys(data).length !== 0) {
                                 data = [data];
                             }
                         }
-                        $rootScope.drilldownIndvs = [];
+                        $rootScope.rDrilldownIndvs = [];
                         $rootScope.$apply();
-                        $rootScope.drilldownIndvs = $filter("orderBy")(data, "id");
+                        $rootScope.rDrilldownIndvs = $filter("orderBy")(data, "id");
                         $rootScope.$apply();
                         var obj = {};
                         $scope.pos = 0;
                         try {
-                            $rootScope.drilldownIndvs.forEach(function (elem) {
+                            $rootScope.rDrilldownIndvs.forEach(function (elem) {
                                 if (elem["id"] === $rootScope.elemTypeId) {
                                     reference = elem["reference"];
                                     throw obj;
@@ -64,11 +71,11 @@
             };
             $scope.showPrevious = function () {
                 $scope.pos = $scope.pos - 1;
-                showElemData($rootScope.drilldownIndvs[$scope.pos]["id"]);
+                showElemData($rootScope.rDrilldownIndvs[$scope.pos]["id"]);
             };
             $scope.showNext = function () {
                 $scope.pos = $scope.pos + 1;
-                showElemData($rootScope.drilldownIndvs[$scope.pos]["id"]);
+                showElemData($rootScope.rDrilldownIndvs[$scope.pos]["id"]);
             };
             $scope.haveEditPrivilege = function () {
                 var haveIt = false;
@@ -120,15 +127,6 @@
                         loadHTML(container, data, false);
                     }
                 }, false, 500);
-            };
-            $scope.getN = function (elemData, n) {
-                var array = new Array(Math.ceil(elemData.length / n));
-                var i = 0;
-                while (array[i]) {
-                    array[i] = i;
-                    i++;
-                }
-                return array;
             };
             $scope.getNElem = function (row, col, n, data) {
                 var pos = (row * n - (n - col)) * 5 - 5;
@@ -338,18 +336,19 @@
                     html = newHtml;
                 }
                 saveChanges(key, html[0].outerHTML);
-                saveConfiguration(key, html[0].innerHTML, reference);
-                saveArrayOfImages(names, files, function (data) {
-                    var go = false;
-                    if (typeof data === "undefined") {
-                        go = true;
-                    } else if (data.val) {
-                        go = true;
-                    }
-                    if (go) {
-                        saveImageRegisters(imageRegisters);
-                    }
-                    loadHTML(document.getElementById("neContent-" + index), html[0].outerHTML, false);
+                saveConfiguration(key, html[0].innerHTML, reference, function () {
+                    saveArrayOfImages(names, files, function (data) {
+                        var go = false;
+                        if (typeof data === "undefined") {
+                            go = true;
+                        } else if (data.val) {
+                            go = true;
+                        }
+                        if (go) {
+                            saveImageRegisters(imageRegisters);
+                        }
+                        ConsultCarouselService.goTo($rootScope.elemTypeId, reference, $("#main-content-ontology-element"));
+                    });                    
                 });
                 var index = new Number(editorId.split("_")[2]);
                 indexForEdit = index;
@@ -364,7 +363,7 @@
                 getViewerURLImages();
             };
             $scope.goTo = function (id, reference, elems) {
-                ConsultCarouselService.openModal(id, reference, elems);                
+                ConsultCarouselService.openModal(id, reference, elems);
             };
             $scope.setSelectedKey = function (key, i, content) {
                 if (key !== null && content !== null) {
@@ -388,7 +387,7 @@
                 AnimationService.animate(
                         {in: elemIn, out: elemOut},
                         {in: "fade-in", out: "fade-out"},
-                        false
+                        true
                         );
                 if (isEditorIn) {
                     showContentInEditor(elemOut.innerHTML, "editor_content_" + i);
@@ -401,9 +400,18 @@
                 }
                 ConsultCarouselService.goTo(id, reference, null);
             };
+            $scope.haveNameButNotDescription = function (data) {
+                return GeneralService.haveNameButNotDescription(data);
+            };
+            $scope.getRelatedElemsVisibleContent = function(content) {
+                if(content.trim().indexOf("</div>") >= 0) {
+                    content = $(content)[0].innerText;
+                }
+                return content;
+            };
 
             function showElemData(id) {
-                if ($scope.drilldownIndvs.length > 0) {
+                if ($rootScope.rDrilldownIndvs.length > 0) {
                     $rootScope.elemData = [];
                     $rootScope.relatedElems = [];
                     $rootScope.elemTypeId = "";
@@ -414,7 +422,6 @@
                     dataType: "json",
                     data: {id: id}
                 }).done(function (elem) {
-                    var reference = "";
                     if (elem !== null) {
                         Object.keys(elem).forEach(function (key) {
                             if (key !== "id") {
@@ -440,7 +447,7 @@
                         AnimationService.animate(
                                 {in: $rootScope.selectedContext, out: $("#main-content-drilldown")},
                                 {in: "slide-in-left", out: "slide-out-right"},
-                                false
+                                true
                                 );
                     }
                 });
@@ -608,20 +615,28 @@
                 }
                 selectedKeys[key].content = content;
             }
-            function saveConfiguration(key, content, reference) {
+            function saveConfiguration(key, content, reference, cb) {
                 var obj = {};
                 obj["id"] = $rootScope.elemTypeId;
                 $rootScope.elemData.forEach(function (elem) {
                     if (elem.key !== "reference") {
-                        obj[elem.key] = elem.key === key ? content : "-_-";
+                        if (($rootScope.elemType === "views" && elem.key !== "type") || $rootScope.elemType !== "views")
+                            obj[elem.key] = elem.key === key ? content : "-_-";
                     }
                 });
                 $.ajax({
                     url: "/" + window.location.pathname.split("/")[1] + reference + "update",
                     method: "POST",
                     data: obj
+                }).done(function(error){
+                    if(!error) {
+                        if(typeof cb !== "undefined") {
+                            cb();
+                        }
+                    }
                 });
             }
+
             function loadHTML(container, html, isEditor) {
                 html = $(html);
                 if (html.length > 1) {

@@ -1,6 +1,5 @@
 package net.unipiloto.wiki.web.controllers;
 
-import java.util.List;
 import net.unipiloto.wiki.web.others.OntologyTools;
 import net.unipiloto.wiki.web.transactions.GeneralTransactions;
 import org.boon.json.JsonFactory;
