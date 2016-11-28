@@ -753,15 +753,6 @@
 
                 }
             }
-            function getImages(html) {
-                var images = [];
-                html.find("span").each(function (i, span) {
-                    if (span.attributes[0].localName === "img") {
-                        images.push(span);
-                    }
-                });
-                return images;
-            }
             function searchImage(html, container, img, isEditor) {
                 var props = function () {
                     this.name = "";
